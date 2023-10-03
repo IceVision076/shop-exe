@@ -6,7 +6,7 @@ public class ProductType {
     private String productId;
     private String name;
     private double price;
-
+    private String image_url;
     public ProductType() {
     }
 
@@ -47,6 +47,14 @@ public class ProductType {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     @Override

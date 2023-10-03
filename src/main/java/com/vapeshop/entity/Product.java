@@ -1,13 +1,13 @@
 package com.vapeshop.entity;
 
 public class Product {
-    private String id;
-    private String productName;
-    private String brand;
-    private String detail;
-    private String origin;
-    private char status;
-
+        private String id;
+        private String productName;
+        private String brand;
+        private String detail;
+        private String origin;
+        private char status;
+    private String image_url;
     public Product() {
     }
 
@@ -66,6 +66,14 @@ public class Product {
 
     public void setStatus(char status) {
         this.status = status;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     @Override
