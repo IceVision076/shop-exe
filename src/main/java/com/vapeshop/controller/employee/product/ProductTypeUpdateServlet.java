@@ -22,9 +22,9 @@ public class ProductTypeUpdateServlet extends HttpServlet {
         String productId=request.getParameter("productId");
         double price = Double.parseDouble(request.getParameter("price"));
         ProductType productType = new ProductType();
-        productType.setId(id);
-        productType.setName(name);
-        productType.setPrice(price);
+        productType.setProductTypeId(id);
+        productType.setTypeName(name);
+        productType.setTypePrice(price);
         ProductRespository.updateProductType(productType);
      response.sendRedirect("product-editor?productID="+productId);
     }

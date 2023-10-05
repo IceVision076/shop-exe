@@ -18,15 +18,16 @@ import java.io.IOException;
 public class ProductCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println(request.getServletContext().getRealPath("").substring(0,request.getServletContext().getRealPath("").lastIndexOf("target")));
+//
+//        System.out.println(request.getServletContext().getRealPath("").substring(0,request.getServletContext().getRealPath("").lastIndexOf("target")));
         String realPath = request.getServletContext().getRealPath("");
+        System.out.println(realPath.substring(0,realPath.lastIndexOf("VapeShop")+9));
         realPath.replace('\\', '/');
-        String savePath = realPath + "assets/img/product";
-        File f = new File(savePath);
-        if (f.exists()) System.out.println("===================ok có==================");
-        else
-            System.out.println("===================không có==================");
+//        String savePath = realPath + "assets/img/product";
+//        File f = new File(savePath);
+//        if (f.exists()) System.out.println("===================ok có==================");
+//        else
+//            System.out.println("===================không có==================");
         request.getRequestDispatcher("dashboard/product-create.jsp").forward(request, response);
 
     }
@@ -67,7 +68,7 @@ public class ProductCreateServlet extends HttpServlet {
             fileName = productId + "A_1" + ".jpg";
 
             if (fileName != null && fileName.length() > 0) {
-                String filePath = appPath.substring(0,appPath.lastIndexOf("target")) + savePath + File.separator + fileName;
+                String filePath = appPath.substring(0,appPath.lastIndexOf("VapeShop")+9) + savePath + File.separator + fileName;
                 part.write(filePath);
             }
 

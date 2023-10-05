@@ -434,7 +434,7 @@
                                     <tr>
                                         <td>
                                             <div>
-                                                <img src="${p.image_url}" class="m-2 img-thumbnail "
+                                                <img src="${p.imgURL}" class="m-2 img-thumbnail "
                                                      style="width: 100px;" alt="user1">
                                             </div>
                                         </td>
@@ -442,29 +442,29 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${p.name}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${p.id}</p>
+                                                    <h6 class="mb-0 text-sm">${p.typeName}</h6>
+                                                    <p class="text-xs text-secondary mb-0">${p.productTypeId}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${p.price}</p>
+                                            <p class="text-xs font-weight-bold mb-0">${p.typePrice}</p>
                                         </td>
 
                                         <td class="align-middle">
                                             <!-- Button to Open the Modal -->
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${p.id}">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${p.productTypeId}">
                                                 Chỉnh sửa
                                             </button>
 
                                             <!-- The Modal -->
-                                            <div class="modal modal-lg" id="${p.id}">
+                                            <div class="modal modal-lg" id="${p.productTypeId}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
 
                                                         <!-- Modal Header -->
                                                         <div class="modal-header d-flex">
-                                                            <h4 class="modal-title">Chỉnh sửa thông tin loại sản phẩm ${p.id}</h4>
+                                                            <h4 class="modal-title">Chỉnh sửa thông tin loại sản phẩm ${p.productTypeId}</h4>
                                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         </div>
 
@@ -475,7 +475,7 @@
                                                                 <div class="col-12">
                                                                     <label for="name" class="form-label">Tên sản phẩm</label>
                                                                     <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control" id="name" name="name" value="${p.name}" required>
+                                                                        <input type="text" class="form-control" id="name" name="name" value="${p.typeName}" required>
                                                                         <div class="invalid-feedback">
                                                                             Tên không được bỏ trống
                                                                         </div>
@@ -484,7 +484,7 @@
                                                                 <div class="col-12">
                                                                     <label for="price" class="form-label">Giá sản phẩm</label>
                                                                     <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control"  id="price" name="price" value="${p.price}" required>
+                                                                        <input type="text" class="form-control"  id="price" name="price" value="${p.typePrice}" required>
                                                                         <div class="invalid-feedback">
                                                                             Vui lòng điền giá hợp lệ
                                                                         </div>
@@ -492,12 +492,12 @@
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="input-group has-validation">
-                                                                        <input type="hidden" class="form-control"  id="id" name="id" value="${p.id}" required>
+                                                                        <input type="hidden" class="form-control"  id="id" name="id" value="${p.productTypeId}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="input-group has-validation">
-                                                                        <input type="hidden" class="form-control"  id="productId" name="productId" value="${product.id}" required>
+                                                                        <input type="hidden" class="form-control"  id="productId" name="productId" value="${product.idProduct}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
@@ -577,7 +577,7 @@
 
                         <form action="product-update" method="post" class="row g-3 needs-validation" novalidate>
                             <div class="col-12">
-                                <input type="hidden" name="id" value="${product.id}">
+                                <input type="hidden" name="id" value="${product.idProduct}">
                             </div>
 
                             <div class="col-md-6">

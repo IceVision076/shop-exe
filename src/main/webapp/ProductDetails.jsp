@@ -121,12 +121,12 @@
                                             <select id="product" name="product" onchange="calculatePrice()">
                                                 <option value="">Select a type</option>
                                                 <c:forEach items="${productTypes}" var="pdt">
-                                                    <option id="optiontype" value="${pdt.id}">${pdt.name}
+                                                    <option id="optiontype" value="${pdt.productTypeId}">${pdt.typeName}
                                                     </option>
                                                 </c:forEach>
                                             </select>
                                         <c:forEach items="${productTypes}" var="pdt">
-                                                <span class="d-none" id="${pdt.id}">${pdt.price}</span>
+                                                <span class="d-none" id="${pdt.productTypeId}">${pdt.typePrice}</span>
                                         </c:forEach>
                                     </ul>
                                 </div>

@@ -8,7 +8,6 @@ import com.vapeshop.entity.ProductType;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductRespository {
@@ -130,7 +129,7 @@ public class ProductRespository {
 
 
                 ProductType productType = new ProductType(id, productId, name, price);
-                productType.setImage_url(getFirstProductTypeImage(id, productID));
+                productType.setImgURL(getFirstProductTypeImage(id, productID));
                 list.add(productType);
             }
             connection.close();
@@ -212,9 +211,9 @@ public class ProductRespository {
                     "    where id=?";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, productType.getName());
-            preparedStatement.setDouble(2, productType.getPrice());
-            preparedStatement.setString(3, productType.getId());
+            preparedStatement.setString(1, productType.getTypeName());
+            preparedStatement.setDouble(2, productType.getTypePrice());
+            preparedStatement.setString(3, productType.getProductTypeId());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -300,10 +299,10 @@ public class ProductRespository {
             preparedStatement.setString(4,product.getDetail());
             preparedStatement.setString(5,product.getOrigin());
             preparedStatement.setString(6,product.getStatus()+"");
-            preparedStatement.setString(7,productType.getId());
+            preparedStatement.setString(7,productType.getProductTypeId());
             preparedStatement.setString(8,productType.getProductId());
-            preparedStatement.setString(9,productType.getName());
-            preparedStatement.setDouble(10,productType.getPrice());
+            preparedStatement.setString(9,productType.getTypeName());
+            preparedStatement.setDouble(10,productType.getTypePrice());
             preparedStatement.setString(11,imageProduct.getProductTypeId());
             preparedStatement.setString(12,imageProduct.getId());
             preparedStatement.setString(13,imageProduct.getImageUrl());

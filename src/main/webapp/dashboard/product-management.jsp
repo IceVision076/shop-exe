@@ -430,7 +430,7 @@
                                     <tr>
                                         <td>
                                             <div>
-                                                <img src="${p.image_url}" class="m-2 img-thumbnail "
+                                                <img src="${p.imgURL}" class="m-2 img-thumbnail "
                                                      style="width: 100px;" alt="user1">
                                             </div>
                                         </td>
@@ -439,7 +439,7 @@
 
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">${p.productName}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${p.id}</p>
+                                                    <p class="text-xs text-secondary mb-0">${p.idProduct}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -463,7 +463,7 @@
 
                                         </td>
                                         <td class="align-middle">
-                                            <a href="product-editor?productID=${p.id}" class="text-secondary font-weight-bold text-xs btn btn-warning"
+                                            <a href="product-editor?productID=${p.idProduct}" class="text-secondary font-weight-bold text-xs btn btn-warning"
                                                data-toggle="tooltip" data-original-title="Edit user">
                                                 Chỉnh sửa
                                             </a>

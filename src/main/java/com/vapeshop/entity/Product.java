@@ -7,7 +7,8 @@ public class Product {
     private String brand;
     private String detail;
     private String origin;
-    private double price;
+
+    private double price;//type price
     private char status;
     private String idProductType;
     private String typeName;
