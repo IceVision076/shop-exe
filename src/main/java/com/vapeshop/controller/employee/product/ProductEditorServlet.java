@@ -2,7 +2,7 @@ package com.vapeshop.controller.employee.product;
 
 import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
-import com.vapeshop.respository.ProductRespository;
+import com.vapeshop.respository.employee.ProductRespository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

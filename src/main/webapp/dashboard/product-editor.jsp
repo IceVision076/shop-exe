@@ -47,6 +47,14 @@
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .modal-ku {
+            width:1000px;
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -57,7 +65,7 @@
            aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
            target="_blank">
-            <img src="dashboard/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="dashboard/assets/img/vape-icon.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">VapeShop Dashboard</span>
         </a>
     </div>
@@ -88,7 +96,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  active" href="pages/tables.html">
+                <a class="nav-link  active" href="product-management">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -274,9 +282,11 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí sản phẩm</li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí sản phẩm</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Chi tiết sản phẩm</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm</h6>
+                <h6 class="font-weight-bolder mb-0">Chi tiết sản phẩm: <u class="font-weight-normal">${product.productName}</u></h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -399,6 +409,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Bảng loại sản phẩm (Trang ${page}/${maxPage})</h6>
+                        <i class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse" style="color: #d31798;" > <span  style="font-family: Courier;font-size: 20px;">Thêm loại sản phẩm mới</span> </i>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -438,16 +449,74 @@
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">${p.price}</p>
-
-                                                <%--                                            id, productId, name, price--%>
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="" class="text-secondary font-weight-bold text-xs btn btn-warning"
-                                               data-toggle="tooltip" data-original-title="Edit user">
+                                            <!-- Button to Open the Modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${p.id}">
                                                 Chỉnh sửa
-                                            </a>
+                                            </button>
+
+                                            <!-- The Modal -->
+                                            <div class="modal modal-lg" id="${p.id}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header d-flex">
+                                                            <h4 class="modal-title">Chỉnh sửa thông tin loại sản phẩm ${p.id}</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+
+                                                        <!-- Modal body String id, String productId, String name, double price -->
+                                                        <div class="modal-body p-2">
+
+                                                            <form class="row g-3 needs-validation p-2" novalidate action="product-type-update" method="post">
+                                                                <div class="col-12">
+                                                                    <label for="name" class="form-label">Tên sản phẩm</label>
+                                                                    <div class="input-group has-validation">
+                                                                        <input type="text" class="form-control" id="name" name="name" value="${p.name}" required>
+                                                                        <div class="invalid-feedback">
+                                                                            Tên không được bỏ trống
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <label for="price" class="form-label">Giá sản phẩm</label>
+                                                                    <div class="input-group has-validation">
+                                                                        <input type="text" class="form-control"  id="price" name="price" value="${p.price}" required>
+                                                                        <div class="invalid-feedback">
+                                                                            Vui lòng điền giá hợp lệ
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="input-group has-validation">
+                                                                        <input type="hidden" class="form-control"  id="id" name="id" value="${p.id}" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="input-group has-validation">
+                                                                        <input type="hidden" class="form-control"  id="productId" name="productId" value="${product.id}" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <button class="btn btn-primary" type="submit">Lưu</button>
+                                                                </div>
+                                                            </form>
+
+
+                                                        </div>
+
+                                                        <!-- Modal footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                         </td>
+
                                     </tr>
 
 
@@ -510,6 +579,7 @@
                             <div class="col-12">
                                 <input type="hidden" name="id" value="${product.id}">
                             </div>
+
                             <div class="col-md-6">
                                 <label for="productName" class="form-label">Tên sản phẩm</label>
                                 <input type="text" class="form-control" id="productName" name="productName" value="${product.productName}" required>
@@ -736,7 +806,7 @@
 <script>
 
     const select = document.querySelector("select");
-    const option = select.querySelector("option[value='${product.status}']");
+    const option = select.querySelector("option[value='${product.status+""}']");
 
     option.setAttribute("selected", true);
 </script>
@@ -745,6 +815,11 @@
 
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="dashboard/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+
+<script src="https://kit.fontawesome.com/fc6bd51969.js" crossorigin="anonymous"></script>
+
+
+
 </body>
 
 </html>

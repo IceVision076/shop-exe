@@ -1,12 +1,14 @@
-package com.vapeshop.respository;
+package com.vapeshop.respository.employee;
 
 import com.vapeshop.config.DBConnect;
+import com.vapeshop.entity.ImageProduct;
 import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductRespository {
@@ -186,15 +188,14 @@ public class ProductRespository {
 
         try {
             String query = "update Product set\n" +
-                    " product_name=? , brand=? , detail=? , origin=? ,status=? where id=?"
-                   ;
+                    " product_name=? , brand=? , detail=? , origin=? ,status=? where id=?";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setString(2, product.getBrand());
             preparedStatement.setString(3, product.getDetail());
             preparedStatement.setString(4, product.getOrigin());
-            preparedStatement.setString(5,product.getStatus()+"");
+            preparedStatement.setString(5, product.getStatus() + "");
             preparedStatement.setString(6, product.getId());
             preparedStatement.executeUpdate();
             connection.close();
@@ -203,10 +204,121 @@ public class ProductRespository {
         }
     }
 
+    public static void updateProductType(ProductType productType) {
+
+        try {
+            String query = "Update ProductType \n" +
+                    "SET  name=?,price=?\n" +
+                    "    where id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productType.getName());
+            preparedStatement.setDouble(2, productType.getPrice());
+            preparedStatement.setString(3, productType.getId());
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getNewProductId(int typeProduct) {
+        String newID="";
+        try {
+            String topID="";
+            String query = "SELECT TOP 1 ID FROM Product\n" +
+                    "                WHERE Product.Id like ?\n" +
+                    "                ORDER BY ID DESC\n";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            switch (typeProduct){
+                //vape
+                case 1:
+                    preparedStatement.setString(1,"V%");
+                    break;
+                //dầu
+                case 2:
+                    preparedStatement.setString(1,"J%");
+                    break;
+                //phụ kiện
+                case 3:
+                    preparedStatement.setString(1,"A%");
+                    break;
+
+            }
+
+            ResultSet resultSet= preparedStatement.executeQuery();
+            if(resultSet.next()){
+                topID=resultSet.getString(1);
+                topID=topID.substring(2);
+                int maxID=Integer.parseInt(topID)+1;
+                topID="";
+                for(int i=1;i<=8-(maxID+"").length();i++){
+                    topID=topID+0;
+                }
+                topID=topID+maxID;
+                switch (typeProduct){
+                    //vape
+                    case 1:
+                        newID="V"+topID;
+                        break;
+                    //dầu
+                    case 2:
+                        newID="J"+topID;
+                        break;
+                    //phụ kiện
+                    case 3:
+                        newID="A"+topID;
+                        break;
+                }
+
+            }
+
+
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newID;
+    }
+
+    public static void addNewProduct(Product product, ProductType productType, ImageProduct imageProduct){
+        try {
+            String query = "insert into Product(Id, product_name, brand, detail, origin, status)\n" +
+                    "values (?,?,?,?,?,?)\n" +
+                    "insert into ProductType(Id, product_id, name, price)\n" +
+                    "values (?,?,?,?)\n" +
+                    "insert into ImageProduct(product_type_id, id, image_url)\n" +
+                    "values (?,?,?)";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,product.getId());
+            preparedStatement.setString(2,product.getProductName());
+            preparedStatement.setString(3,product.getBrand());
+            preparedStatement.setString(4,product.getDetail());
+            preparedStatement.setString(5,product.getOrigin());
+            preparedStatement.setString(6,product.getStatus()+"");
+            preparedStatement.setString(7,productType.getId());
+            preparedStatement.setString(8,productType.getProductId());
+            preparedStatement.setString(9,productType.getName());
+            preparedStatement.setDouble(10,productType.getPrice());
+            preparedStatement.setString(11,imageProduct.getProductTypeId());
+            preparedStatement.setString(12,imageProduct.getId());
+            preparedStatement.setString(13,imageProduct.getImageUrl());
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public static void main(String[] args) {
 
-        getProductTypePage("V00000010", 1).stream().forEach(System.out::println);
-        System.out.println(getProductTypeAmount("V00000010"));
+        System.out.println(getNewProductId(3));
     }
 
 }
