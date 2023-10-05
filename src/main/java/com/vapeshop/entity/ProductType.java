@@ -2,27 +2,33 @@ package com.vapeshop.entity;
 
 public class ProductType {
 
-    private String id;
+    private String productTypeId;
     private String productId;
-    private String name;
-    private double price;
-
+    private String typeName;
+    private double typePrice;
+    private String imgURL;
     public ProductType() {
     }
 
-    public ProductType(String id, String productId, String name, double price) {
-        this.id = id;
+    public ProductType(String productTypeId, String productId, String typeName, double typePrice) {
+        this.productTypeId = productTypeId;
         this.productId = productId;
-        this.name = name;
-        this.price = price;
+        this.typeName = typeName;
+        this.typePrice = typePrice;
     }
 
-    public String getId() {
-        return id;
+    public ProductType(String productTypeId, String typeName, double typePrice) {
+        this.productTypeId = productTypeId;
+        this.typeName = typeName;
+        this.typePrice = typePrice;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(String productTypeId) {
+        this.productTypeId = productTypeId;
     }
 
     public String getProductId() {
@@ -33,29 +39,37 @@ public class ProductType {
         this.productId = productId;
     }
 
-    public String getName() {
-        return name;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
-    public double getPrice() {
-        return price;
+    public double getTypePrice() {
+        return typePrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setTypePrice(double typePrice) {
+        this.typePrice = typePrice;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     @Override
     public String toString() {
         return "ProductType{" +
-                "id='" + id + '\'' +
+                "id='" + productTypeId + '\'' +
                 ", productId='" + productId + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
+                ", name='" + typeName + '\'' +
+                ", price=" + typePrice +
                 '}';
     }
 }
