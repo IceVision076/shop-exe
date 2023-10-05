@@ -37,7 +37,7 @@ public class ProductRespository {
                 String img_url = getFirstProductImage(id);
 
                 Product product = new Product(id, productName, brand, detail, origin, status);
-                product.setImage_url(img_url);
+                product.setImgURL(img_url);
                 list.add(product);
             }
             connection.close();
@@ -196,7 +196,7 @@ public class ProductRespository {
             preparedStatement.setString(3, product.getDetail());
             preparedStatement.setString(4, product.getOrigin());
             preparedStatement.setString(5, product.getStatus() + "");
-            preparedStatement.setString(6, product.getId());
+            preparedStatement.setString(6, product.getIdProduct());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -294,7 +294,7 @@ public class ProductRespository {
                     "values (?,?,?)";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,product.getId());
+            preparedStatement.setString(1,product.getIdProduct());
             preparedStatement.setString(2,product.getProductName());
             preparedStatement.setString(3,product.getBrand());
             preparedStatement.setString(4,product.getDetail());
