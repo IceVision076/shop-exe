@@ -21,7 +21,9 @@ public class ProductCreateServlet extends HttpServlet {
 //
 //        System.out.println(request.getServletContext().getRealPath("").substring(0,request.getServletContext().getRealPath("").lastIndexOf("target")));
         String realPath = request.getServletContext().getRealPath("");
-        System.out.println(realPath.substring(0,realPath.lastIndexOf("VapeShop")+9));
+        System.out.println(realPath);
+
+        System.out.println(realPath.substring(0,realPath.indexOf("VapeShop")+9));
         realPath.replace('\\', '/');
 //        String savePath = realPath + "assets/img/product";
 //        File f = new File(savePath);
@@ -68,7 +70,7 @@ public class ProductCreateServlet extends HttpServlet {
             fileName = productId + "A_1" + ".jpg";
 
             if (fileName != null && fileName.length() > 0) {
-                String filePath = appPath.substring(0,appPath.lastIndexOf("VapeShop")+9) + savePath + File.separator + fileName;
+                String filePath = appPath.substring(0,appPath.indexOf("VapeShop")+9) + savePath + File.separator + fileName;
                 part.write(filePath);
             }
 
