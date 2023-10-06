@@ -66,24 +66,23 @@
           </div>
         </div>
       </div>
-      ${endPage}
-<%--      Product--%>
+      <%--      Product--%>
       <div class="row">
         <c:forEach items="${productList}" var="pl">
           <div class="col-md-4">
             <div class="card mb-4 product-wap rounded-0">
               <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="${pl.imgURL}" >
+                <img class="card-img rounded-0 img-fluid" src="${pl.imageProducts.get(0).imageUrl}" >
                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                   <ul class="list-unstyled">
                     <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                    <li><a class="btn btn-success text-white mt-2" href="ShowProductDetails?idProduct=${pl.idProduct}"><i class="far fa-eye"></i></a></li>
+                    <li><a class="btn btn-success text-white mt-2" href="ShowProductDetails?idProduct=${pl.product.idProduct}&brand=${pl.product.brand}"><i class="far fa-eye"></i></a></li>
                     <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                   </ul>
                 </div>
               </div>
               <div class="card-body">
-                <a href="ShowProductDetails?idProduct=${pl.idProduct}" class="h3 text-decoration-none">${pl.productName}</a>
+                <a href="ShowProductDetails?idProduct=${pl.product.idProduct}&brand=${pl.product.brand}" class="h3 text-decoration-none">${pl.product.productName}</a>
                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                   <li>${pl.typeName}</li>
                   <li class="pt-2">
@@ -103,13 +102,13 @@
                     <i class="text-muted fa fa-star"></i>
                   </li>
                 </ul>
-                <p class="text-center mb-0">${pl.price}<i class="text-warning">VND</i></p>
+                <p class="text-center mb-0">${pl.typePrice}<i class="text-warning">VND</i></p>
               </div>
             </div>
           </div>
         </c:forEach>
       </div>
-<%--      End Product--%>
+      <%--      End Product--%>
 
       <div div="row">
         <ul class="pagination pagination-lg justify-content-end">

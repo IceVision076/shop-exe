@@ -1,6 +1,7 @@
 package com.vapeshop.controller.ProductController;
 
 import com.vapeshop.entity.Product;
+import com.vapeshop.entity.ProductType;
 import com.vapeshop.respository.ProductRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,7 +30,7 @@ public class ShowProduct extends HttpServlet {
         if(count % 6 != 0){
             endPage++;
         }
-        List<Product> productList = productRepository.pagingProduct(index);
+        List<ProductType> productList = productRepository.pagingProduct(index);
 
         req.setAttribute("productList",productList);
         req.setAttribute("endPage",endPage);
