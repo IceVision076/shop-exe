@@ -111,20 +111,30 @@
       <%--      End Product--%>
 
       <div div="row">
-        <ul class="pagination pagination-lg justify-content-end">
+        <ul class="pagination pagination-lg justify-content-end " >
           <c:if test="${tag>1}">
-            <li class="page-item disabled">
-              <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="ProductServlet?index=${tag-1}" tabindex="-1">Previous</a>
+            <li class="page-item ">
+              <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="ProductServlet?index=${tag-1}" tabindex="-1">Previous</a>
             </li>
           </c:if>
-          <c:forEach begin="1" end="${endPage}" var="i">
-            <li class="page-item active">
-              <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark ${tag == i?"active":""}" href="ProductServlet?index=${i}">${i}</a>
-            </li>
-          </c:forEach>
+          <c:if test="${endPage >3}">
+            <c:set var="beginIndex" value="${tag - 1}" />
+            <c:set var="endIndex" value="${tag + 1}" />
+            <c:if test="${beginIndex < 1}">
+              <c:set var="beginIndex" value="1" />
+            </c:if>
+            <c:if test="${endIndex > endPage}">
+              <c:set var="endIndex" value="${endPage}" />
+            </c:if>
+            <c:forEach begin="${beginIndex}" end="${endIndex}" var="i" step="1">
+              <li class="page-item">
+                <a class="page-link rounded-0 mr-3 shadow-sm  text-dark  ${tag == i?"active":""}" href="ProductServlet?index=${i}">${i}</a>
+              </li>
+            </c:forEach>
+          </c:if>
           <c:if test="${tag<endPage}">
             <li class="page-item">
-              <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="ProductServlet?index=${tag+1}">Next</a>
+              <a class="page-link rounded-0 shadow-sm  text-dark" href="ProductServlet?index=${tag+1}">Next</a>
             </li>
           </c:if>
         </ul>
