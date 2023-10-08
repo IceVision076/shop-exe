@@ -51,7 +51,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         .modal-ku {
-            width:1000px;
+            width: 1000px;
             margin: auto;
         }
     </style>
@@ -282,11 +282,13 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí sản phẩm</a>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí
+                        sản phẩm</a>
                     </li>
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Chi tiết sản phẩm</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Chi tiết sản phẩm: <u class="font-weight-normal">${product.productName}</u></h6>
+                <h6 class="font-weight-bolder mb-0">Chi tiết sản phẩm: <u
+                        class="font-weight-normal">${product.productName}</u></h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -409,7 +411,8 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Bảng loại sản phẩm (Trang ${page}/${maxPage})</h6>
-                        <i class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse" style="color: #d31798;" > <span  style="font-family: Courier;font-size: 20px;">Thêm loại sản phẩm mới</span> </i>
+                        <a href="product-type-create?productId=${product.idProduct}" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse" style="color: #d31798;"> <span
+                                style="font-family: Courier;font-size: 20px;">Thêm loại sản phẩm mới</span> </a>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -434,7 +437,7 @@
                                     <tr>
                                         <td>
                                             <div>
-                                                <img src="${p.imgURL}" class="m-2 img-thumbnail "
+                                                <img src="${p.imageProducts.get(0).imageUrl}" class="m-2 img-thumbnail "
                                                      style="width: 100px;" alt="user1">
                                             </div>
                                         </td>
@@ -453,7 +456,8 @@
 
                                         <td class="align-middle">
                                             <!-- Button to Open the Modal -->
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${p.productTypeId}">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#${p.productTypeId}">
                                                 Chỉnh sửa
                                             </button>
 
@@ -464,27 +468,37 @@
 
                                                         <!-- Modal Header -->
                                                         <div class="modal-header d-flex">
-                                                            <h4 class="modal-title">Chỉnh sửa thông tin loại sản phẩm ${p.productTypeId}</h4>
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Chỉnh sửa thông tin loại sản
+                                                                phẩm ${p.productTypeId}</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                &times;
+                                                            </button>
                                                         </div>
 
                                                         <!-- Modal body String id, String productId, String name, double price -->
                                                         <div class="modal-body p-2">
 
-                                                            <form class="row g-3 needs-validation p-2" novalidate action="product-type-update" method="post">
+                                                            <form class="row g-3 needs-validation p-2" novalidate
+                                                                  action="product-type-update" method="post">
                                                                 <div class="col-12">
-                                                                    <label for="name" class="form-label">Tên sản phẩm</label>
+                                                                    <label for="name" class="form-label">Tên sản
+                                                                        phẩm</label>
                                                                     <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control" id="name" name="name" value="${p.typeName}" required>
+                                                                        <input type="text" class="form-control"
+                                                                               id="name" name="name"
+                                                                               value="${p.typeName}" required>
                                                                         <div class="invalid-feedback">
                                                                             Tên không được bỏ trống
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <label for="price" class="form-label">Giá sản phẩm</label>
+                                                                    <label for="price" class="form-label">Giá sản
+                                                                        phẩm</label>
                                                                     <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control"  id="price" name="price" value="${p.typePrice}" required>
+                                                                        <input type="text" class="form-control"
+                                                                               id="price" name="price"
+                                                                               value="${p.typePrice}" required>
                                                                         <div class="invalid-feedback">
                                                                             Vui lòng điền giá hợp lệ
                                                                         </div>
@@ -492,16 +506,21 @@
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="input-group has-validation">
-                                                                        <input type="hidden" class="form-control"  id="id" name="id" value="${p.productTypeId}" required>
+                                                                        <input type="hidden" class="form-control"
+                                                                               id="id" name="id"
+                                                                               value="${p.productTypeId}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="input-group has-validation">
-                                                                        <input type="hidden" class="form-control"  id="productId" name="productId" value="${product.idProduct}" required>
+                                                                        <input type="hidden" class="form-control"
+                                                                               id="productId" name="productId"
+                                                                               value="${product.idProduct}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <button class="btn btn-primary" type="submit">Lưu</button>
+                                                                    <button class="btn btn-primary" type="submit">Lưu
+                                                                    </button>
                                                                 </div>
                                                             </form>
 
@@ -510,11 +529,14 @@
 
                                                         <!-- Modal footer -->
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Đóng
+                                                            </button>
                                                         </div>
 
                                                     </div>
                                                 </div>
+                                            </div>
                                         </td>
 
                                     </tr>
@@ -582,7 +604,8 @@
 
                             <div class="col-md-6">
                                 <label for="productName" class="form-label">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="productName" name="productName" value="${product.productName}" required>
+                                <input type="text" class="form-control" id="productName" name="productName"
+                                       value="${product.productName}" required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -593,7 +616,8 @@
 
                             <div class="col-md-6">
                                 <label for="brand" class="form-label">Nhãn hàng</label>
-                                <input type="text" class="form-control" id="brand" name="brand" value="${product.brand}" required>
+                                <input type="text" class="form-control" id="brand" name="brand" value="${product.brand}"
+                                       required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -603,7 +627,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="origin" class="form-label">Xuất xứ</label>
-                                <input type="text" class="form-control" id="origin" name="origin" value="${product.origin}" required>
+                                <input type="text" class="form-control" id="origin" name="origin"
+                                       value="${product.origin}" required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -613,14 +638,15 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="status" class="form-label">Trạng thái</label>
-                                <select class="form-select" name="status" id="status" >
+                                <select class="form-select" name="status" id="status">
                                     <option value="1">Đang bán</option>
                                     <option value="0">Dừng bán</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
                                 <label for="detail" class="form-label">Mô tả sản phẩm</label>
-                                <textarea  cols="30" rows="10"  class="form-control" id="detail" name="detail"  required >${product.detail}</textarea>
+                                <textarea cols="30" rows="10" class="form-control" id="detail" name="detail"
+                                          required>${product.detail}</textarea>
 
                                 <div class="valid-feedback">
                                     Looks good!
@@ -800,7 +826,6 @@
 </script>
 
 
-
 <%--Default select input--%>
 
 <script>
@@ -817,7 +842,6 @@
 <script src="dashboard/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
 <script src="https://kit.fontawesome.com/fc6bd51969.js" crossorigin="anonymous"></script>
-
 
 
 </body>

@@ -12,6 +12,7 @@ public class ProductType {
     private ArrayList<ImageProduct> imageProducts;
 
     public ProductType() {
+        this.imageProducts = new ArrayList<>();
     }
 
     public ProductType(String productTypeId, String productId, String typeName, double typePrice) {
