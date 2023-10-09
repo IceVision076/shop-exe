@@ -1,31 +1,39 @@
 package com.vapeshop.entity;
 
 public class User {
-
     private String id;
-    private String username;
-    private String password;
+    private String userName;
+    private String passWord;
     private String fullName;
     private String email;
-    private char role;
+    private String role;
     private String phone;
-    private char status;
-    private String avataImg;
+    private String status;
+    private String avatarImg;
     private String address;
 
     public User() {
     }
 
-    public User(String id, String username, String password, String fullName, String email, char role, String phone, char status, String avataImg, String address) {
+    ;
+
+    public User(String userName, String passWord) {
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+
+
+
+    public User(String id, String userName, String passWord, String fullName, String email, String role, String phone, String status, String avatarImg, String address) {
         this.id = id;
-        this.username = username;
-        this.password = password;
+        this.userName = userName;
+        this.passWord = passWord;
         this.fullName = fullName;
         this.email = email;
         this.role = role;
         this.phone = phone;
         this.status = status;
-        this.avataImg = avataImg;
+        this.avatarImg = avatarImg;
         this.address = address;
     }
 
@@ -37,20 +45,20 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getFullName() {
@@ -69,11 +77,11 @@ public class User {
         this.email = email;
     }
 
-    public char getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(char role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -85,20 +93,20 @@ public class User {
         this.phone = phone;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getAvataImg() {
-        return avataImg;
+    public String getAvatarImg() {
+        return avatarImg;
     }
 
-    public void setAvataImg(String avataImg) {
-        this.avataImg = avataImg;
+    public void setAvatarImg(String avatarImg) {
+        this.avatarImg = avatarImg;
     }
 
     public String getAddress() {
@@ -111,17 +119,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", role=" + role +
-                ", phone='" + phone + '\'' +
-                ", status=" + status +
-                ", avataImg='" + avataImg + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return "User{" + "id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", fullName=" + fullName + ", email=" + email + ", role=" + role + ", phone=" + phone + ", status=" + status + ", avatarImg=" + avatarImg + ", address=" + address + '}';
     }
 }
