@@ -112,9 +112,9 @@ public class ProductRepository {
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
                     + "ORDER BY pdt.[id]\n"
-                    + "OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY\n"
+                    + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
-            stmt.setInt(1, (index-1)*6);
+            stmt.setInt(1, (index-1)*9);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String idProduct = rs.getString(1);

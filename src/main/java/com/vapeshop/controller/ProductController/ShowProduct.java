@@ -26,8 +26,8 @@ public class ShowProduct extends HttpServlet {
 
         ProductRepository productRepository = new ProductRepository();
         int count  = productRepository.getTotalProduct();
-        int endPage = count/6;
-        if(count % 6 != 0){
+        int endPage = count/9;
+        if(count % 9 != 0){
             endPage++;
         }
         List<ProductType> productList = productRepository.pagingProduct(index);
