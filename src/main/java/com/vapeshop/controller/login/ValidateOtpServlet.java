@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author HUNTER
  */
 @WebServlet(name = "ValidateOtp", urlPatterns = {"/ValidateOtp"})
-public class ValidateOtp extends HttpServlet {
+public class ValidateOtpServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,12 +35,11 @@ public class ValidateOtp extends HttpServlet {
         if (value == otp) {
 
             request.setAttribute("email", request.getParameter("email"));
-            request.setAttribute("status", "success");
             dispatcher = request.getRequestDispatcher("newPassword.jsp");
             dispatcher.forward(request, response);
 
         } else {
-            request.setAttribute("message", "wrong otp");
+            request.setAttribute("message", "Sai mã OTP");
 
             dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
             dispatcher.forward(request, response);

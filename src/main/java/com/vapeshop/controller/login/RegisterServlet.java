@@ -21,7 +21,7 @@ import java.io.PrintWriter;
  * @author HUNTER
  */
 @WebServlet(name = "register", urlPatterns = {"/register"})
-public class register extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,12 +50,12 @@ public class register extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String id = request.getParameter("id");
         String userName = request.getParameter("userName");
-        String passWord = request.getParameter("pass");
+        String passWord = request.getParameter("password");
 
         String fullName = request.getParameter("FullName");
         String email = request.getParameter("email");
@@ -67,27 +67,32 @@ public class register extends HttpServlet {
 
         String rePass = request.getParameter("rePass");
         UserRespository dao = new UserRespository();
-        User checkAcount = dao.CheckAccoutExist(userName);
-
-        if (checkAcount != null) {
+        User checkAccount  = dao.CheckAccoutExist(userName);
+        User checkEmail = dao.CheckEmailExist(email);
+        if (checkAccount  != null) {
             // Tên người dùng đã tồn tại, load lại trang register
 
-            request.getSession().setAttribute("accoutExits", "Account already exists");
+            request.getSession().setAttribute("accoutExits", "Tài khoản đã tồn tại");
 
             request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else if (checkEmail != null) {
+            // eamil đã tồn tại, load lại trang
+            request.getSession().setAttribute("mess", "Email đã tồn tại");
+
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+
         } else if (!passWord.equals(rePass)) {
+
             // Mật khẩu không khớp, load lại trang register
 //            request.setAttribute("mess2", "Re-entered password is incorrect");
-            request.getSession().setAttribute("rePass", "Re-entered password is incorrect");
+            request.getSession().setAttribute("rePass", "Mật khẩu nhập lại sai");
 
             request.getRequestDispatcher("register.jsp").forward(request, response);
-
         } else {
+
             dao.Register(id, userName, passWord, fullName, email, role, phone, status, avatarImg, address);
             response.sendRedirect("login.jsp");
         }
-
-       
 
 //        if (!passWord.equals(rePass)) {
 //            response.sendRedirect("login.jsp");
@@ -107,7 +112,7 @@ public class register extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

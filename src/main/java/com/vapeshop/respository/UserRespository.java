@@ -12,13 +12,12 @@ import java.sql.SQLException;
 
 public class UserRespository {
 
-    static Connection conn = null;
-    static PreparedStatement ps = null;
-    static ResultSet rs = null;
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
 
     private void CloseResources() {
         try {
-
             if (rs != null) {
                 rs.close();
             }
@@ -33,13 +32,16 @@ public class UserRespository {
         }
     }
 
-    public User login(String userName, String passWord) throws SQLException {
-        String query_account = "  select *FROM [VapeShopDB].[dbo].[UserInfo] where [username]= ? and [password] =?";
+    public User login(String usernameOrEmail, String passWord) throws SQLException {
+        String query_account = " SELECT * FROM [dbo].[UserInfo] WHERE (username = ? OR email = ?) AND password = ?";
         try {
+
             conn =  DBConnect.getConnection();
+
             ps = conn.prepareStatement(query_account);
-            ps.setString(1, userName);
-            ps.setString(2, passWord);
+            ps.setString(1, usernameOrEmail);
+            ps.setString(2, usernameOrEmail);
+            ps.setString(3, passWord);
             rs = ps.executeQuery();
             while (rs.next()) {
                 return new User(
@@ -61,6 +63,8 @@ public class UserRespository {
         return null;
     }
 
+
+
     public User CheckAccoutExist(String UserName) {
 
         String query_check = "SELECT [id]\n"
@@ -78,8 +82,51 @@ public class UserRespository {
 
         try {
             conn =  DBConnect.getConnection();
+
             ps = conn.prepareStatement(query_check);
             ps.setString(1, UserName);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return new User(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10));
+
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public User CheckEmailExist(String email) {
+
+        String query_check = "SELECT [id]\n"
+                + "      ,[username]\n"
+                + "      ,[password]\n"
+                + "      ,[full_name]\n"
+                + "      ,[email]\n"
+                + "      ,[role]\n"
+                + "      ,[phone]\n"
+                + "      ,[status]\n"
+                + "      ,[avata_img]\n"
+                + "      ,[address]\n"
+                + "  FROM [dbo].[UserInfo]\n"
+                + "  Where [email] = ?";
+
+        try {
+            conn =  DBConnect.getConnection();
+
+            ps = conn.prepareStatement(query_check);
+            ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
 
@@ -119,6 +166,7 @@ public class UserRespository {
 
         try {
             conn =  DBConnect.getConnection();
+
             ps = conn.prepareStatement(query_check);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -159,6 +207,7 @@ public class UserRespository {
 
         try {
             conn =  DBConnect.getConnection();
+
             ps = conn.prepareStatement(get_last_Id);
             rs = ps.executeQuery();
             String lastId = "AC00000000";
@@ -188,9 +237,7 @@ public class UserRespository {
             ps.setString(10, address);
             ps.executeUpdate();
 
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
         } finally {
             CloseResources();
         }
@@ -200,6 +247,7 @@ public class UserRespository {
         String resetPass = "UPDATE [dbo].[UserInfo] SET [password] = ? WHERE [email] = ?";
         try {
             conn =  DBConnect.getConnection();
+
             ps = conn.prepareStatement(resetPass);
             ps.setString(1, passWord);
             ps.setString(2, email);
@@ -221,5 +269,43 @@ public class UserRespository {
         return result;
     }
 
+    public static void main(String[] args) {
+        // Gọi phương thức setIDDatabase và cung cấp chuỗi đầu vào "AC00000999"
+//        String inputString = "AC00000010";
+//        String newID = setIDDatabase(inputString);
+//
+//        // In kết quả
+//        System.out.println("New ID: " + newID);
+
+//          Tạo một đối tượng UserRegistration (điều này giả sử bạn đã tạo một lớp có phương thức Register)
+        // Gọi phương thức Register để đăng ký người dùng
+        // Thông tin người dùng mới
+//        String id = ""; // Bạn có thể để trống hoặc tự tạo id mới
+//        String userName = "john_doe";
+//        String passWord = "password123";
+//        String fullName = "John Doe";
+//        String email = "john.doe@example.com";
+//        String role = "";
+//        String phone = "1234567890";
+//        String status = "";
+//        String avatarImg = "a";
+//        String address = "123 Main St";
+
+//        // Tạo đối tượng để thực hiện đăng ký
+//        UserRespository ur = new UserRespository();
+//        ur.Register(id, userName, passWord, fullName, email, role, phone, status, avatarImg, address);
+//
+//        // In thông báo khi đăng ký thành công hoặc xử lý lỗi ở đây
+//        System.out.println("Đăng ký thành công!");
+//
+
+
+
+        String email = "nguyenngocnhan442002@gmail.com";
+        String pass = "123456789";
+        UserRespository dao = new UserRespository();
+        dao.resetPassWord(email, pass);
+
+    }
 
 }

@@ -19,15 +19,15 @@ import java.io.IOException;
  * @author HUNTER
  */
 @WebServlet(name = "logout", urlPatterns = {"/logout"})
-public class logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        session.removeAttribute("accountLink");
-        response.sendRedirect("home.jsp");
+        session.removeAttribute("user");
+        response.sendRedirect("index.jsp");
     }
 
     @Override

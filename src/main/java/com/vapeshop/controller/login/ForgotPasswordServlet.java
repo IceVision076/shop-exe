@@ -23,7 +23,7 @@ import java.util.Properties;
 import java.util.Random;
 
 @WebServlet("/forgotPassword")
-public class ForgotPassword extends HttpServlet {
+public class ForgotPasswordServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -38,9 +38,8 @@ public class ForgotPassword extends HttpServlet {
             User check = dao.CheckEmailtExist(email);
             if (check == null) {
                 // account không tồn tại, load lại trang repassWord
-                request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-
                 request.getSession().setAttribute("emailExist", "Your email is not exist ");
+                request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
 
             } else {
                 // sending otp
@@ -76,12 +75,10 @@ public class ForgotPassword extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
-                request.setAttribute("message", "OTP is sent to your email id");
-                //request.setAttribute("connection", con);
+                request.setAttribute("message", "Mã OTP đã được gửi đến email của bạn ");
                 mySession.setAttribute("otp", otpvalue);
                 mySession.setAttribute("email", email);
                 dispatcher.forward(request, response);
-                //request.setAttribute("status", "success");
             }
 
 //        } else {

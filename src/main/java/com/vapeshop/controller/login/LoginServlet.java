@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,9 +24,24 @@ import java.util.logging.Logger;
  * @author HUNTER
  */
 @WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet login</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -37,36 +53,40 @@ public class login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String userName = request.getParameter("user");
+        String userName = request.getParameter("userOrEmail");
         String passWord = request.getParameter("passWord");
+
         UserRespository dao = new UserRespository();
         try {
             User account = dao.login(userName, passWord);
 
             if (account == null) {
                 // account không tồn tại , load lại trang login
-                request.setAttribute("mess", "Wrong User or Pass");
+                request.getSession().setAttribute("userOrEmail", "Sai tài khoản hoặc mật khẩu");
+
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("accountLink", account);
+                session.setAttribute("user", account);
 
-                request.getSession().setAttribute("email", account.getEmail());
-
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                response.sendRedirect("index.jsp");
 
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
     /**
      * Returns a short description of the servlet.
