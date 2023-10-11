@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="${product.imgURL}" alt="Card image cap" id="product-detail">
+                        <img class="card-img img-fluid" src="${product.productTypes.get(0).imageProducts.get(0).imageUrl}" alt="Card image cap" id="product-detail">
                     </div>
                 <div class="row">
                     <!--Start Controls-->
@@ -34,12 +34,14 @@
                             <!--First slide-->
                             <div class="carousel-item active">
                                 <div class="row">
-                                        <c:forEach items="${imageProducts}" var="ip">
-                                            <div class="col-4">
-                                                <a href="#">
-                                                    <img class="card-img img-fluid" src="${ip.imgURL}" alt="Product Image 1">
-                                                </a>
-                                            </div>
+                                        <c:forEach items="${product.productTypes}" var="ip">
+                                            <c:forEach items="${ip.imageProducts}" var="img">
+                                                <div class="col-4">
+                                                    <a href="#">
+                                                        <img class="card-img img-fluid" src="${img.imageUrl}" alt="Product Image 1">
+                                                    </a>
+                                                </div>
+                                            </c:forEach>
                                         </c:forEach>
                                 </div>
                             </div>
@@ -48,12 +50,14 @@
                             <!--Second slide-->
                             <div class="carousel-item">
                                 <div class="row">
-                                    <c:forEach items="${imageProducts}" var="ip">
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="${ip.imgURL}" alt="Product Image 1">
-                                            </a>
-                                        </div>
+                                    <c:forEach items="${product.productTypes}" var="ip">
+                                        <c:forEach items="${ip.imageProducts}" var="img">
+                                            <div class="col-4">
+                                                <a href="#">
+                                                    <img class="card-img img-fluid" src="${img.imageUrl}" alt="Product Image 1">
+                                                </a>
+                                            </div>
+                                        </c:forEach>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -62,12 +66,14 @@
                             <!--Third slide-->
                             <div class="carousel-item">
                                 <div class="row">
-                                    <c:forEach items="${imageProducts}" var="ip">
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="${ip.imgURL}" alt="Product Image 1">
-                                            </a>
-                                        </div>
+                                    <c:forEach items="${product.productTypes}" var="ip">
+                                        <c:forEach items="${ip.imageProducts}" var="img">
+                                            <div class="col-4">
+                                                <a href="#">
+                                                    <img class="card-img img-fluid" src="${img.imageUrl}" alt="Product Image 1">
+                                                </a>
+                                            </div>
+                                        </c:forEach>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -91,7 +97,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2">${product.productName}</h1>
-                        <p class="h3 py-2" > <span id="product-price">${product.price}</span> <i class="text-warning">VND</i></p>
+                        <p class="h3 py-2" > <span id="product-price">${product.productTypes.get(0).typePrice}</span> <i class="text-warning">VND</i></p>
                         <p class="py-2">
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
@@ -120,12 +126,12 @@
                                             <label for="product">Type:</label>
                                             <select id="product" name="product" onchange="calculatePrice()">
                                                 <option value="">Select a type</option>
-                                                <c:forEach items="${productTypes}" var="pdt">
+                                                <c:forEach items="${product.productTypes}" var="pdt">
                                                     <option id="optiontype" value="${pdt.productTypeId}">${pdt.typeName}
                                                     </option>
                                                 </c:forEach>
                                             </select>
-                                        <c:forEach items="${productTypes}" var="pdt">
+                                        <c:forEach items="${product.productTypes}" var="pdt">
                                                 <span class="d-none" id="${pdt.productTypeId}">${pdt.typePrice}</span>
                                         </c:forEach>
                                     </ul>
@@ -169,23 +175,23 @@
 
         <!--Start Carousel Wrapper-->
         <div id="carousel-related-product">
-            <c:forEach items="${productList}" var="pl">
+            <c:forEach items="${productTypeArrayList}" var="pta">
                 <div class="p-2 pb-3">
                     <div class="product-wap card rounded-0">
                         <div class="card rounded-0">
-                            <img class="card-img rounded-0 img-fluid" src="${pl.imgURL}">
+                            <img class="card-img rounded-0 img-fluid" src="${pta.imageProducts.get(0).imageUrl}">
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
                                     <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="ShowProductDetails?idProduct=${pl.idProduct}"><i class="far fa-eye"></i></a></li>
+                                    <li><a class="btn btn-success text-white mt-2" href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}"><i class="far fa-eye"></i></a></li>
                                     <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="ShowProductDetails?idProduct=${pl.idProduct}" class="h3 text-decoration-none">${pl.productName}</a>
+                            <a href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}" class="h3 text-decoration-none">${pta.product.productName}</a>
                             <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li>${pl.typeName}</li>
+                                <li>${pta.typeName}</li>
                                 <li class="pt-2">
                                     <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
                                     <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
@@ -203,7 +209,7 @@
                                     <i class="text-muted fa fa-star"></i>
                                 </li>
                             </ul>
-                            <p class="text-center mb-0">${pl.price}<i class="text-warning">VND</i></p>
+                            <p class="text-center mb-0">${pta.typePrice}<i class="text-warning">VND</i></p>
                         </div>
                     </div>
                 </div>

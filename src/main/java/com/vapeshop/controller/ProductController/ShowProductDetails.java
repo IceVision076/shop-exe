@@ -20,16 +20,13 @@ public class ShowProductDetails extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String brand = req.getParameter("brand");
         String idProduct = req.getParameter("idProduct");
         Product product = ProductRepository.getProductByID(idProduct);
-        ArrayList<ProductType> productTypes = ProductRepository.getTypeByID(idProduct);
-        ArrayList<Product> imageProducts = ProductRepository.getImageByID(idProduct);
-        ArrayList<Product> productList = ProductRepository.getAllProduct();
+        ArrayList<ProductType> productTypeArrayList = ProductRepository.getProductByBrand(brand,idProduct);
 
         req.setAttribute("product",product);
-        req.setAttribute("productTypes",productTypes);
-        req.setAttribute("imageProducts",imageProducts);
-        req.setAttribute("productList",productList);
+        req.setAttribute("productTypeArrayList",productTypeArrayList);
         req.getRequestDispatcher("ProductDetails.jsp").forward(req,resp);
     }
 

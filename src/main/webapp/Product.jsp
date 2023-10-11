@@ -66,24 +66,23 @@
           </div>
         </div>
       </div>
-      ${endPage}
-<%--      Product--%>
+      <%--      Product--%>
       <div class="row">
         <c:forEach items="${productList}" var="pl">
           <div class="col-md-4">
             <div class="card mb-4 product-wap rounded-0">
               <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="${pl.imgURL}" >
+                <img class="card-img rounded-0 img-fluid" src="${pl.imageProducts.get(0).imageUrl}" >
                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                   <ul class="list-unstyled">
                     <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                    <li><a class="btn btn-success text-white mt-2" href="ShowProductDetails?idProduct=${pl.idProduct}"><i class="far fa-eye"></i></a></li>
+                    <li><a class="btn btn-success text-white mt-2" href="ShowProductDetails?idProduct=${pl.product.idProduct}&brand=${pl.product.brand}"><i class="far fa-eye"></i></a></li>
                     <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                   </ul>
                 </div>
               </div>
               <div class="card-body">
-                <a href="ShowProductDetails?idProduct=${pl.idProduct}" class="h3 text-decoration-none">${pl.productName}</a>
+                <a href="ShowProductDetails?idProduct=${pl.product.idProduct}&brand=${pl.product.brand}" class="h3 text-decoration-none">${pl.product.productName}</a>
                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                   <li>${pl.typeName}</li>
                   <li class="pt-2">
@@ -103,29 +102,39 @@
                     <i class="text-muted fa fa-star"></i>
                   </li>
                 </ul>
-                <p class="text-center mb-0">${pl.price}<i class="text-warning">VND</i></p>
+                <p class="text-center mb-0">${pl.typePrice}<i class="text-warning">VND</i></p>
               </div>
             </div>
           </div>
         </c:forEach>
       </div>
-<%--      End Product--%>
+      <%--      End Product--%>
 
       <div div="row">
-        <ul class="pagination pagination-lg justify-content-end">
+        <ul class="pagination pagination-lg justify-content-end " >
           <c:if test="${tag>1}">
-            <li class="page-item disabled">
-              <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="ProductServlet?index=${tag-1}" tabindex="-1">Previous</a>
+            <li class="page-item ">
+              <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="ProductServlet?index=${tag-1}" tabindex="-1">Previous</a>
             </li>
           </c:if>
-          <c:forEach begin="1" end="${endPage}" var="i">
-            <li class="page-item active">
-              <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark ${tag == i?"active":""}" href="ProductServlet?index=${i}">${i}</a>
-            </li>
-          </c:forEach>
+          <c:if test="${endPage >3}">
+            <c:set var="beginIndex" value="${tag - 1}" />
+            <c:set var="endIndex" value="${tag + 1}" />
+            <c:if test="${beginIndex < 1}">
+              <c:set var="beginIndex" value="1" />
+            </c:if>
+            <c:if test="${endIndex > endPage}">
+              <c:set var="endIndex" value="${endPage}" />
+            </c:if>
+            <c:forEach begin="${beginIndex}" end="${endIndex}" var="i" step="1">
+              <li class="page-item">
+                <a class="page-link rounded-0 mr-3 shadow-sm  text-dark  ${tag == i?"active":""}" href="ProductServlet?index=${i}">${i}</a>
+              </li>
+            </c:forEach>
+          </c:if>
           <c:if test="${tag<endPage}">
             <li class="page-item">
-              <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="ProductServlet?index=${tag+1}">Next</a>
+              <a class="page-link rounded-0 shadow-sm  text-dark" href="ProductServlet?index=${tag+1}">Next</a>
             </li>
           </c:if>
         </ul>

@@ -1,12 +1,16 @@
 package com.vapeshop.entity;
 
+import java.util.ArrayList;
+
 public class ProductType {
 
     private String productTypeId;
     private String productId;
     private String typeName;
     private double typePrice;
-    private String imgURL;
+    private Product product;
+    private ArrayList<ImageProduct> imageProducts;
+
     public ProductType() {
     }
 
@@ -15,12 +19,8 @@ public class ProductType {
         this.productId = productId;
         this.typeName = typeName;
         this.typePrice = typePrice;
-    }
-
-    public ProductType(String productTypeId, String typeName, double typePrice) {
-        this.productTypeId = productTypeId;
-        this.typeName = typeName;
-        this.typePrice = typePrice;
+        this.product = new Product();
+        this.imageProducts = new ArrayList<>();
     }
 
     public String getProductTypeId() {
@@ -55,21 +55,31 @@ public class ProductType {
         this.typePrice = typePrice;
     }
 
-    public String getImgURL() {
-        return imgURL;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public ArrayList<ImageProduct> getImageProducts() {
+        return imageProducts;
+    }
+
+    public void setImageProducts(ArrayList<ImageProduct> imageProducts) {
+        this.imageProducts = imageProducts;
     }
 
     @Override
     public String toString() {
         return "ProductType{" +
-                "id='" + productTypeId + '\'' +
+                "productTypeId='" + productTypeId + '\'' +
                 ", productId='" + productId + '\'' +
-                ", name='" + typeName + '\'' +
-                ", price=" + typePrice +
+                ", typeName='" + typeName + '\'' +
+                ", typePrice=" + typePrice +
+                ", product=" + product +
+                ", imageProducts=" + imageProducts +
                 '}';
     }
 }
