@@ -1,19 +1,22 @@
 package com.vapeshop.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ImportProduct {
 
     private String lotId;
+    private String lotName;
     private String productTypeId;
     private int quantity;
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
 
     public ImportProduct() {
     }
 
-    public ImportProduct(String lotId, String productTypeId, int quantity, LocalDate dateTime) {
+    public ImportProduct(String lotId, String lotName, String productTypeId, int quantity, LocalDateTime dateTime) {
         this.lotId = lotId;
+        this.lotName = lotName;
         this.productTypeId = productTypeId;
         this.quantity = quantity;
         this.dateTime = dateTime;
@@ -25,6 +28,14 @@ public class ImportProduct {
 
     public void setLotId(String lotId) {
         this.lotId = lotId;
+    }
+
+    public String getLotName() {
+        return lotName;
+    }
+
+    public void setLotName(String lotName) {
+        this.lotName = lotName;
     }
 
     public String getProductTypeId() {
@@ -43,19 +54,19 @@ public class ImportProduct {
         this.quantity = quantity;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDate dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
-    // getters and setters
 
     @Override
     public String toString() {
         return "ImportProduct{" +
                 "lotId='" + lotId + '\'' +
+                ", lotName='" + lotName + '\'' +
                 ", productTypeId='" + productTypeId + '\'' +
                 ", quantity=" + quantity +
                 ", dateTime=" + dateTime +

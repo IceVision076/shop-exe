@@ -291,7 +291,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><a href="" class="btn btn-behance">Nhập hàng</a></td>
+                                        <td><a href="product-import?productTypeId=${p.productTypeId}" class="btn btn-behance">Nhập hàng</a></td>
                                     </tr>
 
 

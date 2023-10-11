@@ -2,13 +2,12 @@ package com.vapeshop.respository.employee;
 
 import com.vapeshop.config.DBConnect;
 import com.vapeshop.entity.ImageProduct;
+import com.vapeshop.entity.ImportProduct;
 import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ProductRespository {
@@ -112,29 +111,30 @@ public class ProductRespository {
 
         return amount;
     }
-      public static ArrayList<ImageProduct> getImgProductType(String productTypeId){
-          ArrayList<ImageProduct> list = null;
-          try {
-              String query = "select * from ImageProduct where product_type_id=?";
-              Connection connection = DBConnect.getConnection();
-              PreparedStatement preparedStatement = connection.prepareStatement(query);
-              preparedStatement.setString(1, productTypeId);
-              ResultSet rs = preparedStatement.executeQuery();
-              list = new ArrayList<>();
-              while (rs.next()) {
 
-                String id=rs.getString(2);
-                String imgUrl=rs.getString(3);
+    public static ArrayList<ImageProduct> getImgProductType(String productTypeId) {
+        ArrayList<ImageProduct> list = null;
+        try {
+            String query = "select * from ImageProduct where product_type_id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            ResultSet rs = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (rs.next()) {
 
-              ImageProduct imageProduct=new ImageProduct(productTypeId,id,imgUrl);
-              list.add(imageProduct);
-              }
-              connection.close();
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
-          return list;
-      }
+                String id = rs.getString(2);
+                String imgUrl = rs.getString(3);
+
+                ImageProduct imageProduct = new ImageProduct(productTypeId, id, imgUrl);
+                list.add(imageProduct);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public static ArrayList<ProductType> getProductTypePage(String productID, int page) {
         ArrayList<ProductType> list = null;
@@ -377,7 +377,7 @@ public class ProductRespository {
             preparedStatement.setString(2, productType.getProductId());
             preparedStatement.setString(3, productType.getTypeName());
             preparedStatement.setDouble(4, productType.getTypePrice());
-            preparedStatement.setString(5,productType.getProductTypeId());
+            preparedStatement.setString(5, productType.getProductTypeId());
             preparedStatement.setString(6, getNewImgId());
             preparedStatement.setString(7, productType.getImageProducts().get(0).getImageUrl());
             preparedStatement.executeUpdate();
@@ -387,8 +387,8 @@ public class ProductRespository {
         }
     }
 
-    public static String  getNewImgId() {
-        String newImgId="";
+    public static String getNewImgId() {
+        String newImgId = "";
         try {
             String query = "select top 1 * from ImageProduct order by id desc ";
             Connection connection = DBConnect.getConnection();
@@ -396,21 +396,57 @@ public class ProductRespository {
             ResultSet rs = statement.executeQuery(query);
             if (rs.next()) {
                 int maxIdRecent = Integer.parseInt(rs.getString(2).substring(3));
-                for(int i=1;i<=7-(maxIdRecent+"").length();i++){
-                    newImgId=newImgId+"0";
+                for (int i = 1; i <= 7 - (maxIdRecent + "").length(); i++) {
+                    newImgId = newImgId + "0";
                 }
-                newImgId=newImgId+(maxIdRecent+1);
+                newImgId = newImgId + (maxIdRecent + 1);
 
             }
-                connection.close();
+            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "IMG"+newImgId;
+        return "IMG" + newImgId;
     }//IMG0000104
 
+    public static boolean checkExitsLotId(String lotId) {
+        boolean check = false;
+        try {
+            String query = "select * from ImportProduct where lot_id=? ";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, lotId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                check = true;
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+
+    public static void addNewLot(ImportProduct importProduct) {
+        try {
+            String query = "insert into ImportProduct(lot_id, lot_name, product_type_id, quantity, date_time)\n" +
+                    "values (?,?,?,?,?) ";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, importProduct.getLotId());
+            preparedStatement.setString(2, importProduct.getLotName());
+            preparedStatement.setString(3, importProduct.getProductTypeId());
+            preparedStatement.setInt(4, importProduct.getQuantity());
+            preparedStatement.setObject(5, importProduct.getDateTime());
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(getNewImgId());
+        System.out.println(LocalDateTime.now().toString());
         //getProductTypePage("J00000006", 1).stream().forEach(System.out::println);
     }
 
