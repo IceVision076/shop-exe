@@ -14,14 +14,23 @@ public class ServiceTracking {
     private LocalDate deliveryDate;
     private char status;
     private double price;
-
+    private String title;
     // getters and setters
 
 
     public ServiceTracking() {
     }
 
-    public ServiceTracking(String id, String employeeId, String userId, String userDescription, String employeeDescription, LocalDate createDate, LocalDate estimatedDeliveryDate, LocalDate deliveryDate, char status, double price) {
+    public ServiceTracking(String id, String userId, String userDescription, LocalDate createDate, char status, String title) {
+        this.id = id;
+        this.userId = userId;
+        this.userDescription = userDescription;
+        this.createDate = createDate;
+        this.status = status;
+        this.title = title;
+    }
+
+    public ServiceTracking(String id, String employeeId, String userId, String userDescription, String employeeDescription, LocalDate createDate, LocalDate estimatedDeliveryDate, LocalDate deliveryDate, char status, double price, String title) {
         this.id = id;
         this.employeeId = employeeId;
         this.userId = userId;
@@ -32,6 +41,7 @@ public class ServiceTracking {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.price = price;
+        this.title = title;
     }
 
     public String getId() {
@@ -114,6 +124,14 @@ public class ServiceTracking {
         this.price = price;
     }
 
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
     @Override
     public String toString() {
         return "ServiceTracking{" +
@@ -127,6 +145,7 @@ public class ServiceTracking {
                 ", deliveryDate=" + deliveryDate +
                 ", status=" + status +
                 ", price=" + price +
+                ", title=" + title +
                 '}';
     }
 }
