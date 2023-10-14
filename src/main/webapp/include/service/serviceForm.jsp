@@ -35,7 +35,7 @@
                 <div class="col-12">
                     <label for="title" class="form-label">Tiêu đề <span class="text-danger"> *</span></label>
                     <div class="input-group has-validation">
-                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"
+                        <input type="text" class="form-control" placeholder="Nhập tiêu đề yêu cầu dịch vụ"
                                id="title" name="title"
                                required>
                         <div class="invalid-feedback">
@@ -53,7 +53,7 @@
                     <div class="input-group has-validation">
                                     <textarea cols="30" rows="10" class="form-control" id="userDescription"
                                               name="userDescription"
-                                              placeholder="Nhập mô tả sản phẩm" required></textarea>
+                                              placeholder="Nhập mô tả yêu cầu dịch vụ" required></textarea>
                         <div class="invalid-feedback">
                             Vui lòng điền mô tả
                         </div>

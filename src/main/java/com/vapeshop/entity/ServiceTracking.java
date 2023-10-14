@@ -1,6 +1,7 @@
 package com.vapeshop.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ServiceTracking {
 
@@ -9,7 +10,7 @@ public class ServiceTracking {
     private String userId;
     private String userDescription;
     private String employeeDescription;
-    private LocalDate createDate;
+    private LocalDateTime createDate;
     private LocalDate estimatedDeliveryDate;
     private LocalDate deliveryDate;
     private char status;
@@ -21,7 +22,7 @@ public class ServiceTracking {
     public ServiceTracking() {
     }
 
-    public ServiceTracking(String id, String userId, String userDescription, LocalDate createDate, char status, String title) {
+    public ServiceTracking(String id, String userId, String userDescription, LocalDateTime createDate, char status, String title) {
         this.id = id;
         this.userId = userId;
         this.userDescription = userDescription;
@@ -30,7 +31,7 @@ public class ServiceTracking {
         this.title = title;
     }
 
-    public ServiceTracking(String id, String employeeId, String userId, String userDescription, String employeeDescription, LocalDate createDate, LocalDate estimatedDeliveryDate, LocalDate deliveryDate, char status, double price, String title) {
+    public ServiceTracking(String id, String employeeId, String userId, String userDescription, String employeeDescription, LocalDateTime createDate, LocalDate estimatedDeliveryDate, LocalDate deliveryDate, char status, double price, String title) {
         this.id = id;
         this.employeeId = employeeId;
         this.userId = userId;
@@ -84,11 +85,11 @@ public class ServiceTracking {
         this.employeeDescription = employeeDescription;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 

@@ -1,15 +1,18 @@
 package com.vapeshop.controller;
 
 import com.vapeshop.entity.ServiceTracking;
+import com.vapeshop.entity.User;
 import com.vapeshop.respository.ServiceTrackingRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "ServiceTrackingServlet", value = "/service-tracking-sender")
 public class ServiceTrackingServlet extends HttpServlet {
@@ -21,13 +24,14 @@ public class ServiceTrackingServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session=request.getSession();
+        User user=(User)session.getAttribute("user");
         String title = request.getParameter("title");
         String userDescription = request.getParameter("userDescription");
-        String id = "ST00000121";
-        String userId = "AC00000015";
-        LocalDate createDate = LocalDate.now();
+        String userId = user.getId();
+        LocalDateTime createDate = LocalDateTime.now();
         char status = '1';
-        ServiceTracking serviceTracking= new ServiceTracking( id, userId, userDescription, createDate, status, title);
+        ServiceTracking serviceTracking= new ServiceTracking( "", userId, userDescription, createDate, status, title);
         ServiceTrackingRepository.serviceTrackingSender(serviceTracking);
         response.sendRedirect("index.jsp");
     }
