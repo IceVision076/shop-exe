@@ -1,6 +1,5 @@
-package com.vapeshop.controller.ProductController;
+package com.vapeshop.controller.product;
 
-import com.vapeshop.entity.ImageProduct;
 import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
 import com.vapeshop.respository.ProductRepository;
@@ -12,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(value = "/ShowProductDetails", name = "ShowProductDetails" )
 public class ShowProductDetails extends HttpServlet {

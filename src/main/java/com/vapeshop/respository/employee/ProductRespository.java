@@ -6,7 +6,10 @@ import com.vapeshop.entity.ImportProduct;
 import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

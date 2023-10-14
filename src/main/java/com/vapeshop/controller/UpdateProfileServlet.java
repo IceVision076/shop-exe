@@ -2,10 +2,14 @@ package com.vapeshop.controller;
 
 
 import com.vapeshop.entity.User;
-import com.vapeshop.respository.khanhRespository;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import com.vapeshop.respository.UserRespository;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 
@@ -13,20 +17,23 @@ import java.io.IOException;
 public class UpdateProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("update-profile.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = "AC00000001";
+        HttpSession session=request.getSession();
+      User userOld= (User) session.getAttribute("user");
+        String id = userOld.getId();
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        User user=new User();
-        user.setFullName(fullname);
-        user.setPhone(phone);
-        user.setAddress(address);
-        user.setId(id);
-        khanhRespository.upadteProfile(user);
+
+        userOld.setFullName(fullname);
+        userOld.setPhone(phone);
+        userOld.setAddress(address);
+        userOld.setId(id);
+        UserRespository.upadateProfile(userOld);
         response.sendRedirect("index.jsp");
     }
 }

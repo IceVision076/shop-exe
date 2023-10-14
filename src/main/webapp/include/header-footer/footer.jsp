@@ -108,6 +108,7 @@
 <script src="assets/js/templatemo.js"></script>
 <script src="assets/js/custom.js"></script>
 <!-- End Script -->
+<script src="https://kit.fontawesome.com/fc6bd51969.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

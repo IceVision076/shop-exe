@@ -1,7 +1,5 @@
-package com.vapeshop.controller.ProductController;
+package com.vapeshop.controller.product;
 
-import com.vapeshop.entity.Product;
-import com.vapeshop.respository.ProductRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(value = "/ProductHomeServlet", name = "ProductHomeServlet" )
 

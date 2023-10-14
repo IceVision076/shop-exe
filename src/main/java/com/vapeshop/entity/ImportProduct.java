@@ -1,6 +1,5 @@
 package com.vapeshop.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ImportProduct {

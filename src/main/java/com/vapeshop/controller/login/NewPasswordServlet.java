@@ -20,7 +20,8 @@ import java.io.PrintWriter;
  *
  * @author HUNTER
  */
-@WebServlet(name = "newPassword", urlPatterns = {"/newPassword"})
+
+@WebServlet(name = "newPassword", value = "/newPassword")
 public class NewPasswordServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

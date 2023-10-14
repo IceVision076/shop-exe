@@ -268,7 +268,55 @@ public class UserRespository {
         result = result + idGet;
         return result;
     }
+    public static void upadateProfile(User user) {
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "UPDATE [dbo].[UserInfo]\n"
+                    + "   SET "
+                    + "      [full_name] = ?\n"
+                    + "      ,[phone] = ? \n"
+                    + "      ,[address] = ?\n"
+                    + " WHERE id=?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, user.getFullName());
+            statement.setString(2, user.getPhone());
+            statement.setString(3, user.getAddress());
+            statement.setString(4, user.getId());
+            statement.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    public User getUserById(String id) {
+
+        User user = null;
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "select * from UserInfo where id =?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getString("id"));
+                user.setUserName(resultSet.getString("username"));
+
+                user.setFullName(resultSet.getString("full_name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setRole(String.valueOf(resultSet.getString("role").charAt(0)));
+                user.setPhone(resultSet.getString("phone"));
+                user.setStatus(String.valueOf(resultSet.getString("status").charAt(0)));
+                user.setAvatarImg(resultSet.getString("avata_img"));
+                user.setAddress(resultSet.getString("address"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
     public static void main(String[] args) {
         // Gọi phương thức setIDDatabase và cung cấp chuỗi đầu vào "AC00000999"
 //        String inputString = "AC00000010";

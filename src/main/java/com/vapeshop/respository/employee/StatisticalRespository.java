@@ -5,7 +5,6 @@ import com.vapeshop.config.DBConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ConcurrentModificationException;
 
 public class StatisticalRespository {
     public static int totalUser() {

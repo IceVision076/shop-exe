@@ -16,7 +16,7 @@ public class ServiceTrackingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.sendRedirect("index.jsp");
+     request.getRequestDispatcher("serviceSender.jsp").forward(request,response);
     }
 
     @Override
