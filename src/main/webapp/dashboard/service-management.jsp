@@ -1,29 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: PC
-  Date: 9/29/2023
-  Time: 2:16 PM
+  Date: 10/15/2023
+  Time: 3:33 PM
   To change this template use File | Settings | File Templates.
 --%>
-
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="include/header-product-management-dashboard.jsp" %>
+<%@ include file="include/header-product-management-dashboard.jsp" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -33,13 +17,9 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí
-                        sản phẩm</a>
-                    </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Chi tiết sản phẩm</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí dịch vụ</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Chi tiết sản phẩm: <u
-                        class="font-weight-normal">${product.productName}</u></h6>
+                <h6 class="font-weight-bolder mb-0">Quản lí dịch vụ</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -49,6 +29,7 @@
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
+
                     <li class="nav-item d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1"></i>
@@ -161,136 +142,133 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng loại sản phẩm (Trang ${page}/${maxPage})</h6>
-                        <a href="product-type-create?productId=${product.idProduct}"
-                           class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse" style="color: #d31798;"> <span
-                                style="font-family: Courier;font-size: 20px;">Thêm loại sản phẩm mới</span> </a>
+                        <h6>Bảng yêu cầu dịch vụ mới (Trang ${page}/${maxPage})</h6>
+
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-
-                                    <th></th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tên loại sản phẩm
+                                    <%--                  id,user_id, user_description,create_date,title--%>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        ID
                                     </th>
-
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        giá
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-start">
+                                        User Id
                                     </th>
-                                    <th class="text-secondary opacity-7"></th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Tiêu đề
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
+                                        Trạng thái
+                                    </th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${listProductType}" var="p">
+                                <c:forEach items="${serviceAcceptList}" var="s">
 
                                     <tr>
                                         <td>
-                                            <div>
-                                                <img src="${p.imageProducts.get(0).imageUrl}" class="m-2 img-thumbnail "
-                                                     style="width: 100px;" alt="user1">
+                                            <div class="d-flex px-2 py-1">
+
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">${s.id}</h6>
+                                                </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${p.typeName}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${p.productTypeId}</p>
+                                                    <h6 class="mb-0 text-sm">${s.userId}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${p.typePrice}</p>
-                                        </td>
+                                            <p class="text-xs font-weight-bold mb-0">${s.title}</p>
 
-                                            <%--                                        Modal thay đổi thông tin--%>
+                                        </td>
+                                        <td class="align-middle text-start text-sm">
+                                            <span class="badge badge-sm bg-gradient-danger ">Đang chờ duyệt</span>
+                                        </td>
                                         <td class="align-middle">
+
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#${p.productTypeId}">
-                                                Chỉnh sửa
+                                                    data-bs-target="#${s.id}">
+                                                Duyệt đơn
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal modal-lg fade" id="${p.productTypeId}" tabindex="-1"
-                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                            <div class="modal modal-lg fade" id="${s.id}" data-bs-backdrop="static"
+                                                 data-bs-keyboard="false" tabindex="-1"
+                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Chỉnh sửa thông tin loại sản
-                                                                phẩm ${p.productTypeId}</h4>
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Duyệt
+                                                                đơn ${s.id}</h1>
                                                             <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close">
-                                                                <i class="fa-solid fa-xmark fa-lg" style="color: #f00000;"></i>
-                                                            </button>
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body p-2">
-
-                                                            <form class="row g-3 needs-validation p-2" novalidate
-                                                                  action="product-type-update" method="post">
-                                                                <div class="col-12">
-                                                                    <label for="name" class="form-label">Tên sản
-                                                                        phẩm</label>
-                                                                    <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control"
-                                                                               id="name" name="name"
-                                                                               value="${p.typeName}" required>
-                                                                        <div class="invalid-feedback">
-                                                                            Tên không được bỏ trống
+                                                        <div class="modal-body">
+                                                                <%--                              Nội dungn yêu cầu--%>
+                                                            <div>
+                                                                <h4>Nội dung yêu cầu</h4>
+                                                                <textarea class="form-control" style="width: 100%"
+                                                                          name="" id="" cols="10"
+                                                                          rows="10"
+                                                                          readonly> ${s.userDescription.trim()}</textarea>
+                                                            </div>
+                                                                <%--Phản hồi yêu cầu--%>
+                                                            <br>
+                                                            <div>
+                                                                <h4>Phản hồi dịch vụ</h4>
+                                                                <form class="row g-3 needs-validation p-4" novalidate
+                                                                      action="service-receive"
+                                                                      method="post">
+                                                                    <input type="hidden" value="${s.id}" name="id">
+                                                                    <div class="col-12">
+                                                                        <label for="employeeDescription" class="form-label">
+                                                                            Phản hồi
+                                                                            <span class="text-danger"> *</span></label>
+                                                                        <div class="input-group has-validation">
+                                    <textarea cols="10" rows="10" class="form-control" id="employeeDescription"
+                                              name="employeeDescription"
+                                              placeholder="Nhập phản hồi yêu cầu dịch vụ" required></textarea>
+                                                                            <div class="invalid-feedback">
+                                                                                Vui lòng điền phản hồi
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <label for="price" class="form-label">Giá sản
-                                                                        phẩm</label>
-                                                                    <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control"
-                                                                               id="price" name="price"
-                                                                               value="${p.typePrice}" required>
-                                                                        <div class="invalid-feedback">
-                                                                            Vui lòng điền giá hợp lệ
-                                                                        </div>
+                                                                    <div class="col-12">
+                                                                        <label for="status" class="form-label">Trạng thái</label>
+                                                                        <select class="form-select" name="status" id="status">
+                                                                            <option value="2">Đồng ý</option>
+                                                                            <option value="0">Không nhận</option>
+                                                                        </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="input-group has-validation">
-                                                                        <input type="hidden" class="form-control"
-                                                                               id="id" name="id"
-                                                                               value="${p.productTypeId}" required>
+                                                                    <div class="col-12">
+                                                                        <button onclick="run()" class="btn btn-primary"
+                                                                                type="submit">Xác Nhận <i
+                                                                                class="fa-solid fa-rocket fa-bounce fa-lg"
+                                                                                style="color: #f2df07;"></i></button>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="input-group has-validation">
-                                                                        <input type="hidden" class="form-control"
-                                                                               id="productId" name="productId"
-                                                                               value="${product.idProduct}" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <button class="btn btn-primary" type="submit">Lưu
-                                                                    </button>
-                                                                </div>
-                                                            </form>
-
-
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-danger"
                                                                     data-bs-dismiss="modal">Đóng
                                                             </button>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                            <%--                                        Modal thay đổi thông tin--%>
-
-                                        <td><a href="product-import?productTypeId=${p.productTypeId}"
-                                               class="btn btn-behance">Nhập hàng</a></td>
                                     </tr>
 
 
@@ -298,14 +276,13 @@
 
                                 </tbody>
                             </table>
-
                             <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                                 <ul class="pagination">
 
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="product-management?page=${page-1}"
+                                            <a class="page-link" href="service-management?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -317,7 +294,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="product-management?page=${i}">${i}</a></li>
+                                                                     href="service-management?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -326,7 +303,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="product-management?page=${page+1}"
+                                            <a class="page-link" href="service-management?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
@@ -341,91 +318,5 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>Chỉnh sửa thông tin sản phẩm</h6>
-                        <h6 class="bg-success text-white">${mess}</h6>
-                    </div>
-                    <div class="p-5">
 
-                        <form action="product-update" method="post" class="row g-3 needs-validation" novalidate>
-                            <div class="col-12">
-                                <input type="hidden" name="id" value="${product.idProduct}">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="productName" class="form-label">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="productName" name="productName"
-                                       value="${product.productName}" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="brand" class="form-label">Nhãn hàng</label>
-                                <input type="text" class="form-control" id="brand" name="brand" value="${product.brand}"
-                                       required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="origin" class="form-label">Xuất xứ</label>
-                                <input type="text" class="form-control" id="origin" name="origin"
-                                       value="${product.origin}" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="status" class="form-label">Trạng thái</label>
-                                <select class="form-select" name="status" id="status">
-                                    <option value="1">Đang bán</option>
-                                    <option value="0">Dừng bán</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="detail" class="form-label">Mô tả sản phẩm</label>
-                                <textarea cols="30" rows="10" class="form-control" id="detail" name="detail"
-                                          required>${product.detail}</textarea>
-
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Lưu thông tin sản phẩm</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%@include file="include/footer-dashboard.jsp" %>>
-
-
-        <%--Default select input--%>
-
-        <script>
-
-            const select = document.querySelector("select");
-            const option = select.querySelector("option[value='${product.status+""}']");
-
-            option.setAttribute("selected", true);
-        </script>
+        <%@ include file="include/footer-dashboard.jsp" %>

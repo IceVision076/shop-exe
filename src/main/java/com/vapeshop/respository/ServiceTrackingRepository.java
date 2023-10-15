@@ -40,7 +40,7 @@ public class ServiceTrackingRepository {
             if (resultSet.next()) {
                 int maxId = Integer.parseInt(resultSet.getString(1).substring(2));
 
-                for (int i=1;i<=8-(maxId+"").length();i++)
+                for (int i=1;i<=8-(maxId+1+"").length();i++)
                 id=id+"0";
                 id=id+(maxId+1);
             } else {
@@ -52,5 +52,12 @@ public class ServiceTrackingRepository {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(newServiceTrackingId());
+//        ST00000001
+//        ST
+        //ST000000010
     }
 }

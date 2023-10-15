@@ -25,10 +25,10 @@ public class ProductPageServlet extends HttpServlet {
                 pageNumber= Integer.parseInt(  request.getParameter("page"))  ;
 
             if( pageNumber>maxPageAmount||pageNumber<=0) pageNumber=1;
-        ArrayList<Product> list=ProductRespository.getProductPage(pageNumber);
+        ArrayList<Product> listProduct=ProductRespository.getProductPage(pageNumber);
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
-        request.setAttribute("listProduct",list);
+        request.setAttribute("listProduct",listProduct);
         request.getRequestDispatcher("dashboard/product-management.jsp").forward(request,response);
 
     }

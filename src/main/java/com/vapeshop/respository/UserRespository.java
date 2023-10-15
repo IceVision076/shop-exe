@@ -262,7 +262,7 @@ public class UserRespository {
         // Phần này giữ nguyên mã đã cung cấp trong câu hỏi ban đầu
         int idGet = Integer.parseInt(s.substring(2)) + 1;
         String result = "AC";
-        for (int i = 1; i <= 8 - (idGet + "").length(); i++) {
+        for (int i = 1; i <= 8 - ((idGet+1) + "").length(); i++) {
             result = result + "0";
         }
         result = result + idGet;
