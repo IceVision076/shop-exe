@@ -19,6 +19,7 @@ public class Order { //gio hang = cart
     public Order() {
         cart = new ArrayList<>();
     }
+    private String orderedId; //id nay dung de fetch lai lich su don hang
 
     public Order(String orderId, String userId, LocalDate createDate, char status, String voucherId, List<Items> cart, DecimalFormat formatter, int paymentType, double discountPercent, String discountCode) {
         this.orderId = orderId;
