@@ -10,7 +10,7 @@ public class ProductType {
     private double typePrice;
     private Product product;
     private ArrayList<ImageProduct> imageProducts;
-
+    private char typeStatus;
     public ProductType() {
     }
 
@@ -21,6 +21,25 @@ public class ProductType {
         this.typePrice = typePrice;
         this.product = new Product();
         this.imageProducts = new ArrayList<>();
+    }
+
+    public ProductType(String productTypeId, String productId, String typeName, double typePrice, Product product, ArrayList<ImageProduct> imageProducts, char typeStatus) {
+        this.productTypeId = productTypeId;
+        this.productId = productId;
+        this.typeName = typeName;
+        this.typePrice = typePrice;
+        this.product = product;
+        this.imageProducts = imageProducts;
+        this.typeStatus = typeStatus;
+    }
+
+    public ProductType(String productTypeId, String productId, String typeName, double typePrice, ArrayList<ImageProduct> imageProducts, char typeStatus) {
+        this.productTypeId = productTypeId;
+        this.productId = productId;
+        this.typeName = typeName;
+        this.typePrice = typePrice;
+        this.imageProducts = imageProducts;
+        this.typeStatus = typeStatus;
     }
 
     public String getProductTypeId() {

@@ -1,5 +1,7 @@
 package com.vapeshop.entity;
 
+import com.vapeshop.respository.OrderRepository;
+
 import java.text.DecimalFormat;
 
 public class Items {
@@ -34,15 +36,15 @@ public class Items {
         public double getPrice() {
         return productType.getTypePrice() * ammout;
     }
-//    public double getPriceAfterPurchase (String OrderId) {
-//        for (int i = 0 ; i < 10 ; i ++) {
-//            System.out.println(OrderId);
-//            System.out.println(product.getProductId());
-//            System.out.println("me");
-//            System.out.println(OrderRepository.getPriceOrdered(OrderId,product.getProductId()));
-//        }
-//        return OrderRepository.getPriceOrdered(OrderId,product.getProductId());
-//    }
+    public double getPriceAfterPurchase (String OrderId) {
+        for (int i = 0 ; i < 10 ; i ++) {
+            System.out.println(OrderId);
+            System.out.println(productType.getProductId());
+            System.out.println("me");
+            System.out.println(OrderRepository.getPriceOrdered(OrderId,productType.getProductId()));
+        }
+        return OrderRepository.getPriceOrdered(OrderId,productType.getProductId());
+    }
     public String getPriceString() {
         return formatter.format(getPrice());
     }

@@ -140,6 +140,69 @@ public class Order { //gio hang = cart
             return "=========>CART : add Thanh Cong<==========";
         }
     }
+
+    public double getThanhTien(double phatsinh) { //done
+        double tong = 0;
+        for (Items item : cart) {
+            tong += item.getPrice();
+        }
+        return tong + phatsinh;
+    }
+    public double getThanhTienAfterPurchase(double phatsinh) {
+        double tong = 0;
+        for (Items item : cart) {
+            tong += item.getPriceAfterPurchase(orderedId);
+        }
+        return tong + phatsinh;
+    }
+    public double getThanhTienAfterPurchaseDiscount(double phatsinh) {
+        double tong = 0;
+        for (Items item : cart) {
+            tong += item.getPriceAfterPurchase(orderedId);
+        }
+        return (tong + phatsinh) - (tong*discountPercent);
+    }
+    public String getThanhTienString(double phatsinh) {
+        if (cart.isEmpty()) {
+            return "0";
+        }
+        return formatter.format(getThanhTien(phatsinh));
+
+    }
+    public String getThanhTienStringDiscount(double phatsinh) {
+        if (cart.isEmpty()) {
+            return "0";
+        }
+        return formatter.format(getThanhTienDiscount(phatsinh));
+
+    }
+    public double getThanhTienDiscount(double phatsinh) {
+        double tong = 0;
+        for (Items item : cart) {
+            tong += item.getPrice();
+        }
+        double x = (tong - tong *discountPercent) + phatsinh;
+        System.out.println(x);
+        System.out.println(x);
+        System.out.println(x);
+        System.out.println(x);
+        return x;
+    }
+    public String getThanhTienStringAfterPurchase(double phatsinh) {
+        if (cart.isEmpty()) {
+            return "0";
+        }
+        return formatter.format(getThanhTienAfterPurchase(phatsinh));
+
+    }
+    public String getThanhTienStringAfterPurchaseDiscount(double phatsinh) {
+        if (cart.isEmpty()) {
+            return "0";
+        }
+        return formatter.format(getThanhTienAfterPurchaseDiscount(phatsinh));
+
+    }
+
     /*====================================END EXTENDED METHOD============================================================*/
 
     @Override
