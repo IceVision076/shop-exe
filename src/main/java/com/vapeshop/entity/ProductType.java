@@ -91,6 +91,10 @@ public class ProductType {
         this.imageProducts = imageProducts;
     }
 
+    public String getPriceString () {
+        return Double.toString(this.typePrice);
+    }
+
     @Override
     public String toString() {
         return "ProductType{" +

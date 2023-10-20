@@ -5,7 +5,7 @@
   Time: 10:02 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <div class="cart-page">
@@ -248,20 +248,20 @@
                   <td>
                     <div class="img">
                       <img src="${item.product.getListImg().get(0).url}" alt="Image">
-                      <p>${item.product.productName}</p>
+                      <p>${item.productType.product.productName}</p>
                     </div>
                   </td>
-                  <td>${item.product.getPriceString()} </td>
+                  <td>${item.productType.getPriceString()} </td>
                   <td>
                     <div class="qty d-flex">
                       <form action="changeammount">
-                        <input name="decrease" value="${item.product.productId}" type="hidden">
+                        <input name="decrease" value="${item.productType.productTypeId}" type="hidden">
                         <button type="submit" class="btn-minus"><i class="fa fa-minus"></i>
                         </button>
                       </form>
                       <input type="text" value="${item.ammout}">
                       <form action="changeammount">
-                        <input name="increase" value="${item.product.productId}" type="hidden">
+                        <input name="increase" value="${item.productType.productTypeId}" type="hidden">
                         <button class="btn-plus" href=""><i class="fa fa-plus"></i></button>
                       </form>
                     </div>
@@ -275,6 +275,7 @@
                   </td>
                 </tr>
               </c:forEach>
+                          <%--              tam thoi do xong ngang nay--%>
               </tbody>
             </table>
           </div>
@@ -286,7 +287,6 @@
             <form action="applydiscount">
               <div class="col-md-12">
                 <div class="coupon">
-                  <%--                                <p>haha</p>--%>
                   <%--                                mã giảm giá ở đây :))))))))))))))))))))))0--%>
                   <input type="text" placeholder="Coupon Code" name="discountID">
                   <input class="button" type="submit" value="Apply Code">

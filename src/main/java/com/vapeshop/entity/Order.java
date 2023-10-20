@@ -204,6 +204,60 @@ public class Order { //gio hang = cart
 
     }
 
+    public String increaseAmmount(String id) {
+        if (cart.isEmpty()) {
+            return "=========>Khong ton tai san pham increaseAmmount(String id) <==========";
+        } else {
+            for (Items items : cart) {
+                if (items.getProductType().getProductId().equals(id)) {
+                    Items hang = cart.get(cart.indexOf(items));
+//                    if (hang.getAmmout() == hang.getProduct().getProductAmount()) {
+//                        return "=========>CART : Tang Thanh Cong increaseAmmount(String id)<==========";
+//                    }
+//                    Khúc này dùng để check số lượng trong kho nếu số lượng trong giỏ hàng == với số lượng trong kho
+//                    thì không tăng nổi nữa <> chỗ này cần code lại thêm thuộc tính vaof class
+                    hang.setAmmout(hang.getAmmout() + 1);
+                    return "=========>CART : Tang Thanh Cong increaseAmmount(String id)<==========";
+
+                }
+            }
+            return "=========>CART : Tang Thanh Cong<==========";
+        }
+    }
+
+    public String decreaseAmmount(String id) {
+        if (cart.isEmpty()) {
+            return "=========>Khong ton tai san pham decreaseAmmount(String id) <==========";
+        } else {
+            for (Items items : cart) {
+                if (items.getProductType().getProductTypeId().equals(id)) {
+                    Items hang = cart.get(cart.indexOf(items));
+                    if (hang.getAmmout() ==1) {
+                        return "=========>CART : giam  Thanh Cong decreaseAmmount(String id)<==========";
+                    }
+                    hang.setAmmout(hang.getAmmout() - 1);
+                    return "=========>CART : giam  Thanh Cong decreaseAmmount(String id)<==========";
+
+                }
+            }
+            return "=========>CART : giam Thanh Cong decreaseAmmount(String id)<==========";
+        }
+    }
+    public String removeItem(String id) {
+        if (cart.isEmpty()) {
+            return "=========>Khong ton tai san pham decreaseAmmount(String id) <==========";
+        } else {
+            for (Items items : cart) {
+                if (items.getProductType().getProductTypeId().equals(id)) {
+                    cart.remove(cart.indexOf(items));
+                    return "=========>CART : remove Thanh Cong<==========";
+
+                }
+            }
+            return "=========>CART : remove Thanh Cong removeItem(String id)<==========";
+        }
+    }
+
     /*====================================END EXTENDED METHOD============================================================*/
 
     @Override
