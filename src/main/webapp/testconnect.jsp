@@ -41,7 +41,7 @@
         width: 100%;
         height: 60px;
         border-radius: 10px;
-        border:  #40414f solid;
+        border: #40414f solid;
         background-color: white;
         transform: translate(0px, 0px);
         box-shadow: 5px 5px #34343f;
@@ -101,7 +101,8 @@
     <div class="row mt-5">
         <div class="col-10 offset-1">
             <div class="Message">
-                <input id="messageArea" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput"
+                <input id="messageArea" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.."
+                       class="MsgInput"
                        type="text">
 
 
@@ -109,7 +110,8 @@
                      viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG">
                     <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70"
                        stroke="none">
-                        <path onclick="send()" d="M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
+                        <path onclick="send()"
+                              d="M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
                     </g>
                 </svg>
 
@@ -120,20 +122,20 @@
 
     </div>
 
-    <div class="row">
-<%--        <textarea name="" id="messageArea" cols="30" rows="10"></textarea>--%>
-<%--        <br>--%>
-<%--        <button onclick="send()">Gửi</button>--%>
-<%--        <button onclick="toii()">Click</button>--%>
+    <%--    <div class="row">--%>
+    <%--&lt;%&ndash;        <textarea name="" id="messageArea" cols="30" rows="10"></textarea>&ndash;%&gt;--%>
+    <%--        <br>--%>
+    <%--        <button onclick="send()">Gửi</button>--%>
+    <%--        <button onclick="toii()">Click</button>--%>
 
-    </div>
+    <%--    </div>--%>
 
 </div>
 
 
 <script>
     var chatLog = document.querySelector("#chatLog");
-    var server = new WebSocket('ws://localhost:8111/VapeShop_war_exploded/chatAll/0');
+    var server = new WebSocket('ws://' + window.location.host + '/VapeShop_war_exploded/chatAll/0');
     var username = '${sessionScope.user.userName}';
     var otherJoined = false;
 
@@ -144,7 +146,7 @@
 
     function inforMessage(infor) {
         var timeSend = document.createElement("span");
-        timeSend.setAttribute("class","span-time-chat")
+        timeSend.setAttribute("class", "span-time-chat")
         var newElement = document.createElement("h4");
         timeSend.innerHTML = "" + (new Date()).toLocaleString();
         newElement.appendChild(timeSend);
@@ -154,12 +156,23 @@
     }
 
     server.onopen = function () {
-        var infor = "Đã kết nối tới server";
+        var infor = "Đã kết nối tới server " + window.location.host + " " + window.location.hostname;
         inforMessage(infor);
     }
-    server.onclose = function () {
-        var infor = "Đóng kết nối server";
-        inforMessage(infor);
+    server.onclose = function (event) {
+        if (event.data instanceof ArrayBuffer) {
+            var message = JSON.parse(String.fromCharCode.apply(null, new Uint8Array(event.data)));
+            console.log(message);
+
+            // objectMessage(message);
+            inforMessage(message.user + " :" + message.content);
+
+
+        } else {
+            var infor = "Đóng kết nối server";
+            inforMessage(infor);
+        }
+
     }
     server.onmessage = function (event) {
         if (event.data instanceof ArrayBuffer) {
@@ -248,7 +261,7 @@
         console.log(messageArea.value.trim());
         messageArea.value = '';
         var info = "Đã kết nối tới server";
-        inforMessage(info);
+        inforMessage(info + " " + server == null);
         var testuserMe = document.createElement("h4");
         testuserMe.innerHTML = "Đây chỉ là test";
         testuserMe.setAttribute("class", "userMe")

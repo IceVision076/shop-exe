@@ -11,13 +11,16 @@ import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
 import jakarta.websocket.*;
 import jakarta.websocket.server.HandshakeRequest;
+import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import jakarta.websocket.server.ServerEndpointConfig;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.*;
 
-@ServerEndpoint(value = "/chatAll",
+@ServerEndpoint(value = "/chatAll/{sessionId}",
         encoders = ChatMessageCodec.class,
         decoders = ChatMessageCodec.class,
 configurator = ChatEndpoint.EndpointConfigurator.class
@@ -36,14 +39,14 @@ public class ChatEndpoint implements HttpSessionListener {
 
     private static final Map<Session,ChatSession> httpSessions=new Hashtable<>();
     private static final Map<Session,ChatSession> sessions=new Hashtable<>();
-    private static Long countUser=0L;
+    private static Long countUser=1L;
 
     @OnOpen
-    public void onOpen(Session session){
+    public void onOpen(Session session, @PathParam("sessionId") long sessionId ) {
         HttpSession httpSession=(HttpSession) session.getUserProperties().get(ChatEndpoint.HTTP_SESSION_PROPERTY);
 
         try {
-            if (httpSession == null) {
+            if (httpSession == null|| httpSession.getAttribute("user")==null) {
                 session.close(new CloseReason(
                         CloseReason.CloseCodes.VIOLATED_POLICY,
                         "You are not logged in!"
@@ -59,7 +62,7 @@ public class ChatEndpoint implements HttpSessionListener {
             ChatSession chatSession;
             //chia session
 
-            if (ChatEndpoint.countUser < 1){
+            if (sessionId < 1){
                 chatMessage.setType(ChatMessage.Type.STARTED);
             chatMessage.setContent(user.getFullName() + " (@" + user.getUserName() + ") starter the chat session");
             chatSession = new ChatSession();
@@ -79,7 +82,7 @@ public class ChatEndpoint implements HttpSessionListener {
                 System.out.println("ông nhân viên");
                chatMessage.setType(ChatMessage.Type.JOINED);
                 chatMessage.setContent(user.getFullName() + " (@" + user.getUserName() + ") join the chat session");
-                chatSession=ChatEndpoint.chatSessions.get(0L);
+                chatSession=ChatEndpoint.chatSessions.get(sessionId);
                 chatSession.setRepresentative(session);
                 chatSession.setRepresentativeUsername(user.getUserName());
                 ChatEndpoint.pendingSession.remove(chatSession);
@@ -121,6 +124,72 @@ public class ChatEndpoint implements HttpSessionListener {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+        @OnClose
+    public void onClose(Session session, CloseReason reason)
+    {
+        if(reason.getCloseCode() == CloseReason.CloseCodes.NORMAL_CLOSURE)
+        {
+            ChatMessage message = new ChatMessage();
+            HttpSession httpSession=(HttpSession) session.getUserProperties().get(ChatEndpoint.HTTP_SESSION_PROPERTY);
+            User user= (User) httpSession.getAttribute("user");
+
+            message.setUser(user.getUserName());
+            message.setType(ChatMessage.Type.LEFT);
+            message.setTimestamp(OffsetDateTime.now());
+            message.setContent(message.getUser() + " left the chat.");
+            try
+            {
+                Session other = this.close(session, message);
+                if(other != null)
+                    other.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private Session close(Session s, ChatMessage message)
+    {
+        ChatSession c = ChatEndpoint.sessions.get(s);
+        Session other = this.getOtherSession(c, s);
+        ChatEndpoint.sessions.remove(s);
+        HttpSession h = (HttpSession) ChatEndpoint.httpSessions.get(s);
+        if(h != null)
+            this.getSessionsFor(h).remove(s);
+        if(c != null)
+        {
+            c.log(message);
+           ChatEndpoint.pendingSession.remove(c);
+            ChatEndpoint.chatSessions.remove(c.getSessionId());
+            try
+            {
+                c.writeChatLog(new File("chat." + c.getSessionId() + ".log"));
+            }
+            catch(Exception e)
+            {
+                System.err.println("Could not write chat log.");
+                e.printStackTrace();
+            }
+        }
+        if(other != null)
+        {
+           ChatEndpoint.sessions.remove(other);
+            h = (HttpSession) ChatEndpoint.httpSessions.get(other);
+            if(h != null)
+                this.getSessionsFor(h).remove(s);
+            try
+            {
+                other.getBasicRemote().sendObject(message);
+            }
+            catch(IOException | EncodeException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return other;
     }
     private Session getOtherSession(ChatSession c, Session s)
     {
