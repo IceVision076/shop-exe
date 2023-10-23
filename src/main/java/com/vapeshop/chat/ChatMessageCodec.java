@@ -8,15 +8,16 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.websocket.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 public class ChatMessageCodec
         implements Encoder.BinaryStream<ChatMessage>,
         Decoder.BinaryStream<ChatMessage>
 {
+
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     static {
@@ -30,6 +31,7 @@ public class ChatMessageCodec
     {
         try
         {
+            System.out.println("Đang mã hoá "+chatMessage);
             ChatMessageCodec.MAPPER.writeValue(outputStream, chatMessage);
         }
         catch(JsonGenerationException | JsonMappingException e)
@@ -44,8 +46,13 @@ public class ChatMessageCodec
     {
         try
         {
+//            String
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String string = bufferedReader.readLine();
+            System.out.println("Đang giải mã "+string);
             return ChatMessageCodec.MAPPER.readValue(
-                    inputStream, ChatMessage.class
+                    string, ChatMessage.class
             );
         }
         catch(JsonParseException | JsonMappingException e)

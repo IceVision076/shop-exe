@@ -45,4 +45,14 @@ public class ChatMessage
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "ChatMessage{" +
+                "timestamp=" + timestamp +
+                ", type=" + type +
+                ", user='" + user + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

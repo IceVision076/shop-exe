@@ -1,19 +1,20 @@
 package com.vapeshop.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Voucher {
     private String id;
     private String voucherName;
     private double voucherPercent;
-    private LocalDate createDate;
-    private LocalDate closeDate;
+    private LocalDateTime createDate;
+    private LocalDateTime closeDate;
     private char status;
 
     public Voucher() {
     }
 
-    public Voucher(String id, String voucherName, double voucherPercent, LocalDate createDate, LocalDate closeDate, char status) {
+    public Voucher(String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status) {
         this.id = id;
         this.voucherName = voucherName;
         this.voucherPercent = voucherPercent;
@@ -46,19 +47,19 @@ public class Voucher {
         this.voucherPercent = voucherPercent;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDate getCloseDate() {
+    public LocalDateTime getCloseDate() {
         return closeDate;
     }
 
-    public void setCloseDate(LocalDate closeDate) {
+    public void setCloseDate(LocalDateTime closeDate) {
         this.closeDate = closeDate;
     }
 

@@ -105,7 +105,7 @@ public class ChatEndpoint implements HttpSessionListener {
     }
     @OnMessage
     public void onMessage(Session session,ChatMessage message){
-        System.out.println("truy cập on message");
+        System.out.println("truy cập on message "+message);
         try {
           ChatSession chatSession=ChatEndpoint.sessions.get(session);
           Session otherSession= this.getOtherSession(chatSession,session);
