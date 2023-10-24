@@ -25,7 +25,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<%@include file="include/header-product-management-dashboard.jsp"%>
+<%@include file="include/header-product-management-dashboard.jsp" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -35,12 +35,11 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí sản phẩm</a>
-                    </li>
 
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm sản phẩm mới</li>
+
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thông tin cá nhân</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm</h6>
+                <h6 class="font-weight-bolder mb-0">Thông tin cá nhân</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -163,55 +162,114 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h4 style="font-family: Calibri;" class="text-center"> <i class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Thêm mã giảm giá mới <i class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i></h4>
-
+                        <h4 class="text-center">Thông tin cá nhân</h4>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
+                        <div class="profile-form">
+                            <section>
+                                <div class="container py-5">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card shadow-lg mb-4">
+                                                <div class="card-body text-center">
+                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV8hRhgljohEKvg8qyijaxkLK440M86ZLyhw&usqp=CAU"
+                                                         alt="avatar"
+                                                         class="rounded-circle img-fluid" style="width: 150px;">
+                                                    <h5 class="my-3">${sessionScope.user.fullName}</h5>
+                                                    <p class="text-muted mb-1">Chức vụ nhân viên</p>
+                                                </div>
+                                            </div>
+                                            <div class="card shadow-lg mb-4 mb-lg-0">
+                                                <div class="card-body p-0">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <i class="fa-regular fa-envelope fa-lg" style="color: #1f71ff;"></i>
+                                                                Email
+                                                            </h6>
+                                                            <span class="text-secondary">${sessionScope.user.email}</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <i class="fa-solid fa-phone fa-lg" style="color: #24f56d;"></i>
+                                                                Số điện thoại
+                                                            </h6>
+                                                            <span class="text-secondary">${sessionScope.user.phone}</span>
+                                                        </li>
 
-<%--                        public Voucher(String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status) {--%>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <i class="fa-regular fa-user fa-lg" style="color: #ff1414;"></i>
+                                                                Username
+                                                            </h6>
+                                                            <span class="text-secondary">${sessionScope.user.userName}</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <i class="fa-solid fa-location-dot fa-lg" style="color: #0ac6f5;"></i>
+                                                                Địa chỉ
+                                                            </h6>
+                                                            <span class="text-secondary">${sessionScope.user.address}</span>
+                                                        </li>
 
-                        <form class="row g-3 needs-validation p-4" novalidate action="voucher-create"
-                              method="post" >
-
-                            <%--                        Tên mã mới--%>
-                            <div class="col-12">
-                                <label for="voucherName" class="form-label">Tên mã giảm giá <span class="text-danger"> *</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="text" class="form-control" placeholder="Nhập tên mã giảm giá"
-                                           id="voucherName" name="voucherName"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Tên không được bỏ trống
-                                    </div>
-                                </div>
-                            </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 ">
+                                            <div class="card mb-4 shadow-lg">
+                                                <div class="card-body">
+                                                    <form action="profile-ad" method="post" class="card-body  g-3 needs-validation " novalidate>
 
 
-                            <%--                        %  giảm--%>
-                            <div class="col-12">
-                                <label for="voucherPercent" class="form-label">Tỷ lệ giảm(%) <span class="text-danger"> *</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="number" class="form-control" min="1" max="70" id="voucherPercent" name="voucherPercent" placeholder="Nhập giá loại sản phẩm" required>
-                                    <div class="invalid-feedback">
-                                        Vui lòng điền số hợp lệ từ 1 đến 70
-                                    </div>
-                                </div>
-                            </div>
-                                <div class="col-12">
-                                    <label for="closeDate" class="form-label">Ngày kết thúc <span class="text-danger"> *</span></label>
-                                    <div class="input-group has-validation">
-                                        <input type="datetime-local" class="form-control" id="closeDate" name="closeDate" placeholder="Nhập giá loại sản phẩm" required>
-                                        <div class="invalid-feedback">
-                                            Vui lòng điền số hợp lệ
+                                                        <div class="row g-3 ">
+                                                            <div class="col-md-12 ">
+                                                                <label for="fullname" class="form-label">Tên</label>
+                                                                <div class="input-group has-validation">
+                                                                    <input maxlength="50" type="text" class="form-control" id="fullname" name="fullname"
+                                                                           aria-describedby="inputGroupPrepend" value="${sessionScope.user.fullName}" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Tối đa là 50 ký tự và không được để trống
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="phone" class="form-label">Số điện thoại </label>
+                                                                <div class="input-group has-validation">
+                                                                    <input maxlength="11" minlength="10" pattern="^\d{10,11}$" type="text" class="form-control"
+                                                                           id="phone" name="phone" aria-describedby="inputGroupPrepend" value="${sessionScope.user.phone}" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Tối đa 11 số và tối thiểu 10 số
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="address" class="form-label">Address</label>
+                                                                <div class="input-group has-validation">
+                                                                    <input maxlength="50" type="text" class="form-control" id="address" name="address"
+                                                                           aria-describedby="inputGroupPrepend" value="${sessionScope.user.address}" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Hãy chọn một địa chỉ.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 d-flex justify-content-center mt-4">
+                                                                <button class="btn btn-primary" type="submit">Cập nhật thông tin</button>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Lưu <i class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
-                            </div>
-                        </form>
+                            </section>
+                        </div>
                         <div class="mx-5 mb-2">
-                            <a href="product-management"><i class="fa-solid fa-arrow-left-long fa-2xl" style="color: #2e2bd4;"></i> Quay lại quản lí sản phẩm</a>
+                            <a href="product-management"><i class="fa-solid fa-arrow-left-long fa-2xl"
+                                                            style="color: #2e2bd4;"></i> Quay lại quản lí sản phẩm</a>
                         </div>
                     </div>
 
@@ -219,21 +277,6 @@
             </div>
         </div>
     </div>
-    <script>
-        // Get the datetime-local input field
-        var dateTimeLocalInput = document.getElementById("closeDate");
 
-        // Get the current date
-        var today = new Date();
-
-        // Increment the day by 1 to get tomorrow's date
-        var tomorrow = new Date(today.setDate(today.getDate() + 1));
-
-        // Set the minimum time to tomorrow's date at 00:00:00
-        dateTimeLocalInput.min = tomorrow.toISOString().substring(0, 10) + "T00:00:00";
-
-
-
-    </script>
-    <%@include file="include/footer-dashboard.jsp"%>
+    <%@include file="include/footer-dashboard.jsp" %>
 
