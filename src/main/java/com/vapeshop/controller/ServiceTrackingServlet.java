@@ -2,7 +2,7 @@ package com.vapeshop.controller;
 
 import com.vapeshop.entity.ServiceTracking;
 import com.vapeshop.entity.User;
-import com.vapeshop.respository.ServiceTrackingRepository;
+import com.vapeshop.respository.user.ServiceTrackingRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @WebServlet(name = "ServiceTrackingServlet", value = "/service-tracking-sender")

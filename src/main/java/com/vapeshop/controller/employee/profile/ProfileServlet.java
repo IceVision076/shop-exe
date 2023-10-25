@@ -1,7 +1,7 @@
 package com.vapeshop.controller.employee.profile;
 
 import com.vapeshop.entity.User;
-import com.vapeshop.respository.UserRespository;
+import com.vapeshop.respository.user.UserRespository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

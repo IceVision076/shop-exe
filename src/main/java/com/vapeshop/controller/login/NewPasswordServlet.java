@@ -5,7 +5,7 @@
 package com.vapeshop.controller.login;
 
 
-import com.vapeshop.respository.UserRespository;
+import com.vapeshop.respository.user.UserRespository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

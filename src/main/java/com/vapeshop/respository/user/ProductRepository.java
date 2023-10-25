@@ -1,4 +1,4 @@
-package com.vapeshop.respository;
+package com.vapeshop.respository.user;
 
 import com.vapeshop.config.DBConnect;
 import com.vapeshop.entity.ImageProduct;

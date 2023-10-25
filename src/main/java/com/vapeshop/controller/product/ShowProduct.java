@@ -1,7 +1,7 @@
 package com.vapeshop.controller.product;
 
 import com.vapeshop.entity.ProductType;
-import com.vapeshop.respository.ProductRepository;
+import com.vapeshop.respository.user.ProductRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
