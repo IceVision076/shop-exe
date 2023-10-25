@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "CustomerManagementServlet", value = "/customer-management")
+@WebServlet(name = "CustomerManagementServlet", value = "/customer-account-management")
 public class CustomerManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +29,7 @@ public class CustomerManagementServlet extends HttpServlet {
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
         request.setAttribute("listCustomer",listCustomer);
-        request.getRequestDispatcher("dashboard/customer-management.jsp").forward(request,response);
+        request.getRequestDispatcher("dashboard/customer-account-management.jsp").forward(request,response);
 
     }
 
@@ -45,6 +45,6 @@ public class CustomerManagementServlet extends HttpServlet {
         else if(action.equals("open")){
          AccountRespository.openAccount(id);
         }
-        response.sendRedirect("customer-management?page="+page);
+        response.sendRedirect("customer-account-management?page="+page);
     }
 }

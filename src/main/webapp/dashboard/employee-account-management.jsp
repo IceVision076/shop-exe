@@ -130,7 +130,7 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Quản lí tài khoản</a>
                     </li>
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí tài khoản nhân viên</li>
                 </ol>
@@ -257,9 +257,9 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng sản phẩm (Trang ${page}/${maxPage})</h6>
-                        <a href="product-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
-                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm  sản phẩm mới</span>
+                        <h6>Bảng quản lí nhân viên (Trang ${page}/${maxPage})</h6>
+                        <a href="product-create" class="fa-solid fa-user-plus fa-xl d-flex flex-row-reverse"
+                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm tài khoản nhân viên</span>
                         </a>
 
                     </div>
@@ -287,7 +287,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-secondary opacity-7">
+                                    <th class="text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Hành động
                                     </th>
                                 </tr>
@@ -340,16 +340,29 @@
                                         </td>
                                         <td class="align-middle">
                                             <c:if test="${e.status eq '1'}">
-                                                <button class="button-close bg-secondary" data-text="Awesome">
-                                                    <span class="actual-text-close">&nbsp;Khóa&nbsp;</span>
-                                                    <span aria-hidden="true" class="hover-text-close">&nbsp;Khóa&nbsp;</span>
-                                                </button>
+                                                <form action="employee-account-management" method="post">
+                                                    <input type="hidden" name="action" value="lock">
+                                                    <input type="hidden" name="id" value="${e.id}">
+                                                    <input type="hidden" name="page" value="${page==null?1:page}">
+                                                    <button type="submit" class="button-close bg-secondary" data-text="Awesome">
+                                                        <span class="actual-text-close">&nbsp;Khóa&nbsp;</span>
+                                                        <span aria-hidden="true"
+                                                              class="hover-text-close">&nbsp;Khóa&nbsp;</span>
+                                                    </button>
+                                                </form>
                                             </c:if>
                                             <c:if test="${e.status eq '0'}">
-                                                <button class="button-open bg-secondary" data-text="Awesome">
-                                                    <span class="actual-text-open">&nbsp;Mở khóa&nbsp;</span>
-                                                    <span aria-hidden="true" class="hover-text-open">&nbsp;Mở khóa&nbsp;</span>
-                                                </button>
+                                                <form action="employee-account-management" method="post">
+                                                    <input type="hidden" name="action" value="open">
+                                                    <input type="hidden" name="id" value="${e.id}">
+                                                    <input type="hidden" name="page" value="${page==null?1:page}">
+                                                    <button type="submit" class="button-open bg-secondary"
+                                                            data-text="Awesome">
+                                                        <span class="actual-text-open">&nbsp;Mở khóa&nbsp;</span>
+                                                        <span aria-hidden="true"
+                                                              class="hover-text-open">&nbsp;Mở khóa&nbsp;</span>
+                                                    </button>
+                                                </form>
                                             </c:if>
                                         </td>
                                     </tr>
@@ -365,7 +378,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="employee-management?page=${page-1}"
+                                            <a class="page-link" href="employee-account-management?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -377,7 +390,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="employee-management?page=${i}">${i}</a></li>
+                                                                     href="employee-account-management?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -386,7 +399,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="employee-management?page=${page+1}"
+                                            <a class="page-link" href="employee-account-management?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>

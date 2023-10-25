@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "EmployeeManagementServlet", value = "/employee-management")
+@WebServlet(name = "EmployeeManagementServlet", value = "/employee-account-management")
 public class EmployeeManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +29,7 @@ public class EmployeeManagementServlet extends HttpServlet {
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
         request.setAttribute("listEmployee",listEmployee);
-        request.getRequestDispatcher("dashboard/employee-management.jsp").forward(request,response);
+        request.getRequestDispatcher("dashboard/employee-account-management.jsp").forward(request,response);
 
     }
 
@@ -38,6 +38,7 @@ public class EmployeeManagementServlet extends HttpServlet {
         String action=request.getParameter("action");
         String id=request.getParameter("id");
         String page=request.getParameter("page");
+
         if(action.equals("lock"))
         {
             AccountRespository.lockAccount(id);
@@ -45,6 +46,6 @@ public class EmployeeManagementServlet extends HttpServlet {
         else if(action.equals("open")){
             AccountRespository.openAccount(id);
         }
-        response.sendRedirect("employee-management?page="+page);
+        response.sendRedirect("employee-account-management?page="+page);
     }
 }

@@ -345,7 +345,7 @@
 
                                             <c:if test="${c.status eq '1'}">
 
-                                                <form action="customer-management" method="post">
+                                                <form action="customer-account-management" method="post">
                                                     <input type="hidden" name="action" value="lock">
                                                     <input type="hidden" name="id" value="${c.id}">
                                                     <input type="hidden" name="page" value="${page==null?1:page}">
@@ -358,7 +358,7 @@
 
                                             </c:if>
                                             <c:if test="${c.status eq '0'}">
-                                                <form action="customer-management" method="post">
+                                                <form action="customer-account-management" method="post">
                                                     <input type="hidden" name="action" value="open">
                                                     <input type="hidden" name="id" value="${c.id}">
                                                     <input type="hidden" name="page" value="${page==null?1:page}">
@@ -385,7 +385,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="customer-management?page=${page-1}"
+                                            <a class="page-link" href="customer-account-management?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -397,7 +397,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="customer-management?page=${i}">${i}</a></li>
+                                                                     href="customer-account-management?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -406,7 +406,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="customer-management?page=${page+1}"
+                                            <a class="page-link" href="customer-account-management?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
