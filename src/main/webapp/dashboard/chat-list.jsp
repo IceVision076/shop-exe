@@ -229,9 +229,10 @@
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="container mt-2 mb-2">
                             <div class="row">
+                                <c:set var="checkChatList" value="0" ></c:set>
                                 <c:forEach items="${chatList}" var="chat">
                                     <%--                                    <a href="#">${chat.sessionId} ${chat.customerUsername}</a>--%>
-
+                                    <c:set var="checkChatList" value="1" ></c:set>
                                     <div class="col-4 mt-2 mb-2">
                                         <div class="card-chat">
                                             <div class="card-chat-border-top">
@@ -242,50 +243,51 @@
                                                       alt="">
                                             </div>
                                             <span>${chat.customerUsername}</span>
-                                            <p class="job"> Job Title</p>
+                                            <p class="job"> Đang chờ tư vấn... </p>
                                             <button><a href="chat-access?sessionId=${chat.sessionId}">Tư vấn ngay</a>
                                             </button>
                                         </div>
                                     </div>
                                 </c:forEach>
 
-                                <div class="col-4 mt-2 mb-2">
-                                    <div class="card-chat">
-                                        <div class="card-chat-border-top">
-                                        </div>
-                                        <div class="img">
-                                        </div>
-                                        <span> Person</span>
-                                        <p class="job"> Job Title</p>
-                                        <button> Click
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2 mb-2">
-                                    <div class="card-chat">
-                                        <div class="card-chat-border-top">
-                                        </div>
-                                        <div class="img">
+                                <c:if test="${checkChatList==0}">
 
+                                    <div class="col-4 mt-2 mb-2">
+                                        <div class="card-chat">
+                                            <div class="card-chat-border-top">
+                                            </div>
+                                            <div class="img">
+                                            </div>
+                                            <span> Đang chờ</span>
+                                            <button> Click
+                                            </button>
                                         </div>
-                                        <span> Person</span>
-                                        <p class="job"> Job Title</p>
-                                        <button> Click
-                                        </button>
                                     </div>
-                                </div>
-                                <div class="col-4 mt-2 mb-2">
-                                    <div class="card-chat">
-                                        <div class="card-chat-border-top">
+                                    <div class="col-4 mt-2 mb-2">
+                                        <div class="card-chat">
+                                            <div class="card-chat-border-top">
+                                            </div>
+                                            <div class="img">
+
+                                            </div>
+                                            <span> Đang chờ</span>
+                                            <button> Click
+                                            </button>
                                         </div>
-                                        <div class="img">
-                                        </div>
-                                        <span> Person</span>
-                                        <p class="job"> Job Title</p>
-                                        <button> Click
-                                        </button>
                                     </div>
-                                </div>
+                                    <div class="col-4 mt-2 mb-2">
+                                        <div class="card-chat">
+                                            <div class="card-chat-border-top">
+                                            </div>
+                                            <div class="img">
+                                            </div>
+                                            <span>Đang chờ</span>
+                                            <button> Click
+                                            </button>
+                                        </div>
+                                    </div>
+                                </c:if>
+
 
                             </div>
                         </div>

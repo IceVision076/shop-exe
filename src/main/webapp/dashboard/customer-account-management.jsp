@@ -52,6 +52,7 @@
         color: transparent;
         -webkit-text-stroke: 1px var(--text-stroke-color);
         border-radius: 5px;
+        background-color: rgba(78,110,113,0.41);
     }
 
     /* this is the text, when you hover on button */
@@ -100,6 +101,7 @@
         color: transparent;
         -webkit-text-stroke: 1px var(--text-stroke-color);
         border-radius: 5px;
+        background-color: rgba(78,110,113,0.41);
     }
 
     /* this is the text, when you hover on button */
@@ -290,7 +292,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-secondary opacity-7">
+                                    <th class="text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Hành động
                                     </th>
                                 </tr>
@@ -349,7 +351,7 @@
                                                     <input type="hidden" name="action" value="lock">
                                                     <input type="hidden" name="id" value="${c.id}">
                                                     <input type="hidden" name="page" value="${page==null?1:page}">
-                                                    <button type="submit" class="button-close bg-secondary" data-text="Awesome">
+                                                    <button type="submit" class="button-close " data-text="Awesome">
                                                         <span class="actual-text-close">&nbsp;Khóa&nbsp;</span>
                                                         <span aria-hidden="true"
                                                               class="hover-text-close">&nbsp;Khóa&nbsp;</span>
@@ -362,7 +364,7 @@
                                                     <input type="hidden" name="action" value="open">
                                                     <input type="hidden" name="id" value="${c.id}">
                                                     <input type="hidden" name="page" value="${page==null?1:page}">
-                                                    <button type="submit" class="button-open bg-secondary"
+                                                    <button type="submit" class="button-open "
                                                             data-text="Awesome">
                                                         <span class="actual-text-open">&nbsp;Mở khóa&nbsp;</span>
                                                         <span aria-hidden="true"

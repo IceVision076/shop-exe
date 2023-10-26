@@ -24,8 +24,58 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
+<style>
+    .shadow__btn_open {
+        padding: 10px 20px;
+        border: none;
+        font-size: 17px;
+        color: #fff;
+        border-radius: 7px;
+        letter-spacing: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.5s;
+        transition-property: box-shadow;
+    }
+
+    .shadow__btn_open {
+        background: rgb(0, 140, 255);
+        box-shadow: 0 0 25px rgb(0, 140, 255);
+    }
+
+    .shadow__btn_open:hover {
+        box-shadow: 0 0 5px rgb(0, 140, 255),
+        0 0 25px rgb(0, 140, 255),
+        0 0 50px rgb(0, 140, 255),
+        0 0 100px rgb(0, 140, 255);
+    }
+
+
+    .shadow__btn_close {
+        padding: 10px 20px;
+        border: none;
+        font-size: 17px;
+        color: #fff;
+        border-radius: 7px;
+        letter-spacing: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.5s;
+        transition-property: box-shadow;
+    }
+
+    .shadow__btn_close {
+        background: rgb(83, 93, 87);
+        box-shadow: 0 0 25px rgb(83, 93, 87);
+    }
+
+    .shadow__btn_close:hover {
+        box-shadow: 0 0 5px rgb(83, 93, 87),
+        0 0 25px rgb(83, 93, 87),
+        0 0 50px rgb(83, 93, 87),
+        0 0 100px rgb(83, 93, 87);
+    }
+</style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -35,9 +85,9 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí voucher</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí poster</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí voucher</h6>
+                <h6 class="font-weight-bolder mb-0">Quản lí poster</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -160,87 +210,84 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng vourcher (Trang ${page}/${maxPage})</h6>
-                        <a href="voucher-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
-                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Mã giảm giá mới</span>
+                        <h6>Bảng poster(Trang ${page}/${maxPage})</h6>
+                        <a href="product-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
+                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm poster mới</span>
                         </a>
+
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên
-                                        Voucher
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh
+                                        poster
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Id người tạo
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Phần trăm được giảm
+                                        Id poster
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Ngày tạo
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Ngày kết thúc
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${listVoucher}" var="v">
-                                    <%--    String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status--%>
-
+                                <c:forEach items="${listPoster}" var="p">
+                                    <%--                  String id, String imgUrl, User user, LocalDateTime dateCreate, char status--%>
                                     <tr>
-
+                                        <td>
+                                            <div>
+                                                <img src="${p.imgUrl}"
+                                                     class="m-2 img-thumbnail "
+                                                     style="width: 100px;" alt="user1">
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${v.id}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${v.voucherName}</p>
+                                                    <h6 class="mb-0 text-sm">${p.user.id}</h6>
                                                 </div>
                                             </div>
                                         </td>
+
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0 text-left">
-                                                    <fmt:formatNumber var="price" value=" ${v.voucherPercent*100}" maxFractionDigits="1"></fmt:formatNumber>
-                                                  ${price} %</p>
+                                            <p class="text-xs font-weight-bold mb-0">${p.id} </p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                                ${v.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
-                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                                    ${v.closeDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
-                                            </span>
+                                            <span class="text-secondary text-xs font-weight-bold"> ${p.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-<%--                                                ${v.status}${(v.status+'') eq ('1').charAt(0)}--%>
-                                                    <c:if test="${(v.status+'') eq ('1').charAt(0)}">
-                                                        <span class="badge badge-sm bg-gradient-success ">Có thể áp dụng</span>
-                                                    </c:if>
-                                                    <c:if test="${(v.status+'') eq ('0').charAt(0)}">
-                                                        <span class="badge badge-sm bg-gradient-danger ">Dừng áp dụng</span>
-                                                    </c:if>
+
+                                            <c:if test="${p.status eq '1'.charAt(0)}">
+                                                <span class="badge badge-sm bg-gradient-success ">Đang hiện</span>
+                                            </c:if>
+                                            <c:if test="${p.status eq '0'.charAt(0)}">
+                                                <span class="badge badge-sm bg-gradient-danger ">Đang ẩn</span>
+                                            </c:if>
 
 
                                         </td>
-                                        <td class="align-middle">
-                                            <a href="product-editor?productID=${v.id}"
-                                               class="text-secondary font-weight-bold text-xs btn btn-warning"
-                                               data-toggle="tooltip" data-original-title="Edit user">
-                                                Chỉnh sửa
-                                            </a>
-                                        </td>
+                                        <c:if test="${p.status eq '1'.charAt(0)}">
+                                            <button class="shadow__btn_close">
+                                                Ẩn
+                                            </button>
+                                        </c:if>
+                                        <c:if test="${p.status eq '0'.charAt(0)}">
+                                            <button class="shadow__btn_open">
+                                                Hiện
+                                            </button>
+                                        </c:if>
                                     </tr>
 
 
@@ -254,7 +301,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="voucher-page?page=${page-1}"
+                                            <a class="page-link" href="product-management?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -266,7 +313,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="voucher-page?page=${i}">${i}</a></li>
+                                                                     href="product-management?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -275,7 +322,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="voucher-page?page=${page+1}"
+                                            <a class="page-link" href="product-management?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
