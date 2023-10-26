@@ -50,9 +50,11 @@ public class Items {
     }
 
     public boolean equal(Items item) {
-        if (this.productType.getProductId().compareToIgnoreCase(item.productType.getProductTypeId()) == 0) {
+        if (this.productType.getProductTypeId().compareToIgnoreCase(item.productType.getProductTypeId()) == 0) {
+            System.out.println("Trung maXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             return true;
         }
+        System.out.println("khong trung maxxxxxxxxxxxxx");
         return false;
     }
 

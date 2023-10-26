@@ -260,6 +260,7 @@ public class ProductRepository {
                 ArrayList<ImageProduct> imageProducts = new ArrayList<>();
                 imageProducts.add(imageProduct);
                 ProductType productType = new ProductType(productTypeID,productId,productTypeName,productTypePrice,imageProducts,status);
+                System.out.println("=>>>>>>>>>>>??????????   " + productType);
                 return productType;
             }
         } catch (Exception e) {

@@ -20,9 +20,14 @@ public class ShowProductDetails extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String brand = req.getParameter("brand");
         String idProduct = req.getParameter("idProduct");
-        Product product = ProductRepository.getProductByID(idProduct);
+        String message = req.getParameter("message");
+        if (message == null) {
+            message = "";
+        }
+         Product product = ProductRepository.getProductByID(idProduct);
         ArrayList<ProductType> productTypeArrayList = ProductRepository.getProductByBrand(brand,idProduct);
-
+        req.setAttribute("message",message);
+        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+message+brand+idProduct+"<<<<<<<<<<<<<<<<<<<<<<<");
         req.setAttribute("product",product);
         req.setAttribute("productTypeArrayList",productTypeArrayList);
         req.getRequestDispatcher("ProductDetails.jsp").forward(req,resp);

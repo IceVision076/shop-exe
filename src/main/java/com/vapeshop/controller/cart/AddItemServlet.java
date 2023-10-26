@@ -2,6 +2,7 @@ package com.vapeshop.controller.cart;
 
 import com.vapeshop.entity.Items;
 import com.vapeshop.entity.Order;
+import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
 import com.vapeshop.respository.ProductRepository;
 import jakarta.servlet.ServletException;
@@ -12,35 +13,66 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "AddItemServlet", value = "/additem")
 public class AddItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //        response.setContentType("text/html;charset=UTF-8");
+        String message = "";
         HttpSession session = request.getSession();
         if(session.getAttribute("user")==null) {
-            request.setAttribute("thongbao", "Vui lòng đăng nhập để sử dụng dịch vụ");
+            request.setAttribute("message", "Vui lòng đăng nhập để sử dụng dịch vụ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+
         }
-        try {
-            String id = request.getParameter("id");
-            String ammout = request.getParameter("ammount");
-            ProductType p = null;
-                p = ProductRepository.getProductType(id);
-            Order cart = (Order) session.getAttribute("cart");
-            Items item = new Items(p, Integer.parseInt(ammout));
+        else if (request.getParameter("typeidcart").equals("?") ||request.getParameter("typeidcart")  == null ) {
+
+            String brand = request.getParameter("brand");
+            String idProduct = request.getParameter("idProduct");
+            message = "1";
+            request.setAttribute("brand",brand);
+            request.setAttribute("idProduct",idProduct);
+            System.out.println("Nhay zo ne");
+//            message = "Vui lòng chọn phân loại sản phẩm";
+
+            request.setAttribute("message", "bruhdua");
+            request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+        } else {
+            try {
+                String id = request.getParameter("typeidcart");
+                String quantity = request.getParameter("quantity");
+
+                ProductType p = null;
+                p = ProductRepository.getProductType(id); // lay cai type
+
+                Order cart = (Order) session.getAttribute("cart");
+
+                Product product = ProductRepository.getProductByID(p.getProductId()); //Add product vao productType
+                p.setProduct(product);
+
+                Items item = new Items(p, Integer.parseInt(quantity));
                 System.out.println(cart.addItems(item));
                 System.out.println(cart);
                 request.setAttribute("product", p);
-                request.setAttribute("message", "Thêm sản phẩm thành công");
+                message = "Thêm sản phẩm thành công";
+                request.setAttribute("message",message);
+
+                String brand = request.getParameter("brand");
+                String idProduct = request.getParameter("idProduct");
+                request.setAttribute("brand",brand);
+                request.setAttribute("idProduct",idProduct);
+
                 response.setCharacterEncoding("UTF-8");
                 session.setAttribute("cart", cart);
-                request.getRequestDispatcher("product-detail.jsp").forward(request, response);
-        } catch (Exception e) {
-            System.out.println("=============>Loi AddItemServlet <===============");
-            e.printStackTrace();
+                request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+            } catch (Exception e) {
+                System.out.println("=============>Loi AddItemServlet <===============");
+                e.printStackTrace();
+            }
         }
+
     }
 
     @Override
