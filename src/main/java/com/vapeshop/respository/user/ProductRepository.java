@@ -15,7 +15,7 @@ public class ProductRepository {
     //Get all Product from Product,productType,ImageProduct table
     public static ArrayList<ProductType> getAllProduct() {
         ArrayList<ProductType> products = new ArrayList<>();
-        try ( Connection con = DBConnect.getConnection()) {
+        try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("SELECT pd.[id]\n"
                     + "      ,pdt.[Id]\n"
                     + "      ,pd.[product_name]\n"
@@ -27,7 +27,7 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    );
+            );
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String idProduct = rs.getString(1);
@@ -39,8 +39,8 @@ public class ProductRepository {
                 String detail = rs.getString(7);
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
-                Product product = new Product(idProduct,productName,brand,detail,origin,status);
-                ProductType productType = new ProductType(idProductType,idProduct,typeName,price);
+                Product product = new Product(idProduct, productName, brand, detail, origin, status);
+                ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
                 productType.setProduct(product);
                 productType.setImageProducts(getImageProduct(idProductType));
                 products.add(productType);
@@ -53,14 +53,13 @@ public class ProductRepository {
     }
 
 
-
     //Calculate total of Product
-    public static int getTotalProduct(){
+    public static int getTotalProduct() {
         try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) from [dbo].[ProductType]"
             );
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (SQLException e) {
@@ -71,13 +70,13 @@ public class ProductRepository {
         return 0;
     }
 
-    public static ArrayList<ImageProduct> getImageProduct (String productTypeID) {
+    public static ArrayList<ImageProduct> getImageProduct(String productTypeID) {
         ArrayList<ImageProduct> imageProductArrayList = new ArrayList<>();
         try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("select * from ImageProduct\n" +
                     "where product_type_id = ?"
             );
-            stmt.setString(1,productTypeID);
+            stmt.setString(1, productTypeID);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String productTypeId = rs.getString(1);
@@ -94,11 +93,11 @@ public class ProductRepository {
         return imageProductArrayList;
     }
 
-            //pagination Product list: 6 product per page
+    //pagination Product list: 6 product per page
 
     public static ArrayList<ProductType> pagingProduct(int index) {
         ArrayList<ProductType> pagingProduct = new ArrayList<>();
-        try ( Connection con = DBConnect.getConnection()) {
+        try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("SELECT pd.[id]\n"
                     + "      ,pdt.[Id]\n"
                     + "      ,pd.[product_name]\n"
@@ -113,7 +112,7 @@ public class ProductRepository {
                     + "ORDER BY pdt.[id]\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
-            stmt.setInt(1, (index-1)*9);
+            stmt.setInt(1, (index - 1) * 9);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String idProduct = rs.getString(1);
@@ -125,8 +124,8 @@ public class ProductRepository {
                 String detail = rs.getString(7);
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
-                Product product = new Product(idProduct,productName,brand,detail,origin,status);
-                ProductType productType = new ProductType(idProductType,idProduct,typeName,price);
+                Product product = new Product(idProduct, productName, brand, detail, origin, status);
+                ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
                 productType.setProduct(product);
                 productType.setImageProducts(getImageProduct(idProductType));
                 pagingProduct.add(productType);
@@ -138,10 +137,10 @@ public class ProductRepository {
         return pagingProduct;
     }
 
-//    //Get product by ID when choose in product list
-    public static Product getProductByID(String idp){
+    //    //Get product by ID when choose in product list
+    public static Product getProductByID(String idp) {
         Product productDetail = new Product();
-        try ( Connection con = DBConnect.getConnection()) {
+        try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("SELECT pd.[id]\n"
                     + "      ,pdt.[Id]\n"
                     + "      ,pd.[product_name]\n"
@@ -168,7 +167,7 @@ public class ProductRepository {
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
 
-                ProductType productType = new ProductType(idProductType,idProduct,typeName,price);
+                ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
                 productType.setImageProducts(getImageProduct(idProductType));
                 productDetail.setIdProduct(idProduct);
                 productDetail.setProductName(productName);
@@ -187,9 +186,10 @@ public class ProductRepository {
         }
         return productDetail;
     }
-    public static ArrayList<ProductType> getProductByBrand(String brands,String idp){
+
+    public static ArrayList<ProductType> getProductByBrand(String brands, String idp) {
         ArrayList<ProductType> relateProduct = new ArrayList<>();
-        try ( Connection con = DBConnect.getConnection()) {
+        try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("SELECT pd.[id]\n"
                     + "      ,pdt.[Id]\n"
                     + "      ,pd.[product_name]\n"
@@ -216,8 +216,8 @@ public class ProductRepository {
                 String detail = rs.getString(7);
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
-                Product product = new Product(idProduct,productName,brand,detail,origin,status);
-                ProductType productType = new ProductType(idProductType,idProduct,typeName,price);
+                Product product = new Product(idProduct, productName, brand, detail, origin, status);
+                ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
                 productType.setProduct(product);
                 productType.setImageProducts(getImageProduct(idProductType));
                 relateProduct.add(productType);
@@ -233,11 +233,66 @@ public class ProductRepository {
     }
 
 
-            public static void main (String[]args){
-                ArrayList<ProductType> product = ProductRepository.getProductByBrand("Aspire","J00000001");
-                for (ProductType p:product
-                     ) {
-                    System.out.println(p);
-                }
-            }
+    public static void main(String[] args) {
+        ArrayList<ProductType> product = ProductRepository.getProductByBrand("Aspire", "J00000001");
+        for (ProductType p : product
+        ) {
+            System.out.println(p);
         }
+    }
+    public static ProductType getProductType(String id) { //method cu la getPet()
+        try {
+            String query = "SELECT  TOP 1 * FROM ProductType t join ImageProduct i  on t.Id = i.product_type_id WHERE t.Id = ?";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, id);
+            ResultSet results = stmt.executeQuery();
+            while (results.next()) {
+                String productTypeID = results.getString(1);
+                String productId = results.getString(2);
+                String productTypeName = results.getString(3);
+                double productTypePrice = results.getDouble(4);
+                char status = results.getString(5).charAt(0);
+                String imgId = results.getString(7);
+                String imgUrl = results.getString(8);
+
+                ImageProduct imageProduct = new ImageProduct(productId,imgId,imgUrl);
+                ArrayList<ImageProduct> imageProducts = new ArrayList<>();
+                imageProducts.add(imageProduct);
+                ProductType productType = new ProductType(productTypeID,productId,productTypeName,productTypePrice,imageProducts,status);
+                System.out.println("=>>>>>>>>>>>??????????   " + productType);
+                return productType;
+            }
+        } catch (Exception e) {
+            System.out.println("=========>>Loi getProductType(String id) trong ProductRepository.java<<========== ");
+        }
+        return null;
+    }
+
+    public static Product getProduct(String id) { //hang moi dua tren cai tg getProductType()
+        try {
+            String query = "SELECT * FROM Product WHERE Id = ?";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, id);
+            ResultSet results = stmt.executeQuery();
+            while (results.next()) {
+                String productID = results.getString(1);
+                String productName = results.getString(2);
+                String brand  = results.getString(3);
+                String detail = results.getString(4);
+                String origin = results.getString(5);
+                char status = results.getString(6).charAt(0);
+                Product product = new Product(productID,productName,brand,detail,origin,status);
+                return product;
+            }
+        } catch (Exception e) {
+            System.out.println("=========>>Loi getProduct(String id) trong ProductRepository.java<<========== ");
+        }
+        return null;
+    }
+
+
+
+
+}

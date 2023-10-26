@@ -118,14 +118,14 @@
                         <h6>Description:</h6>
                         <p>${product.detail}</p>
 
-                        <form action="" method="GET" name="product-card">
+                        <div action="" method="GET" name="product-card">
                             <input type="hidden" name="product-title" value="Activewear">
                             <div class="row">
                                 <div class="col-auto">
                                     <ul class="list-inline pb-3">
                                             <label for="product">Type:</label>
                                             <select id="product" name="product" onchange="calculatePrice()">
-                                                <option value="">Select a type</option>
+                                                <option value="" >Select a type</option>
                                                 <c:forEach items="${product.productTypes}" var="pdt">
                                                     <option id="optiontype" value="${pdt.productTypeId}">${pdt.typeName}
                                                     </option>
@@ -142,21 +142,39 @@
                                             Quantity
                                             <input type="hidden" name="product-quanity" id="product-quanity" value="1">
                                         </li>
-                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-minus" onclick="decreaseAmountCart()" >-</span></li>
                                         <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-plus" onclick="increaseAmountCart()" >+</span></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row pb-3">
                                 <div class="col d-grid">
+<%--                                    =================================================--%>
+
+
+
+                                    <h1>${product.productTypes.get(0)}</h1>
+
                                     <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
                                 </div>
                                 <div class="col d-grid">
-                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+
+                                    <form action="additem" method="get">
+                                        <input id = "typeidcart" value="?" type="text" name = "typeidcart">
+                                        <input id = "quantity" value="1" type="text" name = "quantity">
+                                        <input id = "productId" value="${product.idProduct}" type="text" name = "idProduct">
+                                        <input id = "brand" value="${product.brand}" type="text" name = "brand">
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+
+                                    </form>
                                 </div>
+                                <h3>${message}</h3>
                             </div>
-                        </form>
+                        </div>
+                        <h3>${message}</h3>
+
+<%--                        =================================================--%>
 
                     </div>
                 </div>
@@ -266,6 +284,19 @@
         console.log(value);
         const price = document.getElementById('product-price');
         price.innerHTML=value;
+        document.getElementById("typeidcart").setAttribute("value",id);
+    }
+
+    function increaseAmountCart() {
+        var ammout = document.getElementById("var-value").textContent;
+            document.getElementById("quantity").setAttribute("value",parseInt(ammout) + 1);
+    }
+    function decreaseAmountCart() {
+
+        var ammout = document.getElementById("var-value").textContent;
+        if (ammout != 1 ) {
+            document.getElementById("quantity").setAttribute("value",parseInt(ammout) - 1);
+        }
     }
 </script>
 </body>
