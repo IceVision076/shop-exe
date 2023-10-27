@@ -1,4 +1,4 @@
-package com.vapeshop.controller;
+package com.vapeshop.controller.login;
 
 
 import com.vapeshop.entity.User;

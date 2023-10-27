@@ -24,56 +24,73 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <style>
-    .shadow__btn_open {
-        padding: 10px 20px;
-        border: none;
-        font-size: 17px;
-        color: #fff;
-        border-radius: 7px;
-        letter-spacing: 4px;
+    .btn-open {
+        display: inline-block;
+        padding: 0.9rem 1.8rem;
+        font-size: 16px;
         font-weight: 700;
-        text-transform: uppercase;
-        transition: 0.5s;
-        transition-property: box-shadow;
+        color: black;
+        border: 3px solid rgba(17,255,50,0.41);
+        cursor: pointer;
+        position: relative;
+        background-color: transparent;
+        text-decoration: none;
+        overflow: hidden;
+        z-index: 1;
+        font-family: inherit;
     }
 
-    .shadow__btn_open {
-        background: rgb(0, 140, 255);
-        box-shadow: 0 0 25px rgb(0, 140, 255);
+    .btn-open::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(17,255,50,0.41);
+        transform: translateX(-100%);
+        transition: all .3s;
+        z-index: -1;
     }
 
-    .shadow__btn_open:hover {
-        box-shadow: 0 0 5px rgb(0, 140, 255),
-        0 0 25px rgb(0, 140, 255),
-        0 0 50px rgb(0, 140, 255),
-        0 0 100px rgb(0, 140, 255);
+    .btn-open:hover::before {
+        transform: translateX(0);
     }
 
 
-    .shadow__btn_close {
-        padding: 10px 20px;
-        border: none;
-        font-size: 17px;
-        color: #fff;
-        border-radius: 7px;
-        letter-spacing: 4px;
+    .btn-close {
+        display: inline-block;
+        padding: 0.9rem 1.8rem;
+        font-size: 16px;
         font-weight: 700;
-        text-transform: uppercase;
-        transition: 0.5s;
-        transition-property: box-shadow;
+        color: black;
+        border: 3px solid rgb(252, 70, 100);
+        cursor: pointer;
+        position: relative;
+        background-color: transparent;
+        text-decoration: none;
+        overflow: hidden;
+        z-index: 1;
+        font-family: inherit;
     }
 
-    .shadow__btn_close {
-        background: rgb(83, 93, 87);
-        box-shadow: 0 0 25px rgb(83, 93, 87);
+    .btn-close::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(252, 70, 100);
+        transform: translateX(-100%);
+        transition: all .3s;
+        z-index: -1;
     }
 
-    .shadow__btn_close:hover {
-        box-shadow: 0 0 5px rgb(83, 93, 87),
-        0 0 25px rgb(83, 93, 87),
-        0 0 50px rgb(83, 93, 87),
-        0 0 100px rgb(83, 93, 87);
+    .btn-close:hover::before {
+        transform: translateX(0);
     }
 </style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -237,6 +254,7 @@
                                         Trạng thái
                                     </th>
                                     <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -265,7 +283,7 @@
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"> ${p.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</span>
+                                            <span class="text-secondary text-xs font-weight-bold"> ${p.dateCreate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
 
@@ -278,16 +296,66 @@
 
 
                                         </td>
+                                        <td>
+
+
                                         <c:if test="${p.status eq '1'.charAt(0)}">
-                                            <button class="shadow__btn_close">
-                                                Ẩn
-                                            </button>
+
+                                            <form action="poster-close" method="post">
+                                                <input type="hidden" name="postId"  value="${p.id}">
+                                                <input type="hidden" name="page" value="${page}">
+                                                <button type="submit" class="btn-close" >Ẩn</button>
+                                            </form>
+
                                         </c:if>
                                         <c:if test="${p.status eq '0'.charAt(0)}">
-                                            <button class="shadow__btn_open">
-                                                Hiện
-                                            </button>
+
+                                            <form action="poster-open" method="post">
+                                                <input type="hidden" name="postId"  value="${p.id}">
+                                                <input type="hidden" name="page" value="${page}">
+                                                <button type="submit" class="btn-open" >Hiện</button>
+                                            </form>
                                         </c:if>
+                                        </td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${p.id}">
+                                              Xem
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal modal-lg fade" id="${p.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Poster ${p.id}</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <img src="${p.imgUrl}"
+                                                                             class="m-2 img-thumbnail "
+                                                                             style="width: 100%;" alt="user1">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                            <form action="poster-delete" method="post">
+                                                                <input type="text" name="postId"  value="${p.id}">
+                                                                <input type="text" name="page" value="${page}">
+                                                                <input type="submit" class="btn btn-primary" value="Xóa poster">
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
 
 
