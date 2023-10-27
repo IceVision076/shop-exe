@@ -143,9 +143,65 @@ public class AccountRespository {
         }
 
     }
+    public static void addNewEmployee(User user){
+        try {
+            user.setId(getNewUserId());
+            String query = "insert into UserInfo(id, username, password, full_name, email, role, phone, status, avata_img, address)\n" +
+                    "values (?,?,?,?,?,?,?,?,?,?)";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,user.getId());
+            preparedStatement.setString(2,user.getUserName());
+            preparedStatement.setString(3,user.getPassWord());
+            preparedStatement.setString(4,user.getFullName());
+            preparedStatement.setString(5,user.getEmail());
+            preparedStatement.setString(6,user.getRole());
+            preparedStatement.setString(7,user.getPhone());
+            preparedStatement.setString(8,user.getStatus());
+            preparedStatement.setString(9,user.getAvatarImg());
+            preparedStatement.setString(10,user.getAddress());
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static String getNewUserId() {
+        String newID = "";
+        try {
+            String topID = "";
+            String query = "SELECT TOP 1 ID FROM UserInfo\n" +
+                    "                ORDER BY ID DESC\n";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                topID = resultSet.getString(1);
+                topID = topID.substring(2);
+                int maxID = Integer.parseInt(topID) + 1;
+                topID = "";
+                for (int i = 1; i <= 8 - (maxID + "").length(); i++) {
+                    topID = topID + 0;
+                }
+                topID = topID + maxID;
+                newID="AC"+topID;
+            }
+            else {
+                newID="PT00000001";
+            }
+
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newID;
+    }
     public static void main(String[] args) {
-        getCustomerList(1).stream().forEach(System.out::println);
-        System.out.println(getCustomerAmount());
+//        getCustomerList(1).stream().forEach(System.out::println);
+//        System.out.println(getCustomerAmount());
+        System.out.println(getNewUserId());
     }
 
 

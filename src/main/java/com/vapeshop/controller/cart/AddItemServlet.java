@@ -4,7 +4,7 @@ import com.vapeshop.entity.Items;
 import com.vapeshop.entity.Order;
 import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
-import com.vapeshop.respository.ProductRepository;
+import com.vapeshop.respository.user.ProductRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "AddItemServlet", value = "/additem")
 public class AddItemServlet extends HttpServlet {
@@ -27,18 +26,26 @@ public class AddItemServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
 
         }
-        else if (request.getParameter("typeidcart").equals("?") ||request.getParameter("typeidcart")  == null ) {
+        else if (request.getParameter("typeidcart").equals("") ||request.getParameter("typeidcart").isEmpty() ) {
 
             String brand = request.getParameter("brand");
             String idProduct = request.getParameter("idProduct");
             message = "1";
-            request.setAttribute("brand",brand);
-            request.setAttribute("idProduct",idProduct);
+//            request.removeAttribute("quantity");
+//            request.re
+//            request.setAttribute("mes", "bruhdua");
+//            request.setAttribute("brand",brand+"alo");
+//            request.setAttribute("idProduct",idProduct);
+
             System.out.println("Nhay zo ne");
 //            message = "Vui lòng chọn phân loại sản phẩm";
 
-            request.setAttribute("message", "bruhdua");
-            request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+
+//            request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+            response.sendRedirect("ShowProductDetails?idProduct="+idProduct+"&brand="+brand+"&message="+message);
+
+
+
         } else {
             try {
                 String id = request.getParameter("typeidcart");

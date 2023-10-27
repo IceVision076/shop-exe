@@ -161,11 +161,11 @@
                                 <div class="col d-grid">
 
                                     <form action="additem" method="get">
-                                        <input id = "typeidcart" value="?" type="text" name = "typeidcart">
+                                        <input id = "typeidcart" type="text" name = "typeidcart">
                                         <input id = "quantity" value="1" type="text" name = "quantity">
                                         <input id = "productId" value="${product.idProduct}" type="text" name = "idProduct">
                                         <input id = "brand" value="${product.brand}" type="text" name = "brand">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+                                        <input type="submit" class="btn btn-success btn-lg"  value="Add To Cart"></input>
 
                                     </form>
                                 </div>
