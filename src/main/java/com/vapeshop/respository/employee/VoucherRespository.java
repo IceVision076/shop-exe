@@ -76,6 +76,32 @@ public class VoucherRespository {
         }
     }
 
+    public static void openVoucher(String id) {
+        try {
+            String query = "update Voucher set status='1'\n" +
+                    "where id=?\n";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void closeVoucher(String id) {
+        try {
+            String query = "update Voucher set status='0'\n" +
+                    "where id=?\n";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
 //        getProductPage(1).stream().forEach(System.out::println);
         System.out.println(getVoucherAmount());
