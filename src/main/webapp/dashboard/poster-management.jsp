@@ -32,7 +32,7 @@
         font-size: 16px;
         font-weight: 700;
         color: black;
-        border: 3px solid rgba(17,255,50,0.41);
+        border: 3px solid rgba(17, 255, 50, 0.41);
         cursor: pointer;
         position: relative;
         background-color: transparent;
@@ -49,7 +49,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(17,255,50,0.41);
+        background-color: rgba(17, 255, 50, 0.41);
         transform: translateX(-100%);
         transition: all .3s;
         z-index: -1;
@@ -228,10 +228,67 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Bảng poster(Trang ${page}/${maxPage})</h6>
-                        <a href="product-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
-                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm poster mới</span>
-                        </a>
+                        <%--                        <a href="product-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"--%>
+                        <%--                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm poster mới</span>--%>
+                        <%--                        </a>--%>
 
+
+                        <div>
+                            <!-- Button trigger modal -->
+                            <div type="button" style="color: #d31798;"
+                                 class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse" data-bs-toggle="modal"
+                                 data-bs-target="#add-poster">
+                                <span style="font-family: Courier;font-size: 20px;">Thêm poster mới</span>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal modal-lg fade" id="add-poster" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Thêm mới poster</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close">x
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+
+                                                <form class="row g-3 needs-validation p-4" novalidate
+                                                      enctype="multipart/form-data" action="poster-add" method="post">
+                                                    <div class="col-12">
+                                                        <label for="image_url" class="form-label">Ảnh poster <span
+                                                                class="text-danger"> *</span></label>
+                                                        <div class="input-group has-validation">
+                                                            <input type="file" class="form-control" id="image_url"
+                                                                   name="image_url" placeholder="Chọn ảnh từ máy tính"
+                                                                   required>
+                                                            <div class="invalid-feedback">
+                                                                Vui lòng tải ảnh
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <input type="hidden" name="page" value="${page}">
+                                                    <input type="submit" class="btn btn-primary" value="Thêm mới">
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Đóng
+                                            </button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -299,37 +356,43 @@
                                         <td>
 
 
-                                        <c:if test="${p.status eq '1'.charAt(0)}">
+                                            <c:if test="${p.status eq '1'.charAt(0)}">
 
-                                            <form action="poster-close" method="post">
-                                                <input type="hidden" name="postId"  value="${p.id}">
-                                                <input type="hidden" name="page" value="${page}">
-                                                <button type="submit" class="btn-close" >Ẩn</button>
-                                            </form>
+                                                <form action="poster-close" method="post">
+                                                    <input type="hidden" name="postId" value="${p.id}">
+                                                    <input type="hidden" name="page" value="${page}">
+                                                    <button type="submit" class="btn-close">Ẩn</button>
+                                                </form>
 
-                                        </c:if>
-                                        <c:if test="${p.status eq '0'.charAt(0)}">
+                                            </c:if>
+                                            <c:if test="${p.status eq '0'.charAt(0)}">
 
-                                            <form action="poster-open" method="post">
-                                                <input type="hidden" name="postId"  value="${p.id}">
-                                                <input type="hidden" name="page" value="${page}">
-                                                <button type="submit" class="btn-open" >Hiện</button>
-                                            </form>
-                                        </c:if>
+                                                <form action="poster-open" method="post">
+                                                    <input type="hidden" name="postId" value="${p.id}">
+                                                    <input type="hidden" name="page" value="${page}">
+                                                    <button type="submit" class="btn-open">Hiện</button>
+                                                </form>
+                                            </c:if>
                                         </td>
                                         <td>
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${p.id}">
-                                              Xem
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#${p.id}">
+                                                Xem
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal modal-lg fade" id="${p.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal modal-lg fade" id="${p.id}" data-bs-backdrop="static"
+                                                 data-bs-keyboard="false" tabindex="-1"
+                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Poster ${p.id}</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Poster ${p.id}</h1>
+                                                            <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close">x
+                                                            </button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="container">
@@ -344,11 +407,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Đóng
+                                                            </button>
                                                             <form action="poster-delete" method="post">
-                                                                <input type="text" name="postId"  value="${p.id}">
-                                                                <input type="text" name="page" value="${page}">
-                                                                <input type="submit" class="btn btn-primary" value="Xóa poster">
+                                                                <input type="hidden" name="postId" value="${p.id}">
+                                                                <input type="hidden" name="page" value="${page}">
+                                                                <input type="submit" class="btn btn-primary"
+                                                                       value="Xóa poster">
                                                             </form>
 
                                                         </div>

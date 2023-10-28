@@ -100,8 +100,8 @@ public class PosterRespository {
             preparedStatement.setString(1,poster.getId());
             preparedStatement.setString(2,poster.getImgUrl());
             preparedStatement.setString(3,poster.getUser().getId());
-            preparedStatement.setString(4,poster.getId());
-            preparedStatement.setString(5,poster.getId());
+            preparedStatement.setString(4,poster.getStatus()+"");
+            preparedStatement.setObject(5,poster.getDateCreate());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
