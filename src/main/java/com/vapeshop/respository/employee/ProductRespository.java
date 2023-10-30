@@ -452,5 +452,4 @@ public class ProductRespository {
         System.out.println(LocalDateTime.now().toString());
         //getProductTypePage("J00000006", 1).stream().forEach(System.out::println);
     }
-
 }
