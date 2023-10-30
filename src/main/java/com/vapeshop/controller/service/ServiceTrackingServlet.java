@@ -1,4 +1,4 @@
-package com.vapeshop.controller;
+package com.vapeshop.controller.service;
 
 import com.vapeshop.entity.ServiceTracking;
 import com.vapeshop.entity.User;

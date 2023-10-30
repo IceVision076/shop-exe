@@ -18,7 +18,7 @@ public class PosterRespository {
                     "  *\n" +
                     "FROM\n" +
                     "   Poster\n" +
-                    "order by id\n" +
+                    "order by date_create desc \n" +
                     "OFFSET (?-1)*10 ROWS\n" +
                     "    FETCH FIRST 10 ROWS ONLY;\n";
             Connection connection = DBConnect.getConnection();
@@ -28,7 +28,7 @@ public class PosterRespository {
             list = new ArrayList<>();
             while (rs.next()) {
                  String id=rs.getString("id");
-                 String imgUrl=rs.getString("img_url");
+                 String imgUrl=rs.getString("url_image");
                  String userId=rs.getString("user_id");
                  LocalDateTime dateCreate=rs.getObject("date_create",LocalDateTime.class);
                  char status=rs.getString("status").charAt(0);
@@ -100,8 +100,8 @@ public class PosterRespository {
             preparedStatement.setString(1,poster.getId());
             preparedStatement.setString(2,poster.getImgUrl());
             preparedStatement.setString(3,poster.getUser().getId());
-            preparedStatement.setString(4,poster.getId());
-            preparedStatement.setString(5,poster.getId());
+            preparedStatement.setString(4,poster.getStatus()+"");
+            preparedStatement.setObject(5,poster.getDateCreate());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -140,9 +140,21 @@ public class PosterRespository {
         }
         return newID;
     }
+    public static void deletePoster(String id){
+        try {
+            String query = "delete Poster where id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,id);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
     public static void main(String[] args) {
-        System.out.println(getNewPosterId());
+       getPosterPage(1).stream().forEach(System.out::println);
     }
 
 }

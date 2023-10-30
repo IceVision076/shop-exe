@@ -235,11 +235,49 @@
 
                                         </td>
                                         <td class="align-middle">
-                                            <a href="product-editor?productID=${v.id}"
-                                               class="text-secondary font-weight-bold text-xs btn btn-warning"
-                                               data-toggle="tooltip" data-original-title="Edit user">
-                                                Chỉnh sửa
-                                            </a>
+                                            <!-- Button trigger modal -->
+                                            <button type="button"   class="text-secondary font-weight-bold text-xs btn btn-warning" data-bs-toggle="modal" data-bs-target="#${v.id}">
+                                               Chỉnh sửa
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal modal-lg fade" id="${v.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <div>
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa voucher ${v.voucherName}: Mã(${v.id})</h1>
+                                                            </div>
+
+                                                            <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <c:if test="${(v.status+'') eq ('1').charAt(0)}">
+                                                                <h4 class="text-danger">Voucher này đang hoạt động bạn có muốn hoãn???</h4>
+                                                                <form action="voucher-change-status" method="post">
+                                                                    <input type="hidden" value="${page}" name="page">
+                                                                    <input type="hidden" value="${v.id}" name="voucherId">
+                                                                    <input type="hidden" value="close" name="action">
+                                                                    <button type="submit" class="btn btn-danger" >Hoãn ngay</button>
+                                                                </form>
+                                                            </c:if>
+                                                            <c:if test="${(v.status+'') eq ('0').charAt(0)}">
+                                                                <h4 style="width: 100%" class="text-danger">Voucher này đang hoãn bạn có muốn kích hoạt???</h4>
+                                                                <form action="voucher-change-status" method="post">
+                                                                    <input type="hidden" value="${page}" name="page">
+                                                                    <input type="hidden" value="${v.id}" name="voucherId">
+                                                                    <input type="hidden" value="open" name="action">
+                                                                    <button type="submit" class="btn btn-success" >Kích hoạt</button>
+                                                                </form>
+
+                                                            </c:if>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
 

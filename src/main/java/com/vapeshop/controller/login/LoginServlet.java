@@ -4,6 +4,7 @@
  */
 package com.vapeshop.controller.login;
 
+import com.vapeshop.entity.Order;
 import com.vapeshop.entity.User;
 import com.vapeshop.respository.user.UserRespository;
 import jakarta.servlet.ServletException;
@@ -71,8 +72,8 @@ public class LoginServlet extends HttpServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", account);
-
-                response.sendRedirect("index.jsp");
+                session.setAttribute("cart", new Order());
+                response.sendRedirect("Home");
 
             }
 

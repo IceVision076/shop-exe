@@ -7,8 +7,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "PosterCloseServlet", value = "/poster-close")
-public class PosterCloseServlet extends HttpServlet {
+@WebServlet(name = "PosterDeleteServlet", value = "/poster-delete")
+public class PosterDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -18,7 +18,8 @@ public class PosterCloseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String postId = request.getParameter("postId");
         String page= request.getParameter("page");
-        PosterRespository.disablePoster(postId);
+        PosterRespository.deletePoster(postId);
+        System.out.println("==================="+postId);
         response.sendRedirect("poster-management?page="+page);
     }
 }

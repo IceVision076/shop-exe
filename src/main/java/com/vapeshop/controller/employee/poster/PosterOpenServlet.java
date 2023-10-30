@@ -1,5 +1,6 @@
 package com.vapeshop.controller.employee.poster;
 
+import com.vapeshop.respository.employee.PosterRespository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -15,6 +16,9 @@ public class PosterOpenServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String postId = request.getParameter("postId");
+        String page= request.getParameter("page");
+        PosterRespository.releasePoster(postId);
+        response.sendRedirect("poster-management?page="+page);
     }
 }

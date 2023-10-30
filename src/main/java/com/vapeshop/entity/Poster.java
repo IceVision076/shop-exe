@@ -65,8 +65,9 @@ public class Poster {
         return "Poster{" +
                 "id='" + id + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", userId='" + user + '\'' +
+                ", user=" + user +
                 ", dateCreate=" + dateCreate +
+                ", status=" + status +
                 '}';
     }
 }
