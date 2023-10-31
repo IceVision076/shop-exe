@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class VoucherRespository {
-    public static ArrayList<Voucher> getProductPage(int page) {
+    public static ArrayList<Voucher> getVoucherPage(int page) {
         ArrayList<Voucher> list = null;
         try {
             String query = "SELECT *\n" +
@@ -28,8 +28,9 @@ public class VoucherRespository {
                 double voucherPercent = rs.getDouble("vourcher_percent");
                 LocalDateTime createDate = rs.getObject("create_date", LocalDateTime.class);
                 LocalDateTime closeDate = rs.getObject("close_date", LocalDateTime.class);
+                LocalDateTime openDate = rs.getObject("open_date", LocalDateTime.class);
                 char status = rs.getString("status").charAt(0);
-                Voucher voucher = new Voucher(id, voucherName, voucherPercent, createDate, closeDate, status);
+                Voucher voucher = new Voucher(id, voucherName, voucherPercent, createDate, closeDate, status,openDate);
                 list.add(voucher);
             }
             connection.close();

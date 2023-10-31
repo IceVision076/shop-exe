@@ -14,7 +14,15 @@ import java.util.Random;
 public class VoucherCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.getRequestDispatcher("dashboard/voucher-create.jsp").forward(request,response);
+        String error = request.getParameter("error");
+        System.out.println(error);
+        if (error == null) {
+            request.getRequestDispatcher("dashboard/voucher-create.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", error);
+            request.getRequestDispatcher("dashboard/voucher-create.jsp").forward(request, response);
+
+        }
     }
 
     @Override
@@ -27,15 +35,21 @@ public class VoucherCreateServlet extends HttpServlet {
             id += characters.charAt(random.nextInt(characters.length()));
         }
 
-        String voucherName=request.getParameter("voucherName");
-        double voucherPercent= Double.parseDouble(request.getParameter("voucherPercent"))/100;
-        LocalDateTime createDate= LocalDateTime.now();
-        LocalDateTime closeDate=LocalDateTime.parse(request.getParameter("closeDate"));
-        char status='1';
+        String voucherName = request.getParameter("voucherName");
+        double voucherPercent = Double.parseDouble(request.getParameter("voucherPercent")) / 100;
+        LocalDateTime createDate = LocalDateTime.now();
+        LocalDateTime closeDate = LocalDateTime.parse(request.getParameter("closeDate"));
+        LocalDateTime openDate = LocalDateTime.parse(request.getParameter("openDate"));
 
-        Voucher voucher = new Voucher(id,voucherName,voucherPercent,createDate,closeDate,status);
-        VoucherRespository.addVoucher(voucher);
-        response.sendRedirect("voucher-create");
+        char status = '1';
+        if (closeDate.isBefore(openDate)) {
+            response.sendRedirect("voucher-create?error=1");
+        } else {
+            Voucher voucher = new Voucher(id, voucherName, voucherPercent, createDate, closeDate, status, openDate);
+            VoucherRespository.addVoucher(voucher);
+            response.sendRedirect("voucher-create");
+        }
+
     }
 
 

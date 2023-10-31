@@ -27,7 +27,7 @@ public class VoucherPageServlet extends HttpServlet {
             pageNumber= Integer.parseInt(  request.getParameter("page"))  ;
 
         if( pageNumber>maxPageAmount||pageNumber<=0) pageNumber=1;
-        ArrayList<Voucher> listVoucher= VoucherRespository.getProductPage(pageNumber);
+        ArrayList<Voucher> listVoucher= VoucherRespository.getVoucherPage(pageNumber);
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
         request.setAttribute("listVoucher",listVoucher);

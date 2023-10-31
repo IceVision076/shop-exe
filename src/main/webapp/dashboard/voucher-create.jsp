@@ -25,7 +25,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<%@include file="include/header-product-management-dashboard.jsp"%>
+<%@include file="include/header-product-management-dashboard.jsp" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -35,10 +35,11 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí sản phẩm</a>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                                                           href="product-management">Voucher</a>
                     </li>
 
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm sản phẩm mới</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm mã giảm giá</li>
                 </ol>
                 <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm</h6>
             </nav>
@@ -163,19 +164,22 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h4 style="font-family: Calibri;" class="text-center"> <i class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Thêm mã giảm giá mới <i class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i></h4>
+                        <h4 style="font-family: Calibri;" class="text-center"><i
+                                class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Thêm mã giảm
+                            giá mới <i class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i></h4>
 
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
 
-<%--                        public Voucher(String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status) {--%>
+                        <%--                        public Voucher(String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status) {--%>
 
                         <form class="row g-3 needs-validation p-4" novalidate action="voucher-create"
-                              method="post" >
+                              method="post">
 
                             <%--                        Tên mã mới--%>
                             <div class="col-12">
-                                <label for="voucherName" class="form-label">Tên mã giảm giá <span class="text-danger"> *</span></label>
+                                <label for="voucherName" class="form-label">Tên mã giảm giá <span
+                                        class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
                                     <input type="text" class="form-control" placeholder="Nhập tên mã giảm giá"
                                            id="voucherName" name="voucherName"
@@ -191,27 +195,49 @@
                             <div class="col-12">
                                 <label for="voucherPercent" class="form-label">Tỷ lệ giảm(%) <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="number" class="form-control" min="1" max="70" id="voucherPercent" name="voucherPercent" placeholder="Nhập giá loại sản phẩm" required>
+                                    <input type="number" class="form-control" min="1" max="70" id="voucherPercent"
+                                           name="voucherPercent" placeholder="Nhập tỉ lệ % giảm(1-70)" required>
                                     <div class="invalid-feedback">
                                         Vui lòng điền số hợp lệ từ 1 đến 70
                                     </div>
                                 </div>
                             </div>
-                                <div class="col-12">
-                                    <label for="closeDate" class="form-label">Ngày kết thúc <span class="text-danger"> *</span></label>
-                                    <div class="input-group has-validation">
-                                        <input type="datetime-local" class="form-control" id="closeDate" name="closeDate" placeholder="Nhập giá loại sản phẩm" required>
-                                        <div class="invalid-feedback">
-                                            Vui lòng điền số hợp lệ
-                                        </div>
+                            <div class="col-12">
+                                <label for="openDate" class="form-label">Ngày bắt đầu <span
+                                        class="text-danger"> *</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="datetime-local" format="DD-MM-YYYY hh:mm" class="form-control"
+                                           id="openDate" name="openDate" required>
+                                    <div class="invalid-feedback">
+                                        Vui lòng chọn ngày bắt đầu
                                     </div>
                                 </div>
+                            </div>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Lưu <i class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
+                                <label for="closeDate" class="form-label">Ngày kết thúc <span
+                                        class="text-danger"> *</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="datetime-local" format="DD-MM-YYYY hh:mm" class="form-control"
+                                           id="closeDate" name="closeDate" required>
+                                    <div class="invalid-feedback">
+                                        Vui lòng chọn ngày kết thúc
+                                    </div>
+                                </div>
+                            </div>
+                                <c:if test="${error eq 1}">
+                                    <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center" style="height: 50px;border-radius: 10px" ><b>Ngày bắt đầu phải lớn hơn ngày kết thúc</b></div>
+                                </c:if>
+                            <div class="col-12">
+                                <button class="btn btn-primary" type="submit">Lưu <i
+                                        class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
                             </div>
                         </form>
+
+
+
                         <div class="mx-5 mb-2">
-                            <a href="product-management"><i class="fa-solid fa-arrow-left-long fa-2xl" style="color: #2e2bd4;"></i> Quay lại quản lí sản phẩm</a>
+                            <a href="voucher-page"><i class="fa-solid fa-arrow-left-long fa-2xl"
+                                                      style="color: #2e2bd4;"></i> Quay lại quản lí voucher</a>
                         </div>
                     </div>
 
@@ -221,8 +247,8 @@
     </div>
     <script>
         // Get the datetime-local input field
-        var dateTimeLocalInput = document.getElementById("closeDate");
-
+        var closeDate = document.getElementById("closeDate");
+        var openDate = document.getElementById("openDate");
         // Get the current date
         var today = new Date();
 
@@ -230,10 +256,9 @@
         var tomorrow = new Date(today.setDate(today.getDate() + 1));
 
         // Set the minimum time to tomorrow's date at 00:00:00
-        dateTimeLocalInput.min = tomorrow.toISOString().substring(0, 10) + "T00:00:00";
-
-
+        closeDate.min = tomorrow.toISOString().substring(0, 10) + "T00:00:00";
+        openDate.min = tomorrow.toISOString().substring(0, 10) + "T00:00:00";
 
     </script>
-    <%@include file="include/footer-dashboard.jsp"%>
+    <%@include file="include/footer-dashboard.jsp" %>
 
