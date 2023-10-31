@@ -448,9 +448,31 @@ public class ProductRespository {
         }
     }
 
+    public static int getProductTypeRealAmount(String productTypeId) {
+        int amount = 0;
+        try {
+            String query = "select sum (quantity) from ImportProduct \n" +
+                    "where product_type_id = ? ";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) amount = rs.getInt(1);
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return amount;
+    }
+
+
+
     public static void main(String[] args) {
         System.out.println(LocalDateTime.now().toString());
         //getProductTypePage("J00000006", 1).stream().forEach(System.out::println);
+//        System.out.println(getProductTypeRealAmount("A00000001A"));
     }
 
 }

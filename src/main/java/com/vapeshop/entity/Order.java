@@ -1,5 +1,7 @@
 package com.vapeshop.entity;
 
+import com.vapeshop.respository.employee.ProductRespository;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -209,11 +211,11 @@ public class Order { //gio hang = cart
             return "=========>Khong ton tai san pham increaseAmmount(String id) <==========";
         } else {
             for (Items items : cart) {
-                if (items.getProductType().getProductId().equals(id)) {
+                if (items.getProductType().getProductTypeId().equals(id)) {
                     Items hang = cart.get(cart.indexOf(items));
-//                    if (hang.getAmmout() == hang.getProduct().getProductAmount()) {
-//                        return "=========>CART : Tang Thanh Cong increaseAmmount(String id)<==========";
-//                    }
+                    if (hang.getAmmout() == ProductRespository.getProductTypeRealAmount(id)) {
+                        return "=========>CART : Tang that bai (vuot qua so luong trong kho)<==========";
+                    }
 //                    Khúc này dùng để check số lượng trong kho nếu số lượng trong giỏ hàng == với số lượng trong kho
 //                    thì không tăng nổi nữa <> chỗ này cần code lại thêm thuộc tính vaof class
                     hang.setAmmout(hang.getAmmout() + 1);
@@ -221,7 +223,7 @@ public class Order { //gio hang = cart
 
                 }
             }
-            return "=========>CART : Tang Thanh Cong<==========";
+            return "=========>CART : Tang That bai (unknown error)<==========";
         }
     }
 
@@ -233,7 +235,7 @@ public class Order { //gio hang = cart
                 if (items.getProductType().getProductTypeId().equals(id)) {
                     Items hang = cart.get(cart.indexOf(items));
                     if (hang.getAmmout() ==1) {
-                        return "=========>CART : giam  Thanh Cong decreaseAmmount(String id)<==========";
+                        return "=========>CART : San pham da = 1 decreaseAmmount(String id)<==========";
                     }
                     hang.setAmmout(hang.getAmmout() - 1);
                     return "=========>CART : giam  Thanh Cong decreaseAmmount(String id)<==========";

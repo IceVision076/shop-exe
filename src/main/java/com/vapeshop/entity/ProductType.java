@@ -1,5 +1,7 @@
 package com.vapeshop.entity;
 
+import com.vapeshop.respository.employee.ProductRespository;
+
 import java.util.ArrayList;
 
 public class ProductType {
@@ -11,6 +13,7 @@ public class ProductType {
     private Product product;
     private ArrayList<ImageProduct> imageProducts;
     private char typeStatus;
+    private int realAmount;
     public ProductType() {
         this.imageProducts = new ArrayList<>();
     }
@@ -93,6 +96,24 @@ public class ProductType {
 
     public String getPriceString () {
         return Double.toString(this.typePrice);
+    }
+
+    public char getTypeStatus() {
+        return typeStatus;
+    }
+
+    public void setTypeStatus(char typeStatus) {
+        this.typeStatus = typeStatus;
+    }
+
+    public int getRealAmount() {
+        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>" + ProductRespository.getProductTypeRealAmount(this.productTypeId));
+        return ProductRespository.getProductTypeRealAmount(this.productTypeId);
+
+    }
+
+    public void setRealAmount(int realAmount) {
+        this.realAmount = realAmount;
     }
 
     @Override

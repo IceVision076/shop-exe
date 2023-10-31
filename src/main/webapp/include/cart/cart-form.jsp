@@ -247,8 +247,10 @@
                 <tr>
                   <td>
                     <div class="img">
-                      <img src="${item.product.getListImg().get(0).url}" alt="Image">
+                      <img src="${item.productType.getImageProducts().get(0).imageUrl}" alt="Image">
                       <p>${item.productType.product.productName}</p>
+                      <br>
+                      Phân loại :  <p>${item.productType.typeName}</p>
                     </div>
                   </td>
                   <td>${item.productType.getPriceString()} </td>
@@ -269,7 +271,7 @@
                   <td>${item.getPriceString()}</td>
                   <td>
                     <form action="changeammount">
-                      <input name="delete" value="${item.product.productId}" type="hidden">
+                      <input name="delete" value="${item.productType.productTypeId}" type="hidden">
                       <button type="submit"><i class="fa fa-trash"></i></button>
                     </form>
                   </td>
