@@ -25,8 +25,9 @@ public class ServiceReceiveServlet extends HttpServlet {
         String id = request.getParameter("id");
         String employeeId = user.getId();
         String employeeDescription = request.getParameter("employeeDescription");
+        double price= Double.parseDouble(request.getParameter("price"));
         char status =request.getParameter("status").charAt(0);
-        ServiceResposiory.serviceReceive(id, employeeId, employeeDescription,status);
+        ServiceResposiory.serviceReceive(id, employeeId, employeeDescription,status,price);
         response.sendRedirect("service-management");
     }
 }

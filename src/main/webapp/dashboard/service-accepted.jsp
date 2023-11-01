@@ -1,31 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: PC
-  Date: 9/29/2023
-  Time: 2:16 PM
+  Date: 10/15/2023
+  Time: 3:33 PM
   To change this template use File | Settings | File Templates.
 --%>
-
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -35,9 +17,9 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí voucher</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí dịch vụ</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí voucher</h6>
+                <h6 class="font-weight-bolder mb-0">Quản lí dịch vụ</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -160,128 +142,147 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng vourcher (Trang ${page}/${maxPage})</h6>
-                        <a href="voucher-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
-                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Mã giảm giá mới</span>
-                        </a>
+                        <h6>Bảng yêu cầu dịch vụ mới (Trang ${page}/${maxPage})</h6>
+
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên
-                                        Voucher
+                                    <%--                  id,user_id, user_description,create_date,title--%>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        ID
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Phần trăm được giảm
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-start">
+                                        User Id
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Ngày tạo
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Tiêu đề
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Ngày mở
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Ngày kết thúc
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
                                         Trạng thái
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${listVoucher}" var="v">
-                                    <%--    String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status--%>
+                                <c:forEach items="${serviceAcceptedList}" var="s">
 
                                     <tr>
-
                                         <td>
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${v.id}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${v.voucherName}</p>
+                                                    <h6 class="mb-0 text-sm">${s.id}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0 text-left">
-                                                    <fmt:formatNumber var="price" value=" ${v.voucherPercent*100}" maxFractionDigits="1"></fmt:formatNumber>
-                                                  ${price} %</p>
+                                            <div class="d-flex px-2 py-1">
+
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">${s.userId}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">${s.title}</p>
 
                                         </td>
-
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                                ${v.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
-                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                                    ${v.openDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
-                                            </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                                    ${v.closeDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
-                                            </span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-<%--                                                ${v.status}${(v.status+'') eq ('1').charAt(0)}--%>
-                                                    <c:if test="${(v.status+'') eq ('1').charAt(0)}">
-                                                        <span class="badge badge-sm bg-gradient-success ">Có thể áp dụng</span>
-                                                    </c:if>
-                                                    <c:if test="${(v.status+'') eq ('0').charAt(0)}">
-                                                        <span class="badge badge-sm bg-gradient-danger ">Dừng áp dụng</span>
-                                                    </c:if>
-
-
+                                        <td class="align-middle text-start text-sm">
+                                            <span class="badge badge-sm bg-gradient-primary ">Đang chờ hoàn thành</span>
                                         </td>
                                         <td class="align-middle">
+
                                             <!-- Button trigger modal -->
-                                            <button type="button"   class="text-secondary font-weight-bold text-xs btn btn-warning" data-bs-toggle="modal" data-bs-target="#${v.id}">
-                                               Chỉnh sửa
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#${s.id}">
+                                                Duyệt đơn
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal modal-lg fade" id="${v.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                            <div class="modal modal-lg fade" id="${s.id}" data-bs-backdrop="static"
+                                                 data-bs-keyboard="false" tabindex="-1"
+                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <div>
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa voucher ${v.voucherName}: Mã(${v.id})</h1>
-                                                            </div>
-
-                                                            <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Duyệt
+                                                                đơn ${s.id}</h1>
+                                                            <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <c:if test="${(v.status+'') eq ('1').charAt(0)}">
-                                                                <h4 class="text-danger">Voucher này đang hoạt động bạn có muốn hoãn???</h4>
-                                                                <form action="voucher-change-status" method="post">
+                                                                <%--                              Nội dungn yêu cầu--%>
+                                                            <div>
+                                                                <h4>Nội dung yêu cầu</h4>
+                                                                <textarea class="form-control" style="width: 100%"
+                                                                          name="" id="" cols="10"
+                                                                          rows="10"
+                                                                          readonly> ${s.userDescription.trim()}</textarea>
+                                                            </div>
+                                                                <%--Phản hồi yêu cầu--%>
+                                                            <br>
+                                                            <div>
+                                                                <h4>Phản hồi dịch vụ</h4>
+                                                                <form class="row g-3 needs-validation p-4" novalidate
+                                                                      action="service-done"
+                                                                      method="post">
+                                                                    <input type="hidden" value="${s.id}" name="id">
                                                                     <input type="hidden" value="${page}" name="page">
-                                                                    <input type="hidden" value="${v.id}" name="voucherId">
-                                                                    <input type="hidden" value="close" name="action">
-                                                                    <button type="submit" class="btn btn-danger" >Hoãn ngay</button>
+                                                                    <div class="col-12">
+                                                                        <label for="employeeDescription"
+                                                                               class="form-label">
+                                                                            Phản hồi
+                                                                            <span class="text-danger"> *</span></label>
+                                                                        <div class="input-group has-validation">
+                                    <textarea cols="10" rows="10" class="form-control" id="employeeDescription"
+                                              name="employeeDescription"
+                                              placeholder="Nhập phản hồi yêu cầu dịch vụ"
+                                              required>${s.employeeDescription.trim()}</textarea>
+                                                                            <div class="invalid-feedback">
+                                                                                Vui lòng điền phản hồi
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                        <%--                        Chi phí phát sinh--%>
+                                                                    <div class="col-12">
+                                                                        <label for="price" class="form-label">Chi phí
+                                                                            phát sinh(Nếu có) / Chi phí hiện tại ${s.price} vnđ
+                                                                        </label>
+                                                                        <div class="input-group has-validation">
+                                                                            <input type="number" class="form-control"
+                                                                                   id="price" name="price"
+                                                                                   placeholder="Nhập chi phí phát sinh">
+                                                                            <div class="invalid-feedback">
+                                                                                Vui lòng điền giá hợp lệ
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <label for="status" class="form-label">Trạng
+                                                                            thái</label>
+                                                                        <select class="form-select" name="status"
+                                                                                id="status">
+                                                                            <option value="4">Thành công</option>
+                                                                            <option value="3">Thất bại</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <button onclick="run()" class="btn btn-primary"
+                                                                                type="submit">Xác Nhận <i
+                                                                                class="fa-solid fa-rocket fa-bounce fa-lg"
+                                                                                style="color: #f2df07;"></i></button>
+                                                                    </div>
                                                                 </form>
-                                                            </c:if>
-                                                            <c:if test="${(v.status+'') eq ('0').charAt(0)}">
-                                                                <h4 style="width: 100%" class="text-danger">Voucher này đang hoãn bạn có muốn kích hoạt???</h4>
-                                                                <form action="voucher-change-status" method="post">
-                                                                    <input type="hidden" value="${page}" name="page">
-                                                                    <input type="hidden" value="${v.id}" name="voucherId">
-                                                                    <input type="hidden" value="open" name="action">
-                                                                    <button type="submit" class="btn btn-success" >Kích hoạt</button>
-                                                                </form>
-
-                                                            </c:if>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal">Đóng
+                                                            </button>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -300,7 +301,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="voucher-page?page=${page-1}"
+                                            <a class="page-link" href="service-accepted?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -312,7 +313,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="voucher-page?page=${i}">${i}</a></li>
+                                                                     href="service-accepted?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -321,7 +322,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="voucher-page?page=${page+1}"
+                                            <a class="page-link" href="service-accepted?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>

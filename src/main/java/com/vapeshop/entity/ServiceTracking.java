@@ -11,8 +11,8 @@ public class ServiceTracking {
     private String userDescription;
     private String employeeDescription;
     private LocalDateTime createDate;
-    private LocalDate estimatedDeliveryDate;
-    private LocalDate deliveryDate;
+    private LocalDateTime estimatedDeliveryDate;
+    private LocalDateTime deliveryDate;
     private char status;
     private double price;
     private String title;
@@ -31,7 +31,7 @@ public class ServiceTracking {
         this.title = title;
     }
 
-    public ServiceTracking(String id, String employeeId, String userId, String userDescription, String employeeDescription, LocalDateTime createDate, LocalDate estimatedDeliveryDate, LocalDate deliveryDate, char status, double price, String title) {
+    public ServiceTracking(String id, String employeeId, String userId, String userDescription, String employeeDescription, LocalDateTime createDate, LocalDateTime estimatedDeliveryDate, LocalDateTime deliveryDate, char status, double price, String title) {
         this.id = id;
         this.employeeId = employeeId;
         this.userId = userId;
@@ -94,19 +94,19 @@ public class ServiceTracking {
         this.createDate = createDate;
     }
 
-    public LocalDate getEstimatedDeliveryDate() {
+    public LocalDateTime getEstimatedDeliveryDate() {
         return estimatedDeliveryDate;
     }
 
-    public void setEstimatedDeliveryDate(LocalDate estimatedDeliveryDate) {
+    public void setEstimatedDeliveryDate(LocalDateTime estimatedDeliveryDate) {
         this.estimatedDeliveryDate = estimatedDeliveryDate;
     }
 
-    public LocalDate getDeliveryDate() {
+    public LocalDateTime getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(LocalDate deliveryDate) {
+    public void setDeliveryDate(LocalDateTime deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

@@ -435,7 +435,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="product-management?page=${page-1}"
+                                            <a class="page-link" href="poster-management?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -447,7 +447,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="product-management?page=${i}">${i}</a></li>
+                                                                     href="poster-management?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -456,7 +456,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="product-management?page=${page+1}"
+                                            <a class="page-link" href="poster-management?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>

@@ -10,17 +10,26 @@ public class Voucher {
     private LocalDateTime createDate;
     private LocalDateTime closeDate;
     private char status;
-
+private LocalDateTime openDate;
     public Voucher() {
     }
 
-    public Voucher(String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status) {
+    public Voucher(String id, String voucherName, double voucherPercent, LocalDateTime createDate, LocalDateTime closeDate, char status, LocalDateTime openDate) {
         this.id = id;
         this.voucherName = voucherName;
         this.voucherPercent = voucherPercent;
         this.createDate = createDate;
         this.closeDate = closeDate;
         this.status = status;
+        this.openDate = openDate;
+    }
+
+    public LocalDateTime getOpenDate() {
+        return openDate;
+    }
+
+    public void setOpenDate(LocalDateTime openDate) {
+        this.openDate = openDate;
     }
 
     public String getId() {

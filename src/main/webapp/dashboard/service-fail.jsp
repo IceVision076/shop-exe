@@ -1,72 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: PC
-  Date: 9/29/2023
-  Time: 2:16 PM
+  Date: 10/15/2023
+  Time: 3:33 PM
   To change this template use File | Settings | File Templates.
 --%>
-
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<%@include file="include/header-product-management-dashboard.jsp"%>
-<style>
-  .cards-service {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-  }
-
-
-
-  .cards-service .card-service {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    height: 200px;
-    width: 200px;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    transition: 400ms;
-  }
-
-  .cards-service .card-service p.tip {
-    font-size: 1em;
-    font-weight: 700;
-  }
-
-  .cards-service .card-service p.second-text {
-    font-size: .7em;
-  }
-
-  .cards-service .card-service:hover {
-    transform: scale(1.2, 1.2);
-  }
-
-  .cards-service:hover > .card-service:not(:hover) {
-    filter: blur(10px);
-    transform: scale(0.9, 0.9);
-  }
-</style>
+<%@ include file="include/header-product-management-dashboard.jsp" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   <!-- Navbar -->
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -76,8 +17,6 @@
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
           </li>
-
-
           <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí dịch vụ</li>
         </ol>
         <h6 class="font-weight-bolder mb-0">Quản lí dịch vụ</h6>
@@ -203,46 +142,154 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h4 style="font-family: Calibri;" class="text-center"> <i class="fa-solid fa-calendar-days fa-flip fa-xl" style="color: #2008d9;"></i> Quản lí dịch vụ <i class="fa-solid fa-calendar-days fa-flip fa-xl" style="color: #2008d9;"></i></h4>
+            <h6>Bảng yêu cầu dịch vụ mới (Trang ${page}/${maxPage})</h6>
 
           </div>
-          <div class="card-body px-0 pt-0 pb-2 ">
-            <div class="container">
-              <div class="cards-service row mb-5 ">
-                <a href="service-management" class="card-service red bg-secondary col-md-4">
-                  <p class="tip" >Dịch vụ đang chờ</p>
-                  <p class="second-text">Nhấp để xem</p>
-                </a>
-                <a href="service-canceled" class="card-service blue bg-danger col-md-4">
-                  <p class="tip">Dịch vụ bị hủy</p>
-                  <p class="second-text">Nhấp để xem</p>
-                </a>
-                <a href="service-accepted" class="card-service yellow bg-primary col-md-4">
-                  <p class="tip">Dịch vụ đang phục vụ</p>
-                  <p class="second-text">Nhấp để xem</p>
-                </a>
-                <a href="service-success" class="card-service green bg-success col-md-4">
-                  <p class="tip">Dịch vụ thành công</p>
-                  <p class="second-text">Nhấp để xem</p>
-                </a>
-                <a href="service-fail" class="card-service green bg-dark col-md-4">
-                  <p class="tip">Dịch vụ thất bại</p>
-                  <p class="second-text">Nhấp để xem</p>
-                </a>
-              </div>
-            </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                <tr>
+                  <%--                  id,user_id, user_description,create_date,title--%>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                    ID
+                  </th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-start">
+                    User Id
+                  </th>
+                  <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                    Tiêu đề
+                  </th>
+                  <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
+                    Trạng thái
+                  </th>
+                  <th class="text-secondary opacity-7"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${serviceFailList}" var="s">
+
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">${s.id}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">${s.userId}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">${s.title}</p>
+
+                    </td>
+                    <td class="align-middle text-start text-sm">
+                      <span class="badge badge-sm bg-gradient-dark ">Đã hoàn trả</span>
+                    </td>
+                    <td class="align-middle">
+
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                              data-bs-target="#${s.id}">
+                        Xem chi tiết
+                      </button>
+
+                      <!-- Modal -->
+                      <div class="modal modal-lg fade" id="${s.id}" data-bs-backdrop="static"
+                           data-bs-keyboard="false" tabindex="-1"
+                           aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Duyệt
+                                đơn ${s.id}</h1>
+                              <button type="button" class="btn-close"
+                                      data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <%--                              Nội dungn yêu cầu--%>
+                              <div>
+                                <h4>Nội dung yêu cầu</h4>
+                                <textarea class="form-control" style="width: 100%"
+                                          name=""  cols="10"
+                                          rows="10"
+                                          readonly> ${s.userDescription.trim()}</textarea>
+                              </div>
+                                <%--Phản hồi yêu cầu--%>
+                              <br>
+                              <div>
+                                <h4>Phản hồi dịch vụ</h4>
+                                <textarea class="form-control" style="width: 100%"
+                                          name=""  cols="10"
+                                          rows="10"
+                                          readonly> ${s.employeeDescription.trim()}</textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger"
+                                      data-bs-dismiss="modal">Đóng
+                              </button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
 
 
+                </c:forEach>
 
-            <div class="mx-5 mb-2">
-              <a href="product-management"><i class="fa-solid fa-arrow-left-long fa-2xl" style="color: #2e2bd4;"></i> Quay lại quản lí sản phẩm</a>
+                </tbody>
+              </table>
+              <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                <ul class="pagination">
+
+                  <c:if test="${page>1}">
+
+                    <li class="page-item">
+                      <a class="page-link" href="service-fail?page=${page-1}"
+                         aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+
+                  </c:if>
+
+                  <c:forEach var="i" begin="${page-1}" end="${page+1}">
+                    <c:if test="${i>=1&&i<=maxPage}">
+                      <li class="page-item"><a class="page-link"
+                                               href="service-fail?page=${i}">${i}</a></li>
+                    </c:if>
+
+                  </c:forEach>
+
+
+                  <c:if test="${page<maxPage}">
+                    <li class="page-item">
+
+                      <a class="page-link" href="service-fail?page=${page+1}"
+                         aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </c:if>
+
+                </ul>
+              </nav>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-  </div>
 
-  <%@include file="include/footer-dashboard.jsp"%>
-
+    <%@ include file="include/footer-dashboard.jsp" %>
