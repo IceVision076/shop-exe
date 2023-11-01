@@ -227,9 +227,10 @@
                                                             <div>
                                                                 <h4>Phản hồi dịch vụ</h4>
                                                                 <form class="row g-3 needs-validation p-4" novalidate
-                                                                      action="service-receive"
+                                                                      action="service-done"
                                                                       method="post">
                                                                     <input type="hidden" value="${s.id}" name="id">
+                                                                    <input type="hidden" value="${page}" name="page">
                                                                     <div class="col-12">
                                                                         <label for="employeeDescription" class="form-label">
                                                                             Phản hồi
@@ -243,11 +244,22 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                        <%--                        Chi phí phát sinh--%>
+                                                                    <div class="col-12">
+                                                                        <label for="price" class="form-label">Chi phí phát sinh(Nếu có)
+                                                                        </label>
+                                                                        <div class="input-group has-validation">
+                                                                            <input type="number" class="form-control" id="price" name="price" placeholder="Nhập chi phí phát sinh" >
+                                                                            <div class="invalid-feedback">
+                                                                                Vui lòng điền giá hợp lệ
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="col-12">
                                                                         <label for="status" class="form-label">Trạng thái</label>
                                                                         <select class="form-select" name="status" id="status">
-                                                                            <option value="2">Đồng ý</option>
-                                                                            <option value="0">Không nhận</option>
+                                                                            <option value="4">Thành công</option>
+                                                                            <option value="3">Thất bại</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-12">

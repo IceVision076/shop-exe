@@ -273,6 +273,55 @@ public class ServiceResposiory {
         }
 
     }
+    public static void updateSuccess(ServiceTracking serviceTracking) {
+        try {
+            String query = "select * from ServiceTracking\n" +
+                    "update ServiceTracking\n" +
+                    "set employee_description=?,\n" +
+                    "    delivery_date=?,\n" +
+                    "    price=price+?,\n" +
+                    "    status=?\n" +
+                    "where id=?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,serviceTracking.getEmployeeDescription());
+            preparedStatement.setObject(2,serviceTracking.getDeliveryDate());
+            preparedStatement.setDouble(3,serviceTracking.getPrice());
+            preparedStatement.setString(4,serviceTracking.getStatus()+"");
+            preparedStatement.setString(5,serviceTracking.getId());
+            preparedStatement.executeUpdate();
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void updateFail(ServiceTracking serviceTracking) {
+        try {
+            String query = "select * from ServiceTracking\n" +
+                    "update ServiceTracking\n" +
+                    "set employee_description=?,\n" +
+                    "    delivery_date=?,\n" +
+                    "    status=?\n" +
+                    "where id=?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,serviceTracking.getEmployeeDescription());
+            preparedStatement.setObject(2,serviceTracking.getDeliveryDate());
+            preparedStatement.setString(3,serviceTracking.getStatus()+"");
+            preparedStatement.setString(4,serviceTracking.getId());
+            preparedStatement.executeUpdate();
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public static void main(String[] args) {
       serviceFailPage(1).stream().forEach(System.out::println);

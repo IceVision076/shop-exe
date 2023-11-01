@@ -212,23 +212,23 @@
               <div class="cards-service row mb-5 ">
                 <a href="service-management" class="card-service red bg-secondary col-md-4">
                   <p class="tip" >Dịch vụ đang chờ</p>
-                  <p class="second-text">Lorem Ipsum</p>
+                  <p class="second-text">Nhấp để xem</p>
                 </a>
                 <a href="service-canceled" class="card-service blue bg-danger col-md-4">
                   <p class="tip">Dịch vụ bị hủy</p>
-                  <p class="second-text">Lorem Ipsum</p>
+                  <p class="second-text">Nhấp để xem</p>
                 </a>
                 <a href="service-accepted" class="card-service yellow bg-primary col-md-4">
                   <p class="tip">Dịch vụ đang phục vụ</p>
-                  <p class="second-text">Lorem Ipsum</p>
+                  <p class="second-text">Nhấp để xem</p>
                 </a>
                 <a href="service-success" class="card-service green bg-success col-md-4">
                   <p class="tip">Dịch vụ thành công</p>
-                  <p class="second-text">Lorem Ipsum</p>
+                  <p class="second-text">Nhấp để xem</p>
                 </a>
                 <a href="service-fail" class="card-service green bg-dark col-md-4">
                   <p class="tip">Dịch vụ thất bại</p>
-                  <p class="second-text">Lorem Ipsum</p>
+                  <p class="second-text">Nhấp để xem</p>
                 </a>
               </div>
             </div>

@@ -191,14 +191,14 @@
 
                     </td>
                     <td class="align-middle text-start text-sm">
-                      <span class="badge badge-sm bg-gradient-danger ">Đang chờ duyệt</span>
+                      <span class="badge badge-sm bg-gradient-success ">Thành công</span>
                     </td>
                     <td class="align-middle">
 
                       <!-- Button trigger modal -->
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                               data-bs-target="#${s.id}">
-                        Duyệt đơn
+                        Xem chi tiết
                       </button>
 
                       <!-- Modal -->
@@ -218,7 +218,7 @@
                               <div>
                                 <h4>Nội dung yêu cầu</h4>
                                 <textarea class="form-control" style="width: 100%"
-                                          name="" id="" cols="10"
+                                          name=""  cols="10"
                                           rows="10"
                                           readonly> ${s.userDescription.trim()}</textarea>
                               </div>
@@ -226,37 +226,11 @@
                               <br>
                               <div>
                                 <h4>Phản hồi dịch vụ</h4>
-                                <form class="row g-3 needs-validation p-4" novalidate
-                                      action="service-receive"
-                                      method="post">
-                                  <input type="hidden" value="${s.id}" name="id">
-                                  <div class="col-12">
-                                    <label for="employeeDescription" class="form-label">
-                                      Phản hồi
-                                      <span class="text-danger"> *</span></label>
-                                    <div class="input-group has-validation">
-                                    <textarea cols="10" rows="10" class="form-control" id="employeeDescription"
-                                              name="employeeDescription"
-                                              placeholder="Nhập phản hồi yêu cầu dịch vụ" required></textarea>
-                                      <div class="invalid-feedback">
-                                        Vui lòng điền phản hồi
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-12">
-                                    <label for="status" class="form-label">Trạng thái</label>
-                                    <select class="form-select" name="status" id="status">
-                                      <option value="2">Đồng ý</option>
-                                      <option value="0">Không nhận</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-12">
-                                    <button onclick="run()" class="btn btn-primary"
-                                            type="submit">Xác Nhận <i
-                                            class="fa-solid fa-rocket fa-bounce fa-lg"
-                                            style="color: #f2df07;"></i></button>
-                                  </div>
-                                </form>
+
+                                <textarea class="form-control" style="width: 100%"
+                                          name="" cols="10"
+                                          rows="10"
+                                          readonly> ${s.employeeDescription.trim()}</textarea>
                               </div>
                             </div>
                             <div class="modal-footer">

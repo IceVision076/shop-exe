@@ -175,7 +175,7 @@
 
 
                         <form class="row g-3 needs-validation p-4" novalidate action="employee-add-account"
-                              method="post"     >
+                              method="post">
                             <%--                            User(id, userName, passWord, fullName, email, role, phone, status, avatarImg, address);--%>
                             <div class="col-12">
                                 <label for="userName" class="form-label">Username<span
@@ -195,9 +195,23 @@
                                 <label for="passWord" class="form-label">Mật khẩu<span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,50}$"
+                                    <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,50}$"
                                            class="form-control" placeholder="Nhập mật khẩu"
                                            id="passWord" name="passWord"
+                                           required>
+                                    <div class="invalid-feedback">
+                                        Mật khẩu phải chứa ít nhất một chữ cái in hoa, một chữ cái in thường, một số và
+                                        có độ dài từ 7 đến 50 kí tự
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="rePassWord" class="form-label">Nhập lại mật khẩu<span
+                                        class="text-danger"> *</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,50}$"
+                                           class="form-control" placeholder="Nhập lại mật khẩu"
+                                           id="rePassWord" name="rePassWord"
                                            required>
                                     <div class="invalid-feedback">
                                         Mật khẩu phải chứa ít nhất một chữ cái in hoa, một chữ cái in thường, một số và
@@ -210,7 +224,8 @@
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
                                     <input type="text" class="form-control" pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
-fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$" placeholder="Nhập tên nhân viên"
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
+                                           placeholder="Nhập tên nhân viên"
                                            id="fullName" name="fullName"
                                            required>
                                     <div class="invalid-feedback">
@@ -239,7 +254,7 @@ fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒ�
                                            id="phone" name="phone"
                                            required>
                                     <div class="invalid-feedback">
-                                        Email không được bỏ trống
+                                        Điện thoại từ 10 đến 11 số
                                     </div>
                                 </div>
                             </div>
@@ -257,13 +272,48 @@ fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒ�
                                     </div>
                                 </div>
                             </div>
+                            <c:if test="${error eq '1'}">
+                            <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center mt-2"
+                                 style="height: 50px;border-radius: 10px">
+                                <b>Mật khẩu nhập lại không khớp vui lòng nhập lại</b>
+                            </div>
+                            </c:if>
+
+                            <c:if test="${error eq '2'}">
+                            <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center mt-2"
+                                 style="height: 50px;border-radius: 10px">
+                                <b>Email đã tồn tại vui lòng chọn email khác</b>
+                            </div>
+                            </c:if>
+
+                            <c:if test="${error eq '3'}">
+                            <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center mt-2"
+                                 style="height: 50px;border-radius: 10px">
+                                <b>Điện thoại đã tồn tại vui lòng chọn số điện thoại khác</b>
+                            </div>
+                            </c:if>
+                            <c:if test="${error eq '4'}">
+                            <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center mt-2"
+                                 style="height: 50px;border-radius: 10px">
+                                <b>Username đã tồn tại vui lòng chọn username khác</b>
+                            </div>
+                            </c:if>
+                            <c:if test="${done eq '1'}">
+                            <div class="bg-success text-white text-center d-flex justify-content-center align-items-center mt-2"
+                                 style="height: 50px;border-radius: 10px">
+                                <b>Thêm thành công</b>
+                            </div>
+                            </c:if>
+
+
                             <button class="btn btn-primary" type="submit">Lưu <i
                                     class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
                     </div>
                     </form>
+
                     <div class="mx-5 mb-2">
-                        <a href="product-management"><i class="fa-solid fa-arrow-left-long fa-2xl"
-                                                        style="color: #2e2bd4;"></i> Quay lại quản lí sản phẩm</a>
+                        <a href="employee-account-management"><i class="fa-solid fa-arrow-left-long fa-2xl"
+                                                        style="color: #2e2bd4;"></i> Quay lại quản lí nhân viên</a>
                     </div>
                 </div>
 

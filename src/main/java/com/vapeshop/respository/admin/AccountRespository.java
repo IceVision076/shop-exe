@@ -44,6 +44,7 @@ public class AccountRespository {
         }
         return list;
     }
+
     public static int getEmployeeAmount() {
         int amount = 0;
         try {
@@ -198,10 +199,61 @@ public class AccountRespository {
         }
         return newID;
     }
+
+    public static boolean checkEmailExist(String email){
+        boolean check=false;
+        try {
+            String query="select email from UserInfo\n" +
+                    "where email=?";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setString(1,email);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if (resultSet.next()) check=true;
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return check;
+    }
+    public static boolean checkPhoneExist(String phone){
+        boolean check=false;
+        try {
+            String query="select phone from UserInfo\n" +
+                    "where phone=?";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setString(1,phone);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if (resultSet.next()) check=true;
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return check;
+    }
+    public static boolean checkUsernameExist(String phone){
+        boolean check=false;
+        try {
+            String query="select username from UserInfo\n" +
+                    "where username=?";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setString(1,phone);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if (resultSet.next()) check=true;
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return check;
+    }
+
     public static void main(String[] args) {
 //        getCustomerList(1).stream().forEach(System.out::println);
 //        System.out.println(getCustomerAmount());
-        System.out.println(getNewUserId());
+//        System.out.println(getNewUserId());
+        System.out.println(checkEmailExist("Leo1@gmail.com"));
     }
 
 

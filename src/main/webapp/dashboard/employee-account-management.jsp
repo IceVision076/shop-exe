@@ -258,7 +258,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Bảng quản lí nhân viên (Trang ${page}/${maxPage})</h6>
-                        <a href="product-create" class="fa-solid fa-user-plus fa-xl d-flex flex-row-reverse"
+                        <a href="employee-add-account" class="fa-solid fa-user-plus fa-xl d-flex flex-row-reverse"
                            style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm tài khoản nhân viên</span>
                         </a>
 
@@ -270,7 +270,7 @@
                                 <tr>
                                     <th>Ảnh đại diện</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tên khách hàng
+                                        Tên nhân viên
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Tên đăng nhập
