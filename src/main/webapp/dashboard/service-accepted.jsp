@@ -232,13 +232,15 @@
                                                                     <input type="hidden" value="${s.id}" name="id">
                                                                     <input type="hidden" value="${page}" name="page">
                                                                     <div class="col-12">
-                                                                        <label for="employeeDescription" class="form-label">
+                                                                        <label for="employeeDescription"
+                                                                               class="form-label">
                                                                             Phản hồi
                                                                             <span class="text-danger"> *</span></label>
                                                                         <div class="input-group has-validation">
                                     <textarea cols="10" rows="10" class="form-control" id="employeeDescription"
                                               name="employeeDescription"
-                                              placeholder="Nhập phản hồi yêu cầu dịch vụ" required></textarea>
+                                              placeholder="Nhập phản hồi yêu cầu dịch vụ"
+                                              required>${s.employeeDescription.trim()}</textarea>
                                                                             <div class="invalid-feedback">
                                                                                 Vui lòng điền phản hồi
                                                                             </div>
@@ -246,18 +248,23 @@
                                                                     </div>
                                                                         <%--                        Chi phí phát sinh--%>
                                                                     <div class="col-12">
-                                                                        <label for="price" class="form-label">Chi phí phát sinh(Nếu có)
+                                                                        <label for="price" class="form-label">Chi phí
+                                                                            phát sinh(Nếu có) / Chi phí hiện tại ${s.price} vnđ
                                                                         </label>
                                                                         <div class="input-group has-validation">
-                                                                            <input type="number" class="form-control" id="price" name="price" placeholder="Nhập chi phí phát sinh" >
+                                                                            <input type="number" class="form-control"
+                                                                                   id="price" name="price"
+                                                                                   placeholder="Nhập chi phí phát sinh">
                                                                             <div class="invalid-feedback">
                                                                                 Vui lòng điền giá hợp lệ
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-12">
-                                                                        <label for="status" class="form-label">Trạng thái</label>
-                                                                        <select class="form-select" name="status" id="status">
+                                                                        <label for="status" class="form-label">Trạng
+                                                                            thái</label>
+                                                                        <select class="form-select" name="status"
+                                                                                id="status">
                                                                             <option value="4">Thành công</option>
                                                                             <option value="3">Thất bại</option>
                                                                         </select>

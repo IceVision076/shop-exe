@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -160,6 +161,12 @@
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
                                         Tiêu đề
                                     </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Ngày tạo đơn
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Ngày hủy
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
                                         Trạng thái
                                     </th>
@@ -190,6 +197,15 @@
                                             <p class="text-xs font-weight-bold mb-0">${s.title}</p>
 
                                         </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">${s.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</p>
+
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">${s.deliveryDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</p>
+
+                                        </td>
+
                                         <td class="align-middle text-start text-sm">
                                             <span class="badge badge-sm bg-gradient-danger ">Đã hủy</span>
                                         </td>
@@ -198,7 +214,7 @@
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                     data-bs-target="#${s.id}">
-                                                Duyệt đơn
+                                                Xem chi tiết
                                             </button>
 
                                             <!-- Modal -->
@@ -230,7 +246,7 @@
                                                                           name="" cols="10"
                                                                           rows="10"
                                                                           readonly> ${s.employeeDescription.trim()}</textarea>
-                                                             
+
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

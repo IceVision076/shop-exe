@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -160,6 +161,9 @@
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
                                         Tiêu đề
                                     </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Ngày tạo đơn
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
                                         Trạng thái
                                     </th>
@@ -189,6 +193,10 @@
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">${s.title}</p>
 
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                    ${s.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</p>
                                         </td>
                                         <td class="align-middle text-start text-sm">
                                             <span class="badge badge-sm bg-gradient-danger ">Đang chờ duyệt</span>
@@ -231,7 +239,8 @@
                                                                       method="post">
                                                                     <input type="hidden" value="${s.id}" name="id">
                                                                     <div class="col-12">
-                                                                        <label for="employeeDescription" class="form-label">
+                                                                        <label for="employeeDescription"
+                                                                               class="form-label">
                                                                             Phản hồi
                                                                             <span class="text-danger"> *</span></label>
                                                                         <div class="input-group has-validation">
@@ -243,9 +252,30 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
                                                                     <div class="col-12">
-                                                                        <label for="status" class="form-label">Trạng thái</label>
-                                                                        <select class="form-select" name="status" id="status">
+                                                                        <label for="price" class="form-label">Giá dự
+                                                                            kiến<span
+                                                                                    class="text-danger"> *</span></label>
+                                                                        <div class="input-group has-validation">
+                                                                            <input type="number"
+                                                                                   min="0"
+                                                                                   max="999999999"
+                                                                                   class="form-control"
+                                                                                   placeholder="Nhập giá dự kiến"
+                                                                                   id="price" name="price"
+                                                                                   required>
+                                                                            <div class="invalid-feedback">
+                                                                                Vui lòng nhập giá phù hợp (0-999999999)
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-12">
+                                                                        <label for="status" class="form-label">Trạng
+                                                                            thái</label>
+                                                                        <select class="form-select" name="status"
+                                                                                id="status">
                                                                             <option value="2">Đồng ý</option>
                                                                             <option value="0">Không nhận</option>
                                                                         </select>

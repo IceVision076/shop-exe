@@ -24,7 +24,10 @@ public class ServiceDoneServlet extends HttpServlet {
         double price = 0;
         String employeeDescription=request.getParameter("employeeDescription");
         char status=request.getParameter("status").charAt(0);
-        if(request.getParameter("price")!=null)
+        String priceString=request.getParameter("price");
+
+        System.out.println(priceString.isEmpty());
+        if(!request.getParameter("price").isEmpty())
             price= Double.parseDouble(request.getParameter("price"));
         ServiceTracking serviceTracking=new ServiceTracking();
         serviceTracking.setPrice(price);
