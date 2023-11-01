@@ -5,37 +5,29 @@
   <div class="row">
 
     <div class="col-lg-3">
-      <h1 class="h2 pb-4">Categories</h1>
+      <h1 class="h2 pb-4">Your Choice</h1>
       <ul class="list-unstyled templatemo-accordion">
         <li class="pb-3">
           <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-            Gender
+            Category
             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
           </a>
           <ul class="collapse show list-unstyled pl-3">
-            <li><a class="text-decoration-none" href="#">Men</a></li>
-            <li><a class="text-decoration-none" href="#">Women</a></li>
+            <c:forEach items="${listBrand}" var="listbrand">
+              <li><a class="text-decoration-none" href="ProductServlet?filterProduct=${listbrand.product.brand}">${listbrand.product.brand}</a></li>
+            </c:forEach>
           </ul>
         </li>
         <li class="pb-3">
           <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-            Sale
+            Price
             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
           </a>
           <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-            <li><a class="text-decoration-none" href="#">Sport</a></li>
-            <li><a class="text-decoration-none" href="#">Luxury</a></li>
-          </ul>
-        </li>
-        <li class="pb-3">
-          <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-            Product
-            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-          </a>
-          <ul id="collapseThree" class="collapse list-unstyled pl-3">
-            <li><a class="text-decoration-none" href="#">Bag</a></li>
-            <li><a class="text-decoration-none" href="#">Sweather</a></li>
-            <li><a class="text-decoration-none" href="#">Sunglass</a></li>
+            <li><a class="text-decoration-none" href="ProductServlet?filterProduct=rangePrice&priceFrom=0&priceTo=100000">Less than 100000 <i class="text-warning">VND</i></a></li>
+            <li><a class="text-decoration-none" href="ProductServlet?filterProduct=rangePrice&priceFrom=100000&priceTo=200000">100000 - 200000 <i class="text-warning">VND</i></a></li>
+            <li><a class="text-decoration-none" href="ProductServlet?filterProduct=rangePrice&priceFrom=200000&priceTo=500000">200000 -500000 <i class="text-warning">VND</i></a></li>
+            <li><a class="text-decoration-none" href="ProductServlet?filterProduct=rangePrice&priceFrom=500000&priceTo=10000000">More than 500000 <i class="text-warning">VND</i></a></li>
           </ul>
         </li>
       </ul>
@@ -43,25 +35,13 @@
 
     <div class="col-lg-9">
       <div class="row">
-        <div class="col-md-6">
-          <ul class="list-inline shop-top-menu pb-3 pt-1">
-            <li class="list-inline-item">
-              <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-            </li>
-          </ul>
-        </div>
         <div class="col-md-6 pb-4">
           <div class="d-flex">
-            <select class="form-control">
+            <select class="form-control" id="filterProduct" onchange="sendRequest()">
               <option>Featured</option>
-              <option>A to Z</option>
-              <option>Item</option>
+              <option  value="sortAlphabet">A to Z</option>
+              <option  value="priceDecrease">High -> Low</option>
+              <option  value="priceIncrease">Low -> High</option>
             </select>
           </div>
         </div>
@@ -112,31 +92,31 @@
 
       <div div="row">
         <ul class="pagination pagination-lg justify-content-end " >
-          <c:if test="${tag>1}">
-            <li class="page-item ">
-              <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="ProductServlet?index=${tag-1}" tabindex="-1">Previous</a>
-            </li>
-          </c:if>
-          <c:if test="${endPage >3}">
-            <c:set var="beginIndex" value="${tag - 1}" />
-            <c:set var="endIndex" value="${tag + 1}" />
-            <c:if test="${beginIndex < 1}">
-              <c:set var="beginIndex" value="1" />
-            </c:if>
-            <c:if test="${endIndex > endPage}">
-              <c:set var="endIndex" value="${endPage}" />
-            </c:if>
-            <c:forEach begin="${beginIndex}" end="${endIndex}" var="i" step="1">
-              <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm  text-dark  ${tag == i?"active":""}" href="ProductServlet?index=${i}">${i}</a>
+            <c:if test="${tag>1}">
+              <li class="page-item ">
+                <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="${url}index=${tag-1}" tabindex="-1">Previous</a>
               </li>
-            </c:forEach>
-          </c:if>
-          <c:if test="${tag<endPage}">
-            <li class="page-item">
-              <a class="page-link rounded-0 shadow-sm  text-dark" href="ProductServlet?index=${tag+1}">Next</a>
-            </li>
-          </c:if>
+            </c:if>
+            <c:if test="${endPage >3}">
+              <c:set var="beginIndex" value="${tag - 1}" />
+              <c:set var="endIndex" value="${tag + 1}" />
+              <c:if test="${beginIndex < 1}">
+                <c:set var="beginIndex" value="1" />
+              </c:if>
+              <c:if test="${endIndex > endPage}">
+                <c:set var="endIndex" value="${endPage}" />
+              </c:if>
+              <c:forEach begin="${beginIndex}" end="${endIndex}" var="i" step="1">
+                <li class="page-item">
+                  <a class="page-link rounded-0 mr-3 shadow-sm  text-dark  ${tag == i?"active":""}" href="${url}index=${i}">${i}</a>
+                </li>
+              </c:forEach>
+            </c:if>
+            <c:if test="${tag<endPage}">
+              <li class="page-item">
+                <a class="page-link rounded-0 shadow-sm  text-dark" href="${url}index=${tag+1}">Next</a>
+              </li>
+            </c:if>
         </ul>
       </div>
     </div>
@@ -249,3 +229,14 @@
 </section>
 <!--End Brands-->
 <%@include file="include/product/Product-Footer.jsp"%>
+<script>
+  function sendRequest() {
+// Get the value of the option.
+    const filterProduct = document.getElementById("filterProduct").value;
+
+// Create a new request with the necessary values.
+
+    location.replace("ProductServlet?filterProduct=" + filterProduct)
+// Send the request to the servlet.
+  }
+</script>
