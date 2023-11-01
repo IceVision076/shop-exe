@@ -4,13 +4,14 @@ import com.vapeshop.respository.employee.ProductRespository;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order { //gio hang = cart
     private String orderId; // id cua order
     private String userId;
-    private LocalDate createDate;
+    private LocalDateTime createDate;
     private char status;
     private String voucherId;
     private List<Items> cart; //list cac item
@@ -23,7 +24,7 @@ public class Order { //gio hang = cart
     }
     private String orderedId; //id nay dung de fetch lai lich su don hang
 
-    public Order(String orderId, String userId, LocalDate createDate, char status, String voucherId, List<Items> cart, DecimalFormat formatter, int paymentType, double discountPercent, String discountCode) {
+    public Order(String orderId, String userId, LocalDateTime createDate, char status, String voucherId, List<Items> cart, DecimalFormat formatter, int paymentType, double discountPercent, String discountCode) {
         this.orderId = orderId;
         this.userId = userId;
         this.createDate = createDate;
@@ -54,11 +55,11 @@ public class Order { //gio hang = cart
         this.userId = userId;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
