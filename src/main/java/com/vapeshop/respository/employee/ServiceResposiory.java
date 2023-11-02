@@ -116,7 +116,7 @@ public class ServiceResposiory {
     public static ArrayList<ServiceTracking> serviceSuccessPage(int page) {
         ArrayList<ServiceTracking> list = null;
         try {
-            String query = "select id,user_id, user_description,create_date,status,title\n" +
+            String query = "select id,user_id, user_description,create_date,status,title,delivery_date\n" +
                     "from ServiceTracking\n" +
                     "where status = '4'\n" +
                     "order by create_date asc\n" +
@@ -134,7 +134,9 @@ public class ServiceResposiory {
                 LocalDateTime createDate = resultSet.getObject(4, LocalDateTime.class);
                 char status = resultSet.getString(5).charAt(0);
                 String title = resultSet.getString(6);
+                LocalDateTime deliveryDate=resultSet.getObject("delivery_date",LocalDateTime.class);
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
+                serviceTracking.setDeliveryDate(deliveryDate);
                 list.add(serviceTracking);
             }
             connection.close();
@@ -146,7 +148,7 @@ public class ServiceResposiory {
     public static ArrayList<ServiceTracking> serviceFailPage(int page) {
         ArrayList<ServiceTracking> list = null;
         try {
-            String query = "select id,user_id, user_description,create_date,status,title\n" +
+            String query = "select id,user_id, user_description,create_date,status,title,delivery_date\n" +
                     "from ServiceTracking\n" +
                     "where status = '3'\n" +
                     "order by create_date asc\n" +
@@ -165,6 +167,8 @@ public class ServiceResposiory {
                 char status = resultSet.getString(5).charAt(0);
                 String title = resultSet.getString(6);
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
+                LocalDateTime deliveryDate=resultSet.getObject("delivery_date",LocalDateTime.class);
+                serviceTracking.setDeliveryDate(deliveryDate);
                 list.add(serviceTracking);
             }
             connection.close();
@@ -314,8 +318,7 @@ public class ServiceResposiory {
     }
     public static void updateFail(ServiceTracking serviceTracking) {
         try {
-            String query = "select * from ServiceTracking\n" +
-                    "update ServiceTracking\n" +
+            String query = "update ServiceTracking\n" +
                     "set employee_description=?,\n" +
                     "    delivery_date=?,\n" +
                     "    status=?\n" +
@@ -324,7 +327,7 @@ public class ServiceResposiory {
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,serviceTracking.getEmployeeDescription());
-            preparedStatement.setObject(2,serviceTracking.getDeliveryDate());
+            preparedStatement.setObject(2,LocalDateTime.now());
             preparedStatement.setString(3,serviceTracking.getStatus()+"");
             preparedStatement.setString(4,serviceTracking.getId());
             preparedStatement.executeUpdate();

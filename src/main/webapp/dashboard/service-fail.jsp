@@ -8,6 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   <!-- Navbar -->
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -160,6 +163,12 @@
                   <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
                     Tiêu đề
                   </th>
+                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                      Ngày tạo đơn
+                    </th>
+                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                      Ngày giao
+                    </th>
                   <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
                     Trạng thái
                   </th>
@@ -190,6 +199,17 @@
                       <p class="text-xs font-weight-bold mb-0">${s.title}</p>
 
                     </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">
+                          ${s.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
+
+
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">
+                          ${s.deliveryDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
+
+                    </td>
                     <td class="align-middle text-start text-sm">
                       <span class="badge badge-sm bg-gradient-dark ">Đã hoàn trả</span>
                     </td>
@@ -214,7 +234,7 @@
                                       data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <%--                              Nội dungn yêu cầu--%>
+                                <%--                              Nội dung yêu cầu--%>
                               <div>
                                 <h4>Nội dung yêu cầu</h4>
                                 <textarea class="form-control" style="width: 100%"
