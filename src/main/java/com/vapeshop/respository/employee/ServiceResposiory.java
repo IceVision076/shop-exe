@@ -335,6 +335,82 @@ public class ServiceResposiory {
 
     }
 
+     public static int getAmountWaiting(){
+        int amount =0;
+        try{
+            String query="select count(1) from ServiceTracking\n" +
+                    "where status ='1'";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            if(resultSet.next())amount=resultSet.getInt(1);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return amount;
+     }
+
+    public static int getAmountCancel(){
+        int amount =0;
+        try{
+            String query="select count(1) from ServiceTracking\n" +
+                    "where status ='0'";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            if(resultSet.next())amount=resultSet.getInt(1);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+    public static int getAmountAccept(){
+        int amount =0;
+        try{
+            String query="select count(1) from ServiceTracking\n" +
+                    "where status ='2'";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            if(resultSet.next())amount=resultSet.getInt(1);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+    public static int getAmountFail(){
+        int amount =0;
+        try{
+            String query="select count(1) from ServiceTracking\n" +
+                    "where status ='3'";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            if(resultSet.next())amount=resultSet.getInt(1);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+    public static int getAmountSuccess(){
+        int amount =0;
+        try{
+            String query="select count(1) from ServiceTracking\n" +
+                    "where status ='4'";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            if(resultSet.next())amount=resultSet.getInt(1);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return amount;
+    }
 
     public static void main(String[] args) {
       serviceFailPage(1).stream().forEach(System.out::println);

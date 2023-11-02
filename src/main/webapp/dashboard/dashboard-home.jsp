@@ -255,7 +255,7 @@
                             </div>
                             <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                                 <div class="bg-success border-radius-lg  h-100">
-                                    <img class="border-radius-lg h-100" src="dashboard/assets/img/page-weather.jpg"
+                                    <img class="border-radius-lg h-100" src="https://img1.kienthucvui.vn/uploads/2019/10/09/anh-bau-troi-dep-hoang-hon-huyen-bi_042052103.jpg"
                                          style="width: 100%;" alt="waves">
                                     <%--                                    <div class="position-relative d-flex align-items-center justify-content-center h-100">--%>
                                     <%--                                        <img class="w-100 position-relative z-index-2 pt-4" src="dashboard/assets/img/page-weather.jpg" alt="rocket">--%>
