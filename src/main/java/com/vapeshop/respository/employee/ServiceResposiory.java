@@ -46,7 +46,7 @@ public class ServiceResposiory {
     public static ArrayList<ServiceTracking> serviceAccepetedPage(int page) {
         ArrayList<ServiceTracking> list = null;
         try {
-            String query = "      select id,user_id, user_description,create_date,status,title,employee_description,price\n" +
+            String query = "      select id,user_id, user_description,create_date,status,title,employee_description,price,estimated_delivery_date\n" +
                     "                    from ServiceTracking\n" +
                     "                    where status = '2'\n" +
                     "                    order by create_date asc\n" +
@@ -66,9 +66,10 @@ public class ServiceResposiory {
                 String title = resultSet.getString(6);
                 String employeeDescription=resultSet.getString(7);
                 double price =resultSet.getDouble(8);
-
+                LocalDateTime estimatedDeliveryDate=resultSet.getObject("estimated_delivery_date",LocalDateTime.class);
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
                 serviceTracking.setPrice(price);
+                serviceTracking.setEstimatedDeliveryDate(estimatedDeliveryDate);
                 serviceTracking.setEmployeeDescription(employeeDescription);
                 list.add(serviceTracking);
             }
@@ -266,7 +267,7 @@ public class ServiceResposiory {
                     "SET employee_id=?,\n" +
                     "    employee_description=?,\n" +
                     "    price=?,\n" +
-                    "    delivery_date=?,\n" +
+                    "    estimated_delivery_date=?,\n" +
                     "    status=?\n" +
                     "where id = ?";
 
@@ -275,7 +276,7 @@ public class ServiceResposiory {
             preparedStatement.setString(1, employeeId);
             preparedStatement.setString(2, employeeDescription);
             preparedStatement.setDouble(3,price);
-            preparedStatement.setObject(4,LocalDateTime.now());
+            preparedStatement.setObject(4,LocalDateTime.now().plusDays(7));
             preparedStatement.setString(5, status+"");
             preparedStatement.setString(6,id);
             preparedStatement.executeUpdate();
@@ -413,6 +414,13 @@ public class ServiceResposiory {
     }
 
     public static void main(String[] args) {
-      serviceFailPage(1).stream().forEach(System.out::println);
+
+        System.out.println(LocalDateTime.now().plusDays(5).isBefore(LocalDateTime.now()));
+        LocalDateTime dl=LocalDateTime.now().plusDays(5);
+        LocalDateTime now=LocalDateTime.now();
+
+        System.out.println( dl.compareTo(now));
+
+
     }
 }
