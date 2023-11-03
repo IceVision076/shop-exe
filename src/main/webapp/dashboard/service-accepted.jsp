@@ -8,6 +8,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -160,6 +165,12 @@
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
                                         Tiêu đề
                                     </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Ngày tạo đơn
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                        Ngày giao dự kiến
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
                                         Trạng thái
                                     </th>
@@ -190,15 +201,32 @@
                                             <p class="text-xs font-weight-bold mb-0">${s.title}</p>
 
                                         </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                    ${s.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                    ${s.estimatedDeliveryDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
+                                        </td>
                                         <td class="align-middle text-start text-sm">
                                             <span class="badge badge-sm bg-gradient-primary ">Đang chờ hoàn thành</span>
+                                            <br>
+                                            <div class="text-danger">
+                                                <c:if test="${s.estimatedDeliveryDate.isBefore(LocalDateTime.now())}">
+                                                    Đang trễ tiến độ (${-s.estimatedDeliveryDate.compareTo(LocalDateTime.now())}) ngày
+                                                </c:if>
+                                                <c:if test="${!s.estimatedDeliveryDate.isBefore(LocalDateTime.now())}">
+                                                    Thời gian giao còn (${s.estimatedDeliveryDate.compareTo(LocalDateTime.now())}) ngày
+                                                </c:if>
+                                            </div>
                                         </td>
                                         <td class="align-middle">
 
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                     data-bs-target="#${s.id}">
-                                                Duyệt đơn
+                                                Thanh toán
                                             </button>
 
                                             <!-- Modal -->
@@ -249,14 +277,24 @@
                                                                         <%--                        Chi phí phát sinh--%>
                                                                     <div class="col-12">
                                                                         <label for="price" class="form-label">Chi phí
-                                                                            phát sinh(Nếu có) / Chi phí hiện tại ${s.price} vnđ
+                                                                            phát sinh(Nếu có) / Chi phí hiện
+                                                                            tại
+                                                                            <fmt:formatNumber type="number"
+                                                                                              maxFractionDigits="3"
+                                                                                              value="${s.price}">
+                                                                            </fmt:formatNumber> vnđ
                                                                         </label>
                                                                         <div class="input-group has-validation">
                                                                             <input type="number" class="form-control"
                                                                                    id="price" name="price"
+                                                                                   min="${-s.price}"
                                                                                    placeholder="Nhập chi phí phát sinh">
                                                                             <div class="invalid-feedback">
-                                                                                Vui lòng điền giá hợp lệ
+                                                                                Vui lòng điền giá hợp lệ (giảm tối đa
+                                                                                <fmt:formatNumber type="number"
+                                                                                                  maxFractionDigits="3"
+                                                                                                  value="${s.price}">
+                                                                                </fmt:formatNumber> vnđ)
                                                                             </div>
                                                                         </div>
                                                                     </div>
