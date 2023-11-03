@@ -467,11 +467,60 @@ public class ProductRespository {
         return amount;
     }
 
+    public static ArrayList<ImportProduct> getImportList(String productTypeId, int page) {
+        ArrayList<ImportProduct> list = null;
+        try {
+            String query = "select *\n" +
+                    "from ImportProduct\n" +
+                    "where product_type_id = ?\n" +
+                    "order by date_time desc \n" +
+                    " OFFSET (?-1)*10 ROWS\n" +
+                    "FETCH FIRST 10 ROWS ONLY";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            preparedStatement.setInt(2,page);
+            ResultSet rs = preparedStatement.executeQuery();
+            list=new ArrayList<>();
+            while (rs.next()) {
+                String lotId = rs.getString("lot_id");
+                String lotName = rs.getString("lot_name");
+
+                int quantity = rs.getInt("quantity");
+                LocalDateTime dateTime = rs.getObject("date_time", LocalDateTime.class);
+                ImportProduct importProduct = new ImportProduct(lotId, lotName, productTypeId, quantity, dateTime);
+                list.add(importProduct);
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+    public static int getImportProductTypeAmount(String productTypeId) {
+        int amount = 0;
+        try {
+            String query = "select count(1)\n" +
+                    "from ImportProduct\n" +
+                    "where product_type_id=? ";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) amount = rs.getInt(1);
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return amount;
+    }
 
 
     public static void main(String[] args) {
         System.out.println(LocalDateTime.now().toString());
-        //getProductTypePage("J00000006", 1).stream().forEach(System.out::println);
-//        System.out.println(getProductTypeRealAmount("A00000001A"));
     }
 }
