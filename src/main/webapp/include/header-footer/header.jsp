@@ -11,16 +11,15 @@
 <html lang="en">
 
 <head>
-    <title>Zay Shop eCommerce HTML CSS Template</title>
+    <title>vapeShop</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
+    <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
@@ -64,38 +63,62 @@
 
 <!-- Header -->
 <!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-    <a href="index.jsp" class="navbar-brand ms-lg-5">
-        <h1 class="navbar-brand text-success logo h1 align-self-center"><i class="bi bi-shop fs-1 text-primary me-3"></i>VapeShop</h1>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse d-flex justify-content-end " id="navbarCollapse">
-        <div class="navbar-nav ms-auto py-0 d-flex ">
-            <a href="index.jsp" class="nav-item nav-link active">Home</a>
-            <a href="about.jsp" class="nav-item nav-link">About</a>
-            <a href="service.jsp" class="nav-item nav-link">Service</a>
-            <a href="ProductServlet" class="nav-item nav-link">Product</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu m-0">
-                    <a href="testmonial.jsp" class="dropdown-item">Testimonial</a>
-                    <a href="blog.jsp" class="dropdown-item">Blog Grid</a>
-                    <a href="detail.jsp" class="dropdown-item">Blog Detail</a>
-                </div>
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <a class="navbar-brand text-success logo h1 align-self-center" href="Home" style="text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            VapeShop
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+            <div class="flex-fill ms-5">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ProductServlet">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="testmonial.jsp" class="dropdown-item">Testimonial</a>
+                                <a href="blog.jsp" class="dropdown-item">Blog Grid</a>
+                                <a href="detail.jsp" class="dropdown-item">Blog Detail</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <c:if test="${sessionScope.user==null}">
                 <a href="login.jsp" class="nav-item nav-link nav-contact bg-success text-white px-5 ms-lg-5">Log in <i class="bi bi-arrow-right"></i></a>
             </c:if>
             <c:if test="${sessionScope.user!=null}">
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle bg-primary text-white px-5 ms-lg-5" data-bs-toggle="dropdown">${sessionScope.user.userName}</a>
+<%--                    <a href="#" class="nav-link dropdown-toggle bg-primary text-white pe-5 ms-lg-5 justify-content-center" data-bs-toggle="dropdown">${sessionScope.user.userName}</a>--%>
+                                        <a class="nav-link dropdown-toggle position-relative text-decoration-none" data-bs-toggle="dropdown" href="#">
+                                                <img src="${sessionScope.user.avatarImg}" alt=""
+                                                     style="width: 50px;
+                                                     height: 50px;
+                                                     border-radius: 50%;
+                                                     object-fit: cover;">
+                                        </a>
                     <div class="dropdown-menu m-0">
                         <a href="update-profile" class="dropdown-item">Thông tin cá nhân</a>
-<%--                        <c:if test="${sessionScope.user.userRole.equals('admin')}">--%>
-<%--                            <a href="admin.jsp" class="dropdown-item">Admin</a>--%>
-<%--                        </c:if>--%>
+                            <%--                        <c:if test="${sessionScope.user.userRole.equals('admin')}">--%>
+                            <%--                            <a href="admin.jsp" class="dropdown-item">Admin</a>--%>
+                            <%--                        </c:if>--%>
 
                         <a href="cart.jsp" class="dropdown-item">Your cart</a>
                         <a href="getorderhistory" class="dropdown-item">History order</a>
@@ -107,4 +130,6 @@
     </div>
 </nav>
 <!-- Close Header -->
+
+
 

@@ -1,6 +1,24 @@
 /*
 Custom Css
 */
+/* Banner section */
 
+.banner-img {
+    width: 100% !important;
+    height: 500px!important;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .banner-img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .banner-img {
+        height: 200px;
+    }
+}
 
 

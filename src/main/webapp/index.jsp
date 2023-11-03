@@ -25,7 +25,7 @@
 
     <!-- Start Banner Hero -->
     <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
+        <ol class="carousel-indicators" hidden="hidden">
             <c:forEach items="${posterList}" var="imageUrl" varStatus="status">
                 <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="${status.index}" class="${status.index == 0 ? 'active' : ''}"></li>
             </c:forEach>
@@ -33,13 +33,7 @@
         <div class="carousel-inner">
             <c:forEach items="${posterList}" var="imageUrl" varStatus="status">
             <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-                <div class="container">
-                    <div class="row p-5">
-                            <div class="mx-auto col-md-12 col-lg-12 order-lg-last">
-                                <img class="banner-img img-fluid" src="${imageUrl.imgUrl}" alt="" style="width: 100%; height: 500px">
-                            </div>
-                    </div>
-                </div>
+                                <img class="banner-img img-fluid" src="${imageUrl.imgUrl}" alt="">
             </div>
         <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
             <i class="fas fa-chevron-left"></i>
@@ -66,7 +60,7 @@
         <div class="row">
             <c:forEach items="${posterListTop}" var="plt">
                 <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="ProductServlet"><img src="${plt.imgUrl}" class="rounded-circle img-fluid border"></a>
+                    <a href="ProductServlet"><img src="${plt.imgUrl}" class="rounded-circle img-fluid border" style="width: 350px;height: 350px;object-fit: cover"></a>
                     <h5 class="text-center mt-3 mb-3">vapes and essential oils</h5>
                     <p class="text-center"><a class="btn btn-success" href="ProductServlet">Go Shop</a></p>
                 </div>
@@ -118,8 +112,7 @@
         </div>
     </section>
     <!-- End Featured Product -->
-
-<%@include file="include/header-footer/footer.jsp"%>
+    <%@include file="include/header-footer/footer.jsp"%>
         <script>
             $(document).ready(function() {
                 $('#template-mo-zay-hero-carousel').carousel();
