@@ -9,32 +9,71 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-    @WebServlet(value = "/ProductServlet", name = "ProductServlet" )
+@WebServlet(value = "/ProductServlet", name = "ProductServlet")
 public class ShowProduct extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String indexPage = req.getParameter("index");
-        if(indexPage == null){
-            indexPage = "1";
+        String filterProduct = req.getParameter("filterProduct");
+        int index = -1;
+        if (indexPage != null) {
+            index = Integer.parseInt(indexPage);
         }
-        int index = Integer.parseInt(indexPage);
 
-        ProductRepository productRepository = new ProductRepository();
-        int count  = productRepository.getTotalProduct();
-        int endPage = count/9;
-        if(count % 9 != 0){
+
+        int count = ProductRepository.getTotalProduct();
+        int endPage = count / 9;
+        if (count % 9 != 0) {
             endPage++;
         }
-        List<ProductType> productList = productRepository.pagingProduct(index);
 
-        req.setAttribute("productList",productList);
-        req.setAttribute("endPage",endPage);
-        req.setAttribute("tag",index);
-        req.getRequestDispatcher("Product.jsp").forward(req,resp);
+        if (index < 1 || index > endPage) {
+            index = 1;
+        }
+        ArrayList<ProductType> listBrand = ProductRepository.getAllBrand();
+        ArrayList<ProductType> productList = new ArrayList<>();
+        String url = "ProductServlet";
+
+
+        if (filterProduct != null) {
+
+            if (filterProduct.equals("sortAlphabet")) {
+                productList = ProductRepository.getAllProductSortByName(index);
+                url += "?filterProduct=" +filterProduct + "&";
+            } else if (filterProduct.equals("priceIncrease")) {
+                url += "?filterProduct=" +filterProduct + "&";
+                productList = ProductRepository.getAllProductIncrease(index);
+            } else if (filterProduct.equals("priceDecrease")) {
+                url += "?filterProduct=" +filterProduct + "&";
+                productList = ProductRepository.getAllProductDecrease(index);
+            } else if (filterProduct.equals("rangePrice")) {
+                String priceFrom = req.getParameter("priceFrom");
+                String priceTo = req.getParameter("priceTo");
+                double from = Double.parseDouble(priceFrom);
+                double to = Double.parseDouble(priceTo);
+                url += "?filterProduct=" +filterProduct + "&priceFrom=" + priceFrom + "&priceTo=" + priceTo + "&";
+                productList = ProductRepository.getAllProductInRange(from, to, index);
+            } else if (filterProduct.equals(filterProduct)) {
+                url += "?filterProduct=" +filterProduct + "&";
+                productList = ProductRepository.getAllProductByBrand(filterProduct, index);
+            }
+        } else {
+            url += "?";
+            productList = ProductRepository.pagingProduct(index);
+        }
+
+
+        req.setAttribute("productList", productList);
+        req.setAttribute("listBrand", listBrand);
+        req.setAttribute("endPage", endPage);
+        req.setAttribute("tag", index);
+        req.setAttribute("url", url);
+        req.getRequestDispatcher("Product.jsp").forward(req, resp);
     }
 
 }

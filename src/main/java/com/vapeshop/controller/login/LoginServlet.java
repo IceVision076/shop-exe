@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", account);
                 session.setAttribute("cart", new Order());
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("Home");
 
             }
 

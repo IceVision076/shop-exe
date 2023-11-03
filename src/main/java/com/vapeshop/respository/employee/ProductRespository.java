@@ -474,5 +474,4 @@ public class ProductRespository {
         //getProductTypePage("J00000006", 1).stream().forEach(System.out::println);
 //        System.out.println(getProductTypeRealAmount("A00000001A"));
     }
-
 }
