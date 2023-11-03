@@ -28,7 +28,7 @@ public class PosterDeleteServlet extends HttpServlet {
             File file=new File(poster.getImgUrl());
 
             if(file.exists()){
-                file.delete();
+                file.delete();//
                 System.out.println("==========Xoa file "+poster.getImgUrl()+"==========");
             }
         }catch (Exception e){
