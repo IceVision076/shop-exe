@@ -194,8 +194,8 @@
         <!--Start Carousel Wrapper-->
         <div id="carousel-related-product">
             <c:forEach items="${productTypeArrayList}" var="pta">
-                <div class="p-2 pb-3">
-                    <div class="product-wap card rounded-0">
+            <div class="p-2 pb-3 ">
+                    <div class="product-wap card rounded-0 d-lg-flex-flex align-items-lg-centercenter justify-content-lg-center">
                         <div class="card rounded-0">
                             <img class="card-img rounded-0 img-fluid" src="${pta.imageProducts.get(0).imageUrl}">
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
@@ -233,8 +233,6 @@
                 </div>
             </c:forEach>
         </div>
-
-
     </div>
 </section>
 <!-- End Article -->

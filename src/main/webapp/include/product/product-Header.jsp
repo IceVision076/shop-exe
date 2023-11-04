@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css "/>
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.min.css"/>
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
