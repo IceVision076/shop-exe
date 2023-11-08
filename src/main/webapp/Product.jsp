@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="include/product/product-Header.jsp"%>
+<%@include file="include/header-footer/header.jsp"%>
 <!-- Start Content -->
 <div class="container py-5">
   <div class="row">
@@ -248,4 +248,4 @@
   </div>
 </section>
 <!--End Brands-->
-<%@include file="include/product/Product-Footer.jsp"%>
+<%@include file="include/header-footer/footer.jsp"%>

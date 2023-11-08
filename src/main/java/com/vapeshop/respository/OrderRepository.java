@@ -233,4 +233,40 @@ public class OrderRepository {
         return quantity;
     }
 
+    public static ArrayList<String> getOrderIdList(String userId) {
+        ArrayList<String> listOrderId = new ArrayList<>();
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "SELECT order_id FROM [Order] WHERE user_id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, userId);
+            ResultSet results = stmt.executeQuery();
+            while (results.next()) {
+                listOrderId.add(results.getString(1));
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("==========>ERROR : getOrderIdList(String userId)<=============");
+        }
+        return listOrderId;
+    }
+
+    public static LocalDateTime getOrderDate(String orderId) {
+        LocalDateTime date = null;
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "SELECT create_date FROM [Order] WHERE order_id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, orderId);
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                date = results.getObject(1,LocalDateTime.class);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("==========>ERROR : getOrderStatus()<=============");
+        }
+        return date;
+    }
+
 }
