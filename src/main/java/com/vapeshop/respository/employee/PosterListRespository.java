@@ -19,7 +19,7 @@ public class PosterListRespository {
                     "FROM\n" +
                     "   Poster\n" +
                     "WHERE status = 1\n"+
-                    "ORDER BY id\n";
+                    "ORDER BY date_create DESC \n";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
