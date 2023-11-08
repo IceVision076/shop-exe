@@ -1,9 +1,8 @@
 package com.vapeshop.respository;
 
 import com.vapeshop.config.DBConnect;
-import com.vapeshop.entity.Items;
-import com.vapeshop.entity.Order;
-import com.vapeshop.entity.User;
+import com.vapeshop.entity.*;
+import com.vapeshop.respository.employee.ProductRespository;
 import com.vapeshop.respository.generator.Isvalid;
 import com.vapeshop.respository.generator.RandomGenerator;
 
@@ -122,5 +121,116 @@ public class OrderRepository {
         return true;
     }
 
+    public static ArrayList<Items> getOrder(String OrderId) {
+        try {
+            ArrayList<Items> orderedList = new ArrayList<>();
+            Connection con = DBConnect.getConnection();
+            String query = "select * from OrderDetail where order_id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, OrderId);
+            ResultSet results = stmt.executeQuery();
+            while (results.next()) {
+                Items item = new Items();
+                item.setAmmout(results.getInt(3));
+                item.setProductType(getProductTypeById(results.getString(2)));
+                //lay id product
+                item.getProductType().setProduct(ProductRespository.getProductById(item.getProductType().getProductId()));
+                orderedList.add(item);
+            }
+            con.close();
+            return orderedList;
+        } catch (Exception e) {
+            System.out.println("=============>ERROR :  ArrayList<Items> getOrder(String OrderId) <==============");
+        }
+        return null;
+    }
+
+    //method nay chua sua :(
+    public static ProductType getProductTypeById(String orderdetailId) {
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "SELECT * FROM ProductType t join ImageProduct i  ON t.Id = i.product_type_id WHERE t.Id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, orderdetailId);
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                    String id = results.getString(1); //id la productTypeId
+                    String productId = results.getString(2);
+                    String name = results.getString(3);
+                    double price = results.getDouble(4);
+
+                    String productTypeId = results.getString(6);
+                    String idImg = results.getString(7);
+                    String imgUrl = results.getString(8);
+                    con.close();
+                    ImageProduct imageProduct = new ImageProduct(productTypeId,idImg,imgUrl);
+                ArrayList<ImageProduct> urls = new ArrayList<>();
+                    urls.add(imageProduct);
+                    return new ProductType(id,productId,name,price,urls);
+
+            }
+            con.close();
+            return null;
+
+        } catch (Exception e) {
+            System.out.println("=========>ERROR :getProductTypeById(String orderdetailId) <===========");
+        }
+        return null;
+    }
+
+    public static String getOrderStatus(String orderId) {
+        String id = null;
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "SELECT [status] FROM [Order] WHERE order_id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, orderId);
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                id = results.getString(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("==========>ERROR : getOrderStatus()<=============");
+        }
+        return id;
+    }
+    public static String getDiscountCodeByOrderID(String orderid) {
+        String discountCode = null;
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "select voucher_id from Order where order_id =?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, orderid);
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                discountCode = results.getString(1);
+                System.out.println("=>>>>>>>>>>>>>>>>>>.." + discountCode);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("==========>ERROR : getDiscountCodeByOrderID()<=============");
+        }
+        return discountCode;
+    }
+
+    public static double getDiscountPercent(String discountID) {
+        double quantity = 0f;
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "select vourcher_percent from Voucher where id =?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, discountID);
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                quantity = results.getDouble(1);
+                System.out.println("=>>>>>>>>>>>>>>>>>>.." + quantity);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("==========>ERROR : getDiscountPercent()<=============");
+        }
+        return quantity;
+    }
 
 }

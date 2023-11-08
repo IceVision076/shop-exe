@@ -46,6 +46,14 @@ public class ProductType {
         this.typeStatus = typeStatus;
     }
 
+    public ProductType(String productTypeId, String productId, String typeName, double typePrice, ArrayList<ImageProduct> imageProducts) {
+        this.productTypeId = productTypeId;
+        this.productId = productId;
+        this.typeName = typeName;
+        this.typePrice = typePrice;
+        this.imageProducts = imageProducts;
+    }
+
     public String getProductTypeId() {
         return productTypeId;
     }
