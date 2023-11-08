@@ -521,6 +521,7 @@ public class ProductRespository {
 
 
     public static void main(String[] args) {
-        System.out.println(LocalDateTime.now().toString());
+
+        getImportList("A00000001A",1).stream().forEach(System.out::println);
     }
 }
