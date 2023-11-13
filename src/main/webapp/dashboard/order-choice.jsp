@@ -78,9 +78,9 @@
           </li>
 
 
-          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí dịch vụ</li>
+          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí đơn hàng</li>
         </ol>
-        <h6 class="font-weight-bolder mb-0">Quản lí dịch vụ</h6>
+        <h6 class="font-weight-bolder mb-0">Quản lí đơn hàng</h6>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -203,50 +203,50 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h4 style="font-family: Calibri;" class="text-center"> <i class="fa-solid fa-calendar-days fa-flip fa-xl" style="color: #2008d9;"></i> Quản lí dịch vụ <i class="fa-solid fa-calendar-days fa-flip fa-xl" style="color: #2008d9;"></i></h4>
+            <h4 style="font-family: Calibri;" class="text-center"> <i class="fa-solid fa-truck-fast" style="color: #0ebea9;"></i> Quản lí đơn hàng <i class="fa-solid fa-truck-fast" style="color: #0ebea9;"></i></h4>
 
           </div>
           <div class="card-body px-0 pt-0 pb-2 ">
             <div class="container">
               <div class="cards-service row mb-5 ">
-                <a href="service-management" class="card-service red bg-secondary col-md-4 position-relative">
+                <a href="order-waiting" class="card-service red bg-secondary col-md-4 position-relative">
                   <p class="tip" >Đơn đang chờ
                   </p>
                   <p class="second-text">Nhấp để xem </p>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-  ${waitAmount}
+  ${orderWaitingAmount}
     <span class="visually-hidden">unread messages</span>
   </span>
                 </a>
-                <a href="service-canceled" class="card-service blue bg-danger col-md-4 position-relative">
+                <a href="order-canceled" class="card-service blue bg-danger col-md-4 position-relative">
                   <p class="tip">Đơn bị hủy</p>
                   <p class="second-text">Nhấp để xem</p>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-${canceledAmount}
+${orderCanceledAmount}
     <span class="visually-hidden">unread messages</span>
   </span>
                 </a>
-                <a href="service-accepted" class="card-service yellow bg-primary col-md-4 position-relative">
+                <a href="order-accepted" class="card-service yellow bg-primary col-md-4 position-relative">
                   <p class="tip">Đơn đang vận chuyển  </p>
                   <p class="second-text">Nhấp để xem</p>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
- ${acceptedAmount}
+ ${orderAcceptedAmount}
     <span class="visually-hidden">unread messages</span>
   </span>
                 </a>
-                <a href="service-success" class="card-service green bg-success col-md-4 position-relative">
+                <a href="order-success" class="card-service green bg-success col-md-4 position-relative">
                   <p class="tip">Đơn thành công  </p>
                   <p class="second-text">Nhấp để xem</p>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-${successAmount}
+${orderSuccessAmount}
     <span class="visually-hidden">unread messages</span>
   </span>
                 </a>
-                <a href="service-fail" class="card-service green bg-dark col-md-4 position-relative">
+                <a href="order-fail" class="card-service green bg-dark col-md-4 position-relative">
                   <p class="tip">Đơn thất bại</p>
                   <p class="second-text">Nhấp để xem</p>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-${failAmount}
+${orderFailAmount}
     <span class="visually-hidden">unread messages</span>
   </span>
                 </a>

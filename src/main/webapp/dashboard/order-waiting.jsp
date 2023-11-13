@@ -104,7 +104,7 @@
                     </li>
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí đơn</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí đơn hàng đã xác nhận</h6>
+                <h6 class="font-weight-bolder mb-0">Quản lí đơn hàng đang chờ xác nhận</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -227,7 +227,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng các đơn hàng đã xác nhận(Trang ${page}/${maxPage})</h6>
+                        <h6>Bảng các đơn hàng đang chờ xác nhận(Trang ${page}/${maxPage})</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -250,19 +250,21 @@
                                         Trạng thái
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                      Địa chỉ
+                                        Địa chỉ
                                     </th>
 
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${orderAccept}" var="o">
+                                <c:forEach items="${orderWaiting}" var="o">
 
                                     <tr>
                                         <td>
                                             <div class="text-xs font-weight-bold mb-0 text-center">
+
                                                 <h6 class="mb-0 text-sm">${o.orderId}</h6>
+
                                             </div>
                                         </td>
                                         <td>
@@ -288,58 +290,60 @@
                                         <td class="align-middle text-center text-sm">
 
 
-                                            <c:if test="${o.status eq '2'.charAt(0)}">
-                                                <span class="badge badge-sm bg-gradient-faded-info ">Đã xác nhận</span>
+                                            <c:if test="${o.status eq '0'.charAt(0)}">
+                                                <span class="badge badge-sm bg-gradient-faded-dark  ">Đơn đang xử lí COD</span>
                                             </c:if>
-
+                                            <c:if test="${o.status eq '1'.charAt(0)}">
+                                                <span class="badge badge-sm bg-gradient-faded-dark ">Đơn đang xử lí CK</span>
+                                            </c:if>
 
                                         </td>
                                         <td>
                                              <span class="text-secondary text-xs font-weight-bold  text-center">
                                                      ${o.address}
-                                                    </span>
+                                             </span>
 
                                         </td>
                                         <td>
                                             <!-- Button trigger modal -->
-<%--                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
-<%--                                                    data-bs-target="#${o.id}">--%>
-<%--                                                Xem--%>
-<%--                                            </button>--%>
+                                                <%--                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
+                                                <%--                                                    data-bs-target="#${o.id}">--%>
+                                                <%--                                                Xem--%>
+                                                <%--                                            </button>--%>
 
                                             <!-- Modal -->
-<%--                                            <div class="modal modal-lg fade" id="${o.id}" data-bs-backdrop="static"--%>
-<%--                                                 data-bs-keyboard="false" tabindex="-1"--%>
-<%--                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
-<%--                                                <div class="modal-dialog">--%>
-<%--                                                    <div class="modal-content">--%>
-<%--                                                        <div class="modal-header">--%>
-<%--                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">--%>
-<%--                                                                Poster ${o.id}</h1>--%>
-<%--                                                            <button type="button" class="btn-close"--%>
-<%--                                                                    data-bs-dismiss="modal" aria-label="Close">x--%>
-<%--                                                            </button>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="modal-body">--%>
-<%--                                                            <div class="container">--%>
-<%--                                                                <div class="row">--%>
-<%--                                                                    <div class="col-12">--%>
-<%--                                                                       ?????--%>
-<%--                                                                    </div>--%>
+                                                <%--                                            <div class="modal modal-lg fade" id="${o.id}" data-bs-backdrop="static"--%>
+                                                <%--                                                 data-bs-keyboard="false" tabindex="-1"--%>
+                                                <%--                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
+                                                <%--                                                <div class="modal-dialog">--%>
+                                                <%--                                                    <div class="modal-content">--%>
+                                                <%--                                                        <div class="modal-header">--%>
+                                                <%--                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">--%>
+                                                <%--                                                                Poster ${o.id}</h1>--%>
+                                                <%--                                                            <button type="button" class="btn-close"--%>
+                                                <%--                                                                    data-bs-dismiss="modal" aria-label="Close">x--%>
+                                                <%--                                                            </button>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                        <div class="modal-body">--%>
+                                                <%--                                                            <div class="container">--%>
+                                                <%--                                                                <div class="row">--%>
+                                                <%--                                                                    <div class="col-12">--%>
+                                                <%--                                                                       ?????--%>
+                                                <%--                                                                    </div>--%>
 
-<%--                                                                </div>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="modal-footer">--%>
-<%--                                                            <button type="button" class="btn btn-secondary"--%>
-<%--                                                                    data-bs-dismiss="modal">Đóng--%>
-<%--                                                            </button>--%>
+                                                <%--                                                                </div>--%>
+                                                <%--                                                            </div>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                        <div class="modal-footer">--%>
+                                                <%--                                                            <button type="button" class="btn btn-secondary"--%>
+                                                <%--                                                                    data-bs-dismiss="modal">Đóng--%>
+                                                <%--                                                            </button>--%>
 
 
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
+                                                <%--                                            </div>--%>
                                         </td>
                                     </tr>
 
@@ -354,7 +358,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="order-accepted?page=${page-1}"
+                                            <a class="page-link" href="order-waiting?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -366,7 +370,7 @@
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a class="page-link"
-                                                                     href="order-accepted?page=${i}">${i}</a></li>
+                                                                     href="order-waiting?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -375,7 +379,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="order-accepted?page=${page+1}"
+                                            <a class="page-link" href="order-waiting?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
