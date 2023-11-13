@@ -37,13 +37,7 @@ public class Items {
         return productType.getTypePrice() * ammout;
     }
     public double getPriceAfterPurchase (String OrderId) {
-        for (int i = 0 ; i < 10 ; i ++) {
-            System.out.println(OrderId);
-            System.out.println(productType.getProductId());
-            System.out.println("me");
-            System.out.println(OrderRepository.getPriceOrdered(OrderId,productType.getProductId()));
-        }
-        return OrderRepository.getPriceOrdered(OrderId,productType.getProductId());
+        return OrderRepository.getPriceOrdered(OrderId,productType.getProductTypeId());
     }
     public String getPriceString() {
         return formatter.format(getPrice());

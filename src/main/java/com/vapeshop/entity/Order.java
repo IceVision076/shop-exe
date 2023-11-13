@@ -22,7 +22,7 @@ public class Order { //gio hang = cart
     public Order() {
         cart = new ArrayList<>();
     }
-    private String orderedId; //id nay dung de fetch lai lich su don hang
+//    private String orderedId; //id nay dung de fetch lai lich su don hang
 
     private String address;
     public Order(String orderId, String userId, LocalDateTime createDate, char status, String voucherId, List<Items> cart, DecimalFormat formatter, int paymentType, double discountPercent, String discountCode) {
@@ -156,14 +156,14 @@ public class Order { //gio hang = cart
     public double getThanhTienAfterPurchase(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
-            tong += item.getPriceAfterPurchase(orderedId);
+            tong += item.getPriceAfterPurchase(orderId);
         }
         return tong + phatsinh;
     }
     public double getThanhTienAfterPurchaseDiscount(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
-            tong += item.getPriceAfterPurchase(orderedId);
+            tong += item.getPriceAfterPurchase(orderId);
         }
         return (tong + phatsinh) - (tong*discountPercent);
     }
