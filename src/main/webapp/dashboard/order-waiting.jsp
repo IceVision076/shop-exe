@@ -26,72 +26,101 @@
 <%@ include file="include/header-product-management-dashboard.jsp" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <style>
-    .btn-open {
-        display: inline-block;
-        padding: 0.9rem 1.8rem;
-        font-size: 16px;
-        font-weight: 700;
-        color: black;
-        border: 3px solid rgba(17, 255, 50, 0.41);
+    /* === removing default button style ===*/
+    /* === removing default button style ===*/
+    .button-open {
+        margin: 0;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        border: none;
         cursor: pointer;
-        position: relative;
-        background-color: transparent;
+
+    }
+
+    /* button styling */
+    .button-open {
+        --border-right: 6px;
+        --text-stroke-color: rgba(255,255,255,0.6);
+        --animation-color: #37FF8B;
+        --fs-size: 20px;
+        letter-spacing: 3px;
         text-decoration: none;
-        overflow: hidden;
-        z-index: 1;
-        font-family: inherit;
-    }
+        font-size: var(--fs-size);
+        font-family: "Arial";
+        position: relative;
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--text-stroke-color);
+        border-radius: 5px;
 
-    .btn-open::before {
-        content: "";
+    }
+    /* this is the text, when you hover on button */
+    .hover-text-open {
         position: absolute;
-        left: 0;
-        top: 0;
+        box-sizing: border-box;
+        content: attr(data-text);
+        color: var(--animation-color);
+        width: 0%;
+        inset: 0;
+        border-right: var(--border-right) solid var(--animation-color);
+        overflow: hidden;
+        transition: 0.5s;
+        -webkit-text-stroke: 1px var(--animation-color);
+    }
+    /* hover */
+    .button-open:hover .hover-text-open {
         width: 100%;
-        height: 100%;
-        background-color: rgba(17, 255, 50, 0.41);
-        transform: translateX(-100%);
-        transition: all .3s;
-        z-index: -1;
-    }
-
-    .btn-open:hover::before {
-        transform: translateX(0);
+        filter: drop-shadow(0 0 23px var(--animation-color))
     }
 
 
-    .btn-close {
-        display: inline-block;
-        padding: 0.9rem 1.8rem;
-        font-size: 16px;
-        font-weight: 700;
-        color: black;
-        border: 3px solid rgb(252, 70, 100);
+    /* === removing default button style ===*/
+    .button-close {
+        margin: 0;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        border: none;
         cursor: pointer;
-        position: relative;
-        background-color: transparent;
+    }
+
+    /* button styling */
+    .button-close {
+        --border-right: 6px;
+        --text-stroke-color: rgba(255,255,255,0.6);
+        --animation-color-c: red;
+        --fs-size: 20px;
+        letter-spacing: 3px;
         text-decoration: none;
-        overflow: hidden;
-        z-index: 1;
-        font-family: inherit;
+        font-size: var(--fs-size);
+        font-family: "Arial";
+        position: relative;
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--text-stroke-color);
+        border-radius: 5px;
     }
-
-    .btn-close::before {
-        content: "";
+    /* this is the text, when you hover on button */
+    .hover-text-close {
         position: absolute;
-        left: 0;
-        top: 0;
+        box-sizing: border-box;
+        content: attr(data-text);
+        color: var(--animation-color-c);
+        width: 0%;
+        inset: 0;
+        border-right: var(--border-right) solid var(--animation-color-c);
+        overflow: hidden;
+        transition: 0.5s;
+        -webkit-text-stroke: 1px var(--animation-color-c);
+    }
+    /* hover */
+    .button-close:hover .hover-text-close {
         width: 100%;
-        height: 100%;
-        background-color: rgb(252, 70, 100);
-        transform: translateX(-100%);
-        transition: all .3s;
-        z-index: -1;
+        filter: drop-shadow(0 0 23px var(--animation-color-c))
     }
 
-    .btn-close:hover::before {
-        transform: translateX(0);
-    }
+
 </style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -228,6 +257,11 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Bảng các đơn hàng đang chờ xác nhận(Trang ${page}/${maxPage})</h6>
+                        <p class="text-danger">
+                            <c:if test="${error eq '1'}">
+                            Trạng thái đơn hàng gặp sự cố vui lòng kiểm tra lại
+                            </c:if>
+                        </p>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -249,10 +283,9 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Địa chỉ
-                                    </th>
 
+
+                                    <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
@@ -298,52 +331,35 @@
                                             </c:if>
 
                                         </td>
+
                                         <td>
-                                             <span class="text-secondary text-xs font-weight-bold  text-center">
-                                                     ${o.address}
-                                             </span>
+                                            <form action="order-waiting" method="post">
+                                                <input type="hidden" name="action" value="open">
+                                                <input type="hidden" name="id" value="${o.orderId}">
+                                                <input type="hidden" name="page" value="${page==null?1:page}">
+                                                <input type="hidden" name="choice" value="accept">
+                                                <button type="submit" class="button-open bg-secondary"
+                                                        data-text="Awesome">
+                                                    <span class="actual-text-open">Duyệt</span>
+                                                    <span aria-hidden="true"
+                                                          class="hover-text-open">Duyệt</span>
+                                                </button>
+                                            </form>
 
                                         </td>
                                         <td>
-                                            <!-- Button trigger modal -->
-                                                <%--                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
-                                                <%--                                                    data-bs-target="#${o.id}">--%>
-                                                <%--                                                Xem--%>
-                                                <%--                                            </button>--%>
+                                            <form action="order-waiting" method="post">
+                                                <input type="hidden" name="action" value="lock">
+                                                <input type="hidden" name="id" value="${o.orderId}">
+                                                <input type="hidden" name="page" value="${page==null?1:page}">
+                                                <input type="hidden" name="choice" value="cancel">
+                                                <button type="submit" class="button-close bg-secondary" data-text="Awesome">
+                                                    <span class="actual-text-close">&nbsp;Hủy&nbsp;</span>
+                                                    <span aria-hidden="true"
+                                                          class="hover-text-close">&nbsp;Hủy&nbsp;</span>
+                                                </button>
+                                            </form>
 
-                                            <!-- Modal -->
-                                                <%--                                            <div class="modal modal-lg fade" id="${o.id}" data-bs-backdrop="static"--%>
-                                                <%--                                                 data-bs-keyboard="false" tabindex="-1"--%>
-                                                <%--                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
-                                                <%--                                                <div class="modal-dialog">--%>
-                                                <%--                                                    <div class="modal-content">--%>
-                                                <%--                                                        <div class="modal-header">--%>
-                                                <%--                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">--%>
-                                                <%--                                                                Poster ${o.id}</h1>--%>
-                                                <%--                                                            <button type="button" class="btn-close"--%>
-                                                <%--                                                                    data-bs-dismiss="modal" aria-label="Close">x--%>
-                                                <%--                                                            </button>--%>
-                                                <%--                                                        </div>--%>
-                                                <%--                                                        <div class="modal-body">--%>
-                                                <%--                                                            <div class="container">--%>
-                                                <%--                                                                <div class="row">--%>
-                                                <%--                                                                    <div class="col-12">--%>
-                                                <%--                                                                       ?????--%>
-                                                <%--                                                                    </div>--%>
-
-                                                <%--                                                                </div>--%>
-                                                <%--                                                            </div>--%>
-                                                <%--                                                        </div>--%>
-                                                <%--                                                        <div class="modal-footer">--%>
-                                                <%--                                                            <button type="button" class="btn btn-secondary"--%>
-                                                <%--                                                                    data-bs-dismiss="modal">Đóng--%>
-                                                <%--                                                            </button>--%>
-
-
-                                                <%--                                                        </div>--%>
-                                                <%--                                                    </div>--%>
-                                                <%--                                                </div>--%>
-                                                <%--                                            </div>--%>
                                         </td>
                                     </tr>
 

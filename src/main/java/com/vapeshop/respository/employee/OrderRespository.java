@@ -52,6 +52,7 @@ public class OrderRespository {
         }
         return list;
     }
+
     public static int orderWaitingAmount() {
         int amount = 0;
         try {
@@ -69,6 +70,7 @@ public class OrderRespository {
         }
         return amount;
     }
+
     public static ArrayList<Order> orderAccepted(int page) {
         ArrayList<Order> list = null;
         try {
@@ -105,6 +107,7 @@ public class OrderRespository {
         }
         return list;
     }
+
     public static int orderAcceptedAmount() {
         int amount = 0;
         try {
@@ -122,6 +125,7 @@ public class OrderRespository {
         }
         return amount;
     }
+
     public static ArrayList<Order> orderCanceled(int page) {
         ArrayList<Order> list = null;
         try {
@@ -158,6 +162,7 @@ public class OrderRespository {
         }
         return list;
     }
+
     public static int orderCanceledAmount() {
         int amount = 0;
         try {
@@ -175,6 +180,7 @@ public class OrderRespository {
         }
         return amount;
     }
+
     public static ArrayList<Order> orderSuccess(int page) {
         ArrayList<Order> list = null;
         try {
@@ -211,6 +217,7 @@ public class OrderRespository {
         }
         return list;
     }
+
     public static int orderSuccessAmount() {
         int amount = 0;
         try {
@@ -228,6 +235,7 @@ public class OrderRespository {
         }
         return amount;
     }
+
     public static ArrayList<Order> orderFail(int page) {
         ArrayList<Order> list = null;
         try {
@@ -264,6 +272,7 @@ public class OrderRespository {
         }
         return list;
     }
+
     public static int orderFailAmount() {
         int amount = 0;
         try {
@@ -281,8 +290,89 @@ public class OrderRespository {
         }
         return amount;
     }
+    public static char checkStatusOrder(String orderId) {
+        char status = 0;
+        try {
+            String query = "select status from [Order] where order_id=?;";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1,orderId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) status = resultSet.getString(1).charAt(0);
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    public static void updateWaitingAccepted(String orderId) {
+
+        try {
+            String query = "update [Order] set status = '2' where order_id = ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+             preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void updateWaitingCanceled(String orderId) {
+
+        try {
+            String query = "update [Order] set status = '3' where order_id = ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void updateAcceptedSuccess(String orderId) {
+
+        try {
+            String query = "update [Order] set status = '4' where order_id = ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void updateAcceptedFail(String orderId) {
+
+        try {
+            String query = "update [Order] set status = '5' where order_id = ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
     public static void main(String[] args) {
-        System.out.println(orderAcceptedAmount());
+
 //       orderWaitingPage(1).stream().forEach(System.out::println);
+        System.out.println(checkStatusOrder("0lbSoK6BNR"));
     }
 }
