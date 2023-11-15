@@ -691,7 +691,7 @@ public class ProductRepository {
         }
         return productsPriceSortByName;
     }
-//-------------------------------
+    //-------------------------------
     public static ProductType getProductType(String id) { //method cu la getPet()
         try {
             String query = "SELECT  TOP 1 * FROM ProductType t join ImageProduct i  on t.Id = i.product_type_id WHERE t.Id = ?";
