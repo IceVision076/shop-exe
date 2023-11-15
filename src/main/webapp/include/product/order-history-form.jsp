@@ -55,12 +55,14 @@
             <tr>
               <td><a href="getordereddetail?orderId=${i.orderId}">${i.orderId}</a></td>
               <td>${i.createDate}</td>
+
               <td>
                 <c:forEach items="${i.cart}" var="item">
-                <div><p>+${i.productType.product.productName}: x${item.ammout}</p><div>
-                  <p>Phân loại: ${i.productType.typeName}</p>
+                <div><p>+${item.productType.product.productName}: x${item.ammout}</p><div>
+                  <p>Phân loại: ${item.productType.typeName}</p>
                   </c:forEach>
               </td>
+
               <td width="15%">
                 <c:if test="${i.discountCode == null}">
                   ${i.getThanhTienStringAfterPurchase(30000)}
@@ -70,7 +72,24 @@
                 </c:if>
               </td>
               <td width="15%">
-                  ${i.status}</td>
+                  ${i.status}
+                <c:if test="${i.status.equals('0')}">
+                  <h1 class="text-danger m-1 p-0">Đang xử lý - COD</h1>
+                </c:if>
+<%--                <c:if test="${i.status == 1}">--%>
+<%--                  <h1 class="text-danger m-1 p-0">Đang xử lý - CK</h1>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${i.status == 2}">--%>
+<%--                  <h1 class="text-danger m-1 p-0">Đã xử lý</h1>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${i.status == 3}">--%>
+<%--                  <h1 class="text-danger m-1 p-0">Đã Hủy</h1>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${i.status == 4}">--%>
+<%--                  <h1 class="text-danger m-1 p-0">Giao Hàng Thành Công</h1>--%>
+<%--                </c:if>--%>
+              </td>
+
             </tr>
             ${orderedCart.getThanhTienStringAfterPurchaseDiscount(30000)}
           </c:forEach>
