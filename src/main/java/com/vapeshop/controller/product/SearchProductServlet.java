@@ -26,14 +26,13 @@ public class SearchProductServlet extends HttpServlet {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-
-            int count  = ProductRepository.getTotalProduct();
+            String productName = req.getParameter("productName");
+            int count  = ProductRepository.getTotalSearchProduct(productName);
             int endPage = count/9;
             if(count % 9 != 0){
                 endPage++;
             }
 //            SearchProductServlet?productName=Aspire&action=Search
-            String productName = req.getParameter("productName");
             String urlSearch = "SearchProductServlet?productName=" + productName + "&action=" +action + "&";
             ArrayList<ProductType> productSearchList = ProductRepository.getProductSearch(productName,index);
             req.setAttribute("productSearchList",productSearchList);

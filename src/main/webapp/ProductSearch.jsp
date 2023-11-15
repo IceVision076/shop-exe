@@ -105,14 +105,14 @@
                             <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="${urlSearch}index=${tag-1}" tabindex="-1">Previous</a>
                         </li>
                     </c:if>
-                    <c:if test="${productSearchList.size() >3}">
+                    <c:if test="${endPage >3}">
                         <c:set var="beginIndex" value="${tag - 1}" />
                         <c:set var="endIndex" value="${tag + 1}" />
                         <c:if test="${beginIndex < 1}">
                             <c:set var="beginIndex" value="1" />
                         </c:if>
-                        <c:if test="${endIndex > productSearchList.size()}">
-                            <c:set var="endIndex" value="${productSearchList.size()}" />
+                        <c:if test="${endIndex > endPage}">
+                            <c:set var="endIndex" value="${endPage}" />
                         </c:if>
                         <c:forEach begin="${beginIndex}" end="${endIndex}" var="i" step="1">
                             <li class="page-item">
@@ -120,7 +120,7 @@
                             </li>
                         </c:forEach>
                     </c:if>
-                    <c:if test="${tag<productSearchList.size()}">
+                    <c:if test="${tag<endPage}">
                         <li class="page-item">
                             <a class="page-link rounded-0 shadow-sm  text-dark" href="${urlSearch}index=${tag+1}">Next</a>
                         </li>
