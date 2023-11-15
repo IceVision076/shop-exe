@@ -75,24 +75,23 @@
             <div class="flex-fill ms-5">
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="Home">Home</a>
+                        <a class="nav-link" href="Home">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="about.html">Thông Tin Cửa Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductServlet">Shop</a>
+                        <a class="nav-link" href="ProductServlet">Của Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="service-tracking-sender">Dịch Vụ</a>
                     </li>
                     <li>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
                             <div class="dropdown-menu m-0">
-                                <a href="testmonial.jsp" class="dropdown-item">Testimonial</a>
-                                <a href="blog.jsp" class="dropdown-item">Blog Grid</a>
-                                <a href="detail.jsp" class="dropdown-item">Blog Detail</a>
+                                <a href="testmonial.jsp" class="dropdown-item">Chứng Thực</a>
+                                <a href="blog.jsp" class="dropdown-item">Bài Viết</a>
                             </div>
                         </div>
                     </li>
@@ -101,7 +100,7 @@
             <div class="navbar align-self-center d-flex">
                 <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                        <input type="text" class="form-control" id="inputMobileSearch" placeholder="Tìm kiếm ...">
                         <div class="input-group-text">
                             <i class="fa fa-fw fa-search"></i>
                         </div>
@@ -110,12 +109,11 @@
                 <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                     <i class="fa fa-fw fa-search text-dark mr-2"></i>
                 </a>
-                <a class="nav-icon position-relative text-decoration-none" href="#">
+                <a class="nav-icon position-relative text-decoration-none" href="cart.jsp">
                     <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                 </a>
                 <c:if test="${sessionScope.user==null}">
-                    <a href="login.jsp" class="nav-item nav-link nav-contact bg-success text-white px-5 ms-lg-5">Log in <i class="bi bi-arrow-right"></i></a>
+                    <a href="login.jsp" class="nav-item nav-link nav-contact bg-success text-white px-5 ms-lg-5">Đăng Nhập <i class="bi bi-arrow-right"></i></a>
                 </c:if>
                 <c:if test="${sessionScope.user!=null}">
                     <div class="nav-item dropdown">
@@ -133,9 +131,9 @@
                                 <%--                            <a href="admin.jsp" class="dropdown-item">Admin</a>--%>
                                 <%--                        </c:if>--%>
 
-                            <a href="cart.jsp" class="dropdown-item">Your cart</a>
-                            <a href="getorderhistory" class="dropdown-item">History order</a>
-                            <a href="logout" class="dropdown-item text-danger">Log out</a>
+                            <a href="cart.jsp" class="dropdown-item">Giỏ Hàng</a>
+                            <a href="getorderhistory" class="dropdown-item">Lịch sử đặt hàng</a>
+                            <a href="logout" class="dropdown-item text-danger">Đăng Xuất</a>
                         </div>
                     </div>
                 </c:if>
