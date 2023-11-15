@@ -71,6 +71,95 @@ public class ProductRepository {
         return 0;
     }
 
+    //Calculate total of Product search
+    public static int getTotalSearchProduct(String searchElement) {
+        try (Connection con = DBConnect.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("select count(1) as endpage\n" +
+                    "from (SELECT pd.[id],\n" +
+                    "             pdt.[Id] as 'ma', pd.[product_name],\n" +
+                    "             pdt.[name],\n" +
+                    "             pdt.[price],\n" +
+                    "             pd.[brand],\n" +
+                    "             pd.[detail],\n" +
+                    "             pd.[origin],\n" +
+                    "             pd.[status]\n" +
+                    "      FROM [dbo].[Product] pd\n" +
+                    "               INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]\n" +
+                    "      WHERE pd.[product_name] LIKE ?) t"
+            );
+            stmt.setString(1,'%' + searchElement + '%');
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    //Calculate total of Product brand
+    public static int getTotalBrandProduct(String brandElement) {
+        try (Connection con = DBConnect.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("select count(1) as endpage\n" +
+                    "from (SELECT pd.[id],\n" +
+                    "             pdt.[Id] as 'ma', pd.[product_name],\n" +
+                    "             pdt.[name],\n" +
+                    "             pdt.[price],\n" +
+                    "             pd.[brand],\n" +
+                    "             pd.[detail],\n" +
+                    "             pd.[origin],\n" +
+                    "             pd.[status]\n" +
+                    "      FROM [dbo].[Product] pd\n" +
+                    "               INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]\n" +
+                    "      WHERE pd.[brand] = ?) t"
+            );
+            stmt.setString(1,brandElement);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    //Calculate total of Product
+    public static int getTotalInRangeProduct(double from, double to) {
+        try (Connection con = DBConnect.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("select count(1) as endpage\n" +
+                    "from (SELECT pd.[id],\n" +
+                    "             pdt.[Id] as 'ma', pd.[product_name],\n" +
+                    "             pdt.[name],\n" +
+                    "             pdt.[price],\n" +
+                    "             pd.[brand],\n" +
+                    "             pd.[detail],\n" +
+                    "             pd.[origin],\n" +
+                    "             pd.[status]\n" +
+                    "      FROM [dbo].[Product] pd\n" +
+                    "               INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]\n" +
+                    "      WHERE pdt.price > ?\n" +
+                    "        and pdt.price < ?) t"
+            );
+            stmt.setDouble(1,from);
+            stmt.setDouble(2,to);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
     public static ArrayList<ImageProduct> getImageProduct(String productTypeID) {
         ArrayList<ImageProduct> imageProductArrayList = new ArrayList<>();
         try (Connection con = DBConnect.getConnection()) {
@@ -656,10 +745,7 @@ public class ProductRepository {
     }
 
     public static void main(String[] args) {
-        ArrayList<ProductType> product = ProductRepository.getProductSearch("Aspire",1);
-        for (ProductType p : product
-        ) {
-            System.out.println(p);
-        }
+        int product = ProductRepository.getTotalInRangeProduct(0,100000);
+        System.out.println(product);
     }
 }
