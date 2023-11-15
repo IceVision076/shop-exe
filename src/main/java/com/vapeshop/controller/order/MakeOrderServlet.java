@@ -24,7 +24,8 @@ public class MakeOrderServlet extends HttpServlet {
             String orderId = OrderRepository.createOrder(cart,user);
             cart.setDiscountCode(null);
             cart.removeAll();
-//            request.getRequestDispatcher("getordereddetail?orderId="+orderId).forward(request, response);
+            request.getRequestDispatcher("getordereddetail?orderId="+orderId).forward(request, response);
+
         }
     }
 

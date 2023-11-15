@@ -10,14 +10,32 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Random;
 
 @WebServlet(name = "ProductImportServlet", value = "/product-import")
 public class ProductImportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String productTypeId = request.getParameter("productTypeId");
 
+        String productTypeId = request.getParameter("productTypeId");
+        int pageNumber=-1;
+
+        int maxPageAmount=ProductRespository.getImportProductTypeAmount(productTypeId)/10+1;
+        if(request.getParameter("page")==null) {
+            pageNumber=1;
+        }
+
+        else
+            pageNumber= Integer.parseInt(  request.getParameter("page"))  ;
+
+        if( pageNumber>maxPageAmount||pageNumber<=0) pageNumber=1;
+
+
+        ArrayList<ImportProduct> importProductList=ProductRespository.getImportList(productTypeId,pageNumber);
+        request.setAttribute("maxPage",maxPageAmount);
+        request.setAttribute("page",pageNumber);
+        request.setAttribute("importProductList",importProductList);
 
         request.setAttribute("productTypeId", productTypeId);
         request.getRequestDispatcher("dashboard/product-import.jsp").forward(request, response);
@@ -30,7 +48,7 @@ public class ProductImportServlet extends HttpServlet {
         String productTypeId = request.getParameter("productTypeId");
         int lotAmount = Integer.parseInt(request.getParameter("lotAmount"));
         String lotId="";
-
+        String page =request.getParameter("page");
         while (true){
             Random random = new Random();
             String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -51,5 +69,7 @@ public class ProductImportServlet extends HttpServlet {
         ImportProduct importProduct=new ImportProduct(lotId,lotName,productTypeId,lotAmount, LocalDateTime.now());
         System.out.println(importProduct);
           ProductRespository.addNewLot(importProduct);
+
+          response.sendRedirect("product-import?productTypeId="+productTypeId+"&page="+page);
     }
 }

@@ -30,9 +30,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%@include file="include/header-product-management-dashboard.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -189,7 +189,7 @@
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
                                     <input maxlength="50" type="text" class="form-control"
-                                           placeholder="Nhập tên sản phẩm"
+                                           placeholder="Nhập tên lô sản phẩm"
                                            id="lotName" name="lotName"
                                            required>
                                     <div class="invalid-feedback">
@@ -204,7 +204,7 @@
                                 <div class="input-group has-validation">
                                     <input type="number" min="1" max="999999" class="form-control" id="lotAmount"
                                            name="lotAmount"
-                                           placeholder="Nhập nhãn hàng" required>
+                                           placeholder="Nhập số lượng sản phẩm" required>
                                     <div class="invalid-feedback">
                                         Số lượng không để trống, tối thiểu 1 và không quá 999999
                                     </div>
@@ -213,6 +213,9 @@
                             <div class="col-12">
                                 <input type="hidden" name="productTypeId" value="${productTypeId}">
                             </div>
+                                <div class="col-12">
+                                    <input type="hidden" name="page" value="${page}">
+                                </div>
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Lưu <i
                                         class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
@@ -235,8 +238,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h4 style="font-family: Calibri;" class="text-center"><i
-                                class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Thêm lô sản
-                            phẩm mới( ${productTypeId} ) <i class="fa-solid fa-kiwi-bird fa-spin-pulse"
+                                class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Danh sách lô sản phẩm ( ${productTypeId} ) <i class="fa-solid fa-kiwi-bird fa-spin-pulse"
                                                             style="color: #b01cba;"></i></h4>
 
                     </div>
@@ -246,7 +248,7 @@
                             <thead>
                             <tr>
 
-                                <th>ID</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Tên lô hàng
                                 </th>
@@ -254,119 +256,37 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Ngày nhập hàng
                                 </th>
-                                <th class="text-secondary opacity-7"></th>
-                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Số lượng</th>
+
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${listProductType}" var="p">
+                            <c:forEach items="${importProductList}" var="imp">
 
                                 <tr>
                                     <td>
-                                        <div>
-                                            <img src="${p.imageProducts.get(0).imageUrl}" class="m-2 img-thumbnail "
-                                                 style="width: 100px;" alt="user1">
-                                        </div>
+
+                                            <p class="text-xs font-weight-bold mb-0">   ${imp.lotId}</p>
+
                                     </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
 
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">${p.typeName}</h6>
-                                                <p class="text-xs text-secondary mb-0">${p.productTypeId}</p>
+                                                <h6 class="mb-0 text-sm">${imp.lotName}</h6>
+                                                <p class="text-xs text-secondary mb-0">${imp.productTypeId}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">${p.typePrice}</p>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                                ${imp.dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0 text-center">${imp.quantity}</p>
                                     </td>
 
-                                    <td class="align-middle">
-                                        <!-- Button to Open the Modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#${p.productTypeId}">
-                                            Chỉnh sửa
-                                        </button>
 
-                                        <!-- The Modal -->
-                                        <div class="modal modal-lg" id="${p.productTypeId}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header d-flex">
-                                                        <h4 class="modal-title">Chỉnh sửa thông tin loại sản
-                                                            phẩm ${p.productTypeId}</h4>
-                                                        <button type="button" class="close" data-dismiss="modal">
-                                                            &times;
-                                                        </button>
-                                                    </div>
-
-                                                    <!-- Modal body String id, String productId, String name, double price -->
-                                                    <div class="modal-body p-2">
-
-                                                        <form class="row g-3 needs-validation p-2" novalidate
-                                                              action="product-type-update" method="post">
-                                                            <div class="col-12">
-                                                                <label for="name" class="form-label">Tên sản
-                                                                    phẩm</label>
-                                                                <div class="input-group has-validation">
-                                                                    <input type="text" class="form-control"
-                                                                           id="name" name="name"
-                                                                           value="${p.typeName}" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Tên không được bỏ trống
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <label for="price" class="form-label">Giá sản
-                                                                    phẩm</label>
-                                                                <div class="input-group has-validation">
-                                                                    <input type="text" class="form-control"
-                                                                           id="price" name="price"
-                                                                           value="${p.typePrice}" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Vui lòng điền giá hợp lệ
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="input-group has-validation">
-                                                                    <input type="hidden" class="form-control"
-                                                                           id="id" name="id"
-                                                                           value="${p.productTypeId}" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="input-group has-validation">
-                                                                    <input type="hidden" class="form-control"
-                                                                           id="productId" name="productId"
-                                                                           value="${product.idProduct}" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <button class="btn btn-primary" type="submit">Lưu
-                                                                </button>
-                                                            </div>
-                                                        </form>
-
-
-                                                    </div>
-
-                                                    <!-- Modal footer -->
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                                data-dismiss="modal">Đóng
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><a href="product-import?productTypeId=${p.productTypeId}"
-                                           class="btn btn-behance">Nhập hàng</a></td>
                                 </tr>
 
 
@@ -374,7 +294,43 @@
 
                             </tbody>
                         </table>
+                        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                            <ul class="pagination">
 
+                                <c:if test="${page>1}">
+
+                                    <li class="page-item">
+                                        <a class="page-link" href="product-import?productTypeId=${productTypeId}&page=${page-1}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+
+                                </c:if>
+
+                                <c:forEach var="i" begin="${page-1}" end="${page+1}">
+                                    <c:if test="${i>=1&&i<=maxPage}">
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="product-import?productTypeId=${productTypeId}&page=${i}">${i}</a></li>
+                                    </c:if>
+
+                                </c:forEach>
+
+
+                                <c:if test="${page<maxPage}">
+                                    <li class="page-item">
+
+                                        <a class="page-link" href="product-import?productTypeId=${productTypeId}&page=${page+1}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                            </ul>
+                        </nav>
 
                     </div>
 

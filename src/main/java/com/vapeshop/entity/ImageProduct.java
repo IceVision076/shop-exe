@@ -15,6 +15,8 @@ public class ImageProduct {
         this.imageUrl = imageUrl;
     }
 
+
+
     // getters and setters
 
     public String getProductTypeId() {
