@@ -29,19 +29,24 @@ public class ShowProduct extends HttpServlet {
             index = Integer.parseInt(indexPage);
         }
 
-        int count =0;
-        if (filterProduct != null){
-        switch (filterProduct){
-            case "rangePrice":
-               from = Double.parseDouble(priceFrom);
-               to = Double.parseDouble(priceTo);
-               count =ProductRepository.getTotalInRangeProduct(from,to);
-            break;
-            default :
-                count = ProductRepository.getTotalBrandProduct(filterProduct);
-                break;
-        }
-        }else {
+        int count = 0;
+        if (filterProduct != null) {
+            switch (filterProduct) {
+                case "rangePrice":
+                    from = Double.parseDouble(priceFrom);
+                    to = Double.parseDouble(priceTo);
+                    count = ProductRepository.getTotalInRangeProduct(from, to);
+                    break;
+                case "sortAlphabet":
+                case "priceIncrease":
+                case "priceDecrease":
+                    count = ProductRepository.getTotalProduct();
+                    break;
+                default:
+                    count = ProductRepository.getTotalBrandProduct(filterProduct);
+                    break;
+            }
+        } else {
             count = ProductRepository.getTotalProduct();
         }
         int endPage = count / 9;
@@ -61,18 +66,18 @@ public class ShowProduct extends HttpServlet {
 
             if (filterProduct.equals("sortAlphabet")) {
                 productList = ProductRepository.getAllProductSortByName(index);
-                url += "?filterProduct=" +filterProduct + "&";
+                url += "?filterProduct=" + filterProduct + "&";
             } else if (filterProduct.equals("priceIncrease")) {
-                url += "?filterProduct=" +filterProduct + "&";
+                url += "?filterProduct=" + filterProduct + "&";
                 productList = ProductRepository.getAllProductIncrease(index);
             } else if (filterProduct.equals("priceDecrease")) {
-                url += "?filterProduct=" +filterProduct + "&";
+                url += "?filterProduct=" + filterProduct + "&";
                 productList = ProductRepository.getAllProductDecrease(index);
             } else if (filterProduct.equals("rangePrice")) {
-                url += "?filterProduct=" +filterProduct + "&priceFrom=" + priceFrom + "&priceTo=" + priceTo + "&";
+                url += "?filterProduct=" + filterProduct + "&priceFrom=" + priceFrom + "&priceTo=" + priceTo + "&";
                 productList = ProductRepository.getAllProductInRange(from, to, index);
             } else if (filterProduct.equals(filterProduct)) {
-                url += "?filterProduct=" +filterProduct + "&";
+                url += "?filterProduct=" + filterProduct + "&";
                 productList = ProductRepository.getAllProductByBrand(filterProduct, index);
             }
         } else {
