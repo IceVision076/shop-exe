@@ -1,6 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="include/product/product-Header.jsp"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!-- Start Content -->
 <div class="container py-5">
   <div class="row">

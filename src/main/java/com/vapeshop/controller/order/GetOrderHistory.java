@@ -39,17 +39,17 @@ public class GetOrderHistory extends HttpServlet {
             orderedCart.setDiscountPercent(OrderRepository.getDiscountPercent(orderedCart.getDiscountCode()));
             listOrdered.add(orderedCart);
         }
-        Collections.sort(listOrdered, new Comparator<Order>() {
-
-            @Override
-            public int compare(Order o1, Order o2) {
-                LocalDateTime dateString1 = o1.getCreateDate();
-                LocalDateTime dateString2 = o2.getCreateDate();
-
-                return Integer.parseInt(String.valueOf(dateString1.isBefore(dateString2)));
-            }
-
-        });
+//        Collections.sort(listOrdered, new Comparator<Order>() {
+//
+//            @Override
+//            public int compare(Order o1, Order o2) {
+//                LocalDateTime dateString1 = o1.getCreateDate();
+//                LocalDateTime dateString2 = o2.getCreateDate();
+//
+//                return Integer.parseInt(String.valueOf(dateString1.isBefore(dateString2)));
+//            }
+//
+//        });
 
 
 
