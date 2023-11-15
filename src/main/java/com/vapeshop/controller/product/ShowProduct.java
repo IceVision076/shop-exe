@@ -25,7 +25,6 @@ public class ShowProduct extends HttpServlet {
             index = Integer.parseInt(indexPage);
         }
 
-
         int count = ProductRepository.getTotalProduct();
         int endPage = count / 9;
         if (count % 9 != 0) {

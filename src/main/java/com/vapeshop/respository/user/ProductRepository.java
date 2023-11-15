@@ -465,6 +465,8 @@ public class ProductRepository {
         return productsPrice;
     }
 
+    //public static ArrayList<ProductType> getAllProductIncrease(int index, int from, int to)
+
     public static ArrayList<ProductType> getAllProductIncrease(int index) {
         ArrayList<ProductType> productsPriceIncrease = new ArrayList<>();
         try (Connection con = DBConnect.getConnection()) {
@@ -522,6 +524,7 @@ public class ProductRepository {
                     + "      ,pd.[detail]\n"
                     + "      ,pd.[origin]\n"
                     + "      ,pd.[status]\n"
+                    + "      ,pdt.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
                     + "ORDER BY pdt.[price] DESC\n"
@@ -653,7 +656,7 @@ public class ProductRepository {
     }
 
     public static void main(String[] args) {
-        ArrayList<ProductType> product = ProductRepository.getAllProductInRange(0,100000,1);
+        ArrayList<ProductType> product = ProductRepository.getProductSearch("Aspire",1);
         for (ProductType p : product
         ) {
             System.out.println(p);

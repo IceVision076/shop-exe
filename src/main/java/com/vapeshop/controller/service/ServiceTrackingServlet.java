@@ -32,6 +32,6 @@ public class ServiceTrackingServlet extends HttpServlet {
         char status = '1';
         ServiceTracking serviceTracking= new ServiceTracking( "", userId, userDescription, createDate, status, title);
         ServiceTrackingRepository.serviceTrackingSender(serviceTracking);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("Home");
     }
 }

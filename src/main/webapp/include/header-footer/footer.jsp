@@ -5,6 +5,7 @@
   Time: 2:18 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!-- Start Footer -->
 <footer class="bg-dark" id="tempaltemo_footer">
@@ -30,26 +31,26 @@
             </div>
 
             <div class="col-md-4 pt-5">
-                <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Thương Hiệu</h2>
                 <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                    <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
-                    <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
-                    <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
-                    <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
-                    <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
-                    <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                    <li><a class="text-decoration-none" href="#">Aspire</a></li>
+                    <li><a class="text-decoration-none" href="#">Dotmod</a></li>
+                    <li><a class="text-decoration-none" href="#">Freemax</a></li>
+                    <li><a class="text-decoration-none" href="#">Geekvape</a></li>
+                    <li><a class="text-decoration-none" href="#">Nevoks</a></li>
+                    <li><a class="text-decoration-none" href="#">Oxva</a></li>
+                    <li><a class="text-decoration-none" href="#">Wotofo</a></li>
                 </ul>
             </div>
 
             <div class="col-md-4 pt-5">
                 <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                 <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="#">Home</a></li>
-                    <li><a class="text-decoration-none" href="#">About Us</a></li>
-                    <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                    <li><a class="text-decoration-none" href="#">Trang Chủ</a></li>
+                    <li><a class="text-decoration-none" href="#">Thông Tin Cửa Hàng</a></li>
+                    <li><a class="text-decoration-none" href="#">Địa Chỉ Cửa hàng</a></li>
                     <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                    <li><a class="text-decoration-none" href="#">Contact</a></li>
+                    <li><a class="text-decoration-none" href="#">Liên Hệ</a></li>
                 </ul>
             </div>
 
@@ -76,10 +77,10 @@
                 </ul>
             </div>
             <div class="col-auto">
-                <label class="sr-only" for="subscribeEmail">Email address</label>
+                <label class="sr-only" for="subscribeEmail">Email </label>
                 <div class="input-group mb-2">
                     <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-                    <div class="input-group-text btn-success text-light">Subscribe</div>
+                    <div class="input-group-text btn-success text-light">liên Hệ</div>
                 </div>
             </div>
         </div>

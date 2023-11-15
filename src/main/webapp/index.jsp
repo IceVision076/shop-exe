@@ -1,5 +1,4 @@
-
-
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="include/header-footer/header.jsp"%>
 
 
@@ -50,10 +49,9 @@
     <section class="container py-5">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Categories of The Month</h1>
+                <h1 class="h1">Sản Phẩm Của Tháng</h1>
                 <p>
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    Sản phẩm được khánh hàng lựa chọn và đánh giá cao về chất lượng sử dụng.
                 </p>
             </div>
         </div>
@@ -75,10 +73,9 @@
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">OutStanding Product</h1>
+                    <h1 class="h1">Sản Phẩm Nổi Trội</h1>
                     <p>
-                        Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident.
+                        Dòng sản phẩm nổi trội với thiết kế đẹp và chất lượng tiêu chuẩn cao.
                     </p>
                 </div>
             </div>
