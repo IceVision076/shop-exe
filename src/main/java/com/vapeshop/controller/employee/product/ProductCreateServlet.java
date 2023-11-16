@@ -22,18 +22,12 @@ import java.io.IOException;
 public class ProductCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//        System.out.println(request.getServletContext().getRealPath("").substring(0,request.getServletContext().getRealPath("").lastIndexOf("target")));
-        String realPath = request.getServletContext().getRealPath("");
-        System.out.println(realPath);
 
-        System.out.println(realPath.substring(0,realPath.indexOf("VapeShop")+9));
-        realPath.replace('\\', '/');
-//        String savePath = realPath + "assets/img/product";
-//        File f = new File(savePath);
-//        if (f.exists()) System.out.println("===================ok có==================");
-//        else
-//            System.out.println("===================không có==================");
+        String success=request.getParameter("success");
+        if(success!=null&&success.equals("1"))
+        {
+            request.setAttribute("success",success);
+        }
         request.getRequestDispatcher("dashboard/product-create.jsp").forward(request, response);
 
     }
@@ -83,6 +77,6 @@ public class ProductCreateServlet extends HttpServlet {
         ProductType productType = new ProductType(productId + 'A', productId, productTypeName, price);
         ImageProduct imageProduct = new ImageProduct(productId + 'A', "test", savePath.substring(savePath.lastIndexOf("assets"))+"/"+fileName);
         ProductRespository.addNewProduct(product, productType, imageProduct);
-
+response.sendRedirect("product-create?success=1");
     }
 }

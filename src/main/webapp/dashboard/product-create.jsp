@@ -168,7 +168,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
 
-
+                         <c:if test="${success==1}"> <h4 class="p-5 pt-0 pb-0 text-success">Thêm sản phẩm thành công</h4></c:if>
                         <form class="row g-3 needs-validation p-4" novalidate action="#"
                               method="post"   enctype="multipart/form-data">
                             <div class="col-12">

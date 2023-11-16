@@ -66,6 +66,6 @@ public class ProductTypeCreateServlet extends HttpServlet {
         }catch (Exception e){
          e.printStackTrace();
         }
-
+         response.sendRedirect("product-type-create");
     }
 }
