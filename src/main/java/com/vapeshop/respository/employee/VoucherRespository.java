@@ -60,8 +60,8 @@ public class VoucherRespository {
 
     public static void addVoucher(Voucher voucher) {
         try {
-            String query = "INSERT INTO Voucher(id,vourcher_name,vourcher_percent,create_date,close_date,status)\n" +
-                    "VALUES (?,?,?,?,?,?)";
+            String query = "INSERT INTO Voucher(id,vourcher_name,vourcher_percent,create_date,close_date,status,open_date)\n" +
+                    "VALUES (?,?,?,?,?,?,?)";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, voucher.getId());
@@ -70,6 +70,7 @@ public class VoucherRespository {
             preparedStatement.setObject(4, voucher.getCreateDate());
             preparedStatement.setObject(5, voucher.getCloseDate());
             preparedStatement.setString(6, voucher.getStatus() + "");
+            preparedStatement.setObject(7, voucher.getOpenDate());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {

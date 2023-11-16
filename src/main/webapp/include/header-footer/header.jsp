@@ -121,6 +121,7 @@
 
                         <a href="cart.jsp" class="dropdown-item">Giỏ Hàng</a>
                         <a href="getorderhistory" class="dropdown-item">Lịch sử đặt hàng</a>
+                        <a href="testconnect.jsp" class="dropdown-item">Tư vấn</a>
                         <a href="logout" class="dropdown-item text-danger">Đăng Xuất</a>
                     </div>
                 </div>
