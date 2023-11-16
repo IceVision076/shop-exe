@@ -43,12 +43,35 @@ public class SearchProductServlet extends HttpServlet {
         }else {
             String filterProduct = req.getParameter("filterProduct");
             String indexPage = req.getParameter("index");
+            String priceFrom = req.getParameter("priceFrom");
+            String priceTo = req.getParameter("priceTo");
+            double from = 0.0;
+            double to = 0.0;
             if(indexPage == null){
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
 
-            int count  = ProductRepository.getTotalProduct();
+            int count = 0;
+            if (filterProduct != null) {
+                switch (filterProduct) {
+                    case "rangePrice":
+                        from = Double.parseDouble(priceFrom);
+                        to = Double.parseDouble(priceTo);
+                        count = ProductRepository.getTotalInRangeProduct(from, to);
+                        break;
+                    case "sortAlphabet":
+                    case "priceIncrease":
+                    case "priceDecrease":
+                        count = ProductRepository.getTotalProduct();
+                        break;
+                    default:
+                        count = ProductRepository.getTotalBrandProduct(filterProduct);
+                        break;
+                }
+            } else {
+                count = ProductRepository.getTotalProduct();
+            }
             int endPage = count/9;
             if(count % 9 != 0){
                 endPage++;
@@ -69,10 +92,6 @@ public class SearchProductServlet extends HttpServlet {
                     url += "?filterProduct=" +filterProduct + "&";
                     productList = ProductRepository.getAllProductDecrease(index);
                 } else if (filterProduct.equals("rangePrice")) {
-                    String priceFrom = req.getParameter("priceFrom");
-                    String priceTo = req.getParameter("priceTo");
-                    double from = Double.parseDouble(priceFrom);
-                    double to = Double.parseDouble(priceTo);
                     url += "?filterProduct=" +filterProduct + "&priceFrom=" + priceFrom + "&priceTo=" + priceTo + "&";
                     productList = ProductRepository.getAllProductInRange(from, to, index);
                 } else if (filterProduct.equals(filterProduct)) {
