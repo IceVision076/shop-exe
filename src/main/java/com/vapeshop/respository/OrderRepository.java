@@ -121,6 +121,39 @@ public class OrderRepository {
         return true;
     }
 
+
+    //------------payment online order
+    public static String createPaymentOrder(Order cart, User user) {
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "INSERT INTO [Order] (order_id,user_id,create_date,delivery_date,status,voucher_id,address ) values\n" +
+                    "(?,?,?,?,?,?,?)";
+            String orderID = getOrderId();
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, orderID) ;
+            stmt.setString(2, user.getId());
+            stmt.setObject(3, LocalDateTime.now());
+            stmt.setString(4, null);
+            stmt.setObject(5, "1");
+            stmt.setString(6, cart.getDiscountCode());
+            stmt.setString(7, user.getAddress());
+            /**
+             * 0 la dang xu ly - cod
+             * 1 la dang xu ly - ck
+             * 2 da xu ly
+             * 3 huy
+             * 4 da giao hang thanh cong :D
+             */
+            stmt.executeUpdate();
+            con.close();
+            createOrderDetail(cart, orderID);
+            return orderID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Loi method createOrder(Cart cart, User user) trong OrderRepository.java ");
+        }
+        return null;
+    }
     public static ArrayList<Items> getOrder(String OrderId) {
         try {
             ArrayList<Items> orderedList = new ArrayList<>();
