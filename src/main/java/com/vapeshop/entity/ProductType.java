@@ -14,6 +14,8 @@ public class ProductType {
     private ArrayList<ImageProduct> imageProducts;
     private char typeStatus;
     private int realAmount;
+
+    private int selledAmount;
     public ProductType() {
         this.imageProducts = new ArrayList<>();
     }
@@ -112,6 +114,14 @@ public class ProductType {
 
     public void setTypeStatus(char typeStatus) {
         this.typeStatus = typeStatus;
+    }
+
+    public int getSelledAmount() {
+        return selledAmount;
+    }
+
+    public void setSelledAmount(int selledAmount) {
+        this.selledAmount = selledAmount;
     }
 
     public int getRealAmount() {
