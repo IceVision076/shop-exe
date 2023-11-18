@@ -322,7 +322,30 @@ public class StatisticalRespository {
                     "         join [Order] o on od.order_id = o.order_id\n" +
                     "where o.status = '4'\n" +
                     "  and MONTH(o.create_date) = ?\n" +
-                    "  and YEAR(o.create_date) = YEAR(DATEADD(MONTH, -1, GETDATE()));";
+                    "  and YEAR(o.create_date) = YEAR( GETDATE());";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement statement = con.prepareStatement(query);
+
+            for (int i = 1; i < 13; i++) {
+                statement.setString(1, i + "");
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) moneyWithMonth.getEachMonths().get(i - 1).setTotalMoney(resultSet.getDouble(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return moneyWithMonth;
+    }
+
+    public static MoneyWithMonth totalMoneyOnEachMonthLastYear() {
+        MoneyWithMonth moneyWithMonth = new MoneyWithMonth();
+        try {
+            String query = "select sum(amount * price_at_purchase)\n" +
+                    "from OrderDetail od\n" +
+                    "         join [Order] o on od.order_id = o.order_id\n" +
+                    "where o.status = '4'\n" +
+                    "  and MONTH(o.create_date) = ?\n" +
+                    "  and YEAR(o.create_date) = YEAR(DATEADD(YEAR, -1, GETDATE()));";
             Connection con = DBConnect.getConnection();
             PreparedStatement statement = con.prepareStatement(query);
 

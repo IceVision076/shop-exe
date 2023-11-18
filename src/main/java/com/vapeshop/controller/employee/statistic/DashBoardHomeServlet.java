@@ -24,6 +24,7 @@ public class DashBoardHomeServlet extends HttpServlet {
         double totalMoneyOnMonth = StatisticalRespository.totalMoneyOnMonth();
         double totalMoneyToday = StatisticalRespository.totalMoneyToday();
         MoneyWithMonth moneyWithMonth = StatisticalRespository.totalMoneyOnEachMonth();
+        MoneyWithMonth moneyWithMonthLastYear = StatisticalRespository.totalMoneyOnEachMonthLastYear();
         int totalEmployeeWorking = StatisticalRespository.totalEmployeeWorking();
         ArrayList<ProductType> top5ProductTypeBestSellOnMonth = StatisticalRespository.top5ProductTypeBestSellOnMonth();
         double totalMoneyJuiceInYear = StatisticalRespository.totalMoneyJuiceInYear();
@@ -32,6 +33,8 @@ public class DashBoardHomeServlet extends HttpServlet {
         double totalMoneyBeforeYear = StatisticalRespository.totalMoneyBeforeYear();
         double totalMoneyVapeInYear = StatisticalRespository.totalMoneyVapeInYear();
         int totalCustomerIsLocked= StatisticalRespository.totalCustomerIsLocked();
+
+        request.setAttribute("moneyWithMonthLastYear", moneyWithMonthLastYear);
 
         request.setAttribute("productAmountChart", productAmountChart);
         request.setAttribute("totalUser", totalUser);
