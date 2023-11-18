@@ -64,22 +64,22 @@
                     <div class="row pt-3 col-12 kt-left">
                         <div class="col-md-6">
                             <h3>Thông tin khách hàng</h3>
-                            <div>
-                                <p>${sessionScope.user.fullName}</p>
-                                <p>Số điện thoại: ${sessionScope.user.phone}</p>
-                                <p>Địa chỉ: ${sessionScope.user.address}</p>
-                                <p>Email: ${sessionScope.user.email}</p>
+                            <div class="my-3">
+                                <h6> Họ Và Tên: ${sessionScope.user.fullName}</h6>
+                                <h6>Số Điện Thoại: ${sessionScope.user.phone}</h6>
+                                <h6>Địa Chỉ: ${sessionScope.user.address}</h6>
+                                <h6>Email: ${sessionScope.user.email}</h6>
                             </div>
-                            <div class=" border-top pt-2 border-2 border-primary d-flex justify-content-between" style="width: 90%">
-                                <span>Tổng giá trị sản phẩm:</span>
+                            <div class="pt-2 d-flex justify-content-between" style="width: 90%;border-top: 2px solid #448c8f">
+                                <h5>Tổng giá trị sản phẩm:</h5>
                                 <strong style="font-size:18px;font-weight:500">${orderedCart.getThanhTienStringAfterPurchase(0)}<i class="text-success">VND</i></strong>
                             </div>
                             <div class=" d-flex justify-content-between" style="width: 90%">
-                                <span>Phí vận chuyển:</span>
+                                <h5>Phí vận chuyển:</h5>
                                 <strong style="font-size:18px;font-weight:500">30000<i class="text-success">VND</i></strong>
                             </div>
                             <div class="mb-sm-5 border-top pt-2 mt-3 d-flex justify-content-between" style="width: 90%">
-                                <span>Tổng cộng:</span>
+                                <h5>Tổng cộng:</h5>
                                 <c:if test="${orderedCart.discountCode == null}">
                                     <strong style="font-size:18px;font-weight:500">${orderedCart.getThanhTienStringAfterPurchase(30000)}<i class="text-success">VND</i></strong>
                                 </c:if>

@@ -57,8 +57,8 @@
         </div>
         <div class="row">
             <c:forEach items="${posterListTop}" var="plt">
-                <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="ProductServlet"><img src="${plt.imgUrl}" class="rounded-circle img-fluid border" style="width: 350px;height: 350px;object-fit: cover"></a>
+                <div class="col-12 col-md-4 p-5 mt-3 d-flex flex-column align-items-center product-month">
+                    <a href="ProductServlet"><img src="${plt.imgUrl}" class="rounded-circle img-thumbnail border"></a>
                     <h5 class="text-center mt-3 mb-3">vapes and essential oils</h5>
                     <p class="text-center"><a class="btn btn-success" href="ProductServlet">Go Shop</a></p>
                 </div>

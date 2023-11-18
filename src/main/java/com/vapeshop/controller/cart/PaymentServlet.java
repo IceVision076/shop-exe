@@ -17,12 +17,15 @@ public class PaymentServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         Order cart = (Order) session.getAttribute("cart");
+        if (cart.getCart().size()==0){
+            response.sendRedirect("cart.jsp");
+        }else {
+            double paymentPrice = cart.getThanhTien(30000);
 
-        double paymentPrice = cart.getThanhTien(30000);
+            request.setAttribute("paymentPrice", paymentPrice);
 
-        request.setAttribute("paymentPrice",paymentPrice);
-
-        request.getRequestDispatcher("vnpay_pay.jsp").forward(request,response);
+            request.getRequestDispatcher("vnpay_pay.jsp").forward(request, response);
+        }
     }
 
 
