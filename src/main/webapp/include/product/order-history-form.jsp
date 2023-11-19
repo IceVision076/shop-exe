@@ -67,11 +67,11 @@
 
                             <td width="15%">
                                 <c:if test="${i.discountCode == null}">
-                                    ${i.getThanhTienStringAfterPurchase(30000)}
+                                    ${i.getThanhTienStringAfterPurchase(30000)}<i class="text-success">VND</i>
                                 </c:if>
                                 <c:if test="${i.discountCode != null}">
-                                    <del>${i.getThanhTienStringAfterPurchase(30000)}</del>
-                                    ${i.getThanhTienStringAfterPurchaseDiscount(30000)}
+                                    <del>${i.getThanhTienStringAfterPurchase(30000)}</del><i class="text-success">VND</i>
+                                    ${i.getThanhTienStringAfterPurchaseDiscount(30000)}<i class="text-success">VND</i>
                                 </c:if>
                             </td>
                             <td width="15%">

@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="include/header-footer/header.jsp"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value = "en_US"/>
 
 
 
-    <!-- Modal -->
+<!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="w-100 pt-1 mb-5 text-right">
@@ -95,7 +97,7 @@
                                         <i class="text-warning fa fa-star"></i>
                                         <i class="text-warning fa fa-star"></i>
                                     </li>
-                                    <li class="text-muted text-right">${ptl.typePrice}<i class="text-warning">VND</i></li>
+                                    <li class="text-muted text-right"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${ptl.typePrice}" /><i class="text-success">VND</i></li>
                                 </ul>
                                 <a href="shop-single.html" class="h2 text-decoration-none text-dark">${ptl.product.productName}</a>
                                     <p class="card-text ">${ptl.product.brand}</p>

@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="include/product/product-Header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value = "en_US"/>
 
 <!-- Start Content -->
 <div class="container py-5">
@@ -30,16 +32,19 @@
                     <ul id="collapseTwo" class="collapse list-unstyled pl-3">
                         <li><a class="text-decoration-none"
                                href="ProductServlet?filterProduct=rangePrice&priceFrom=0&priceTo=100000">Less than
-                            100000 <i class="text-success">VND</i></a></li>
+                            <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "100000" /> <i class="text-success">VND</i>
+                        </a></li>
                         <li><a class="text-decoration-none"
-                               href="ProductServlet?filterProduct=rangePrice&priceFrom=100000&priceTo=200000">100000 -
-                            200000 <i class="text-success">VND</i></a></li>
+                               href="ProductServlet?filterProduct=rangePrice&priceFrom=100000&priceTo=200000">
+                            <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "100000" /> - <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "200000" /> <i class="text-success">VND</i>
+                        </a></li>
                         <li><a class="text-decoration-none"
-                               href="ProductServlet?filterProduct=rangePrice&priceFrom=200000&priceTo=500000">200000
-                            -500000 <i class="text-success">VND</i></a></li>
+                               href="ProductServlet?filterProduct=rangePrice&priceFrom=200000&priceTo=500000"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "200000" /> - <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "500000" /> <i class="text-success">VND</i>
+                        </a></li>
                         <li><a class="text-decoration-none"
-                               href="ProductServlet?filterProduct=rangePrice&priceFrom=500000&priceTo=10000000">More
-                            than 500000 <i class="text-success">VND</i></a></li>
+                               href="ProductServlet?filterProduct=rangePrice&priceFrom=500000&priceTo=10000000">More than
+                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "500000" /> <i class="text-success">VND</i>
+                        </a></li>
                     </ul>
                 </li>
             </ul>
@@ -102,7 +107,8 @@
                                         <i class="text-muted fa fa-star"></i>
                                     </li>
                                 </ul>
-                                <p class="text-center mb-0">${pl.typePrice}<i class="text-success">VND</i></p>
+                                <p class="text-center mb-0"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${pl.typePrice}" /> <i class="text-success">VND</i>
+                                </p>
                             </div>
                         </div>
                     </div>

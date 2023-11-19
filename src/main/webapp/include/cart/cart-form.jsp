@@ -7,6 +7,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <div class="cart-page">
   <style>
@@ -252,7 +253,7 @@
                       <p >Phân loại:${item.productType.typeName}</p>
                     </div>
                   </td>
-                  <td>${item.productType.getPriceString()}<i class="text-success">VND</i></td>
+                  <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${item.productType.getPriceString()}" /><i class="text-success">VND</i></td>
                   <td>
                     <div class="qty d-flex">
                       <form action="changeammount">
@@ -328,7 +329,7 @@
                   </form>
 
                   <p>Tạm tính: <span>${sessionScope.cart.getThanhTienString(0)}<i class="text-success">VND</i></span></p>
-                  <p>Tiền ship: <span>30000 ${discountPercent}</span><i class="text-success">VND</i></p>
+                  <p>Tiền ship: <span><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "30000" /> ${discountPercent}</span><i class="text-success">VND</i></p>
                   <c:if test="${sessionScope.cart.discountCode == null}">
                     <h2>Tổng cộng: <span>${sessionScope.cart.getThanhTienString(30000)}</span><i class="text-success">VND</i></h2>
                   </c:if>

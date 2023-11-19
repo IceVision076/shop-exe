@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="include/product/product-Header.jsp"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <title>Vape Shop - Product Details</title>
 
 <!-- Open Content -->
@@ -97,7 +99,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2">${product.productName}</h1>
-                        <p class="h3 py-2" > <span id="product-price">${product.productTypes.get(0).typePrice}</span> <i class="text-success">VND</i></p>
+                        <p class="h3 py-2" > <span id="product-price"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${product.productTypes.get(0).typePrice}" /><i class="text-success">VND</i></span></p>
                         <p class="py-2">
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
@@ -221,7 +223,7 @@
                                     <i class="text-muted fa fa-star"></i>
                                 </li>
                             </ul>
-                            <p class="text-center mb-0">${pta.typePrice}<i class="text-success">VND</i></p>
+                            <p class="text-center mb-0"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${pta.typePrice}" /><i class="text-success">VND</i></p>
                         </div>
                     </div>
                 </div>
