@@ -6,11 +6,13 @@ import com.vapeshop.entity.Product;
 import com.vapeshop.entity.ProductType;
 import com.vapeshop.entity.User;
 import com.vapeshop.entity.statistic.MoneyWithMonth;
+import com.vapeshop.entity.statistic.MoneyWithWeek;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class StatisticalRespository {
@@ -360,11 +362,63 @@ public class StatisticalRespository {
         return moneyWithMonth;
     }
 
+    public static MoneyWithWeek totalMoneyOnEachWeek() {
+        MoneyWithWeek moneyWithWeek = new MoneyWithWeek();
+        try {
+            String query = "SET DATEFIRST 4 /* or use any other weird value to test it */\n" +
+                    "DECLARE @d         DATETIME\n" +
+                    "DECLARE @startdate DATE\n" +
+                    "DECLARE @enddate   DATE\n" +
+                    "SET @d = GETDATE()\n" +
+                    "SET @startdate = CONVERT(date, DATEADD(dd, 0 - (@@DATEFIRST + 5 + DATEPART(dw, @d)) % 7, @d))\n" +
+                    "SET @enddate = CONVERT(date, DATEADD(dd, 6 - (@@DATEFIRST + 5 + DATEPART(dw, @d)) % 7, @d))\n" +
+                    "select OD.order_id,create_date,sum(OD.amount*OD.price_at_purchase) as total\n" +
+                    "from [Order]\n" +
+                    "join OrderDetail OD on [Order].order_id = OD.order_id\n" +
+                    "where CONVERT(date,create_date) between @startdate and @enddate and status='4'\n" +
+                    "group by OD.order_id,create_date";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                LocalDateTime createDay = resultSet.getObject("create_date", LocalDateTime.class);
+                String dayOfWeek = createDay.getDayOfWeek().toString();
+                switch (dayOfWeek) {
+                    case "MONDAY":
+                        moneyWithWeek.getEachDays().get(1).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+                    case "TUESDAY":
+                        moneyWithWeek.getEachDays().get(2).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+                    case "WEDNESDAY":
+                        moneyWithWeek.getEachDays().get(3).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+                    case "THURSDAY":
+                        moneyWithWeek.getEachDays().get(4).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+                    case "FRIDAY":
+                        moneyWithWeek.getEachDays().get(5).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+                    case "SATURDAY":
+                        moneyWithWeek.getEachDays().get(6).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+                    case "SUNDAY":
+                        moneyWithWeek.getEachDays().get(0).setTotalMoney(resultSet.getDouble("total"));
+                        break;
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return moneyWithWeek;
+    }
+
     //Số nhân viên đang làm việc
 
 
     public static void main(String[] args) {
-//        top5ProductTypeBestSellOnMonth().stream().forEach(System.out::println);
-        totalMoneyOnEachMonth().getEachMonths().stream().forEach(System.out::println);
+    totalMoneyOnEachWeek().getEachDays().stream().forEach(System.out::println);
     }
 }

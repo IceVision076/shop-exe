@@ -2,6 +2,7 @@ package com.vapeshop.controller.employee.statistic;
 
 import com.vapeshop.entity.ProductType;
 import com.vapeshop.entity.statistic.MoneyWithMonth;
+import com.vapeshop.entity.statistic.MoneyWithWeek;
 import com.vapeshop.respository.employee.StatisticalRespository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,10 +33,11 @@ public class DashBoardHomeServlet extends HttpServlet {
         double totalMoneyInYear = StatisticalRespository.totalMoneyInYear();
         double totalMoneyBeforeYear = StatisticalRespository.totalMoneyBeforeYear();
         double totalMoneyVapeInYear = StatisticalRespository.totalMoneyVapeInYear();
-        int totalCustomerIsLocked= StatisticalRespository.totalCustomerIsLocked();
+        int totalCustomerIsLocked = StatisticalRespository.totalCustomerIsLocked();
+        MoneyWithWeek moneyWithWeek = StatisticalRespository.totalMoneyOnEachWeek();
 
         request.setAttribute("moneyWithMonthLastYear", moneyWithMonthLastYear);
-
+        request.setAttribute("moneyWithWeek", moneyWithWeek);
         request.setAttribute("productAmountChart", productAmountChart);
         request.setAttribute("totalUser", totalUser);
         //
