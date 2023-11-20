@@ -319,8 +319,8 @@ public class ProductRespository {
         try {
             String query = "insert into Product(Id, product_name, brand, detail, origin, status)\n" +
                     "values (?,?,?,?,?,?)\n" +
-                    "insert into ProductType(Id, product_id, name, price)\n" +
-                    "values (?,?,?,?)\n" +
+                    "insert into ProductType(Id, product_id, name, price,status)\n" +
+                    "values (?,?,?,?,?)\n" +
                     "insert into ImageProduct(product_type_id, id, image_url)\n" +
                     "values (?,?,?)";
             Connection connection = DBConnect.getConnection();
@@ -335,9 +335,10 @@ public class ProductRespository {
             preparedStatement.setString(8, productType.getProductId());
             preparedStatement.setString(9, productType.getTypeName());
             preparedStatement.setDouble(10, productType.getTypePrice());
-            preparedStatement.setString(11, imageProduct.getProductTypeId());
-            preparedStatement.setString(12, getNewImgId());
-            preparedStatement.setString(13, imageProduct.getImageUrl());
+            preparedStatement.setString(11, "1");
+            preparedStatement.setString(12, imageProduct.getProductTypeId());
+            preparedStatement.setString(13, getNewImgId());
+            preparedStatement.setString(14, imageProduct.getImageUrl());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -372,7 +373,7 @@ public class ProductRespository {
     public static void addNewProductType(ProductType productType) {
 
         try {
-            String query = "INSERT INTO ProductType (Id, product_id, name, price) values (?,?,?,?)\n" +
+            String query = "INSERT INTO ProductType (Id, product_id, name, price,status) values (?,?,?,?,?)\n" +
                     "insert into ImageProduct (product_type_id, id, image_url) values (?,?,?) ";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -380,9 +381,10 @@ public class ProductRespository {
             preparedStatement.setString(2, productType.getProductId());
             preparedStatement.setString(3, productType.getTypeName());
             preparedStatement.setDouble(4, productType.getTypePrice());
-            preparedStatement.setString(5, productType.getProductTypeId());
-            preparedStatement.setString(6, getNewImgId());
-            preparedStatement.setString(7, productType.getImageProducts().get(0).getImageUrl());
+            preparedStatement.setString(5, "1");
+            preparedStatement.setString(6, productType.getProductTypeId());
+            preparedStatement.setString(7, getNewImgId());
+            preparedStatement.setString(8, productType.getImageProducts().get(0).getImageUrl());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {

@@ -590,7 +590,68 @@
             </div>
         </div>
 
+        <div class="row my-4">
+            <div class="col-12 mb-md-0 mb-4 ">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-7">
+                                <h6 class="text-lg">Top 10 người mua hóa đơn có giá trị cao</h6>
 
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder ">
+                                        Id khách hàng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder  ps-2">
+                                        Tên khách hàng
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder ">
+                                       Tổng tiền mua
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${top10MostPurchased.userPurchaseds}" var="u">
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-lg">${u.user.id}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="font-weight-bold">${u.user.fullName}</p>
+                                        </td>
+                                        <td class=" text-center ">
+                                            <p class="text-lg font-weight-bold">
+                                                <fmt:formatNumber type="number" maxFractionDigits="3"
+                                                                  value="${u.total}"/> <span
+                                                    class="text-success">VNĐ</span>
+
+                                            </p>
+                                        </td>
+
+                                    </tr>
+                                </c:forEach>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row my-4" >
             <div class="col-12 card mb-3">
                 <div class="card-header">

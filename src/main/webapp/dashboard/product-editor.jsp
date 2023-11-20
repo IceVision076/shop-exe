@@ -316,7 +316,7 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link"
+                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                                      href="product-management?page=${i}">${i}</a></li>
                                         </c:if>
 
@@ -356,48 +356,48 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="productName" class="form-label">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="productName" name="productName"
+                                <label for="productName" class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
+                                <input pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,100}$" type="text" class="form-control" id="productName" name="productName"
                                        value="${product.productName}" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+
                                 <div class="invalid-feedback">
-                                    You must agree before submitting.
+                                    Vui lòng nhập tên sản phẩm, tên sản phẩm có độ dài tối đa là 100 kí tự
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="brand" class="form-label">Nhãn hàng</label>
+                                <label for="brand" class="form-label">Nhãn hàng<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="brand" name="brand" value="${product.brand}"
+                                       pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
                                        required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+
                                 <div class="invalid-feedback">
-                                    You must agree before submitting.
+                                    Vui lòng nhập nhãn hàng, nhãn hàng có độ dài tối đa là 50 kí tự
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="origin" class="form-label">Xuất xứ</label>
+                                <label for="origin" class="form-label">Xuất xứ<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="origin" name="origin"
-                                       value="${product.origin}" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                                       value="${product.origin}" required
+                                       pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
+                                >
+
                                 <div class="invalid-feedback">
-                                    You must agree before submitting.
+                            Vui lòng nhập xuất xứ, xuất xứ có độ dài tối đa là 50 kí tự
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="status" class="form-label">Trạng thái</label>
+                                <label for="status" class="form-label">Trạng thái<span class="text-danger">*</span></label>
                                 <select class="form-select" name="status" id="status">
                                     <option value="1">Đang bán</option>
                                     <option value="0">Dừng bán</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label for="detail" class="form-label">Mô tả sản phẩm</label>
+                                <label for="detail" class="form-label">Mô tả sản phẩm<span class="text-danger">*</span></label>
                                 <textarea cols="30" rows="10" class="form-control" id="detail" name="detail"
                                           required>${product.detail}</textarea>
 
@@ -405,7 +405,7 @@
                                     Looks good!
                                 </div>
                                 <div class="invalid-feedback">
-                                    You must agree before submitting.
+                                   Vui lòng nhập mô tả sản phẩm
                                 </div>
                             </div>
 

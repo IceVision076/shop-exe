@@ -170,16 +170,16 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder ">Tên
                                         sản phẩm
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder  ps-2">
                                         Nhãn hàng
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">
                                         Xuất xứ
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">
                                         Trạng thái
                                     </th>
                                     <th class="text-secondary opacity-7"></th>
@@ -238,6 +238,7 @@
 
                                 </tbody>
                             </table>
+
                             <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                                 <ul class="pagination">
 
@@ -255,7 +256,7 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link"
+                                            <li class="page-item "><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                                      href="product-management?page=${i}">${i}</a></li>
                                         </c:if>
 

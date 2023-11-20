@@ -288,7 +288,7 @@
 
                   <c:forEach var="i" begin="${page-1}" end="${page+1}">
                     <c:if test="${i>=1&&i<=maxPage}">
-                      <li class="page-item"><a class="page-link"
+                      <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                href="service-success?page=${i}">${i}</a></li>
                     </c:if>
 

@@ -7,6 +7,7 @@ import com.vapeshop.entity.ProductType;
 import com.vapeshop.entity.User;
 import com.vapeshop.entity.statistic.MoneyWithMonth;
 import com.vapeshop.entity.statistic.MoneyWithWeek;
+import com.vapeshop.entity.statistic.Top10MostPurchased;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -385,25 +386,32 @@ public class StatisticalRespository {
                 String dayOfWeek = createDay.getDayOfWeek().toString();
                 switch (dayOfWeek) {
                     case "MONDAY":
-                        moneyWithWeek.getEachDays().get(1).setTotalMoney(resultSet.getDouble("total"));
+                        double moneyMonday= moneyWithWeek.getEachDays().get(1).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(1).setTotalMoney(resultSet.getDouble("total")+moneyMonday);
                         break;
                     case "TUESDAY":
-                        moneyWithWeek.getEachDays().get(2).setTotalMoney(resultSet.getDouble("total"));
+                        double moneyTuesday= moneyWithWeek.getEachDays().get(2).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(2).setTotalMoney(resultSet.getDouble("total")+moneyTuesday);
                         break;
                     case "WEDNESDAY":
-                        moneyWithWeek.getEachDays().get(3).setTotalMoney(resultSet.getDouble("total"));
+                        double moneyWednesday= moneyWithWeek.getEachDays().get(3).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(3).setTotalMoney(resultSet.getDouble("total")+moneyWednesday);
                         break;
                     case "THURSDAY":
-                        moneyWithWeek.getEachDays().get(4).setTotalMoney(resultSet.getDouble("total"));
+                        double moneyThursday= moneyWithWeek.getEachDays().get(4).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(4).setTotalMoney(resultSet.getDouble("total")+moneyThursday);
                         break;
                     case "FRIDAY":
-                        moneyWithWeek.getEachDays().get(5).setTotalMoney(resultSet.getDouble("total"));
+                        double moneyFriday= moneyWithWeek.getEachDays().get(5).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(5).setTotalMoney(resultSet.getDouble("total")+moneyFriday);
                         break;
                     case "SATURDAY":
-                        moneyWithWeek.getEachDays().get(6).setTotalMoney(resultSet.getDouble("total"));
+                        double moneySaturday= moneyWithWeek.getEachDays().get(6).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(6).setTotalMoney(resultSet.getDouble("total")+moneySaturday);
                         break;
                     case "SUNDAY":
-                        moneyWithWeek.getEachDays().get(0).setTotalMoney(resultSet.getDouble("total"));
+                        double moneySunday= moneyWithWeek.getEachDays().get(0).getTotalMoney();
+                        moneyWithWeek.getEachDays().get(0).setTotalMoney(resultSet.getDouble("total")+moneySunday);
                         break;
 
                 }
@@ -415,10 +423,40 @@ public class StatisticalRespository {
         return moneyWithWeek;
     }
 
-    //Số nhân viên đang làm việc
+    // lấy top 10 người mua đơn có giá trị cao
+    public static Top10MostPurchased top10MostPurchased() {
+        Top10MostPurchased top10MostPurchased = new Top10MostPurchased();
+        try {
+            String query = "select top 10 UserInfo.id, full_name, SUM(OD.price_at_purchase * OD.amount) AS 'total'\n" +
+                    "from UserInfo\n" +
+                    "         join [Order] on UserInfo.id = [Order].user_id\n" +
+                    "         join OrderDetail OD on [Order].order_id = OD.order_id\n" +
+                    "where [Order].status = '4'\n" +
+                    "  and DATEPART(MONTH, create_date) = datepart(MONTH, GETDATE())\n" +
+                    "  and DATEPART(YEAR , create_date) = datepart(YEAR, GETDATE())\n" +
+                    "group by UserInfo.id, full_name\n" +
+                    "order by total desc ;";
+            Connection connection = DBConnect.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String userId = resultSet.getString("id");
+                String fullName = resultSet.getString("full_name");
+                double total = resultSet.getDouble("total");
+                User user = new User();
+                user.setId(userId);
+                user.setFullName(fullName);
+                top10MostPurchased.addUserPurchased(user, total);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return top10MostPurchased;
+    }
 
 
     public static void main(String[] args) {
-    totalMoneyOnEachWeek().getEachDays().stream().forEach(System.out::println);
+        top10MostPurchased().getUserPurchaseds().stream().forEach(System.out::println);
     }
 }
