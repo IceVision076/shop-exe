@@ -24,6 +24,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="include/header-product-management-dashboard.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en_US"/>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -161,7 +176,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng loại sản phẩm (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng loại sản phẩm (Trang ${page}/${maxPage})</h6>
                         <a href="product-type-create?productId=${product.idProduct}"
                            class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse" style="color: #d31798;"> <span
                                 style="font-family: Courier;font-size: 20px;">Thêm loại sản phẩm mới</span> </a>
@@ -173,13 +188,17 @@
                                 <tr>
 
                                     <th></th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder">
                                         Tên loại sản phẩm
                                     </th>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        giá
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder ">
+                                        Giá
                                     </th>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder text-center ">
+                                        Số lượng còn lại
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
@@ -198,15 +217,38 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${p.typeName}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${p.productTypeId}</p>
+                                                    <h6 class="mb-0 text-lg">${p.typeName}</h6>
+                                                    <p class="text-lg text-secondary mb-0">${p.productTypeId}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${p.typePrice}</p>
+                                            <p class="text-lg font-weight-bold mb-0" style="color: orange">
+                                                <fmt:formatNumber type="number"
+                                                                  maxFractionDigits="3" value="${p.typePrice}"/> <span
+                                                    class="text-success">VND</span></p>
                                         </td>
+                                        <td>
+                                            <c:if test="${p.realAmount<=10}">
+                                                <p class="text-lg font-weight-bold mb-0 text-center"
+                                                   style="color: #e8070e"><fmt:formatNumber type="number"
+                                                                                            maxFractionDigits="3"
+                                                                                            value="${p.realAmount}"/>
+                                                    <span><i class="fa-solid fa-circle-exclamation fa-sm"
+                                                             style="color: #e62e00;"></i></span></p>
+                                            </c:if>
 
+
+                                            <c:if test="${p.realAmount>10}">
+                                                <p class="text-lg font-weight-bold mb-0 text-center"
+                                                   style="color: #0bff7e"><fmt:formatNumber type="number"
+                                                                                           maxFractionDigits="3"
+                                                                                           value="${p.realAmount}"/>
+                                                    <span><i class="fa-solid fa-circle-check fa-sm"
+                                                             style="color: #0be023;"></i></span></p>
+                                            </c:if>
+
+                                        </td>
                                             <%--                                        Modal thay đổi thông tin--%>
                                         <td class="align-middle">
                                             <!-- Button trigger modal -->
@@ -225,7 +267,8 @@
                                                                 phẩm ${p.productTypeId}</h4>
                                                             <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close">
-                                                                <i class="fa-solid fa-xmark fa-lg" style="color: #f00000;"></i>
+                                                                <i class="fa-solid fa-xmark fa-lg"
+                                                                   style="color: #f00000;"></i>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body p-2">
@@ -233,29 +276,34 @@
                                                             <form class="row g-3 needs-validation p-2" novalidate
                                                                   action="product-type-update" method="post">
                                                                 <div class="col-12">
-                                                                    <label for="name" class="form-label">Tên sản
+                                                                    <label for="name" class="form-label text-lg">Tên sản
                                                                         phẩm</label>
                                                                     <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control text-lg"
+                                                                               maxlength="50"
                                                                                id="name" name="name"
                                                                                value="${p.typeName}" required>
-                                                                        <div class="invalid-feedback">
-                                                                            Tên không được bỏ trống
+                                                                        <div class="invalid-feedback text-lg">
+                                                                            Tên sản phẩm không được để trống và tối đa
+                                                                            50 kí tự
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <label for="price" class="form-label">Giá sản
+                                                                    <label for="price" class="form-label text-lg">Giá
+                                                                        sản
                                                                         phẩm</label>
                                                                     <div class="input-group has-validation">
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="number"
+                                                                               class="form-control text-lg"
                                                                                id="price" name="price"
                                                                                value="${p.typePrice}" required>
-                                                                        <div class="invalid-feedback">
+                                                                        <div class="invalid-feedback text-lg">
                                                                             Vui lòng điền giá hợp lệ
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                                 <div class="col-12">
                                                                     <div class="input-group has-validation">
                                                                         <input type="hidden" class="form-control"
@@ -291,6 +339,8 @@
 
                                         <td><a href="product-import?productTypeId=${p.productTypeId}"
                                                class="btn btn-behance">Nhập hàng</a></td>
+                                        <td><a href="product-import?productTypeId=${p.productTypeId}"
+                                               class="btn btn-dribbble">Dừng bán</a></td>
                                     </tr>
 
 
@@ -316,8 +366,9 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                                     href="product-management?page=${i}">${i}</a></li>
+                                            <li class="page-item"><a
+                                                    class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                    href="product-management?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -345,7 +396,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Chỉnh sửa thông tin sản phẩm</h6>
+                        <h6 class="text-lg">Chỉnh sửa thông tin sản phẩm</h6>
                         <h6 class="bg-success text-white">${mess}</h6>
                     </div>
                     <div class="p-5">
@@ -356,61 +407,62 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="productName" class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
+                                <label for="productName" class="form-label text-lg">Tên sản phẩm <span
+                                        class="text-danger">*</span></label>
                                 <input pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
-fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,100}$" type="text" class="form-control" id="productName" name="productName"
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,100}$"
+                                       type="text" class="form-control text-lg" id="productName" name="productName"
                                        value="${product.productName}" required>
 
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback text-lg">
                                     Vui lòng nhập tên sản phẩm, tên sản phẩm có độ dài tối đa là 100 kí tự
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="brand" class="form-label">Nhãn hàng<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="brand" name="brand" value="${product.brand}"
+                                <label for="brand" class="form-label text-lg">Nhãn hàng<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control text-lg" id="brand" name="brand"
+                                       value="${product.brand}"
                                        pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
 fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
                                        required>
 
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback text-lg">
                                     Vui lòng nhập nhãn hàng, nhãn hàng có độ dài tối đa là 50 kí tự
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="origin" class="form-label">Xuất xứ<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="origin" name="origin"
+                                <label for="origin" class="form-label text-lg">Xuất xứ<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control text-lg" id="origin" name="origin"
                                        value="${product.origin}" required
                                        pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
-fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
-                                >
-
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$">
                                 <div class="invalid-feedback">
-                            Vui lòng nhập xuất xứ, xuất xứ có độ dài tối đa là 50 kí tự
+                                    Vui lòng nhập xuất xứ, xuất xứ có độ dài tối đa là 50 kí tự
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="status" class="form-label">Trạng thái<span class="text-danger">*</span></label>
-                                <select class="form-select" name="status" id="status">
+                                <label for="status" class="form-label text-lg">Trạng thái<span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select text-lg" name="status" id="status">
                                     <option value="1">Đang bán</option>
                                     <option value="0">Dừng bán</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label for="detail" class="form-label">Mô tả sản phẩm<span class="text-danger">*</span></label>
-                                <textarea cols="30" rows="10" class="form-control" id="detail" name="detail"
+                                <label for="detail" class="form-label text-lg">Mô tả sản phẩm<span
+                                        class="text-danger">*</span></label>
+                                <textarea cols="30" rows="10" class="form-control text-lg" id="detail" name="detail"
+                                          maxlength="1000"
                                           required>${product.detail}</textarea>
-
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                   Vui lòng nhập mô tả sản phẩm
+                                <div class="invalid-feedback text-lg">
+                                    Vui lòng nhập mô tả sản phẩm
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Lưu thông tin sản phẩm</button>
+                                <button class="btn btn-primary text-lg" type="submit">Lưu thông tin sản phẩm</button>
                             </div>
                         </form>
                     </div>

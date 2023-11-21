@@ -96,7 +96,7 @@ public class OrderRepository {
         }
         return null;
     }
-//get ammount cua item la so luong trong gio hang :D
+    //get ammount cua item la so luong trong gio hang :D
     public static boolean createOrderDetail(Order cart, String orderId) {
         System.out.println("=>>>>....>>>>>>>>>>>>>>>>>>>>>>>" + orderId);
         System.out.println(cart.getCart());
@@ -187,19 +187,19 @@ public class OrderRepository {
             stmt.setString(1, orderdetailId);
             ResultSet results = stmt.executeQuery();
             if (results.next()) {
-                    String id = results.getString(1); //id la productTypeId
-                    String productId = results.getString(2);
-                    String name = results.getString(3);
-                    double price = results.getDouble(4);
+                String id = results.getString(1); //id la productTypeId
+                String productId = results.getString(2);
+                String name = results.getString(3);
+                double price = results.getDouble(4);
 
-                    String productTypeId = results.getString(6);
-                    String idImg = results.getString(7);
-                    String imgUrl = results.getString(8);
-                    con.close();
-                    ImageProduct imageProduct = new ImageProduct(productTypeId,idImg,imgUrl);
+                String productTypeId = results.getString(6);
+                String idImg = results.getString(7);
+                String imgUrl = results.getString(8);
+                con.close();
+                ImageProduct imageProduct = new ImageProduct(productTypeId,idImg,imgUrl);
                 ArrayList<ImageProduct> urls = new ArrayList<>();
-                    urls.add(imageProduct);
-                    return new ProductType(id,productId,name,price,urls);
+                urls.add(imageProduct);
+                return new ProductType(id,productId,name,price,urls);
 
             }
             con.close();

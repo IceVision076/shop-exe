@@ -76,7 +76,7 @@ public class PosterListRespository {
         ArrayList<Poster> pt = PosterListRespository.getTop3BannerImg();
 
         for (Poster p: pt
-             ) {
+        ) {
             System.out.println(p);
         }
     }

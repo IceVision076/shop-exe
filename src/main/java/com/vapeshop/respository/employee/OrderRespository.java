@@ -297,7 +297,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1,orderId);
+            preparedStatement.setString(1,orderId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) status = resultSet.getString(1).charAt(0);
             connection.close();
@@ -315,7 +315,7 @@ public class OrderRespository {
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderId);
-             preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();

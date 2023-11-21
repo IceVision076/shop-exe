@@ -158,7 +158,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng sản phẩm (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng sản phẩm (Trang ${page}/${maxPage})</h6>
                         <a href="product-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
                            style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm  sản phẩm mới</span>
                         </a>
@@ -170,16 +170,16 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder ">Tên
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder ">Tên
                                         sản phẩm
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder  ps-2">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder  ps-2">
                                         Nhãn hàng
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder ">
                                         Xuất xứ
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder ">
                                         Trạng thái
                                     </th>
                                     <th class="text-secondary opacity-7"></th>
@@ -200,20 +200,20 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${p.productName}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${p.idProduct}</p>
+                                                    <h6 class="mb-0 text-lg">${p.productName}</h6>
+                                                    <p class="text-lg text-secondary mb-0">${p.idProduct}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${p.brand}</p>
+                                            <p class="text-lg font-weight-bold mb-0">${p.brand}</p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${p.origin}</span>
+                                            <span class="text-secondary text-lg font-weight-bold">${p.origin}</span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center text-lg">
 
                                             <c:if test="${p.status==1}">
                                                 <span class="badge badge-sm bg-gradient-success ">Đang bán</span>
@@ -226,7 +226,7 @@
                                         </td>
                                         <td class="align-middle">
                                             <a href="product-editor?productID=${p.idProduct}"
-                                               class="text-secondary font-weight-bold text-xs btn btn-warning"
+                                               class="text-secondary font-weight-bold text-lg btn btn-warning"
                                                data-toggle="tooltip" data-original-title="Edit user">
                                                 Chỉnh sửa
                                             </a>

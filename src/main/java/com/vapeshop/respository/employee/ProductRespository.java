@@ -162,6 +162,7 @@ public class ProductRespository {
 
 
                 ProductType productType = new ProductType(id, productId, name, price);
+                remainingAmountUpdate(productType);
                 productType.setImageProducts(getImgProductType(id));
                 list.add(productType);
             }
@@ -521,6 +522,50 @@ public class ProductRespository {
         return amount;
     }
 
+    public static void  remainingAmountUpdate(ProductType productType){
+
+        try {
+            String query ="    select dbo.remainingAmount(?) as remaining_amount";
+        Connection connection=DBConnect.getConnection();
+        PreparedStatement  preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1,productType.getProductTypeId());
+        ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()) {
+              int remainingAmount=  resultSet.getInt("remaining_amount");
+              productType.setRealAmount(remainingAmount);
+            }
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void  updateContinueSellProductType(String productTypeId){
+
+        try {
+            String query ="UPDATE ProductType set status='1' where Id=?";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement  preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,productTypeId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void  updateStopSellProductType(String productTypeId){
+
+        try {
+            String query ="UPDATE ProductType set status='0' where Id=?";
+            Connection connection=DBConnect.getConnection();
+            PreparedStatement  preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,productTypeId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
 
