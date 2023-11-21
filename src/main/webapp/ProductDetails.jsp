@@ -129,7 +129,7 @@
                                             <select id="product" name="product" onchange="calculatePrice()">
                                                 <option value="" >Select a type</option>
                                                 <c:forEach items="${product.productTypes}" var="pdt">
-                                                    <option id="optiontype" value="${pdt.productTypeId}">${pdt.typeName}
+                                                    <option id="optiontype" value="${pdt.productTypeId}">${pdt.typeName},Con lai ${pdt.getRealAmount()}
                                                     </option>
                                                 </c:forEach>
                                             </select>
