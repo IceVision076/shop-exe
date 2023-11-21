@@ -6,11 +6,11 @@
     <div class="row">
 
         <div class="col-lg-4 mb-5">
-            <div class="card border border-primary">
+            <div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
                         <img src="https://bizweb.dktcdn.net/100/438/408/files/anh-chan-dung-dep-yodyvn1.jpg?v=1683537734987"
-                             alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                             alt="Admin" class="rounded-circle p-1 bg-primary" width="110" height="110" style="object-fit: cover">
                         <div class="mt-3">
                             <h4>${sessionScope.user.fullName}</h4>
                         </div>
@@ -51,14 +51,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 border border-primary  card">
+        <div class="col-lg-8 mb-5 pt-2 card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
 
             <form action="update-profile" method="post" class="card-body  g-3 needs-validation " novalidate>
-
-
                 <div class="row g-3 ">
                     <div class="col-md-12 ">
-                        <label for="fullname" class="form-label">Tên</label>
+                        <h3 class="text-center">Thông Tin Của Bạn</h3>
+                        <label for="fullname" class="form-label">Tên:</label>
                         <div class="input-group has-validation">
                             <input maxlength="50" type="text" class="form-control" id="fullname" name="fullname"
                                    aria-describedby="inputGroupPrepend" value="${sessionScope.user.fullName}" required>
@@ -68,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="phone" class="form-label">Số điện thoại </label>
+                        <label for="phone" class="form-label">Số điện thoại: </label>
                         <div class="input-group has-validation">
                             <input maxlength="11" minlength="10" pattern="^\d{10,11}$" type="text" class="form-control"
                                    id="phone" name="phone" aria-describedby="inputGroupPrepend" value="${sessionScope.user.phone}" required>
@@ -78,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="address" class="form-label">Address</label>
+                        <label for="address" class="form-label">Address:</label>
                         <div class="input-group has-validation">
                             <input maxlength="50" type="text" class="form-control" id="address" name="address"
                                    aria-describedby="inputGroupPrepend" value="${sessionScope.user.address}" required>

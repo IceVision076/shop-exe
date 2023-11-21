@@ -8,9 +8,10 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Tạo mới đơn hàng</title>
+        <title>Đơn Hàng Của Bạn</title>
         <!-- Bootstrap core CSS -->
         <link href="assets/asset/bootstrap.min.css" rel="stylesheet"/>
+        <link href="assets/asset/vn_pay.css" rel="stylesheet"/>
         <!-- Custom styles for this template -->
         <link href="assets/asset/jumbotron-narrow.css" rel="stylesheet">
         <script src="assets/asset/jquery-1.11.3.min.js"></script>
@@ -21,9 +22,9 @@
          <div class="container">
            <div class="header clearfix">
 
-                <h3 class="text-muted">VNPAY DEMO</h3>
+                <h3 class="text-muted text-center">VapeShop Payment</h3>
             </div>
-            <h3>Tạo mới đơn hàng</h3>
+            <h3>Đơn Hàng Của Bạn</h3>
             <div class="table-responsive">
                 <form action="/VapeShope_war_exploded/vnpayajax" id="frmCreateOrder" method="post">
                     <div class="form-group">
@@ -64,7 +65,7 @@
                 &nbsp;
             </p>
             <footer class="footer">
-                <p>&copy; VNPAY 2020</p>
+                <p>&copy; VapeShop Payment</p>
             </footer>
         </div>
           

@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="include/product/product-Header.jsp"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <title>Vape Shop - Product Details</title>
 
 <!-- Open Content -->
@@ -36,7 +38,7 @@
                                 <div class="row">
                                         <c:forEach items="${product.productTypes}" var="ip">
                                             <c:forEach items="${ip.imageProducts}" var="img">
-                                                <div class="col-4">
+                                                <div class="col-4 mb-4">
                                                     <a href="#">
                                                         <img class="card-img img-fluid" src="${img.imageUrl}" alt="Product Image 1">
                                                     </a>
@@ -52,7 +54,7 @@
                                 <div class="row">
                                     <c:forEach items="${product.productTypes}" var="ip">
                                         <c:forEach items="${ip.imageProducts}" var="img">
-                                            <div class="col-4">
+                                            <div class="col-4 mb-4">
                                                 <a href="#">
                                                     <img class="card-img img-fluid" src="${img.imageUrl}" alt="Product Image 1">
                                                 </a>
@@ -68,7 +70,7 @@
                                 <div class="row">
                                     <c:forEach items="${product.productTypes}" var="ip">
                                         <c:forEach items="${ip.imageProducts}" var="img">
-                                            <div class="col-4">
+                                            <div class="col-4 mb-4">
                                                 <a href="#">
                                                     <img class="card-img img-fluid" src="${img.imageUrl}" alt="Product Image 1">
                                                 </a>
@@ -97,7 +99,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2">${product.productName}</h1>
-                        <p class="h3 py-2" > <span id="product-price">${product.productTypes.get(0).typePrice}</span> <i class="text-warning">VND</i></p>
+                        <p class="h3 py-2" > <span id="product-price"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${product.productTypes.get(0).typePrice}" /><i class="text-success">VND</i></span></p>
                         <p class="py-2">
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
@@ -172,6 +174,7 @@
             </div>
         </div>
     </div>
+    </div>
 </section>
 <!-- Close Content -->
 
@@ -198,8 +201,10 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}" class="h3 text-decoration-none">${pta.product.productName}</a>
-                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                            <div  style="white-space: nowrap;width: 100%;overflow: hidden;text-overflow: clip;">
+                                <a href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}" class="h3 text-decoration-none">${pta.product.productName}</a>
+                            </div>
+                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-3">
                                 <li>${pta.typeName}</li>
                                 <li class="pt-2">
                                     <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
@@ -218,7 +223,7 @@
                                     <i class="text-muted fa fa-star"></i>
                                 </li>
                             </ul>
-                            <p class="text-center mb-0">${pta.typePrice}<i class="text-warning">VND</i></p>
+                            <p class="text-center mb-0"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${pta.typePrice}" /><i class="text-success">VND</i></p>
                         </div>
                     </div>
                 </div>
