@@ -20,10 +20,6 @@ public class ShowProductDetails extends HttpServlet {
         String alo = req.getParameter("message");
         String brand = req.getParameter("brand");
         String idProduct = req.getParameter("idProduct");
-//
-//        if (message == null) {
-//            message = "";
-//        }
          Product product = ProductRepository.getProductByID(idProduct);
         ArrayList<ProductType> productTypeArrayList = ProductRepository.getProductByBrand(brand,idProduct);
         System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+"alo"+brand+idProduct+"<<<<<<<<<<<<<<<<<<<<<<<");

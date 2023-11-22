@@ -7,6 +7,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <div class="cart-page">
   <style>
@@ -246,14 +247,13 @@
               <c:forEach var="item" items="${sessionScope.cart.cart}">
                 <tr>
                   <td>
-                    <div class="img">
-                      <img src="${item.productType.getImageProducts().get(0).imageUrl}" alt="Image">
-                      <p>${item.productType.product.productName}</p>
-                      <br>
-                      Phân loại :  <p>${item.productType.typeName}</p>
+                    <div class="img ">
+                      <img src="${item.productType.getImageProducts().get(0).imageUrl}" alt="Image" >
+                      <p >${item.productType.product.productName}</p>
+                      <p >Phân loại:${item.productType.typeName}</p>
                     </div>
                   </td>
-                  <td>${item.productType.getPriceString()} </td>
+                  <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${item.productType.getPriceString()}" /><i class="text-success">VND</i></td>
                   <td>
                     <div class="qty d-flex">
                       <form action="changeammount">
@@ -268,7 +268,7 @@
                       </form>
                     </div>
                   </td>
-                  <td>${item.getPriceString()}</td>
+                  <td>${item.getPriceString()}<i class="text-success">VND</i></td>
                   <td>
                     <form action="changeammount">
                       <input name="delete" value="${item.productType.productTypeId}" type="hidden">
@@ -328,13 +328,13 @@
                     <%--                                        <button type="submit" class="btn btn-primary">Gửi</button>--%>
                   </form>
 
-                  <p>Tạm tính: <span>${sessionScope.cart.getThanhTienString(0)}</span></p>
-                  <p>Tiền ship: <span>30000 ${discountPercent}</span></p>
+                  <p>Tạm tính: <span>${sessionScope.cart.getThanhTienString(0)}<i class="text-success">VND</i></span></p>
+                  <p>Tiền ship: <span><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "30000" /> ${discountPercent}</span><i class="text-success">VND</i></p>
                   <c:if test="${sessionScope.cart.discountCode == null}">
-                    <h2>Tổng cộng: <span>${sessionScope.cart.getThanhTienString(30000)}</span></h2>
+                    <h2>Tổng cộng: <span>${sessionScope.cart.getThanhTienString(30000)}</span><i class="text-success">VND</i></h2>
                   </c:if>
                   <c:if test="${sessionScope.cart.discountCode != null}">
-                    <h2>Tổng cộng<span><del>${sessionScope.cart.getThanhTienString(30000)}</del>  ${sessionScope.cart.getThanhTienStringDiscount(30000)}</span></h2>
+                    <h2>Tổng cộng<span><del>${sessionScope.cart.getThanhTienString(30000)}</del><i class="text-success">VND</i>  ${sessionScope.cart.getThanhTienStringDiscount(30000)}</span><i class="text-success">VND</i></h2>
                   </c:if>
                 </div>
                 <div class="cart-btn">
