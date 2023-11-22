@@ -235,6 +235,7 @@
               <thead class="thead-dark">
               <tr>
                 <th>Sản phẩm</th>
+                <th>Phân Loại</th>
                 <th>Giá</th>
                 <th>Số lượng</th>
                 <th>Tạm tính</th>
@@ -249,9 +250,11 @@
                   <td>
                     <div class="img ">
                       <img src="${item.productType.getImageProducts().get(0).imageUrl}" alt="Image" >
-                      <p >${item.productType.product.productName}</p>
-                      <p >Phân loại:${item.productType.typeName}</p>
+                      <p>${item.productType.product.productName}</p>
                     </div>
+                  </td>
+                  <td>
+                    <p>${item.productType.typeName}</p>
                   </td>
                   <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${item.productType.getPriceString()}" /><i class="text-success">VND</i></td>
                   <td>
@@ -290,8 +293,8 @@
               <div class="col-md-12">
                 <div class="coupon">
                   <%--                                mã giảm giá ở đây :))))))))))))))))))))))0--%>
-                  <input type="text" placeholder="Coupon Code" name="discountID">
-                  <input class="button" type="submit" value="Apply Code">
+                  <input type="text" placeholder="Nhập mã giảm giá" name="discountID">
+                  <input class="button" type="submit" value="Áp dụng mã">
                 </div>
               </div>
               <div class = "col-md-12">

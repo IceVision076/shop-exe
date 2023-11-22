@@ -84,10 +84,10 @@
                         <a class="nav-link" href="about.html">Thông Tin Cửa Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductServlet">Của Hàng</a>
+                        <a class="nav-link" href="ProductServlet">Cửa Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="service-tracking-sender">Dịch Vụ</a>
+                        <a class="nav-link" href="service-intro.jsp">Dịch Vụ</a>
                     </li>
                     <li>
                         <div class="nav-item dropdown">

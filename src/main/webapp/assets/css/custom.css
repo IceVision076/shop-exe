@@ -1,6 +1,28 @@
 .product-month img{
-    width: 300px;
+    width: 100px;
     height: 300px;
     object-fit: cover;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+/*!* Media queries for responsiveness *!*/
+/*@media (max-width: 767px) {*/
+/*    .product-month img{*/
+/*        margin-bottom: 2rem;*/
+/*        width: 100px;*/
+/*        height: 150px;*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 768px) and (max-width: 991px) {*/
+/*    .product-month img{*/
+/*        width: 200px;*/
+/*        height: 200px;*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 992px) {*/
+/*    .product-month img{*/
+/*        width: 300px;*/
+/*        height: 300px;    }*/
+/*}*/

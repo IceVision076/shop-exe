@@ -120,7 +120,7 @@
                     <c:if test="${tag>1}">
                         <li class="page-item ">
                             <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="${url}index=${tag-1}"
-                               tabindex="-1">Previous</a>
+                               tabindex="-1"><i class="text-dark fas fa-chevron-left"></i></a>
                         </li>
                     </c:if>
                     <c:if test="${endPage >3}">
@@ -141,7 +141,7 @@
                     </c:if>
                     <c:if test="${tag<endPage}">
                         <li class="page-item">
-                            <a class="page-link rounded-0 shadow-sm  text-dark " href="${url}index=${tag+1}">Next</a>
+                            <a class="page-link rounded-0 shadow-sm  text-dark " href="${url}index=${tag+1}"><i class="text-dark fas fa-chevron-right"></i></a>
                         </li>
                     </c:if>
                 </ul>
