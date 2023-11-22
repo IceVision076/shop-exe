@@ -159,9 +159,10 @@ public class ProductRespository {
                 String productId = rs.getString(2);
                 String name = rs.getString(3);
                 double price = rs.getDouble(4);
-
+                char status=rs.getString("status").charAt(0);
 
                 ProductType productType = new ProductType(id, productId, name, price);
+                productType.setTypeStatus(status);
                 remainingAmountUpdate(productType);
                 productType.setImageProducts(getImgProductType(id));
                 list.add(productType);

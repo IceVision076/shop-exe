@@ -8,6 +8,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="include/header-product-management-dashboard.jsp" %>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -173,10 +186,12 @@
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
                                     <input type="text" class="form-control" placeholder="Nhập tên loại sản phẩm"
-                                           id="typeName" name="typeName"
+                                           id="typeName" name="typeName" maxlength="50"
+                                           pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
+fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
                                            required>
                                     <div class="invalid-feedback">
-                                        Tên không được bỏ trống
+                                        Tên không được bỏ trống và có tối đa 50 kí tự
                                     </div>
                                 </div>
                             </div>
@@ -186,11 +201,13 @@
                                 <label for="price" class="form-label">Giá loại sản phẩm <span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="price" name="price"
-                                           placeholder="Nhập giá loại sản phẩm" required>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                           placeholder="Nhập giá loại sản phẩm"
+                                           min="10000" max="999999999"
+                                           required>
                                     <div class="invalid-feedback">
-                                        Vui lòng điền giá hợp lệ
-                                    </div>
+                                        Vui lòng điền giá hợp lệ, tối thiểu 10,000đ và tối đa 999,999,999đ
+                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -198,9 +215,9 @@
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
                                     <input type="file" class="form-control" id="image_url" name="image_url"
-                                           placeholder="Chọn ảnh từ máy tính" required>
+                                           placeholder="Chọn ảnh từ máy tính" accept=".jpg,.png,.gif" required>
                                     <div class="invalid-feedback">
-                                        Vui lòng tải ảnh
+                                        Vui lòng tải ảnh chứa đuôi: .jpg ,.png , .gif
                                     </div>
                                 </div>
                             </div>

@@ -339,8 +339,31 @@
 
                                         <td><a href="product-import?productTypeId=${p.productTypeId}"
                                                class="btn btn-behance">Nhập hàng</a></td>
-                                        <td><a href="product-import?productTypeId=${p.productTypeId}"
-                                               class="btn btn-dribbble">Dừng bán</a></td>
+                                        <td>
+                                            <c:if test="${p.typeStatus eq '1'.charAt(0)}">
+<%--                                                <a href="product-import?productTypeId=${p.productTypeId}"--%>
+<%--                                                   class="btn btn-danger">Dừng bán</a>--%>
+                                                <form action="update-status-product-type" method="post">
+                                                    <input type="hidden" name="productId" value="${product.idProduct}">
+                                                    <input type="hidden" name="page" value="${page}">
+                                                    <input type="hidden" name="productTypeId" value="${p.productTypeId}">
+                                                    <input type="hidden" name="choice" value="stop">
+                                                    <button type="submit" class="btn btn-danger" >Dừng bán</button>
+                                                </form>
+
+                                            </c:if>
+                                            <c:if test="${p.typeStatus eq '0'.charAt(0)}">
+<%--                                                <a href="product-import?productTypeId=${p.productTypeId}"--%>
+<%--                                                   class="btn btn-success">Bán lại</a>--%>
+                                                <form action="update-status-product-type" method="post">
+                                                    <input type="hidden" name="productId" value="${product.idProduct}">
+                                                    <input type="hidden" name="page" value="${page}">
+                                                    <input type="hidden" name="productTypeId" value="${p.productTypeId}">
+                                                    <input type="hidden" name="choice" value="continue">
+                                                    <button type="submit" class="btn btn-success" >Bán lại</button>
+                                                </form>
+                                            </c:if>
+                                        </td>
                                     </tr>
 
 
@@ -355,7 +378,7 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="product-management?page=${page-1}"
+                                            <a class="page-link" href="product-editor?productID=${product.idProduct}&page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -368,7 +391,7 @@
                                         <c:if test="${i>=1&&i<=maxPage}">
                                             <li class="page-item"><a
                                                     class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                    href="product-management?page=${i}">${i}</a></li>
+                                                    href="product-editor?productID=${product.idProduct}&page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -377,7 +400,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="product-management?page=${page+1}"
+                                            <a class="page-link" href="product-editor?productID=${product.idProduct}&page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>

@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "UpdateStatusProductTypeServlet", value = "/UpdateStatusProductTypeServlet")
+@WebServlet(name = "UpdateStatusProductTypeServlet", value = "/update-status-product-type")
 public class UpdateStatusProductTypeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,7 +18,8 @@ public class UpdateStatusProductTypeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String choice = request.getParameter("choice");
         String productTypeId = request.getParameter("productTypeId");
-
+        String productId=request.getParameter("productId");
+        String page=request.getParameter("page");
         if (choice.equals("stop")) {
             //stop
             ProductRespository.updateStopSellProductType(productTypeId);
@@ -26,5 +27,6 @@ public class UpdateStatusProductTypeServlet extends HttpServlet {
             //continue
             ProductRespository.updateContinueSellProductType(productTypeId);
         }
+        response.sendRedirect("product-editor?productID="+productId+"&page="+page);
     }
 }
