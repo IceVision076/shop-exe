@@ -24,7 +24,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header-product-management-dashboard.jsp" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en_US"/>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -42,7 +43,6 @@
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Nhập ở đây...">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -159,7 +159,8 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="text-center card-header pb-0">
-                        <h3>Thông tin đơn hàng <i class="fa-solid fa-cart-shopping fa-bounce" style="color: #0452d7;"></i></h3>
+                        <h3>Thông tin đơn hàng <i class="fa-solid fa-cart-shopping fa-bounce"
+                                                  style="color: #0452d7;"></i></h3>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -169,88 +170,107 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Mã hóa đơn</h6>
+                                                <h6 class="mb-0 text-lg">Mã hóa đơn</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">0192837416</h6>
+                                        <h6 class="mb-0 text-lg">${order.orderId}</h6>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Tên khách hàng</h6>
+                                                <h6 class="mb-0 text-lg">Tên khách hàng</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">#####</h6>
+                                        <h6 class="mb-0 text-lg">${order.user.fullName}</h6>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Ngày tạo đơn</h6>
+                                                <h6 class="mb-0 text-lg">Ngày tạo đơn</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">####</h6>
+                                        <h6 class="mb-0 text-lg">${order.createDate}</h6>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-lg">Trạng thái đơn</h6>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 text-lg">
+                                            <c:if test="${order.status eq '0'.charAt(0)}">
+                                                <h6 class="text-warning m-1 p-0">Đang xử lý - COD</h6>
+                                            </c:if>
+                                            <c:if test="${order.status eq '1'.charAt(0)}">
+                                                <h6 class="text-warning m-1 p-0">Đang xử lý - CK</h6>
+                                            </c:if>
+                                            <c:if test="${order.status eq '2'.charAt(0)}">
+                                                <h6 class="text-primary m-1 p-0">Đã xử lý</h6>
+                                            </c:if>
+                                            <c:if test="${order.status eq '3'.charAt(0)}">
+                                                <h6 class="text-danger m-1 p-0">Đã Hủy</h6>
+                                            </c:if>
+                                            <c:if test="${order.status eq '4'.charAt(0)}">
+                                                <h6 class="text-success m-1 p-0">Giao Hàng Thành Công</h6>
+                                            </c:if>
+                                            <c:if test="${order.status eq '5'.charAt(0)}">
+                                                <h6 class="text-danger m-1 p-0">Giao Hàng thất bại</h6>
+                                            </c:if>
+                                        </h6>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Ngày giao hàng</h6>
-                                                <p class="text-xs text-secondary mb-0">(Ngày giao hàng dự kiến)</p>
+                                                <h6 class="mb-0 text-lg">Mã khuyến mã</h6>
+
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">######</h6>
+                                        <h6 class="mb-0 text-lg">
+
+                                            <c:if test="${empty order.voucher.id}"> Không có mã khuyến mãi</c:if>
+                                            <c:if test="${not empty order.voucher.id}">
+                                                ${order.voucher.id}
+                                                (
+                                                <fmt:formatNumber value="${order.voucher.voucherPercent*100}"
+                                                                  maxFractionDigits="0"></fmt:formatNumber>
+                                                %
+                                                )
+                                            </c:if>
+                                        </h6>
+
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Trạng thái đơn</h6>
-                                                <p class="text-xs text-secondary mb-0">(Chưa giao - Đang giao - Đã giao)</p>
+                                                <h6 class="mb-0 text-lg">Địa chỉ giao hàng</h6>
+
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">#####</h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Mã khuyến mã</h6>
-                                                <p class="text-xs text-secondary mb-0">Voucher</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h6 class="mb-0 text-sm">#####</h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Địa chỉ</h6>
-                                                <p class="text-xs text-secondary mb-0">(Địa chỉ giao hàng cụ thể)</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h6 class="mb-0 text-sm">#####</h6>
+                                        <h6 class="mb-0 text-lg">${order.orderAddress}</h6>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -266,7 +286,8 @@
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0" style="height: auto">
                             <div class="text-center card-header pb-0 p-5">
-                                <h3>Thanh toán <i class="fa-solid fa-money-check-dollar fa-bounce" style="color: #0d55c9;"></i></h3>
+                                <h3>Thanh toán <i class="fa-solid fa-money-check-dollar fa-bounce"
+                                                  style="color: #0d55c9;"></i></h3>
                             </div>
                             <div class="container-fluid py-4">
                                 <div class="row">
@@ -277,193 +298,118 @@
                                                     <table class="table align-items-center mb-0">
                                                         <thead>
                                                         <tr>
-                                                            <th class="text-uppercase text-secondary text-xxl font-weight-bolder opacity-8"><i class="fa-regular fa-image fa-bounce" style="color: #0ee1ad;"></i> Hình ảnh</th>
-                                                            <th class="text-uppercase text-secondary text-xxl-start font-weight-bolder opacity-8"><i class="fa-brands fa-product-hunt fa-flip" style="color: #97e10e;"></i> Tên sản phẩm</th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxl-center font-weight-bolder opacity-8"><i class="fa-brands fa-quinscape fa-spin" style="color: #8de010;"></i> Giá tiền</th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxl-center font-weight-bolder opacity-8"><i class="fa-brands fa-quinscape fa-spin" style="color: #8de010;"></i> Số lượng</th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxl font-weight-bolder opacity-8"><i class="fa-solid fa-check fa-bounce" style="color: #d5340b;"></i> Thành tiền</th>
-                                                            <th class="text-secondary opacity-8"></th>
+                                                            <th class="text-uppercase text-secondary text-xxl font-weight-bolder ">
+                                                                <i class="fa-regular fa-image fa-bounce"
+                                                                   style="color: #0ee1ad;"></i> Hình ảnh
+                                                            </th>
+                                                            <th class="text-uppercase text-secondary text-xxl-start font-weight-bolder ">
+                                                                <i class="fa-brands fa-product-hunt fa-flip"
+                                                                   style="color: #97e10e;"></i> Tên sản phẩm
+                                                            </th>
+                                                            <th class="text-center text-uppercase text-secondary text-xxl-center font-weight-bolder ">
+                                                                <i class="fa-brands fa-quinscape fa-spin"
+                                                                   style="color: #8de010;"></i> Giá tiền
+                                                            </th>
+                                                            <th class="text-center text-uppercase text-secondary text-xxl-center font-weight-bolder ">
+                                                                <i class="fa-brands fa-quinscape fa-spin"
+                                                                   style="color: #8de010;"></i> Số lượng
+                                                            </th>
+                                                            <th class="text-center text-uppercase text-secondary text-xxl font-weight-bolder ">
+                                                                <i class="fa-solid fa-check fa-bounce"
+                                                                   style="color: #d5340b;"></i> Thành tiền
+                                                            </th>
+
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="align-middle text-center">
-                                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">John Michael</h6>
+
+                                                        <c:forEach items="${order.orderDetails}" var="od">
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="align-middle text-center">
+                                                                        <img src="${od.productType.imageProducts.get(0).imageUrl}"
+                                                                             class="avatar avatar-lg me-3" alt="user1">
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-faded-danger">x1</span>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="align-middle text-center">
-                                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">John Michael</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex px-2 py-1">
+                                                                        <div class="d-flex flex-column justify-content-center">
+                                                                            <h6 class="mb-0 text-lg">${od.productType.product.productName}</h6>
+                                                                            <p class="mb-0 text-lg">${od.productType.typeName}</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-faded-danger">x1</span>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="align-middle text-center">
-                                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-faded-danger">x1</span>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="align-middle text-center">
-                                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-faded-danger">x1</span>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="align-middle text-center">
-                                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-faded-danger">x1</span>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="align-middle text-center">
-                                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1">
-                                                                    <div class="d-flex flex-column justify-content-center">
-                                                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-faded-danger">x1</span>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                <span class="text-secondary text-xs font-weight-bold">100.000đ</span>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+                                                                </td>
+                                                                <td class="align-middle text-center">
+                                                                    <p class="text-secondary text-lg font-weight-bold">
+                                                                         <fmt:formatNumber type="number"
+                                                                                           maxFractionDigits="3" value=" ${od.priceAtPurchase}"/> <span
+                                                                            class="text-success">VND</span></p>
+                                                                           </p>
+                                                                </td>
+                                                                <td class="align-middle text-center text-lg">
+                                                                    <p class="badge badge-sm bg-gradient-faded-danger">${od.amount}</p>
+                                                                </td>
+                                                                <td class="align-middle text-center">
+                                                                    <p class="text-secondary text-lg font-weight-bold">
+                                                                             <fmt:formatNumber type="number"
+                                                                                               maxFractionDigits="3" value="${od.priceAtPurchase*od.amount}"/> <span
+                                                                            class="text-success">VND</span></p>
+                                                                           </p>
+                                                                </td>
+
+                                                            </tr>
+                                                        </c:forEach>
+
                                                         </tbody>
                                                     </table>
                                                     <div class="col-12" style="overflow-x: hidden">
-                                                        <div class="row text-uppercase" style="height: auto; overflow-x: hidden ">
-                                                            <div class="col-7 right-text align-middle p-2" style="background-color: #E8EFFF; border-radius: 20px 5px 5px 30px">
-                                                                <h6 class="fw-bold fst-italic" style="margin-left: 5%; font-family: 'Roboto', sans-serif">ghi chú:</h6>
+                                                        <div class="row text-uppercase"
+                                                             style="height: auto; overflow-x: hidden ">
+                                                            <div class="col-7 right-text align-middle p-2"
+                                                                 style="background-color: #E8EFFF; border-radius: 20px 5px 5px 30px">
+                                                                <h6 class="fw-bold fst-italic"
+                                                                    style="margin-left: 5%; font-family: 'Roboto', sans-serif">
+                                                                    ghi chú:</h6>
+                                                                <p class="text-bold text-2xl" style="padding-left: 100px">
+                                                                    <c:if test="${empty order.voucher.id}">
+                                                                        Chưa áp mã giảm giá
+                                                                    </c:if>
+                                                                    <c:if test="${not empty order.voucher.id}">
+                                                                       Đã áp mã giảm giá   <fmt:formatNumber value="${order.voucher.voucherPercent*100}"
+                                                                                                             maxFractionDigits="0"></fmt:formatNumber>
+                                                                        %
+                                                                    </c:if>
+                                                                </p>
                                                             </div>
-                                                            <div class="col-5 left-text align-middle text-center p-2" style="background:#F26969; border-radius: 5px 20px 30px 5px;">
-                                                                <h6 style="color: whitesmoke; font-family: 'Roboto', sans-serif">tổng:</h6>
-                                                                <span class="font-italic font-weight-bold text-2xl" style="font-family: Algerian; color: whitesmoke">100.000đ</span>
+                                                            <div class="col-5 left-text align-middle text-center p-2"
+                                                                 style="background:#F26969; border-radius: 5px 20px 30px 5px;">
+                                                                <h6 style="color: whitesmoke; font-family: 'Roboto', sans-serif">
+                                                                    tổng:</h6>
+                                                                <span class="font-italic font-weight-bold text-2xl"
+                                                                      style="font-family: Algerian; color: whitesmoke">
+                                                                    <c:set var="sum" value="0" scope="page">
+                                                                    </c:set>
+                                                                    <c:if test="${empty order.voucher.id}">
+                                                                        <c:forEach items="${order.orderDetails}"
+                                                                                   var="od">
+                                                                            <c:set var="sum"
+                                                                                   value="${sum + od.priceAtPurchase*od.amount}"
+                                                                                   scope="page">
+                                                                            </c:set>
+                                                                        </c:forEach>
+                                                                        ${sum}
+                                                                    </c:if><c:if test="${not empty order.voucher.id}">
+                                                                    <c:forEach items="${order.orderDetails}"
+                                                                               var="od">
+                                                                        <c:set var="sum"
+                                                                               value="${sum + od.priceAtPurchase*od.amount}"
+                                                                               scope="page">
+                                                                        </c:set>
+                                                                    </c:forEach>
+                                                                    ${sum*order.voucher.voucherPercent}
+                                                                </c:if>
+
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>

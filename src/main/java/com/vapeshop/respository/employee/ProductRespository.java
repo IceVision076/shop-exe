@@ -159,7 +159,7 @@ public class ProductRespository {
                 String productId = rs.getString(2);
                 String name = rs.getString(3);
                 double price = rs.getDouble(4);
-                char status=rs.getString("status").charAt(0);
+                char status = rs.getString("status").charAt(0);
 
                 ProductType productType = new ProductType(id, productId, name, price);
                 productType.setTypeStatus(status);
@@ -483,9 +483,9 @@ public class ProductRespository {
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, productTypeId);
-            preparedStatement.setInt(2,page);
+            preparedStatement.setInt(2, page);
             ResultSet rs = preparedStatement.executeQuery();
-            list=new ArrayList<>();
+            list = new ArrayList<>();
             while (rs.next()) {
                 String lotId = rs.getString("lot_id");
                 String lotName = rs.getString("lot_name");
@@ -503,6 +503,7 @@ public class ProductRespository {
 
         return list;
     }
+
     public static int getImportProductTypeAmount(String productTypeId) {
         int amount = 0;
         try {
@@ -523,53 +524,93 @@ public class ProductRespository {
         return amount;
     }
 
-    public static void  remainingAmountUpdate(ProductType productType){
+    public static void remainingAmountUpdate(ProductType productType) {
 
         try {
-            String query ="    select dbo.remainingAmount(?) as remaining_amount";
-        Connection connection=DBConnect.getConnection();
-        PreparedStatement  preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1,productType.getProductTypeId());
-        ResultSet resultSet=preparedStatement.executeQuery();
-            if(resultSet.next()) {
-              int remainingAmount=  resultSet.getInt("remaining_amount");
-              productType.setRealAmount(remainingAmount);
+            String query = "    select dbo.remainingAmount(?) as remaining_amount";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productType.getProductTypeId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int remainingAmount = resultSet.getInt("remaining_amount");
+                productType.setRealAmount(remainingAmount);
             }
             connection.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void  updateContinueSellProductType(String productTypeId){
-
-        try {
-            String query ="UPDATE ProductType set status='1' where Id=?";
-            Connection connection=DBConnect.getConnection();
-            PreparedStatement  preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,productTypeId);
-            preparedStatement.executeUpdate();
-            connection.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public static void  updateStopSellProductType(String productTypeId){
+    public static void updateContinueSellProductType(String productTypeId) {
 
         try {
-            String query ="UPDATE ProductType set status='0' where Id=?";
-            Connection connection=DBConnect.getConnection();
-            PreparedStatement  preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,productTypeId);
+            String query = "UPDATE ProductType set status='1' where Id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
             preparedStatement.executeUpdate();
             connection.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public static void updateStopSellProductType(String productTypeId) {
+
+        try {
+            String query = "UPDATE ProductType set status='0' where Id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static ProductType getProductTypeById(String productID) {
+        ProductType productType = null;
+        try {
+            String query = "SELECT ProductType.*,P.product_name\n" +
+                    "                    FROM ProductType\n" +
+                    "                        join Product P on P.Id = ProductType.product_id\n" +
+                    "                    where ProductType.id=?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productID);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+
+                String id = rs.getString(1);
+                String productId = rs.getString(2);
+                String name = rs.getString(3);
+                double price = rs.getDouble(4);
+                char status = rs.getString("status").charAt(0);
+                String productName = rs.getString("product_name");
+                Product product = new Product();
+                product.setProductName(productName);
+                productType = new ProductType(id, productId, name, price);
+                productType.setTypeStatus(status);
+                productType.setProduct(product);
+                productType.setImageProducts(getImgProductType(id));
+
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return productType;
+    }
+
 
     public static void main(String[] args) {
 
-        getImportList("A00000001A",1).stream().forEach(System.out::println);
+        getImportList("A00000001A", 1).stream().forEach(System.out::println);
     }
 }

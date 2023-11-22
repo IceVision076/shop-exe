@@ -1,9 +1,7 @@
 package com.vapeshop.respository.employee;
 
 import com.vapeshop.config.DBConnect;
-import com.vapeshop.entity.Items;
-import com.vapeshop.entity.Order;
-import com.vapeshop.entity.ServiceTracking;
+import com.vapeshop.entity.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -290,6 +288,7 @@ public class OrderRespository {
         }
         return amount;
     }
+
     public static char checkStatusOrder(String orderId) {
         char status = 0;
         try {
@@ -297,7 +296,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,orderId);
+            preparedStatement.setString(1, orderId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) status = resultSet.getString(1).charAt(0);
             connection.close();
@@ -322,6 +321,7 @@ public class OrderRespository {
         }
 
     }
+
     public static void updateWaitingCanceled(String orderId) {
 
         try {
@@ -337,6 +337,7 @@ public class OrderRespository {
         }
 
     }
+
     public static void updateAcceptedSuccess(String orderId) {
 
         try {
@@ -352,6 +353,7 @@ public class OrderRespository {
         }
 
     }
+
     public static void updateAcceptedFail(String orderId) {
 
         try {
@@ -368,11 +370,100 @@ public class OrderRespository {
 
     }
 
+    public static Order getOrderById(String orderId) {
+        Order order = new Order();
+        try {
+            String query = "select [Order].*,UI.full_name,vourcher_percent,voucher_id  from [Order]\n" +
+                    "       join UserInfo UI on [Order].user_id = UI.id\n" +
+                    "    left join Voucher on [Order].voucher_id = Voucher.id\n" +
+                    "where [Order].order_id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+
+
+                String userId = resultSet.getString("user_id");
+                LocalDateTime createDate = resultSet.getObject("create_date", LocalDateTime.class);
+                String orderAddress = resultSet.getString("address");
+                char status = resultSet.getString("status").charAt(0);
+                String voucherId = resultSet.getString("voucher_id");
+                double vourcherPercent = resultSet.getDouble("vourcher_percent"); //phan tram giam gia
+
+                String fullNameUser = resultSet.getString("full_name");
+
+                //user
+                User user = new User();
+                user.setFullName(fullNameUser);
+                user.setId(userId);
+
+                //voucher
+                Voucher voucher = new Voucher();
+                voucher.setId(voucherId);
+                voucher.setVoucherPercent(vourcherPercent);
+
+
+                //OrderDetail
+                ArrayList<OrderDetail> orderDetails = OrderRespository.getOrderdetailByOrderId(orderId);
+
+
+                //order
+                order.setOrderId(orderId);
+                order.setCreateDate(createDate);
+                order.setStatus(status);
+                order.setOrderAddress(orderAddress);
+
+                order.setUser(user);
+                order.setOrderDetails(orderDetails);
+                order.setVoucher(voucher);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
+
+
+    public static ArrayList<OrderDetail> getOrderdetailByOrderId(String orderId) {
+        ArrayList<OrderDetail> list = null;
+        try {
+            String query = "select * from OrderDetail where order_id = ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (resultSet.next()) {
+                OrderDetail orderDetail = new OrderDetail();
+
+                String productTypeId = resultSet.getString("product_type_id");
+                int amount = resultSet.getInt("amount");
+                double priceAtPurchase = resultSet.getDouble("price_at_purchase");
+
+                ProductType productType=ProductRespository.getProductTypeById(productTypeId);
+
+                orderDetail.setProductType(productType);
+                orderDetail.setOrderId(orderId);
+                orderDetail.setProductTypeId(productTypeId);
+                orderDetail.setAmount(amount);
+                orderDetail.setPriceAtPurchase(priceAtPurchase);
+                list.add(orderDetail);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 
     public static void main(String[] args) {
+        Order order = OrderRespository.getOrderById("0lbSoK6BNR");
+        System.out.println(order.getOrderId());
 
-//       orderWaitingPage(1).stream().forEach(System.out::println);
-        System.out.println(checkStatusOrder("0lbSoK6BNR"));
     }
 }

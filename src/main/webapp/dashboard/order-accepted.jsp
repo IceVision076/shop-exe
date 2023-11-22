@@ -256,7 +256,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng các đơn hàng đã xác nhận(Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng các đơn hàng đã xác nhận(Trang ${page}/${maxPage})</h6>
                         <p class="text-danger">
                             <c:if test="${error eq '1'}">
                                 Trạng thái đơn hàng gặp sự cố vui lòng kiểm tra lại
@@ -269,19 +269,19 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Mã đơn
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Id khách hàng
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
                                         Ngày đặt
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Mã giảm giá
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
 
@@ -295,30 +295,30 @@
                                     <tr>
                                         <td>
                                             <div class="text-xs font-weight-bold mb-0 text-center">
-                                                <h6 class="mb-0 text-sm">${o.orderId}</h6>
+                                                <a href="order-detail?orderId=${o.orderId}" class="mb-0 text-lg">${o.orderId}</a>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${o.userId}</h6>
+                                                    <h6 class="mb-0 text-lg">${o.userId}</h6>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${o.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</p>
+                                            <p class="text-lg font-weight-bold mb-0">${o.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold bg-warning badge ">
+                                            <span class="text-secondary text-lg font-weight-bold bg-warning badge ">
                                                     <c:if test="${o.voucherId==null}">Không áp dụng mã</c:if>
                                                <c:if test="${!o.voucherId==null}">  ${o.voucherId}</c:if>
                                                     </span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center text-lg">
 
 
                                             <c:if test="${o.status eq '2'.charAt(0)}">

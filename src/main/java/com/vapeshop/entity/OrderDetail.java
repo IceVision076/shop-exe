@@ -1,10 +1,14 @@
 package com.vapeshop.entity;
 
+import java.util.ArrayList;
+
 public class OrderDetail {
     private String orderId;
     private String productTypeId;
     private int amount;
     private double priceAtPurchase;
+
+    private ProductType productType;
 
     public OrderDetail() {
     }
@@ -46,6 +50,14 @@ public class OrderDetail {
 
     public void setPriceAtPurchase(double priceAtPurchase) {
         this.priceAtPurchase = priceAtPurchase;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
 
     @Override
