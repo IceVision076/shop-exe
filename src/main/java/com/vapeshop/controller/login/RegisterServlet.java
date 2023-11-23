@@ -63,7 +63,11 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("telephone");
         String status = request.getParameter("status");
         String avatarImg = request.getParameter("avatarImg");
+
         String address = request.getParameter("address");
+        String address1 = request.getParameter("address1");
+
+        String combineAdress = address1+", "+address ;
 
         String rePass = request.getParameter("rePass");
         UserRespository dao = new UserRespository();
@@ -90,7 +94,7 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else {
 
-            dao.Register(id, userName, passWord, fullName, email, role, phone, status, avatarImg, address);
+            dao.Register(id, userName, passWord, fullName, email, role, phone, status, avatarImg, combineAdress);
             response.sendRedirect("login.jsp");
         }
 
