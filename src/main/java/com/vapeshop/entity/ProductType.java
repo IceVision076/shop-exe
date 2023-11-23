@@ -16,6 +16,7 @@ public class ProductType {
     private int realAmount;
 
     private int selledAmount;
+
     public ProductType() {
         this.imageProducts = new ArrayList<>();
     }
@@ -104,7 +105,7 @@ public class ProductType {
         this.imageProducts = imageProducts;
     }
 
-    public String getPriceString () {
+    public String getPriceString() {
         return Double.toString(this.typePrice);
     }
 
@@ -125,9 +126,9 @@ public class ProductType {
     }
 
     public int getRealAmount() {
-        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>" + ProductRespository.getProductTypeRealAmount(this.productTypeId));
-        return ProductRespository.getProductTypeRealAmount(this.productTypeId);
-
+//        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>" + ProductRespository.getProductTypeRealAmount(this.productTypeId));
+//        return ProductRespository.getProductTypeRealAmount(this.productTypeId);
+        return realAmount;
     }
 
     public void setRealAmount(int realAmount) {

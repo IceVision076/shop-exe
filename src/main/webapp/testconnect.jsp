@@ -102,7 +102,7 @@
         <div class="col-10 offset-1">
             <div class="Message">
                 <input id="messageArea" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.."
-                       class="MsgInput"
+                       class="MsgInput" maxlength="100"
                        type="text">
 
 

@@ -158,7 +158,11 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6 class="text-lg">Bảng sản phẩm (Trang ${page}/${maxPage})</h6>
+                        <div>
+                            <h6 class="text-lg">Bảng sản phẩm (Trang ${page}/${maxPage})</h6>
+                            <span class="badge bg-danger"><a href="product-out-of-stock" class="text-white text-lg">Xem Sản phẩm gần hết hàng</a></span>
+                        </div>
+
                         <a href="product-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
                            style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm  sản phẩm mới</span>
                         </a>

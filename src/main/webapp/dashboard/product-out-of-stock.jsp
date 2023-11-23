@@ -1,13 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
   User: PC
-  Date: 10/11/2023
-  Time: 3:18 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%--
-  Created by IntelliJ IDEA.
-  User: PC
   Date: 9/29/2023
   Time: 2:16 PM
   To change this template use File | Settings | File Templates.
@@ -32,7 +25,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="include/header-product-management-dashboard.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
+<fmt:setLocale value="en_US"/>
 <style>
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -58,17 +51,15 @@
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí
                         sản phẩm</a>
                     </li>
-
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm sản phẩm mới</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí sản phẩm sắp hết hàng</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm</h6>
+                <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm sắp hết hàng </h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     
                 </div>
                 <ul class="navbar-nav  justify-content-end">
-
                     <li class="nav-item d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1"></i>
@@ -137,8 +128,7 @@
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                            <svg width="12px" height="12px"
-                                                 viewBox="0 0 43 36" version="1.1"
+                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                                                  xmlns="http://www.w3.org/2000/svg"
                                             >
                                                 <title>credit-card</title>
@@ -182,172 +172,144 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h4 style="font-family: Calibri;" class="text-center"><i
-                                class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Thêm lô sản
-                            phẩm mới( ${productTypeId} ) <i class="fa-solid fa-kiwi-bird fa-spin-pulse"
-                                                            style="color: #b01cba;"></i></h4>
+                        <h6 class="text-lg">Bảng loại sản phẩm sắp hết hàng (Trang ${page}/${maxPage})</h6>
 
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
-
-
-                        <form class="row g-3 needs-validation p-4" novalidate action="product-import"
-                              method="post" >
-                            <%--                      Tên lô--%>
-                            <div class="col-12">
-                                <label for="lotName" class="form-label text-lg">Tên lô sản phẩm<span
-                                        class="text-danger"> *</span></label>
-                                <div class="input-group has-validation">
-                                    <input maxlength="50" type="text" class="form-control text-lg"
-                                           placeholder="Nhập tên lô sản phẩm"
-                                           id="lotName" name="lotName"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Tên không được bỏ trống và không quá 50 kí tự
-                                    </div>
-                                </div>
-                            </div>
-                            <%--                      Số lượng--%>
-                            <div class="col-12">
-                                <label for="lotAmount" class="form-label text-lg">Số lượng <span
-                                        class="text-danger"> *</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="number" min="1" max="999999" class="form-control text-lg" id="lotAmount"
-                                           name="lotAmount"
-                                           placeholder="Nhập số lượng sản phẩm" required>
-                                    <div class="invalid-feedback">
-                                        Số lượng không để trống, tối thiểu 1 và không quá 999999
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <input type="hidden" name="productTypeId" value="${productTypeId}">
-                            </div>
-                                <div class="col-12">
-                                    <input type="hidden" name="page" value="${page}">
-                                </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Lưu <i
-                                        class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
-                            </div>
-                        </form>
-                        <div class="mx-5 mb-2">
-                            <a href="product-editor?productID=${productTypeId.substring(0,9)}"><i
-                                    class="fa-solid fa-arrow-left-long fa-2xl" style="color: #2e2bd4;"></i> Quay lại
-                                quản lí sản phẩm</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h4 style="font-family: Calibri;" class="text-center"><i
-                                class="fa-solid fa-kiwi-bird fa-spin-pulse" style="color: #b01cba;"></i> Danh sách lô sản phẩm ( ${productTypeId} ) <i class="fa-solid fa-kiwi-bird fa-spin-pulse"
-                                                            style="color: #b01cba;"></i></h4>
-
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                            <tr>
-
-                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">ID</th>
-                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
-                                    Tên lô hàng
-                                </th>
-
-                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
-                                    Ngày nhập hàng
-                                </th>
-                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-center">Số lượng</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${importProductList}" var="imp">
-
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
                                 <tr>
-                                    <td>
-                                            <p class="text-lg font-weight-bold mb-0">   ${imp.lotId}</p>
 
-                                    </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
+                                    <th></th>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder">
+                                        Tên loại sản phẩm
+                                    </th>
 
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-lg">${imp.lotName}</h6>
-                                                <p class="text-lg text-secondary mb-0">${imp.productTypeId}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-lg font-weight-bold mb-0">
-                                                ${imp.dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}
-                                    </td>
-                                    <td>
-                                        <p class="text-lg font-weight-bold mb-0 text-center">${imp.quantity}</p>
-                                    </td>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder ">
+                                        Giá
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder text-center ">
+                                        Số lượng còn lại
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
 
 
                                 </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${listProductType}" var="p">
+
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <img src="${p.imageProducts.get(0).imageUrl}" class="m-2 img-thumbnail "
+                                                     style="width: 100px;" alt="user1">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-lg">${p.typeName}</h6>
+                                                    <p class="text-lg text-secondary mb-0">${p.productTypeId}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-lg font-weight-bold mb-0" style="color: orange">
+                                                <fmt:formatNumber type="number"
+                                                                  maxFractionDigits="3" value="${p.typePrice}"/> <span
+                                                    class="text-success">VND</span></p>
+                                        </td>
+                                        <td>
+                                            <c:if test="${p.realAmount<=10}">
+                                                <p class="text-lg font-weight-bold mb-0 text-center"
+                                                   style="color: #e8070e"><fmt:formatNumber type="number"
+                                                                                            maxFractionDigits="3"
+                                                                                            value="${p.realAmount}"/>
+                                                    <span><i class="fa-solid fa-circle-exclamation fa-sm"
+                                                             style="color: #e62e00;"></i></span></p>
+                                            </c:if>
 
 
-                            </c:forEach>
+                                            <c:if test="${p.realAmount>10}">
+                                                <p class="text-lg font-weight-bold mb-0 text-center"
+                                                   style="color: #0bff7e"><fmt:formatNumber type="number"
+                                                                                            maxFractionDigits="3"
+                                                                                            value="${p.realAmount}"/>
+                                                    <span><i class="fa-solid fa-circle-check fa-sm"
+                                                             style="color: #0be023;"></i></span></p>
+                                            </c:if>
 
-                            </tbody>
-                        </table>
-                        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                            <ul class="pagination">
+                                        </td>
+                                            <%--                                        Modal thay đổi thông tin--%>
 
-                                <c:if test="${page>1}">
 
-                                    <li class="page-item">
-                                        <a class="page-link" href="product-import?productTypeId=${productTypeId}&page=${page-1}"
-                                           aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
+                                        <td><a href="product-import?productTypeId=${p.productTypeId}"
+                                               class="btn btn-behance">Nhập hàng</a></td>
 
-                                </c:if>
+                                    </tr>
 
-                                <c:forEach var="i" begin="${page-1}" end="${page+1}">
-                                    <c:if test="${i>=1&&i<=maxPage}">
-                                        <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                                 href="product-import?productTypeId=${productTypeId}&page=${i}">${i}</a></li>
-                                    </c:if>
 
                                 </c:forEach>
 
+                                </tbody>
+                            </table>
 
-                                <c:if test="${page<maxPage}">
-                                    <li class="page-item">
+                            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                                <ul class="pagination">
 
-                                        <a class="page-link" href="product-import?productTypeId=${productTypeId}&page=${page+1}"
-                                           aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </c:if>
+                                    <c:if test="${page>1}">
 
-                            </ul>
-                        </nav>
+                                        <li class="page-item">
+                                            <a class="page-link" href="product-out-of-stock?page=${page-1}"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
 
+                                    </c:if>
+
+                                    <c:forEach var="i" begin="${page-1}" end="${page+1}">
+                                        <c:if test="${i>=1&&i<=maxPage}">
+                                            <li class="page-item"><a
+                                                    class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                    href="product-out-of-stock?page=${i}">${i}</a></li>
+                                        </c:if>
+
+                                    </c:forEach>
+
+
+                                    <c:if test="${page<maxPage}">
+                                        <li class="page-item">
+
+                                            <a class="page-link" href="product-out-of-stock?page=${page+1}"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
 
-    <%@include file="include/footer-dashboard.jsp" %>
+        <%@include file="include/footer-dashboard.jsp" %>>
 
 
+        <%--Default select input--%>
+
+        <script>
+
+            const select = document.querySelector("select");
+            const option = select.querySelector("option[value='${product.status+""}']");
+
+            option.setAttribute("selected", true);
+        </script>

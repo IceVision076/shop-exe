@@ -41,7 +41,7 @@
         </div> 
         <script>
              function pay() {
-              window.location.href = "/VapeShope_war_exploded/vnpay_pay.jsp";
+              window.location.href = "/VapeShop_war_exploded/vnpay_pay.jsp";
             }
             function querydr() {
               window.location.href = "/vnpay_jsp/vnpay_querydr.jsp";

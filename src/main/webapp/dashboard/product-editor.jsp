@@ -58,10 +58,7 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
@@ -277,7 +274,7 @@
                                                                   action="product-type-update" method="post">
                                                                 <div class="col-12">
                                                                     <label for="name" class="form-label text-lg">Tên sản
-                                                                        phẩm</label>
+                                                                        phẩm <span class="text-danger">*</span></label>
                                                                     <div class="input-group has-validation">
                                                                         <input type="text" class="form-control text-lg"
                                                                                maxlength="50"
@@ -290,9 +287,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <label for="price" class="form-label text-lg">Giá
-                                                                        sản
-                                                                        phẩm</label>
+                                                                    <label for="price" class="form-label text-lg">
+                                                                        Giá sản phẩm <span class="text-danger">*</span></label>
                                                                     <div class="input-group has-validation">
                                                                         <input type="number"
                                                                                class="form-control text-lg"
@@ -435,6 +431,7 @@
                                 <input pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
 fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,100}$"
                                        type="text" class="form-control text-lg" id="productName" name="productName"
+                                       maxlength="100"
                                        value="${product.productName}" required>
 
                                 <div class="invalid-feedback text-lg">
@@ -446,7 +443,7 @@ fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒ�
                                 <label for="brand" class="form-label text-lg">Nhãn hàng<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control text-lg" id="brand" name="brand"
-                                       value="${product.brand}"
+                                       value="${product.brand}" maxlength="50"
                                        pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
 fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$"
                                        required>
@@ -459,6 +456,7 @@ fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒ�
                                 <label for="origin" class="form-label text-lg">Xuất xứ<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control text-lg" id="origin" name="origin"
                                        value="${product.origin}" required
+                                       maxlength="50"
                                        pattern="^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
 fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]{1,50}$">
                                 <div class="invalid-feedback">
