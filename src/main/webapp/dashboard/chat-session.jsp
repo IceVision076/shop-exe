@@ -114,20 +114,15 @@
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
           </li>
-          <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí
-            sản phẩm</a>
-          </li>
 
-          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm sản phẩm mới</li>
+
+          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Chat với khách hàng</li>
         </ol>
-        <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm</h6>
+        <h6 class="font-weight-bolder mb-0">Chat với khách hàng</h6>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group">
-            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-            <input type="text" class="form-control" placeholder="Type here...">
-          </div>
+       
         </div>
         <ul class="navbar-nav  justify-content-end">
 
@@ -243,7 +238,7 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h4 class="text-center">Chat với khách hàng</h4>
+            <h2 class="text-center">Chat với khách hàng</h2>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
 
@@ -260,7 +255,7 @@
                 <div class="col-10 offset-1">
                   <div class="Message">
                     <input id="messageArea" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput"
-                           type="text">
+                           type="text" maxlength="100">
 
 
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt"

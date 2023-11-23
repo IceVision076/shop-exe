@@ -28,9 +28,9 @@ public class ProductTypeCreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String productId=request.getParameter("productId");
         try {
-            String productId=request.getParameter("productId");
+
             String productTypeId=ProductRespository.getNewProductTypeId(productId);
             String typeName=request.getParameter("typeName");
             double typePrice= Double.parseDouble(request.getParameter("price"));
@@ -66,6 +66,6 @@ public class ProductTypeCreateServlet extends HttpServlet {
         }catch (Exception e){
          e.printStackTrace();
         }
-         response.sendRedirect("product-type-create");
+         response.sendRedirect("product-type-create?productId="+productId);
     }
 }

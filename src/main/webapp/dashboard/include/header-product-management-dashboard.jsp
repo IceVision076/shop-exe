@@ -38,8 +38,8 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
            aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
-           target="_blank">
+        <a class="navbar-brand m-0" href="dashboard-home"
+        >
             <img src="dashboard/assets/img/vape-icon.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">VapeShop Dashboard</span>
         </a>
@@ -51,7 +51,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lí của hàng</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="dashboard-home">
+                <a class="nav-link   " href="dashboard-home">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -134,6 +134,7 @@
                 </a>
             </li>
             <li class="nav-item">
+
                 <a class="nav-link <%= request.getRequestURI().contains("chat")? "active": "" %>  "
                    href="chat-list">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -169,7 +170,12 @@
                         </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Hỗ trợ khách hàng</span>
+                    <span class="nav-link-text ms-1 position-relative" id="amountChat">Hỗ trợ khách hàng
+
+<%--                                   <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">--%>
+<%--    <span class="visually-hidden">New alerts</span>--%>
+<%--  </span>--%>
+                    </span>
                 </a>
             </li>
 
@@ -352,3 +358,34 @@
     </div>
 
 </aside>
+
+<script>
+    setInterval(test, 10000);
+
+    function test() {
+        var amountChat= document.querySelector("#amountChat");
+        var nofi=document.createElement("span");
+        nofi.setAttribute("class","position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle")
+        const xhr = new XMLHttpRequest();
+
+
+        xhr.open("GET", "http://localhost:8111/VapeShop_war_exploded/chatamount", true);
+
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                console.log(data);
+          
+                if(data !== 0) amountChat.appendChild(nofi);
+                else amountChat.removeChild(nofi);
+            } else {
+                console.log("ERROR");
+            }
+        };
+    }
+
+</script>

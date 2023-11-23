@@ -265,7 +265,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng khách hàng (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng khách hàng (Trang ${page}/${maxPage})</h6>
 
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -273,26 +273,26 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th>Ảnh đại diện</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
+                                        Ảnh đại diện
+                                    </th><th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Tên khách hàng
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
                                         Tên đăng nhập
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Email
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Điện thoại
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Địa chỉ
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-secondary text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Hành động
                                     </th>
                                 </tr>
@@ -316,26 +316,24 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${c.fullName}</h6>
+                                                    <h6 class="mb-0 text-lg">${c.fullName}</h6>
 
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${c.userName}</p>
+                                            <p class="text-lg font-weight-bold mb-0">${c.userName}</p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${c.email}</span>
+                                            <span class="text-secondary text-lg font-weight-bold">${c.email}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${c.phone}</span>
+                                            <span class="text-secondary text-lg font-weight-bold">${c.phone}</span>
                                         </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${c.address}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
+
+                                        <td class="align-middle text-center text-lg">
                                             <c:if test="${c.status eq '1'}">
                                                 <span class="badge badge-sm bg-gradient-success ">Có thể truy cập</span>
                                             </c:if>
@@ -398,7 +396,7 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link"
+                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                                      href="customer-account-management?page=${i}">${i}</a></li>
                                         </c:if>
 

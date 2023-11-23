@@ -159,9 +159,11 @@ public class ProductRespository {
                 String productId = rs.getString(2);
                 String name = rs.getString(3);
                 double price = rs.getDouble(4);
-
+                char status = rs.getString("status").charAt(0);
 
                 ProductType productType = new ProductType(id, productId, name, price);
+                productType.setTypeStatus(status);
+                remainingAmountUpdate(productType);
                 productType.setImageProducts(getImgProductType(id));
                 list.add(productType);
             }
@@ -319,8 +321,8 @@ public class ProductRespository {
         try {
             String query = "insert into Product(Id, product_name, brand, detail, origin, status)\n" +
                     "values (?,?,?,?,?,?)\n" +
-                    "insert into ProductType(Id, product_id, name, price)\n" +
-                    "values (?,?,?,?)\n" +
+                    "insert into ProductType(Id, product_id, name, price,status)\n" +
+                    "values (?,?,?,?,?)\n" +
                     "insert into ImageProduct(product_type_id, id, image_url)\n" +
                     "values (?,?,?)";
             Connection connection = DBConnect.getConnection();
@@ -335,9 +337,10 @@ public class ProductRespository {
             preparedStatement.setString(8, productType.getProductId());
             preparedStatement.setString(9, productType.getTypeName());
             preparedStatement.setDouble(10, productType.getTypePrice());
-            preparedStatement.setString(11, imageProduct.getProductTypeId());
-            preparedStatement.setString(12, getNewImgId());
-            preparedStatement.setString(13, imageProduct.getImageUrl());
+            preparedStatement.setString(11, "1");
+            preparedStatement.setString(12, imageProduct.getProductTypeId());
+            preparedStatement.setString(13, getNewImgId());
+            preparedStatement.setString(14, imageProduct.getImageUrl());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -372,7 +375,7 @@ public class ProductRespository {
     public static void addNewProductType(ProductType productType) {
 
         try {
-            String query = "INSERT INTO ProductType (Id, product_id, name, price) values (?,?,?,?)\n" +
+            String query = "INSERT INTO ProductType (Id, product_id, name, price,status) values (?,?,?,?,?)\n" +
                     "insert into ImageProduct (product_type_id, id, image_url) values (?,?,?) ";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -380,9 +383,10 @@ public class ProductRespository {
             preparedStatement.setString(2, productType.getProductId());
             preparedStatement.setString(3, productType.getTypeName());
             preparedStatement.setDouble(4, productType.getTypePrice());
-            preparedStatement.setString(5, productType.getProductTypeId());
-            preparedStatement.setString(6, getNewImgId());
-            preparedStatement.setString(7, productType.getImageProducts().get(0).getImageUrl());
+            preparedStatement.setString(5, "1");
+            preparedStatement.setString(6, productType.getProductTypeId());
+            preparedStatement.setString(7, getNewImgId());
+            preparedStatement.setString(8, productType.getImageProducts().get(0).getImageUrl());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -479,9 +483,9 @@ public class ProductRespository {
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, productTypeId);
-            preparedStatement.setInt(2,page);
+            preparedStatement.setInt(2, page);
             ResultSet rs = preparedStatement.executeQuery();
-            list=new ArrayList<>();
+            list = new ArrayList<>();
             while (rs.next()) {
                 String lotId = rs.getString("lot_id");
                 String lotName = rs.getString("lot_name");
@@ -499,6 +503,7 @@ public class ProductRespository {
 
         return list;
     }
+
     public static int getImportProductTypeAmount(String productTypeId) {
         int amount = 0;
         try {
@@ -519,9 +524,156 @@ public class ProductRespository {
         return amount;
     }
 
+    public static void remainingAmountUpdate(ProductType productType) {
+
+        try {
+            String query = "    select dbo.remainingAmount(?) as remaining_amount";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productType.getProductTypeId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int remainingAmount = resultSet.getInt("remaining_amount");
+                productType.setRealAmount(remainingAmount);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateContinueSellProductType(String productTypeId) {
+
+        try {
+            String query = "UPDATE ProductType set status='1' where Id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateStopSellProductType(String productTypeId) {
+
+        try {
+            String query = "UPDATE ProductType set status='0' where Id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static ProductType getProductTypeById(String productID) {
+        ProductType productType = null;
+        try {
+            String query = "SELECT ProductType.*,P.product_name\n" +
+                    "                    FROM ProductType\n" +
+                    "                        join Product P on P.Id = ProductType.product_id\n" +
+                    "                    where ProductType.id=?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productID);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+
+                String id = rs.getString(1);
+                String productId = rs.getString(2);
+                String name = rs.getString(3);
+                double price = rs.getDouble(4);
+                char status = rs.getString("status").charAt(0);
+                String productName = rs.getString("product_name");
+                Product product = new Product();
+                product.setProductName(productName);
+                productType = new ProductType(id, productId, name, price);
+                productType.setTypeStatus(status);
+                productType.setProduct(product);
+                productType.setImageProducts(getImgProductType(id));
+
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return productType;
+    }
+
+    public static ArrayList<ProductType> getProductTypeOutOfStockPage(int page) {
+        ArrayList<ProductType> productTypes = null;
+        try {
+            String query = "select pt.Id,pt.name,p.product_name,pt.status,pt.price,dbo.remainingAmount(pt.Id) as 'remaining_amount' from ProductType pt\n" +
+                    "join Product P on P.Id = pt.product_id\n" +
+                    "where dbo.remainingAmount(pt.Id)<=10\n" +
+                    "order by  pt.Id\n" +
+                    "OFFSET (?-1)*10 ROWS\n" +
+                    "FETCH FIRST 10 ROWS ONLY";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, page);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            productTypes = new ArrayList<>();
+            while (rs.next()) {
+                String productTypeId = rs.getString("Id");
+                String productName = rs.getString("product_name");
+                String productTypeStatus = rs.getString("status");
+                int realAmount = rs.getInt("remaining_amount");
+                double price = rs.getDouble("price");
+                ProductType productType = new ProductType();
+                productType.setProductTypeId(productTypeId);
+                productType.setTypeName(productName);
+                productType.setTypeStatus(productTypeStatus.charAt(0));
+                productType.setTypePrice(price);
+                productType.setRealAmount(realAmount);
+                Product product = new Product();
+                product.setProductName(productName);
+                productType.setProduct(product);
+                ArrayList<ImageProduct> imageProducts = getImgProductType(productTypeId);
+                productType.setImageProducts(imageProducts);
+                productTypes.add(productType);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return productTypes;
+    }
+
+    public static int getProductTypeOutOfStockAmount() {
+        int amount = 0;
+        try {
+            String query = "\n" +
+                    "select count(1) from ProductType pt\n" +
+                    "join Product P on P.Id = pt.product_id\n" +
+                    "where dbo.remainingAmount(pt.Id)<=10";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                amount = rs.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+
 
     public static void main(String[] args) {
 
-        getImportList("A00000001A",1).stream().forEach(System.out::println);
+        getImportList("A00000001A", 1).stream().forEach(System.out::println);
     }
 }

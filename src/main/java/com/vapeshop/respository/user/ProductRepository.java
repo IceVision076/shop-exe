@@ -402,12 +402,12 @@ public class ProductRepository {
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
                 if (!brandSet.contains(brand)) {
-                Product product = new Product(idProduct, productName, brand, detail, origin, status);
-                ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
-                productType.setProduct(product);
-                productType.setImageProducts(getImageProduct(idProductType));
-                listBrand.add(productType);
-                brandSet.add(brand);
+                    Product product = new Product(idProduct, productName, brand, detail, origin, status);
+                    ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
+                    productType.setProduct(product);
+                    productType.setImageProducts(getImageProduct(idProductType));
+                    listBrand.add(productType);
+                    brandSet.add(brand);
                 }
 
             }

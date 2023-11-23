@@ -295,19 +295,19 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">Ảnh
                                         poster
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Id người tạo
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
                                         Id poster
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Ngày tạo
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
                                     <th class="text-secondary opacity-7"></th>
@@ -329,20 +329,20 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${p.user.id}</h6>
+                                                    <h6 class="mb-0 text-lg">${p.user.id}</h6>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${p.id} </p>
+                                            <p class="text-lg font-weight-bold mb-0">${p.id} </p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"> ${p.dateCreate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</span>
+                                            <span class="text-secondary text-lg font-weight-bold"> ${p.dateCreate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center text-lg">
 
                                             <c:if test="${p.status eq '1'.charAt(0)}">
                                                 <span class="badge badge-sm bg-gradient-success ">Đang hiện</span>
@@ -446,7 +446,7 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link"
+                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                                      href="poster-management?page=${i}">${i}</a></li>
                                         </c:if>
 

@@ -23,104 +23,21 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="include/header-product-management-dashboard.jsp" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@include file="include/header-product-management-dashboard.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en_US"/>
 <style>
-    /* === removing default button style ===*/
-    /* === removing default button style ===*/
-    .button-open {
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
         margin: 0;
-        height: auto;
-        background: transparent;
-        padding: 0;
-        border: none;
-        cursor: pointer;
-
     }
 
-    /* button styling */
-    .button-open {
-        --border-right: 6px;
-        --text-stroke-color: rgba(255,255,255,0.6);
-        --animation-color: #37FF8B;
-        --fs-size: 20px;
-        letter-spacing: 3px;
-        text-decoration: none;
-        font-size: var(--fs-size);
-        font-family: "Arial";
-        position: relative;
-        text-transform: uppercase;
-        color: transparent;
-        -webkit-text-stroke: 1px var(--text-stroke-color);
-        border-radius: 5px;
-
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
     }
-    /* this is the text, when you hover on button */
-    .hover-text-open {
-        position: absolute;
-        box-sizing: border-box;
-        content: attr(data-text);
-        color: var(--animation-color);
-        width: 0%;
-        inset: 0;
-        border-right: var(--border-right) solid var(--animation-color);
-        overflow: hidden;
-        transition: 0.5s;
-        -webkit-text-stroke: 1px var(--animation-color);
-    }
-    /* hover */
-    .button-open:hover .hover-text-open {
-        width: 100%;
-        filter: drop-shadow(0 0 23px var(--animation-color))
-    }
-
-
-    /* === removing default button style ===*/
-    .button-close {
-        margin: 0;
-        height: auto;
-        background: transparent;
-        padding: 0;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* button styling */
-    .button-close {
-        --border-right: 6px;
-        --text-stroke-color: rgba(255,255,255,0.6);
-        --animation-color-c: red;
-        --fs-size: 20px;
-        letter-spacing: 3px;
-        text-decoration: none;
-        font-size: var(--fs-size);
-        font-family: "Arial";
-        position: relative;
-        text-transform: uppercase;
-        color: transparent;
-        -webkit-text-stroke: 1px var(--text-stroke-color);
-        border-radius: 5px;
-    }
-    /* this is the text, when you hover on button */
-    .hover-text-close {
-        position: absolute;
-        box-sizing: border-box;
-        content: attr(data-text);
-        color: var(--animation-color-c);
-        width: 0%;
-        inset: 0;
-        border-right: var(--border-right) solid var(--animation-color-c);
-        overflow: hidden;
-        transition: 0.5s;
-        -webkit-text-stroke: 1px var(--animation-color-c);
-    }
-    /* hover */
-    .button-close:hover .hover-text-close {
-        width: 100%;
-        filter: drop-shadow(0 0 23px var(--animation-color-c))
-    }
-
-
 </style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -131,19 +48,18 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí đơn</li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="product-management">Quản lí
+                        sản phẩm</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lí sản phẩm sắp hết hàng</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí đơn hàng đã xác nhận</h6>
+                <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm sắp hết hàng </h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    
                 </div>
                 <ul class="navbar-nav  justify-content-end">
-
                     <li class="nav-item d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1"></i>
@@ -256,12 +172,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6 class="text-lg">Bảng các đơn hàng đã xác nhận(Trang ${page}/${maxPage})</h6>
-                        <p class="text-danger">
-                            <c:if test="${error eq '1'}">
-                                Trạng thái đơn hàng gặp sự cố vui lòng kiểm tra lại
-                            </c:if>
-                        </p>
+                        <h6 class="text-lg">Bảng loại sản phẩm sắp hết hàng (Trang ${page}/${maxPage})</h6>
 
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -269,93 +180,75 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
-                                        Mã đơn
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
-                                        Id khách hàng
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
-                                        Ngày đặt
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
-                                        Mã giảm giá
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
-                                        Trạng thái
+
+                                    <th></th>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder">
+                                        Tên loại sản phẩm
                                     </th>
 
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder ">
+                                        Giá
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder text-center ">
+                                        Số lượng còn lại
+                                    </th>
                                     <th class="text-secondary opacity-7"></th>
-                                    <th class="text-secondary opacity-7"></th>
+
+
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${orderAccept}" var="o">
+                                <c:forEach items="${listProductType}" var="p">
 
                                     <tr>
                                         <td>
-                                            <div class="text-xs font-weight-bold mb-0 text-center">
-                                                <a href="order-detail?orderId=${o.orderId}" class="mb-0 text-lg">${o.orderId}</a>
+                                            <div>
+                                                <img src="${p.imageProducts.get(0).imageUrl}" class="m-2 img-thumbnail "
+                                                     style="width: 100px;" alt="user1">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-lg">${o.userId}</h6>
+                                                    <h6 class="mb-0 text-lg">${p.typeName}</h6>
+                                                    <p class="text-lg text-secondary mb-0">${p.productTypeId}</p>
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td>
-                                            <p class="text-lg font-weight-bold mb-0">${o.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}</p>
-
+                                            <p class="text-lg font-weight-bold mb-0" style="color: orange">
+                                                <fmt:formatNumber type="number"
+                                                                  maxFractionDigits="3" value="${p.typePrice}"/> <span
+                                                    class="text-success">VND</span></p>
                                         </td>
-
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-lg font-weight-bold bg-warning badge ">
-                                                    <c:if test="${o.voucherId==null}">Không áp dụng mã</c:if>
-                                               <c:if test="${!o.voucherId==null}">  ${o.voucherId}</c:if>
-                                                    </span>
-                                        </td>
-                                        <td class="align-middle text-center text-lg">
-
-
-                                            <c:if test="${o.status eq '2'.charAt(0)}">
-                                                <span class="badge badge-sm bg-gradient-faded-info ">Đã xác nhận</span>
+                                        <td>
+                                            <c:if test="${p.realAmount<=10}">
+                                                <p class="text-lg font-weight-bold mb-0 text-center"
+                                                   style="color: #e8070e"><fmt:formatNumber type="number"
+                                                                                            maxFractionDigits="3"
+                                                                                            value="${p.realAmount}"/>
+                                                    <span><i class="fa-solid fa-circle-exclamation fa-sm"
+                                                             style="color: #e62e00;"></i></span></p>
                                             </c:if>
 
 
-                                        </td>
-                                        <td>
-                                            <form action="order-accepted" method="post">
-                                                <input type="hidden" name="action" value="open">
-                                                <input type="hidden" name="id" value="${o.orderId}">
-                                                <input type="hidden" name="page" value="${page==null?1:page}">
-                                                <input type="hidden" name="choice" value="success">
-                                                <button type="submit" class="button-open bg-secondary"
-                                                        data-text="Awesome">
-                                                    <span class="actual-text-open">Thành công</span>
-                                                    <span aria-hidden="true"
-                                                          class="hover-text-open">Thành công</span>
-                                                </button>
-                                            </form>
+                                            <c:if test="${p.realAmount>10}">
+                                                <p class="text-lg font-weight-bold mb-0 text-center"
+                                                   style="color: #0bff7e"><fmt:formatNumber type="number"
+                                                                                            maxFractionDigits="3"
+                                                                                            value="${p.realAmount}"/>
+                                                    <span><i class="fa-solid fa-circle-check fa-sm"
+                                                             style="color: #0be023;"></i></span></p>
+                                            </c:if>
 
                                         </td>
-                                        <td>
-                                            <form action="order-accepted" method="post">
-                                                <input type="hidden" name="action" value="lock">
-                                                <input type="hidden" name="id" value="${o.orderId}">
-                                                <input type="hidden" name="page" value="${page==null?1:page}">
-                                                <input type="hidden" name="choice" value="fail">
-                                                <button type="submit" class="button-close bg-secondary" data-text="Awesome">
-                                                    <span class="actual-text-close">Thất bại</span>
-                                                    <span aria-hidden="true"
-                                                          class="hover-text-close">Thất bại</span>
-                                                </button>
-                                            </form>
+                                            <%--                                        Modal thay đổi thông tin--%>
 
-                                        </td>
+
+                                        <td><a href="product-import?productTypeId=${p.productTypeId}"
+                                               class="btn btn-behance">Nhập hàng</a></td>
+
                                     </tr>
 
 
@@ -363,13 +256,14 @@
 
                                 </tbody>
                             </table>
+
                             <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                                 <ul class="pagination">
 
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="order-accepted?page=${page-1}"
+                                            <a class="page-link" href="product-out-of-stock?page=${page-1}"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -380,8 +274,9 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                                     href="order-accepted?page=${i}">${i}</a></li>
+                                            <li class="page-item"><a
+                                                    class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                    href="product-out-of-stock?page=${i}">${i}</a></li>
                                         </c:if>
 
                                     </c:forEach>
@@ -390,7 +285,7 @@
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
 
-                                            <a class="page-link" href="order-accepted?page=${page+1}"
+                                            <a class="page-link" href="product-out-of-stock?page=${page+1}"
                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
@@ -406,4 +301,15 @@
             </div>
         </div>
 
-        <%@ include file="include/footer-dashboard.jsp" %>
+        <%@include file="include/footer-dashboard.jsp" %>>
+
+
+        <%--Default select input--%>
+
+        <script>
+
+            const select = document.querySelector("select");
+            const option = select.querySelector("option[value='${product.status+""}']");
+
+            option.setAttribute("selected", true);
+        </script>

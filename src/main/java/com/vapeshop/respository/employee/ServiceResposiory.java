@@ -101,7 +101,7 @@ public class ServiceResposiory {
                 char status = resultSet.getString(5).charAt(0);
                 String title = resultSet.getString(6);
                 String employeeDescription=resultSet.getString(7);
-                 LocalDateTime deliveryDate=resultSet.getObject(8,LocalDateTime.class);
+                LocalDateTime deliveryDate=resultSet.getObject(8,LocalDateTime.class);
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
                 serviceTracking.setEmployeeDescription(employeeDescription);
                 serviceTracking.setDeliveryDate(deliveryDate);
@@ -339,7 +339,7 @@ public class ServiceResposiory {
 
     }
 
-     public static int getAmountWaiting(){
+    public static int getAmountWaiting(){
         int amount =0;
         try{
             String query="select count(1) from ServiceTracking\n" +
@@ -353,7 +353,7 @@ public class ServiceResposiory {
             e.printStackTrace();
         }
         return amount;
-     }
+    }
 
     public static int getAmountCancel(){
         int amount =0;

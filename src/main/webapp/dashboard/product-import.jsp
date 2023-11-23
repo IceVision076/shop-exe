@@ -33,6 +33,19 @@
 <%@include file="include/header-product-management-dashboard.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -52,10 +65,7 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -185,10 +195,10 @@
                               method="post" >
                             <%--                      Tên lô--%>
                             <div class="col-12">
-                                <label for="lotName" class="form-label">Tên lô sản phẩm<span
+                                <label for="lotName" class="form-label text-lg">Tên lô sản phẩm<span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input maxlength="50" type="text" class="form-control"
+                                    <input maxlength="50" type="text" class="form-control text-lg"
                                            placeholder="Nhập tên lô sản phẩm"
                                            id="lotName" name="lotName"
                                            required>
@@ -199,10 +209,10 @@
                             </div>
                             <%--                      Số lượng--%>
                             <div class="col-12">
-                                <label for="lotAmount" class="form-label">Số lượng <span
+                                <label for="lotAmount" class="form-label text-lg">Số lượng <span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="number" min="1" max="999999" class="form-control" id="lotAmount"
+                                    <input type="number" min="1" max="999999" class="form-control text-lg" id="lotAmount"
                                            name="lotAmount"
                                            placeholder="Nhập số lượng sản phẩm" required>
                                     <div class="invalid-feedback">
@@ -248,15 +258,15 @@
                             <thead>
                             <tr>
 
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">ID</th>
+                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                     Tên lô hàng
                                 </th>
 
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                     Ngày nhập hàng
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Số lượng</th>
+                                <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-center">Số lượng</th>
 
                             </tr>
                             </thead>
@@ -265,25 +275,24 @@
 
                                 <tr>
                                     <td>
-
-                                            <p class="text-xs font-weight-bold mb-0">   ${imp.lotId}</p>
+                                            <p class="text-lg font-weight-bold mb-0">   ${imp.lotId}</p>
 
                                     </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
 
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">${imp.lotName}</h6>
-                                                <p class="text-xs text-secondary mb-0">${imp.productTypeId}</p>
+                                                <h6 class="mb-0 text-lg">${imp.lotName}</h6>
+                                                <p class="text-lg text-secondary mb-0">${imp.productTypeId}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">
+                                        <p class="text-lg font-weight-bold mb-0">
                                                 ${imp.dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0 text-center">${imp.quantity}</p>
+                                        <p class="text-lg font-weight-bold mb-0 text-center">${imp.quantity}</p>
                                     </td>
 
 
@@ -311,7 +320,7 @@
 
                                 <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                     <c:if test="${i>=1&&i<=maxPage}">
-                                        <li class="page-item"><a class="page-link"
+                                        <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                                  href="product-import?productTypeId=${productTypeId}&page=${i}">${i}</a></li>
                                     </c:if>
 

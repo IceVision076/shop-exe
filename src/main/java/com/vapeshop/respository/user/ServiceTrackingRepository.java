@@ -41,7 +41,7 @@ public class ServiceTrackingRepository {
                 int maxId = Integer.parseInt(resultSet.getString(1).substring(2));
 
                 for (int i=1;i<=8-(maxId+1+"").length();i++)
-                id=id+"0";
+                    id=id+"0";
                 id=id+(maxId+1);
             } else {
                 id = "ST00000001";
