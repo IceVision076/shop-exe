@@ -147,7 +147,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng yêu cầu dịch vụ mới (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng yêu cầu dịch vụ đang chờ hoàn thành(Trang ${page}/${maxPage})</h6>
 
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -156,22 +156,22 @@
                                 <thead>
                                 <tr>
                                     <%--                  id,user_id, user_description,create_date,title--%>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start">
                                         ID
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-start">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2 text-start">
                                         User Id
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                    <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start">
                                         Tiêu đề
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                    <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start">
                                         Ngày tạo đơn
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">
+                                    <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start">
                                         Ngày giao dự kiến
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start ">
+                                    <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start ">
                                         Trạng thái
                                     </th>
                                     <th class="text-secondary opacity-7"></th>
@@ -185,7 +185,7 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${s.id}</h6>
+                                                    <h6 class="mb-0 text-lg">${s.id}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -193,23 +193,23 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${s.userId}</h6>
+                                                    <h6 class="mb-0 text-lg">${s.userId}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${s.title}</p>
+                                            <p class="text-lg text-center font-weight-bold mb-0">${s.title}</p>
 
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-lg font-weight-bold mb-0">
                                                     ${s.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-lg font-weight-bold mb-0">
                                                     ${s.estimatedDeliveryDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
                                         </td>
-                                        <td class="align-middle text-start text-sm">
+                                        <td class="align-middle text-start text-lg">
                                             <span class="badge badge-sm bg-gradient-primary ">Đang chờ hoàn thành</span>
                                             <br>
                                             <div class="text-danger">

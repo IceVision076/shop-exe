@@ -257,7 +257,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng quản lí nhân viên (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng quản lí nhân viên (Trang ${page}/${maxPage})</h6>
                         <a href="employee-add-account" class="fa-solid fa-user-plus fa-xl d-flex flex-row-reverse"
                            style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Thêm tài khoản nhân viên</span>
                         </a>
@@ -268,26 +268,26 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th>Ảnh đại diện</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
+                                        Ảnh đại diện
+                                    </th>  <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Tên nhân viên
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
                                         Tên đăng nhập
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Email
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Điện thoại
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Địa chỉ
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-secondary text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Hành động
                                     </th>
                                 </tr>
@@ -311,26 +311,24 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${e.fullName}</h6>
+                                                    <h6 class="mb-0 text-lg">${e.fullName}</h6>
 
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">${e.userName}</p>
+                                            <p class="text-lg font-weight-bold mb-0">${e.userName}</p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${e.email}</span>
+                                            <span class="text-secondary text-lg font-weight-bold">${e.email}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${e.phone}</span>
+                                            <span class="text-secondary text-lg font-weight-bold">${e.phone}</span>
                                         </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">${e.address}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
+
+                                        <td class="align-middle text-center text-lg">
                                             <c:if test="${e.status eq '1'}">
                                                 <span class="badge badge-sm bg-gradient-success ">Có thể truy cập</span>
                                             </c:if>
@@ -389,7 +387,7 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link"
+                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
                                                                      href="employee-account-management?page=${i}">${i}</a></li>
                                         </c:if>
 

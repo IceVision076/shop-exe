@@ -160,7 +160,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Bảng vourcher (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng vourcher (Trang ${page}/${maxPage})</h6>
                         <a href="voucher-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
                            style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Mã giảm giá mới</span>
                         </a>
@@ -171,25 +171,25 @@
                                 <thead>
                                 <tr>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7">Tên
                                         Voucher
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Phần trăm được giảm
+                                    <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
+                                        Phần trăm 
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Ngày tạo
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Ngày mở
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Ngày kết thúc
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Trạng thái
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
 
                                     </th>
                                 </tr>
@@ -204,34 +204,34 @@
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">${v.id}</h6>
-                                                    <p class="text-xs text-secondary mb-0">${v.voucherName}</p>
+                                                    <h6 class="mb-0 text-lg">${v.id}</h6>
+                                                    <p class="text-lg text-secondary mb-0">${v.voucherName}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0 text-left">
+                                            <p class="text-lg font-weight-bold mb-0 text-left">
                                                     <fmt:formatNumber var="price" value=" ${v.voucherPercent*100}" maxFractionDigits="1"></fmt:formatNumber>
                                                   ${price} %</p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
+                                            <span class="text-secondary text-lg font-weight-bold">
                                                 ${v.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
                                              </span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
+                                            <span class="text-secondary text-lg font-weight-bold">
                                                     ${v.openDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
                                             </span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">
+                                            <span class="text-secondary text-lg font-weight-bold">
                                                     ${v.closeDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
                                             </span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center text-lg">
 <%--                                                ${v.status}${(v.status+'') eq ('1').charAt(0)}--%>
                                                     <c:if test="${(v.status+'') eq ('1').charAt(0)}">
                                                         <span class="badge badge-sm bg-gradient-success ">Có thể áp dụng</span>

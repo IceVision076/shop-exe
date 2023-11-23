@@ -26,6 +26,7 @@
 <%@ include file="include/header-product-management-dashboard.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en_US"/>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -199,7 +200,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-lg">${order.createDate}</h6>
+                                        <h6 class="mb-0 text-lg">
+                                            ${order.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
+
+                                        </h6>
                                     </td>
                                 </tr>
 
