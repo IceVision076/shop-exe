@@ -21,7 +21,7 @@ public class PaymentServlet extends HttpServlet {
             response.sendRedirect("cart.jsp");
         }else {
             double paymentPrice = cart.getThanhTien(30000);
-
+            if(cart.getDiscountPercent()>0) paymentPrice=cart.getThanhTienDiscount(30000);
             request.setAttribute("paymentPrice", paymentPrice);
 
             request.getRequestDispatcher("vnpay_pay.jsp").forward(request, response);

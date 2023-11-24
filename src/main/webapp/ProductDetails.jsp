@@ -108,9 +108,10 @@
                         <p class="h3 py-2">
                             <span id="product-price">
                                 <fmt:formatNumber type="number" maxFractionDigits="3"
-                                                  value="${product.productTypes.get(0).typePrice}"/><i class="text-success">VND</i>
+                                                  value="${product.productTypes.get(0).typePrice}"/><i
+                                    class="text-success">VND</i>
                             </span><br>
-<%--                            <span id="remaining-quantity"> ${product.productTypes.get(0).realAmount} Cái</span>--%>
+                            <%--                            <span id="remaining-quantity"> ${product.productTypes.get(0).realAmount} Cái</span>--%>
                         </p>
                         <p></p>
                         <p class="py-2">
@@ -132,7 +133,8 @@
                                 <h6>Số lượng còn lại:</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p style="color: #505052" id="remaining-quantity"><strong> ${product.productTypes.get(0).realAmount} Cái</strong></p>
+                                <p style="color: #505052" id="remaining-quantity">
+                                    <strong> ${product.productTypes.get(0).realAmount} Cái</strong></p>
                             </li>
                         </ul>
 
@@ -165,11 +167,11 @@
                                             Số Lượng
                                             <input type="hidden" name="product-quanity" id="product-quanity" value="1">
                                         </li>
-                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-minus"
+                                        <li class="list-inline-item"><span class="btn btn-success " id="btn-minus"
                                                                            onclick="decreaseAmountCart()">-</span></li>
                                         <li class="list-inline-item"><span class="badge bg-secondary"
                                                                            id="var-value">1</span></li>
-                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-plus"
+                                        <li class="list-inline-item"><span class="btn btn-success " id="btn-plus"
                                                                            onclick="increaseAmountCart()">+</span></li>
                                     </ul>
                                 </div>
@@ -193,6 +195,12 @@
                                     <c:if test="${message eq '1'}">
                                         <p class="text-danger mt-2">Vui lòng chọn loại sản phẩm</p>
                                     </c:if>
+                                    <c:if test="${message eq '2'}">
+                                        <p class="text-success mt-2">Thêm vào giỏ thành công</p>
+                                    </c:if>
+                                        <c:if test="${message eq '3'}">
+                                            <p class="text-danger mt-2">Sản phẩm này đã hết hàng</p>
+                                        </c:if>
                                 </div>
                             </div>
                             <%--                        =================================================--%>
@@ -307,6 +315,7 @@
 <!-- End Slider Script -->
 <script>
     let maxQuantityProduct = 100;
+
     function calculatePrice() {
         const id = document.getElementById("product").value;
         console.log(id);
@@ -314,9 +323,9 @@
         console.log(value);
         const price = document.getElementById('product-price');
         const remainingQuantity = document.getElementById('remaining-quantity');
-        remainingQuantity.setAttribute("class","text-muted")
+        remainingQuantity.setAttribute("class", "text-muted")
         const quantityInfo = document.getElementById(id).textContent.split("-");
-        remainingQuantity.innerHTML =+ quantityInfo[1] + " Cái";
+        remainingQuantity.innerHTML = +quantityInfo[1] + " Cái";
         price.innerHTML = value[0];
         const priceDetail = document.createElement("i");
         priceDetail.setAttribute('class', 'text-success');
@@ -327,14 +336,16 @@
         let orderAmount1 = document.getElementById("var-value");
         let orderAmount2 = document.getElementById("product-quanity");
         let orderAmount3 = document.getElementById("quantity");
-        if (value[1] == 0){
+        if (value[1] == 0) {
             orderAmount1.innerHTML = 0;
-            orderAmount2.setAttribute("value",0);
-            orderAmount3.setAttribute("value",0);
-        }else{
+            orderAmount2.setAttribute("value", 0);
+            orderAmount3.setAttribute("value", 0);
+            var decreaseButton= document.getElementById("btn-minus");
+            decreaseButton.setAttribute("class","btn btn-success disabled");
+        } else {
             orderAmount1.innerHTML = 1;
-            orderAmount2.setAttribute("value",1);
-            orderAmount3.setAttribute("value",1);
+            orderAmount2.setAttribute("value", 1);
+            orderAmount3.setAttribute("value", 1);
         }
     }
 
@@ -342,8 +353,8 @@
         let amount = document.getElementById("var-value");
         if (parseInt(amount.textContent)<maxQuantityProduct){
             document.getElementById("quantity").setAttribute("value", parseInt(amount.textContent) + 1);
-        }else {
-            amount.innerHTML = maxQuantityProduct-1;
+        } else {
+            amount.innerHTML = maxQuantityProduct - 1;
         }
     }
 

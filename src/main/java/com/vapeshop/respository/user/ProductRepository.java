@@ -756,7 +756,9 @@ public class ProductRepository {
     }
 
     public static void main(String[] args) {
-        int product = ProductRepository.getTotalInRangeProduct(0,100000);
-        System.out.println(product);
+//        int product = ProductRepository.getTotalInRangeProduct(0,100000);
+//        System.out.println(product);
+           int  amount=  getProductByID("A00000002").getProductTypes().get(0).getRealAmount();
+        System.out.println(amount);
     }
 }

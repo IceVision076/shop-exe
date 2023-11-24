@@ -50,35 +50,36 @@ public class AddItemServlet extends HttpServlet {
             try {
                 String id = request.getParameter("typeidcart");
                 String quantity = request.getParameter("quantity");
-
-                ProductType p = null;
-                p = ProductRepository.getProductType(id); // lay cai type
-
-                Order cart = (Order) session.getAttribute("cart");
-
-                Product product = ProductRepository.getProductByID(p.getProductId()); //Add product vao productType
-                p.setProduct(product);
-
-                Items item = new Items(p, Integer.parseInt(quantity));
-                System.out.println(cart.addItems(item));
-                System.out.println(cart);
-
-                request.setAttribute("product", p);
-
-                message = "2";
-
-
-
                 String brand = request.getParameter("brand");
                 String idProduct = request.getParameter("idProduct");
-                request.setAttribute("message",message);
-                request.setAttribute("brand",brand);
-                request.setAttribute("idProduct",idProduct);
-                response.setCharacterEncoding("UTF-8");
-                session.setAttribute("cart", cart);
-//                request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+                if( Integer.parseInt(quantity)<=0)
+                    response.sendRedirect("ShowProductDetails?idProduct="+idProduct+"&brand="+brand+"&message="+3);
+                    else {
+                    ProductType p = null;
+                    p = ProductRepository.getProductType(id); // lay cai type
 
-                response.sendRedirect("ShowProductDetails?idProduct="+idProduct+"&brand="+brand+"&message="+message);
+                    Order cart = (Order) session.getAttribute("cart");
+
+                    Product product = ProductRepository.getProductByID(p.getProductId()); //Add product vao productType
+                    p.setProduct(product);
+
+                    Items item = new Items(p, Integer.parseInt(quantity));
+                    System.out.println(cart.addItems(item));
+                    System.out.println(cart);
+
+                    request.setAttribute("product", p);
+
+                    message = "2";
+
+                    request.setAttribute("message",message);
+                    request.setAttribute("brand",brand);
+                    request.setAttribute("idProduct",idProduct);
+                    response.setCharacterEncoding("UTF-8");
+                    session.setAttribute("cart", cart);
+                    response.sendRedirect("ShowProductDetails?idProduct="+idProduct+"&brand="+brand+"&message="+message);
+                }
+
+
 
             } catch (Exception e) {
                 System.out.println("=============>Loi AddItemServlet <===============");

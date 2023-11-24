@@ -455,8 +455,7 @@ public class ProductRespository {
     public static int getProductTypeRealAmount(String productTypeId) {
         int amount = 0;
         try {
-            String query = "select sum (quantity) from ImportProduct \n" +
-                    "where product_type_id = ? ";
+            String query = "select dbo.remainingAmount(?) as 'amount' ";
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, productTypeId);

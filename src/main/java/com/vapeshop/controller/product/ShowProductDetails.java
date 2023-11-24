@@ -17,13 +17,14 @@ public class ShowProductDetails extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String alo = req.getParameter("message");
+        String message = req.getParameter("message");
         String brand = req.getParameter("brand");
         String idProduct = req.getParameter("idProduct");
         Product product = ProductRepository.getProductByID(idProduct);
         ArrayList<ProductType> productTypeArrayList = ProductRepository.getProductByBrand(brand,idProduct);
-        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+alo+brand+idProduct+"<<<<<<<<<<<<<<<<<<<<<<<");
-        req.setAttribute("message",alo);
+       // System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+alo+brand+idProduct+"<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println(product.getProductTypes().get(0).getRealAmount());
+        req.setAttribute("message",message);
         req.setAttribute("product",product);
         req.setAttribute("productTypeArrayList",productTypeArrayList);
         req.getRequestDispatcher("ProductDetails.jsp").forward(req,resp);

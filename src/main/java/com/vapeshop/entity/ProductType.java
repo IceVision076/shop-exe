@@ -126,8 +126,6 @@ public class ProductType {
     }
 
     public int getRealAmount() {
-//        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>" + ProductRespository.getProductTypeRealAmount(this.productTypeId));
-//        return ProductRespository.getProductTypeRealAmount(this.productTypeId);
         return realAmount;
     }
 
