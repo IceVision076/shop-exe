@@ -280,7 +280,7 @@
 
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-lg font-weight-bold bg-warning badge ">
-                                                    <c:if test="${empty  o.voucherId==null}">Không áp dụng mã</c:if>
+                                                    <c:if test="${empty  o.voucherId}">Không áp dụng mã</c:if>
                                                <c:if test="${ not empty o.voucherId}">  ${o.voucherId}</c:if>
                                                     </span>
                                         </td>
