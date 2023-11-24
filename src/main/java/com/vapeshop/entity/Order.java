@@ -220,7 +220,8 @@ public class Order { //gio hang = cart
         return formatter.format(getThanhTienDiscount(phatsinh));
 
     }
-    public double getThanhTienDiscount(double phatsinh) {
+    public double
+    getThanhTienDiscount(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
             tong += item.getPrice();
