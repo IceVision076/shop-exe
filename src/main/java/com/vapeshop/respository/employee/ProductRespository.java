@@ -671,9 +671,45 @@ public class ProductRespository {
         return amount;
     }
 
+    public static boolean checkExistProduct(String productId) {
+        boolean check = false;
+
+        try {
+            String query = "select * from Product where Id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                check = true;
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+    public static boolean checkExistProductType(String productTypeId) {
+        boolean check = false;
+
+        try {
+            String query = "select * from ProductType where Id=?";
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productTypeId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                check = true;
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
 
     public static void main(String[] args) {
-
-        getImportList("A00000001A", 1).stream().forEach(System.out::println);
+        System.out.println(checkExistProduct("A00000001"));
+//        getImportList("A00000001A", 1).stream().forEach(System.out::println);
     }
 }

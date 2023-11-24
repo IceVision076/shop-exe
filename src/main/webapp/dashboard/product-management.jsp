@@ -39,10 +39,17 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <form id="searchForm"  onsubmit="submitSearch()" action="product-search" method="get">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
+<%--                        <input type="text" class="form-control" placeholder="Type here...">--%>
+
+
+
+                            <input id="search" maxlength="10" class="form-control" name="search" placeholder="Nhập mã sản phẩm" />
+
                     </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -285,5 +292,15 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            function submitSearch(){
+                document.getElementById("search").addEventListener("keyup", function(event) {
+                    if (event.keyCode === 13) {
+                        var x = document.getElementById("searchForm");
+                        x.submit();
+                        return false;
+                    }
+                });
+            }
+        </script>
         <%@ include file="include/footer-dashboard.jsp" %>

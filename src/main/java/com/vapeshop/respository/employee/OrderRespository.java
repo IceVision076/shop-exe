@@ -2,7 +2,9 @@ package com.vapeshop.respository.employee;
 
 import com.vapeshop.config.DBConnect;
 import com.vapeshop.entity.*;
+import com.vapeshop.print_invoce.PrintInvoce;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +13,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class OrderRespository {
     public static ArrayList<Order> orderWaitingPage(int page) {
@@ -373,7 +376,7 @@ public class OrderRespository {
     public static Order getOrderById(String orderId) {
         Order order = new Order();
         try {
-            String query = "select [Order].*,UI.full_name,vourcher_percent,voucher_id  from [Order]\n" +
+            String query = "select [Order].*,UI.full_name,UI.phone,vourcher_percent,voucher_id  from [Order]\n" +
                     "       join UserInfo UI on [Order].user_id = UI.id\n" +
                     "    left join Voucher on [Order].voucher_id = Voucher.id\n" +
                     "where [Order].order_id=?";
@@ -391,13 +394,14 @@ public class OrderRespository {
                 char status = resultSet.getString("status").charAt(0);
                 String voucherId = resultSet.getString("voucher_id");
                 double vourcherPercent = resultSet.getDouble("vourcher_percent"); //phan tram giam gia
-
+                String phone=resultSet.getString("phone");
                 String fullNameUser = resultSet.getString("full_name");
 
                 //user
                 User user = new User();
                 user.setFullName(fullNameUser);
                 user.setId(userId);
+                user.setPhone(phone);
 
                 //voucher
                 Voucher voucher = new Voucher();
@@ -461,9 +465,24 @@ public class OrderRespository {
     }
 
 
-    public static void main(String[] args) {
-        Order order = OrderRespository.getOrderById("0lbSoK6BNR");
-        System.out.println(order.getOrderId());
+    public static String downloadInvoce(String orderId){
+        String urlDownload="D:/Project_final_intership/Invoice/history/"+orderId+".pdf";
+        String path="D:/Project_final_intership/Invoice/history/";
+        File file=new File(urlDownload);
+        System.out.println("in"+urlDownload);
+        if(!file.exists()){
+            String pdfFilename = orderId + ".pdf";
+            PrintInvoce generateInvoice = new PrintInvoce();
+            Order order=getOrderById(orderId);
+            generateInvoice.createPDF(pdfFilename,path,order);
+        }
 
+        return urlDownload;
+    }
+
+    public static void main(String[] args) {
+//        Order order = OrderRespository.getOrderById("0lbSoK6BNR");
+//        System.out.println(order.getOrderId());
+        System.out.println(downloadInvoce("0lbSoK6BNR"));
     }
 }

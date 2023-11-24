@@ -14,6 +14,8 @@ public class OrderDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String orderId = request.getParameter("orderId");
         Order order= OrderRespository.getOrderById(orderId);
+        String downloadUrl=OrderRespository.downloadInvoce(orderId);
+        request.setAttribute("downloadUrl",downloadUrl);
         request.setAttribute("order", order);
         request.getRequestDispatcher("dashboard/order-detail.jsp").forward(request, response);
     }
