@@ -62,18 +62,24 @@ public class AddItemServlet extends HttpServlet {
                 Items item = new Items(p, Integer.parseInt(quantity));
                 System.out.println(cart.addItems(item));
                 System.out.println(cart);
+
                 request.setAttribute("product", p);
-                message = "Thêm sản phẩm thành công";
-                request.setAttribute("message",message);
+
+                message = "2";
+
+
 
                 String brand = request.getParameter("brand");
                 String idProduct = request.getParameter("idProduct");
+                request.setAttribute("message",message);
                 request.setAttribute("brand",brand);
                 request.setAttribute("idProduct",idProduct);
-
                 response.setCharacterEncoding("UTF-8");
                 session.setAttribute("cart", cart);
-                request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+//                request.getRequestDispatcher("ShowProductDetails").forward(request, response);
+
+                response.sendRedirect("ShowProductDetails?idProduct="+idProduct+"&brand="+brand+"&message="+message);
+
             } catch (Exception e) {
                 System.out.println("=============>Loi AddItemServlet <===============");
                 e.printStackTrace();

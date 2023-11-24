@@ -22,7 +22,7 @@ public class ShowProductDetails extends HttpServlet {
         String idProduct = req.getParameter("idProduct");
         Product product = ProductRepository.getProductByID(idProduct);
         ArrayList<ProductType> productTypeArrayList = ProductRepository.getProductByBrand(brand,idProduct);
-        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+"alo"+brand+idProduct+"<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println("=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+alo+brand+idProduct+"<<<<<<<<<<<<<<<<<<<<<<<");
         req.setAttribute("message",alo);
         req.setAttribute("product",product);
         req.setAttribute("productTypeArrayList",productTypeArrayList);

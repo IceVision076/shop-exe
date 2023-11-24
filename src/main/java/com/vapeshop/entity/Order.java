@@ -255,10 +255,12 @@ public class Order { //gio hang = cart
                 if (items.getProductType().getProductTypeId().equals(id)) {
                     Items hang = cart.get(cart.indexOf(items));
                     if (hang.getAmmout() == ProductRespository.getProductTypeRealAmount(id)) {
+                        System.out.println("so luong that ne"+ProductRespository.getProductTypeRealAmount(id));
                         return "=========>CART : Tang that bai (vuot qua so luong trong kho)<==========";
                     }
 //                    Khúc này dùng để check số lượng trong kho nếu số lượng trong giỏ hàng == với số lượng trong kho
 //                    thì không tăng nổi nữa <> chỗ này cần code lại thêm thuộc tính vaof class
+                    System.out.println("so luong that ne"+ProductRespository.getProductTypeRealAmount(id));
                     hang.setAmmout(hang.getAmmout() + 1);
                     return "=========>CART : Tang Thanh Cong increaseAmmount(String id)<==========";
 
