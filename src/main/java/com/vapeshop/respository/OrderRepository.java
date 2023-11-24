@@ -302,4 +302,27 @@ public class OrderRepository {
         return date;
     }
 
+    public static int checkVoucherStatus(String voucherId) {
+        int status = 0;
+        try {
+            Connection con = DBConnect.getConnection();
+            String query = "select dbo.checkStatusVoucher(?)";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, voucherId);
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                status = results.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("==========>ERROR : checkVoucherStatus()<=============");
+        }
+        return status;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(checkVoucherStatus("sdsaddssd"));
+    }
+
 }

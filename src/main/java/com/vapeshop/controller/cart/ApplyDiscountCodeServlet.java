@@ -19,7 +19,7 @@ public class ApplyDiscountCodeServlet extends HttpServlet {
         String discountID= request.getParameter("discountID");
         double discountPercent = OrderRepository.getDiscountPercent(discountID);
         Order cart = (Order) session.getAttribute("cart");
-        if (discountPercent == 0f) {
+        if (discountPercent == 0f || OrderRepository.checkVoucherStatus(discountID) == 0) {
             String message = "Mã không hợp lệ";
             request.setAttribute("message",message);
             request.getRequestDispatcher("cart.jsp").forward(request,response);
