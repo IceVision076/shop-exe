@@ -34,7 +34,7 @@ public class UpdateProfileServlet extends HttpServlet {
         userOld.setAddress(address);
         userOld.setId(id);
         UserRespository.upadateProfile(userOld);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("update-profile");
     }
 }
 

@@ -16,8 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/asset/custom.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
 
@@ -75,7 +75,7 @@
         </button>
 
         <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-            <div class="flex-fill ms-5">
+            <div class="flex-fill ms-10">
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="Home">Trang Chủ</a>
@@ -108,21 +108,26 @@
 <%--                    <a href="#" class="nav-link dropdown-toggle bg-primary text-white pe-5 ms-lg-5 justify-content-center" data-bs-toggle="dropdown">${sessionScope.user.userName}</a>--%>
                                         <a class="nav-link dropdown-toggle position-relative text-decoration-none" data-bs-toggle="dropdown" href="#">
                                                 <img src="${sessionScope.user.avatarImg}" alt=""
-                                                     style="width: 50px;
-                                                     height: 50px;
+                                                     style="width: 40px;
+                                                     height: 40px;
                                                      border-radius: 50%;
                                                      object-fit: cover;">
                                         </a>
-                    <div class="dropdown-menu m-0">
-                        <a href="update-profile" class="dropdown-item">Thông tin cá nhân</a>
+                    <div class="dropdown-menu m-0 dropdown-menu-end px-2">
+                        <a class="nav-link position-relative pb-0 text-decoration-none d-flex justify-content-start align-items-start border-bottom" href="update-profile">
+                            <img src="${sessionScope.user.avatarImg}" alt=""
+                                 style="width: 30px;height: 30px;border-radius: 50%;object-fit: cover;margin-right: 10px">                            <p class="fw-bolder">${sessionScope.user.userName}</p>
+
+                        </a>
+                        <a href="update-profile" class="dropdown-item pt-2"><img width="20" height="20" src="https://img.icons8.com/ios-filled/50/settings.png" alt="settings"/> Thông tin cá nhân</a>
                             <%--                        <c:if test="${sessionScope.user.userRole.equals('admin')}">--%>
                             <%--                            <a href="admin.jsp" class="dropdown-item">Admin</a>--%>
                             <%--                        </c:if>--%>
 
-                        <a href="cart.jsp" class="dropdown-item">Giỏ Hàng</a>
-                        <a href="getorderhistory" class="dropdown-item">Lịch sử đặt hàng</a>
-                        <a href="testconnect.jsp" class="dropdown-item">Tư vấn</a>
-                        <a href="logout" class="dropdown-item text-danger">Đăng Xuất</a>
+                        <a href="cart.jsp" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/64/1A1A1A/external-cart-supermarket-flatart-icons-solid-flatarticons.png" alt="external-cart-supermarket-flatart-icons-solid-flatarticons"/> Giỏ Hàng</a>
+                        <a href="getorderhistory" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/1A1A1A/paid--v1.png" alt="paid--v1"/> Lịch sử đặt hàng</a>
+                        <a href="testconnect.jsp" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-filled/50/1A1A1A/chat.png" alt="chat"/> Tư vấn</a>
+                        <a href="logout" class="mt-3 dropdown-item text-white text-center bg-danger">Đăng Xuất</a>
                     </div>
                 </div>
             </c:if>

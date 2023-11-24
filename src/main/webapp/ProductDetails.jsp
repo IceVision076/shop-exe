@@ -126,13 +126,13 @@
                                 <h6>Hãng:</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>${product.brand}</strong></p>
+                                <p style="color: #505052"><strong>${product.brand}</strong></p>
                             </li>
                             <li class="list-inline-item">
                                 <h6>Số lượng còn lại:</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted" id="remaining-quantity"><strong> ${product.productTypes.get(0).realAmount} Cái</strong></p>
+                                <p style="color: #505052" id="remaining-quantity"><strong> ${product.productTypes.get(0).realAmount} Cái</strong></p>
                             </li>
                         </ul>
 
