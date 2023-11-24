@@ -1,0 +1,24 @@
+.month-Product img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .month-Product img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .month-Product img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+}

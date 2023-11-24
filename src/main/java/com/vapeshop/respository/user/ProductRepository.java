@@ -199,6 +199,7 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
+                    + "WHERE pd.status = '1' AND pdt.status = '1'"
                     + "ORDER BY pdt.[id]\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
@@ -240,9 +241,10 @@ public class ProductRepository {
                     + "      ,pd.[detail]\n"
                     + "      ,pd.[origin]\n"
                     + "      ,pd.[status]\n"
+                    + "      ,dbo.remainingAmount(pdt.[Id]) as 'RemainAmount'\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    + "WHERE pd.[id] = ?"
+                    + "WHERE pd.[id] = ? AND pd.status = '1' AND pdt.status = '1'"
             );
             stmt.setString(1, idp);
             ResultSet rs = stmt.executeQuery();
@@ -256,9 +258,11 @@ public class ProductRepository {
                 String detail = rs.getString(7);
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
+                int realAmount = rs.getInt("RemainAmount");
 
                 ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
                 productType.setImageProducts(getImageProduct(idProductType));
+                productType.setRealAmount(realAmount);
                 productDetail.setIdProduct(idProduct);
                 productDetail.setProductName(productName);
                 productDetail.setBrand(brand);
@@ -266,6 +270,7 @@ public class ProductRepository {
                 productDetail.setOrigin(origin);
                 productDetail.setStatus(status);
                 productDetail.getProductTypes().add(productType);
+
 
             }
             con.close();
@@ -289,9 +294,10 @@ public class ProductRepository {
                     + "      ,pd.[detail]\n"
                     + "      ,pd.[origin]\n"
                     + "      ,pd.[status]\n"
+                    + "      ,dbo.remainingAmount(pdt.[Id]) as 'RemainAmount'\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    + "WHERE  pd.[brand] = ? AND pd.[id] != ?"
+                    + "WHERE  pd.[brand] = ? AND pd.[id] != ? AND pd.status = '1' AND pdt.status = '1'"
             );
             stmt.setString(1, brands);
             stmt.setString(2, idp);
@@ -306,10 +312,12 @@ public class ProductRepository {
                 String detail = rs.getString(7);
                 String origin = rs.getString(8);
                 char status = rs.getString(9).charAt(0);
+                int realAmount = rs.getInt("RemainAmount");
                 Product product = new Product(idProduct, productName, brand, detail, origin, status);
                 ProductType productType = new ProductType(idProductType, idProduct, typeName, price);
                 productType.setProduct(product);
                 productType.setImageProducts(getImageProduct(idProductType));
+                productType.setRealAmount(realAmount);
                 relateProduct.add(productType);
 
             }
@@ -426,7 +434,7 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    + "WHERE  pd.[brand] = ?\n"
+                    + "WHERE  pd.[brand] = ? AND pd.status = '1' AND pdt.status = '1'\n"
                     + "ORDER BY pd.[brand] ASC\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
@@ -473,7 +481,7 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    + "WHERE  pd.[product_name] LIKE ?\n"
+                    + "WHERE  pd.[product_name] LIKE ? AND pd.status = '1' AND pdt.status = '1'\n"
                     + "ORDER BY pdt.[price] ASC\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
@@ -520,7 +528,7 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    + "WHERE pdt.[price] BETWEEN ? AND ?\n"
+                    + "WHERE pdt.[price] BETWEEN ? AND ? AND pd.status = '1' AND pdt.status = '1'\n"
                     + "ORDER BY pdt.[price]\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
@@ -570,6 +578,7 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
                     + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
+                    +" WHERE pd.status = '1' AND pdt.status = '1'\n"
                     + "ORDER BY pdt.[price] ASC\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
@@ -615,7 +624,8 @@ public class ProductRepository {
                     + "      ,pd.[status]\n"
                     + "      ,pdt.[status]\n"
                     + "  FROM [dbo].[Product] pd\n"
-                    + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
+                    + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]\n"
+                    +" WHERE pd.status = '1' AND pdt.status = '1'\n"
                     + "ORDER BY pdt.[price] DESC\n"
                     + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
             );
@@ -650,19 +660,20 @@ public class ProductRepository {
     public static ArrayList<ProductType> getAllProductSortByName(int index) {
         ArrayList<ProductType> productsPriceSortByName = new ArrayList<>();
         try (Connection con = DBConnect.getConnection()) {
-            PreparedStatement stmt = con.prepareStatement("SELECT pd.[id]\n"
-                    + "      ,pdt.[Id]\n"
-                    + "      ,pd.[product_name]\n"
-                    + "      ,pdt.[name]\n"
-                    + "      ,pdt.[price]\n"
-                    + "      ,pd.[brand]\n"
-                    + "      ,pd.[detail]\n"
-                    + "      ,pd.[origin]\n"
-                    + "      ,pd.[status]\n"
-                    + "  FROM [dbo].[Product] pd\n"
-                    + "INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]"
-                    + "ORDER BY pd.[product_name] ASC\n"
-                    + "OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY\n"
+            PreparedStatement stmt = con.prepareStatement("        SELECT pd.[id],\n" +
+                    "            pdt.[Id],\n" +
+                    "                    pd.[product_name],\n" +
+                    "                    pdt.[name],\n" +
+                    "                    pdt.[price],\n" +
+                    "                    pd.[brand],\n" +
+                    "                    pd.[detail],\n" +
+                    "                    pd.[origin],\n" +
+                    "                    pd.[status]\n" +
+                    "                    FROM [dbo].[Product] pd\n" +
+                    "                    INNER JOIN [ProductType] pdt on pdt.[product_id] = pd.[id]\n" +
+                    "                    WHERE pd.status = '1' AND pdt.status = '1'\n" +
+                    "                    ORDER BY pd.[product_name] ASC\n" +
+                    "                    OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY"
             );
             stmt.setInt(1,(index - 1) * 9);
             ResultSet rs = stmt.executeQuery();
