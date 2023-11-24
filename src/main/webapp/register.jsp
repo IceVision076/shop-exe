@@ -54,10 +54,10 @@
                                                                  style="color: #000000;"></i> <span class="text-danger">*</span></div>
                         </div>
 
-                        <input type="text" name="userName" class="form-control form-control-lg bg-light fs-6 p-1 "placeholder="Tên người dùng" pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$" required>
+                        <input type="text" name="userName" class="form-control form-control-lg bg-light fs-6 p-1 "placeholder="Tên người dùng" pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$" maxlength="20" required>
 
                         <div class="invalid-feedback">
-                         <span>Vui lòng điền vào trường này</span>
+                         <span>Vui lòng điền vào trường này và tối đa 20 ký tự trở xuống</span>
                         </div>
                     </div>
 
@@ -84,9 +84,9 @@
                                                                  style="color: #000000;"></i> <span class="text-danger">*</span></div>
                         </div>
                         <input type="text" name="FullName" class="form-control form-control-lg bg-light fs-6 p-1"
-                               placeholder="Tên của bạn" required>
+                               placeholder="Tên của bạn" maxlength="50" required>
                         <div class="invalid-feedback">
-                            <span>Vui lòng điền vào trường này</span>
+                            <span>Vui lòng điền vào trường này và tối đa 50 ký tự trở xuống</span>
                         </div>
                     </div>
 
@@ -97,7 +97,7 @@
                         </div>
                         <input class="form-control form-control-lg bg-light fs-6 p-1" type="email" id="psw" name="email"
                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="
-                                        Sai định dạng email" placeholder="Địa chỉ Email" required>
+                                        Sai định dạng email" placeholder="Địa chỉ Email" maxlength="100" required>
                         <div class="invalid-feedback">
                             <span>Vui lòng điền email hợp lệ(chỉ bao gồm 1 dấu @ và không có khoảng cách)</span> <br>
                             <span>Example@gmail.com</span>
@@ -117,36 +117,54 @@
                         }
                     %>
 
-                    <div class="input-group mb-2">
-
-
-
+                    <div class="input-group mb-2 ">
 
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
                                                                  style="color: #000000;"></i><span class="text-danger">*</span></div>
                         </div>
-                        <select id="city" required>
+                        <select class="form-control form-control-lg bg-light fs-6 p-1" id="city" required>
                             <option value="" selected>Chọn tỉnh thành</option>
                         </select>
+
+                        <div class="invalid-feedback">
+                            <span>Vui Lòng Chọn Tỉnh Thành Phố</span> <br>
+
+
+                        </div>
                     </div>
-                    <div class="input-group mb-2">
+
+
+
+                    <div class="input-group mb-2 ">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
                                                                  style="color: #000000;"></i><span class="text-danger">*</span></div>
                         </div>
-                        <select id="district" required>
+                        <select  class="form-control form-control-lg bg-light fs-6 p-1" id="district" required>
                             <option value="" selected>Chọn quận huyện</option>
                         </select>
+
+                        <div class="invalid-feedback">
+                            <span>Vui Lòng Chọn quận huyện</span> <br>
+
+
+                        </div>
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-2 has-">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
                                                                  style="color: #000000;"></i><span class="text-danger">*</span></div>
                         </div>
-                        <select id="ward" required>
+                        <select  class="form-control form-control-lg bg-light fs-6 p-1" id="ward" required>
                             <option value="" selected>Chọn phường xã</option>
                         </select>
+
+                        <div class="invalid-feedback">
+                            <span>Vui Lòng Chọn phường xã</span> <br>
+
+
+                        </div>
                     </div>
 
 
@@ -165,9 +183,9 @@
                                                                  style="color: #000000;"></i> <span class="text-danger">*</span></div>
                         </div>
                         <input type="text" name="address" class="form-control form-control-lg bg-light fs-6 p-1" pattern="^[a-zA-Z0-9\s,./-]{20,50}$"
-                               placeholder="Địa chỉ của bạn" maxlength="50"  required>
+                               placeholder="Địa chỉ của bạn" maxlength="200"  required>
                         <div class="invalid-feedback">
-                            <span>Vui lòng điền vào trường này</span>
+                            <span>Vui lòng điền vào trường này và tối đa 100 ký tự trở xuống</span>
                         </div>
                     </div>
 
@@ -182,7 +200,7 @@
                                         Phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lên"
                                placeholder="Mật khẩu" required>
                         <div class="invalid-feedback">
-                            <span>Vui lòng điền vào trường này</span>
+                            <span>Vui lòng điền vào trường này và  Phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lênm</span>
                         </div>
                     </div>
 
@@ -269,7 +287,7 @@
     }
 
     const renderData = (array, select) => {
-        let row = ' <option disable value="">Lựa Chọn</option>';
+        let row = ' <option disable value="">Chọn Tỉnh Thành Phố</option>';
         console.log(array)
         array.forEach(element => {
             let addressCode = JSON.stringify(element.code);
