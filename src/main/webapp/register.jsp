@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/vapeShop.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>Đăng nhập</title>
+    <title>Đăng Ký Tài Khoản</title>
 </head>
 <body>
 
@@ -51,13 +50,16 @@
                     <div class="input-group mb-2 has-validation ">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-user fa-bounce"
-                                                                 style="color: #000000;"></i> <span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i> <span class="text-danger">*</span>
+                            </div>
                         </div>
 
-                        <input type="text" name="userName" class="form-control form-control-lg bg-light fs-6 p-1 "placeholder="Tên người dùng" pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$" maxlength="20" required>
+                        <input type="text" name="userName" class="form-control form-control-lg bg-light fs-6 p-1 "
+                               placeholder="Tên người dùng" pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$" maxlength="20"
+                               required>
 
                         <div class="invalid-feedback">
-                         <span>Vui lòng điền vào trường này và tối đa 20 ký tự trở xuống</span>
+                            <span>Vui lòng điền vào trường này và tối đa 20 ký tự trở xuống</span>
                         </div>
                     </div>
 
@@ -76,12 +78,11 @@
                     %>
 
 
-
-
                     <div class="input-group mb-2 has-validation">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-user-pen fa-bounce"
-                                                                 style="color: #000000;"></i> <span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i> <span class="text-danger">*</span>
+                            </div>
                         </div>
                         <input type="text" name="FullName" class="form-control form-control-lg bg-light fs-6 p-1"
                                placeholder="Tên của bạn" maxlength="50" required>
@@ -93,7 +94,8 @@
                     <div class="input-group mb-2 has-validation ">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-regular fa-envelope fa-bounce"
-                                                                 style="color: #000000;"></i> <span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i> <span class="text-danger">*</span>
+                            </div>
                         </div>
                         <input class="form-control form-control-lg bg-light fs-6 p-1" type="email" id="psw" name="email"
                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="
@@ -121,69 +123,56 @@
 
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
-                                                                 style="color: #000000;"></i><span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i><span
+                                    class="text-danger">*</span></div>
                         </div>
                         <select class="form-control form-control-lg bg-light fs-6 p-1" id="city" required>
                             <option value="" selected>Chọn tỉnh thành</option>
                         </select>
-
                         <div class="invalid-feedback">
                             <span>Vui Lòng Chọn Tỉnh Thành Phố</span> <br>
-
-
                         </div>
                     </div>
-
-
-
                     <div class="input-group mb-2 ">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
-                                                                 style="color: #000000;"></i><span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i><span
+                                    class="text-danger">*</span></div>
                         </div>
-                        <select  class="form-control form-control-lg bg-light fs-6 p-1" id="district" required>
+                        <select class="form-control form-control-lg bg-light fs-6 p-1" id="district" required>
                             <option value="" selected>Chọn quận huyện</option>
                         </select>
-
                         <div class="invalid-feedback">
                             <span>Vui Lòng Chọn quận huyện</span> <br>
-
-
                         </div>
                     </div>
                     <div class="input-group mb-2 has-">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
-                                                                 style="color: #000000;"></i><span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i><span
+                                    class="text-danger">*</span></div>
                         </div>
-                        <select  class="form-control form-control-lg bg-light fs-6 p-1" id="ward" required>
+                        <select class="form-control form-control-lg bg-light fs-6 p-1" id="ward" required>
                             <option value="" selected>Chọn phường xã</option>
                         </select>
-
                         <div class="invalid-feedback">
                             <span>Vui Lòng Chọn phường xã</span> <br>
-
-
                         </div>
                     </div>
 
-
-
-
-
-                        <input type="hidden" id="addressInput" name="address1" class="form-control form-control-lg bg-light fs-6 p-1"
-                               placeholder="Địa chỉ của bạn" required>
-
-
-
+                    <input type="hidden" id="addressInput" name="address1"
+                           class="form-control form-control-lg bg-light fs-6 p-1"
+                           placeholder="Địa chỉ của bạn" required>
 
                     <div class="input-group mb-2 has-validation">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-location-dot fa-bounce"
-                                                                 style="color: #000000;"></i> <span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i> <span class="text-danger">*</span>
+                            </div>
                         </div>
-                        <input type="text" name="address" class="form-control form-control-lg bg-light fs-6 p-1" pattern="^[a-zA-Z0-9\s,./-]{20,50}$"
-                               placeholder="Địa chỉ của bạn" maxlength="200"  required>
+                        <input type="text" name="address" class="form-control form-control-lg bg-light fs-6 p-1"
+                               pattern="^[a-zA-Z0-9\s,./-]{20,50}$"
+                               placeholder="Địa chỉ của bạn" maxlength="200" required>
                         <div class="invalid-feedback">
                             <span>Vui lòng điền vào trường này và tối đa 100 ký tự trở xuống</span>
                         </div>
@@ -193,9 +182,11 @@
                     <div class="input-group mb-2 has-validation">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-key fa-bounce"
-                                                                 style="color: #000000;"></i>  <span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i> <span class="text-danger">*</span>
+                            </div>
                         </div>
-                        <input class="form-control form-control-lg bg-light fs-6 p-1" type="password" id="pass1"
+                        <input maxlength="50" class="form-control form-control-lg bg-light fs-6 p-1" type="password"
+                               id="pass1"
                                name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\S{8,50}$" title="
                                         Phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lên"
                                placeholder="Mật khẩu" required>
@@ -207,9 +198,10 @@
                     <div class="input-group mb-2 has-validation">
                         <div class="input-group-prepend ">
                             <div class="input-group-text p-3"><i class="fa-solid fa-key fa-bounce"
-                                                                 style="color: #000000;"></i>  <span class="text-danger">*</span></div>
+                                                                 style="color: #000000;"></i> <span class="text-danger">*</span>
+                            </div>
                         </div>
-                        <input type="password" name="rePass" id="pass2"
+                        <input maxlength="50" type="password" name="rePass" id="pass2"
                                class="form-control form-control-lg bg-light fs-6 p-1"
                                placeholder="Nhập lại mật khẩu" required>
                         <div class="invalid-feedback">
@@ -228,8 +220,6 @@
                             request.getSession().removeAttribute("rePass");
                         }
                     %>
-
-
 
 
                     <div class="input-group mb-5 d-flex justify-content-between">
@@ -291,9 +281,9 @@
         console.log(array)
         array.forEach(element => {
             let addressCode = JSON.stringify(element.code);
-            let addressName = JSON.stringify(element.name).slice(1,-1);
-            console.log(addressCode+addressName)
-            row += `<option data-id="`+addressCode+`" value="`+addressName+`">`+addressName+`</option>`
+            let addressName = JSON.stringify(element.name).slice(1, -1);
+            console.log(addressCode + addressName)
+            row += `<option data-id="` + addressCode + `" value="` + addressName + `">` + addressName + `</option>`
         });
         document.querySelector("#" + select).innerHTML = row
     }
@@ -326,7 +316,7 @@
         }
     }
 
-    const getResult = () =>{
+    const getResult = () => {
         if ($("#city").val() && $("#district").val() && $("#ward").val()) {
             alert("Form đã được submit! Địa chỉ đã chọn: " + $("#result").text());
         } else {
@@ -334,7 +324,6 @@
         }
     }
 </script>
-
 
 
 </body>
@@ -409,7 +398,6 @@
     }
 
 
-
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
         'use strict'
@@ -435,7 +423,11 @@
 
 
 <script src="https://kit.fontawesome.com/fc6bd51969.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 
 </html>

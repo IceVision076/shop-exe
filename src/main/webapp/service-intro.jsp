@@ -514,7 +514,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="title" class="form-label">Tiêu đề <span class="text-danger"> *</span></label>
+                                    <label for="title" class="form-label fw-bolder">Tiêu đề <span class="text-danger"> *</span></label>
                                     <div class="input-group has-validation mt-1">
                                         <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"
                                                id="title" name="title"
@@ -527,7 +527,7 @@
 
 
                                 <div class="col-12 mt-4">
-                                    <label for="userDescription" class="form-label">Mô tả <span
+                                    <label for="userDescription" class="form-label fw-bolder">Mô tả <span
                                             class="text-danger"> *</span></label>
                                     <div class="input-group has-validation">
                                         <textarea cols="30" rows="10" class="form-control" id="userDescription"
@@ -539,7 +539,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 mt-1" style="margin: 0">
+                                <div class="col-12 mt-3" style="margin: 0">
                                     <button onclick="run()" class="btn btn-success" type="submit">Xác Nhận <i
                                             class="fa-solid fa-rocket fa-bounce fa-lg"
                                             style="color: #f2df07;"></i></button>

@@ -57,7 +57,7 @@
                 <div class="row g-3 ">
                     <div class="col-md-12 ">
                         <h3 class="text-center">Thông Tin Của Bạn</h3>
-                        <label for="fullname" class="form-label">Tên:</label>
+                        <label for="fullname" class="form-label fw-bolder">Tên:</label>
                         <div class="input-group has-validation">
                             <input maxlength="100" type="text" class="form-control" id="fullname" name="fullname"
                                    aria-describedby="inputGroupPrepend" value="${sessionScope.user.fullName}" required>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="phone" class="form-label">Số điện thoại: </label>
+                        <label for="phone" class="form-label fw-bolder">Số điện thoại: </label>
                         <div class="input-group has-validation">
                             <input maxlength="11" minlength="10" pattern="^\d{10,11}$" type="text" class="form-control"
                                    id="phone" name="phone" aria-describedby="inputGroupPrepend" value="${sessionScope.user.phone}" required>
@@ -77,25 +77,34 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="phone" class="form-label">Tỉnh/Thành: </label>
-                        <select id="city" required>
+                        <label for="phone" class="form-label fw-bolder">Tỉnh/Thành: </label>
+                        <select class="form-control" id="city" required>
                             <option value="" selected></option>
                         </select>
+                        <div class="invalid-feedback">
+                            <span>Vui Lòng Chọn Tỉnh Thành Phố</span> <br>
+                        </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="phone" class="form-label">Quận/Huyện: </label>
-                        <select id="district" required>
+                        <label for="phone" class="form-label fw-bolder">Quận/Huyện: </label>
+                        <select class="form-control" id="district" required>
                             <option value="" selected></option>
                         </select>
+                        <div class="invalid-feedback">
+                            <span>Vui Lòng Chọn quận huyện</span> <br>
+                        </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="phone" class="form-label">Phường/Xã: </label>
-                        <select id="ward" required>
+                        <label for="phone" class="form-label fw-bolder">Phường/Xã: </label>
+                        <select class="form-control" id="ward" required>
                             <option value="" selected></option>
                         </select>
+                        <div class="invalid-feedback">
+                            <span>Vui Lòng Chọn phường xã</span> <br>
+                        </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="addressInput" class="form-label">Địa Chỉ:</label>
+                        <label for="addressInput" class="form-label fw-bolder">Địa Chỉ:</label>
                         <div class="input-group has-validation">
                             <input maxlength="100" type="text" class="form-control" id="addressInput" name="address"
                                    aria-describedby="inputGroupPrepend" value="${sessionScope.user.address}" required>
