@@ -126,6 +126,7 @@
 
                         <a href="cart.jsp" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/64/1A1A1A/external-cart-supermarket-flatart-icons-solid-flatarticons.png" alt="external-cart-supermarket-flatart-icons-solid-flatarticons"/> Giỏ Hàng</a>
                         <a href="getorderhistory" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/1A1A1A/paid--v1.png" alt="paid--v1"/> Lịch sử đặt hàng</a>
+                        <a href="ServiceTrackingHistory" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/1A1A1A/paid--v1.png" alt="paid--v1"/> ServiceTrackingHistory</a>
                         <a href="testconnect.jsp" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-filled/50/1A1A1A/chat.png" alt="chat"/> Tư vấn</a>
                         <a href="logout" class="mt-3 dropdown-item text-white text-center bg-danger">Đăng Xuất</a>
                     </div>

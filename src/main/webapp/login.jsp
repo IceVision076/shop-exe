@@ -13,8 +13,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/vapeShop.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <title>Đăng Nhập</title>
 </head>
 <body>
 
@@ -51,13 +53,13 @@
                     <div class="input-group-prepend ">
                         <div class="input-group-text p-3"><i class="fa-solid fa-user fa-bounce" style="color: #000000;"></i></div>
                     </div>
-                    <input type="text" name="userOrEmail" class="form-control form-control-lg bg-light fs-6 p-1" placeholder=" Địa chỉ email hoặc Người dùng">
+                    <input maxlength="100" type="text" name="userOrEmail" class="form-control form-control-lg bg-light fs-6 p-1" placeholder=" Địa chỉ email hoặc Người dùng">
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend ">
                         <div class="input-group-text p-3"><i class="fa-solid fa-key fa-bounce" style="color: #050505;"></i></div>
                     </div>
-                    <input type="password" name="passWord" id="myInput" class="form-control form-control-lg bg-light fs-6  p-1" placeholder=" Mật Khẩu" >
+                    <input maxlength="50" type="password" name="passWord" id="myInput" class="form-control form-control-lg bg-light fs-6  p-1" placeholder=" Mật Khẩu" >
 
                 </div>
 

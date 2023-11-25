@@ -188,7 +188,7 @@
         </tr>
     </c:forEach>
 
-</table>
-</body>--%>
+</table>--%>
+</body>
 
 </html>

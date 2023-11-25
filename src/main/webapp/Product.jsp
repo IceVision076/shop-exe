@@ -115,10 +115,10 @@
                 </c:forEach>
             </div>
             <%--      End Product--%>
-            <div div="row">
+            <div class="row">
                 <ul class="pagination pagination-lg justify-content-end ">
                     <c:if test="${tag>1}">
-                        <li class="page-item ">
+                        <li class="page-item">
                             <a class="page-link rounded-0 mr-3 shadow-sm  text-dark" href="${url}index=${tag-1}"
                                tabindex="-1"><i class="text-dark fas fa-chevron-left"></i></a>
                         </li>
