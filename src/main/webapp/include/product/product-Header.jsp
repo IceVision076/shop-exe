@@ -78,7 +78,7 @@
                         <a class="nav-link" href="Home">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">Thông Tin Cửa Hàng</a>
+                        <a class="nav-link" href="introduce.jsp">Thông Tin Cửa Hàng</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="ProductServlet">Cửa Hàng</a>

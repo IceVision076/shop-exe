@@ -15,9 +15,17 @@ import java.util.ArrayList;
 public class OrderCanceledServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int pageNumber = -1;
 
-        int orderCancelAmount = OrderRespository.orderCanceledAmount();
+        String search=request.getParameter("search");
+        int pageNumber = -1;
+        int orderCancelAmount = 0;
+        if(search==null){
+          orderCancelAmount=  OrderRespository.orderCanceledAmount();
+        }
+        else
+        {
+            orderCancelAmount=OrderRespository.searchCanceledOrderAmount(search);
+        }
         int maxPageAmount = (orderCancelAmount % 10 == 0) ? orderCancelAmount / 10 : orderCancelAmount / 10 + 1;
         if (request.getParameter("page") == null) {
             pageNumber = 1;
@@ -27,7 +35,17 @@ public class OrderCanceledServlet extends HttpServlet {
         if (pageNumber > maxPageAmount || pageNumber <= 0) pageNumber = 1;
 
 
-        ArrayList<Order> orderCancel = OrderRespository.orderCanceled(pageNumber);
+
+        ArrayList<Order> orderCancel ;
+        if(search==null){
+            orderCancel = OrderRespository.orderCanceled(pageNumber);
+        }
+        else{
+            orderCancel = OrderRespository.searchCanceledOrder(search,pageNumber);
+            request.setAttribute("search",search);
+        }
+
+
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
         request.setAttribute("orderCancel",orderCancel);

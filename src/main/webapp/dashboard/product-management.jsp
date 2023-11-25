@@ -43,9 +43,6 @@
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
 <%--                        <input type="text" class="form-control" placeholder="Type here...">--%>
-
-
-
                             <input id="search" maxlength="10" class="form-control" name="search" placeholder="Nhập mã sản phẩm" />
 
                     </div>

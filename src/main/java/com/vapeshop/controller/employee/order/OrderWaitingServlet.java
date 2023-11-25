@@ -16,8 +16,17 @@ import java.util.ArrayList;
 public class OrderWaitingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String search=request.getParameter("search");
         int pageNumber = -1;
-        int orderWaitingAmount = OrderRespository.orderWaitingAmount();
+        int orderWaitingAmount = 0;
+        if(search==null){
+            orderWaitingAmount=   OrderRespository.orderWaitingAmount();
+        }
+        else{
+            orderWaitingAmount=OrderRespository.searchWaitingOrderAmount(search);
+        }
+
         int maxPageAmount = (orderWaitingAmount % 10 == 0) ? orderWaitingAmount / 10 : orderWaitingAmount / 10 + 1;
         String error = request.getParameter("error");
 
@@ -29,8 +38,19 @@ public class OrderWaitingServlet extends HttpServlet {
         if (pageNumber > maxPageAmount || pageNumber <= 0) pageNumber = 1;
 
 
-        ArrayList<Order> orderWaiting = OrderRespository.orderWaitingPage(pageNumber);
+        ArrayList<Order> orderWaiting;
+        if(search==null){
+            orderWaiting = OrderRespository.orderWaitingPage(pageNumber);
+        }
+        else{
+            orderWaiting = OrderRespository.searchWaitingOrder(search,pageNumber);
+            request.setAttribute("search",search);
+
+        }
+
+
         if (error != null) request.setAttribute("error", error);
+
         request.setAttribute("maxPage", maxPageAmount);
         request.setAttribute("page", pageNumber);
         request.setAttribute("orderWaiting", orderWaiting);

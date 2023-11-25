@@ -480,9 +480,314 @@ public class OrderRespository {
         return urlDownload;
     }
 
+    public static ArrayList<Order> searchWaitingOrder(String orderIdSearch,int page){
+        ArrayList<Order> list = null;
+        try {
+            String query = "select *\n" +
+                    "from [Order]\n" +
+                    "where (status = '0'\n" +
+                    "   or status = '1')  and order_id like ?\n" +
+                    "order by create_date asc\n" +
+                    "OFFSET (? - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setInt(2, page);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (resultSet.next()) {
+                String orderId = resultSet.getString("order_id");
+                String userId = resultSet.getString("user_id");
+                LocalDateTime createDate = resultSet.getObject("create_date", LocalDateTime.class);
+                char status = resultSet.getString("status").charAt(0);
+                String voucherId = resultSet.getString("voucher_id");
+                String address = resultSet.getString("address");
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setUserId(userId);
+                order.setCreateDate(createDate);
+                order.setStatus(status);
+                order.setVoucherId(voucherId);
+                order.setAddress(address);
+                list.add(order);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static int  searchWaitingOrderAmount(String orderId){
+        int amount=0;
+        try {
+            String query = "select count(1)\n" +
+                    "from [Order]\n" +
+                    "where (status = '0'\n" +
+                    "    or status = '1')\n" +
+                    "  and order_id like ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderId+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+               amount=resultSet.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+
+
+    public static ArrayList<Order> searchCanceledOrder(String orderIdSearch,int page){
+        ArrayList<Order> list = null;
+        try {
+            String query = "select *\n" +
+                    "from [Order]\n" +
+                    "where (status = '3')  and order_id like ?\n" +
+                    "order by create_date asc\n" +
+                    "OFFSET (? - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setInt(2, page);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (resultSet.next()) {
+                String orderId = resultSet.getString("order_id");
+                String userId = resultSet.getString("user_id");
+                LocalDateTime createDate = resultSet.getObject("create_date", LocalDateTime.class);
+                char status = resultSet.getString("status").charAt(0);
+                String voucherId = resultSet.getString("voucher_id");
+                String address = resultSet.getString("address");
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setUserId(userId);
+                order.setCreateDate(createDate);
+                order.setStatus(status);
+                order.setVoucherId(voucherId);
+                order.setAddress(address);
+                list.add(order);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+
+    public static int  searchCanceledOrderAmount(String orderId){
+        int amount=0;
+        try {
+            String query = "select count(1)\n" +
+                    "from [Order]\n" +
+                    "where status='3'\n" +
+                    "  and order_id like ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderId+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                amount=resultSet.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+    public static ArrayList<Order> searchSuccessOrder(String orderIdSearch,int page){
+        ArrayList<Order> list = null;
+        try {
+            String query = "select *\n" +
+                    "from [Order]\n" +
+                    "where (status = '4')  and order_id like ?\n" +
+                    "order by create_date asc\n" +
+                    "OFFSET (? - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setInt(2, page);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (resultSet.next()) {
+                String orderId = resultSet.getString("order_id");
+                String userId = resultSet.getString("user_id");
+                LocalDateTime createDate = resultSet.getObject("create_date", LocalDateTime.class);
+                char status = resultSet.getString("status").charAt(0);
+                String voucherId = resultSet.getString("voucher_id");
+                String address = resultSet.getString("address");
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setUserId(userId);
+                order.setCreateDate(createDate);
+                order.setStatus(status);
+                order.setVoucherId(voucherId);
+                order.setAddress(address);
+                list.add(order);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static int  searchSuccessOrderAmount(String orderId){
+        int amount=0;
+        try {
+            String query = "select count(1)\n" +
+                    "from [Order]\n" +
+                    "where status='4'\n" +
+                    "  and order_id like ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderId+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                amount=resultSet.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+
+    public static ArrayList<Order> searchFailOrder(String orderIdSearch,int page){
+        ArrayList<Order> list = null;
+        try {
+            String query = "select *\n" +
+                    "from [Order]\n" +
+                    "where (status = '5')  and order_id like ?\n" +
+                    "order by create_date asc\n" +
+                    "OFFSET (? - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setInt(2, page);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (resultSet.next()) {
+                String orderId = resultSet.getString("order_id");
+                String userId = resultSet.getString("user_id");
+                LocalDateTime createDate = resultSet.getObject("create_date", LocalDateTime.class);
+                char status = resultSet.getString("status").charAt(0);
+                String voucherId = resultSet.getString("voucher_id");
+                String address = resultSet.getString("address");
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setUserId(userId);
+                order.setCreateDate(createDate);
+                order.setStatus(status);
+                order.setVoucherId(voucherId);
+                order.setAddress(address);
+                list.add(order);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static int  searchFailOrderAmount(String orderId){
+        int amount=0;
+        try {
+            String query = "select count(1)\n" +
+                    "from [Order]\n" +
+                    "where status='5'\n" +
+                    "  and order_id like ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderId+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                amount=resultSet.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+
+
+    public static ArrayList<Order> searchAcceptedOrder(String orderIdSearch,int page){
+        ArrayList<Order> list = null;
+        try {
+            String query = "select *\n" +
+                    "from [Order]\n" +
+                    "where (status = '2')  and order_id like ?\n" +
+                    "order by create_date asc\n" +
+                    "OFFSET (? - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setInt(2, page);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = new ArrayList<>();
+            while (resultSet.next()) {
+                String orderId = resultSet.getString("order_id");
+                String userId = resultSet.getString("user_id");
+                LocalDateTime createDate = resultSet.getObject("create_date", LocalDateTime.class);
+                char status = resultSet.getString("status").charAt(0);
+                String voucherId = resultSet.getString("voucher_id");
+                String address = resultSet.getString("address");
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setUserId(userId);
+                order.setCreateDate(createDate);
+                order.setStatus(status);
+                order.setVoucherId(voucherId);
+                order.setAddress(address);
+                list.add(order);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static int  searchAcceptedOrderAmount(String orderId){
+        int amount=0;
+        try {
+            String query = "select count(1)\n" +
+                    "from [Order]\n" +
+                    "where status='2'\n" +
+                    "  and order_id like ?";
+
+            Connection connection = DBConnect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,"%"+orderId+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                amount=resultSet.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+
     public static void main(String[] args) {
 //        Order order = OrderRespository.getOrderById("0lbSoK6BNR");
 //        System.out.println(order.getOrderId());
-        System.out.println(downloadInvoce("0lbSoK6BNR"));
+       // System.out.println(downloadInvoce("0lbSoK6BNR"));
+
+        System.out.println(searchCanceledOrder("Gmt81L",1).size());
+
     }
 }

@@ -15,8 +15,18 @@ import java.util.ArrayList;
 public class OrderFailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String search=request.getParameter("search");
         int pageNumber = -1;
-        int orderFailAmount = OrderRespository.orderFailAmount();
+        int orderFailAmount =0;
+        if(search==null){
+            orderFailAmount=  OrderRespository.orderFailAmount();
+        }
+        else
+        {
+            orderFailAmount=OrderRespository.searchFailOrderAmount(search);
+        }
+
         int maxPageAmount = (orderFailAmount % 10 == 0) ? orderFailAmount / 10 : orderFailAmount / 10 + 1;
         if (request.getParameter("page") == null) {
             pageNumber = 1;
@@ -26,7 +36,16 @@ public class OrderFailServlet extends HttpServlet {
         if (pageNumber > maxPageAmount || pageNumber <= 0) pageNumber = 1;
 
 
-        ArrayList<Order> orderFail =OrderRespository.orderFail(pageNumber);
+        ArrayList<Order> orderFail;
+        if(search==null){
+            orderFail = OrderRespository.orderFail(pageNumber);
+        }
+        else{
+            orderFail = OrderRespository.searchFailOrder(search,pageNumber);
+            request.setAttribute("search",search);
+        }
+
+
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
         request.setAttribute("orderFail",orderFail);

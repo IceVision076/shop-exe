@@ -55,6 +55,7 @@
         border-radius: 5px;
 
     }
+
     /* this is the text, when you hover on button */
     .hover-text-open {
         position: absolute;
@@ -68,6 +69,7 @@
         transition: 0.5s;
         -webkit-text-stroke: 1px var(--animation-color);
     }
+
     /* hover */
     .button-open:hover .hover-text-open {
         width: 100%;
@@ -101,6 +103,7 @@
         -webkit-text-stroke: 1px var(--text-stroke-color);
         border-radius: 5px;
     }
+
     /* this is the text, when you hover on button */
     .hover-text-close {
         position: absolute;
@@ -114,6 +117,7 @@
         transition: 0.5s;
         -webkit-text-stroke: 1px var(--animation-color-c);
     }
+
     /* hover */
     .button-close:hover .hover-text-close {
         width: 100%;
@@ -137,10 +141,16 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    <form id="searchForm" onsubmit="submitSearch()" action="order-waiting" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                        aria-hidden="true"></i></span>
+                            <%--                        <input type="text" class="form-control" placeholder="Type here...">--%>
+                            <input id="search" maxlength="10" class="form-control" name="search"
+                                   placeholder="Nhập mã đơn hàng"/>
+
+                        </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -259,7 +269,7 @@
                         <h6 class="text-lg">Bảng các đơn hàng đang chờ xác nhận(Trang ${page}/${maxPage})</h6>
                         <p class="text-danger">
                             <c:if test="${error eq '1'}">
-                            Trạng thái đơn hàng gặp sự cố vui lòng kiểm tra lại
+                                Trạng thái đơn hàng gặp sự cố vui lòng kiểm tra lại
                             </c:if>
                         </p>
                     </div>
@@ -296,7 +306,8 @@
                                         <td>
                                             <div class="text-lg font-weight-bold mb-0 text-center">
 
-                                                <a class="mb-0 text-lg" href="order-detail?orderId=${o.orderId}">${o.orderId}</a>
+                                                <a class="mb-0 text-lg"
+                                                   href="order-detail?orderId=${o.orderId}">${o.orderId}</a>
                                             </div>
                                         </td>
                                         <td>
@@ -352,7 +363,8 @@
                                                 <input type="hidden" name="id" value="${o.orderId}">
                                                 <input type="hidden" name="page" value="${page==null?1:page}">
                                                 <input type="hidden" name="choice" value="cancel">
-                                                <button type="submit" class="button-close bg-secondary" data-text="Awesome">
+                                                <button type="submit" class="button-close bg-secondary"
+                                                        data-text="Awesome">
                                                     <span class="actual-text-close">&nbsp;Hủy&nbsp;</span>
                                                     <span aria-hidden="true"
                                                           class="hover-text-close">&nbsp;Hủy&nbsp;</span>
@@ -370,10 +382,18 @@
                             <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                                 <ul class="pagination">
 
+
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="order-waiting?page=${page-1}"
+
+                                            <c:if test="${empty search}">
+                                                <a class="page-link" href="order-waiting?page=${page-1}"
+                                            </c:if>
+                                            <c:if test="${not empty search}">
+                                            <a class="page-link" href="order-waiting?page=${page-1}&search=${search}"
+                                            </c:if>
+
                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
@@ -384,8 +404,19 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                                     href="order-waiting?page=${i}">${i}</a></li>
+
+                                            <c:if test="${empty search}">
+                                                <li class="page-item"><a
+                                                        class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                        href="order-waiting?page=${i}">${i}</a></li>
+                                            </c:if>
+
+                                            <c:if test="${not empty search}">
+                                                <li class="page-item"><a
+                                                        class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                        href="order-waiting?page=${i}&search=${search}">${i}</a></li>
+                                            </c:if>
+
                                         </c:if>
 
                                     </c:forEach>
@@ -393,12 +424,19 @@
 
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
-
+                                            <c:if test="${empty search}">
                                             <a class="page-link" href="order-waiting?page=${page+1}"
                                                aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
+                                                </c:if>
+                                                <c:if test="${not empty search}">
+                                                <a class="page-link"
+                                                   href="order-waiting?page=${page+1}&search=${search}"
+                                                   aria-label="Next">
+                                                    </c:if>
+
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
                                         </li>
                                     </c:if>
 
@@ -409,5 +447,16 @@
                 </div>
             </div>
         </div>
+        <script>
+            function submitSearch() {
+                document.getElementById("search").addEventListener("keyup", function (event) {
+                    if (event.keyCode === 13) {
+                        var x = document.getElementById("searchForm");
+                        x.submit();
+                        return false;
+                    }
+                });
+            }
+        </script>
 
         <%@ include file="include/footer-dashboard.jsp" %>
