@@ -553,7 +553,14 @@
     </div>
     <script>
         function run() {
-            alert("CẢM ƠN BẠN ĐÃ PHẢN HỒI (^.^)")
+            alert(
+            <c:if test="${not empty sessionScope.user}">
+                ${"CẢM ƠN BẠN ĐÃ PHẢN HỒI (^.^)"}
+                </c:if>
+            <c:if test="${empty sessionScope.user}">
+            "Vui lòng đăng nhập để sử dụng tính năng"
+            </c:if>
+            )
         }
 
         // Example starter JavaScript for disabling form submissions if there are invalid fields

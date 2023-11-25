@@ -27,7 +27,7 @@ public class SeviceCustomerFilter implements Filter {
         User user=(User) session.getAttribute("user");
         if(user ==null ){
             System.out.println("Không có quyền truy cập vì người dùng không phải khách hàng hoặc chưa đăng nhập");
-            httpServletResponse.sendRedirect("Home");
+            httpServletResponse.sendRedirect("login.jsp");
         }
         else if(user.getRole().equals("1")||user.getRole().equals("2")){
             System.out.println("Không có quyền truy cập vì người dùng không phải khách hàng hoặc chưa đăng nhập");
