@@ -7,6 +7,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +46,7 @@
             <div class="row align-items-center">
                 <div class="header-text mb-4">
                     <h2> Xin chào <i class="fa-solid fa-heart fa-beat-fade" style="color: #ff0000;"></i> </h2>
-                    <p>Chúng tôi rất vui khi có bạn trở lại.</p>
+                    <p>Chúng tôi rất vui khi có bạn trở lại.${error}</p>
                 </div>
 
                 <form action="login" method="post">
@@ -74,6 +75,9 @@
                     }
                 %>
 
+                <c:if test="${error == 1}">
+                    <div class="alert alert-danger" style="color: red">Tài khoản này đang tạm khóa vui lòng liên hệ admin</div>
+                </c:if>
                 <div class="input-group mb-5 d-flex justify-content-between">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="formCheck" onclick="myFunction()" >

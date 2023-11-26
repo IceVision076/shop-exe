@@ -2,6 +2,7 @@ package com.vapeshop.respository.user;
 
 
 import com.vapeshop.config.DBConnect;
+import com.vapeshop.entity.Product;
 import com.vapeshop.entity.User;
 
 import java.sql.Connection;
@@ -317,6 +318,26 @@ public class UserRespository {
         }
         return user;
     }
+
+    public static char checkStatus(String usernameOrEmail){
+        char check='0';
+        try{
+            String query="select status from UserInfo\n" +
+                    "where username=? or email=?";
+            Connection con=DBConnect.getConnection();
+            PreparedStatement preparedStatement=con.prepareStatement(query);
+            preparedStatement.setString(1,usernameOrEmail);
+            preparedStatement.setString(2,usernameOrEmail);
+            ResultSet rs=preparedStatement.executeQuery();
+            if(rs.next()) {
+              check =rs.getString("status").charAt(0);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+            return check;
+    }
     public static void main(String[] args) {
         // Gọi phương thức setIDDatabase và cung cấp chuỗi đầu vào "AC00000999"
 //        String inputString = "AC00000010";
@@ -348,12 +369,12 @@ public class UserRespository {
 //
 
 
-
-        String email = "nguyenngocnhan442002@gmail.com";
-        String pass = "123456789";
-        UserRespository dao = new UserRespository();
-        dao.resetPassWord(email, pass);
-
+//
+//        String email = "nguyenngocnhan442002@gmail.com";
+//        String pass = "123456789";
+//        UserRespository dao = new UserRespository();
+//        dao.resetPassWord(email, pass);
+        System.out.println(checkStatus("Cancer@gmail.com"));
     }
 
 }

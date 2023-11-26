@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 
         UserRespository dao = new UserRespository();
         try {
+
             User account = dao.login(userName, passWord);
 
             if (account == null) {
@@ -70,10 +71,17 @@ public class LoginServlet extends HttpServlet {
 
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", account);
-                session.setAttribute("cart", new Order());
-                response.sendRedirect("Home");
+             if(UserRespository.checkStatus(userName)=='1'){
+                 HttpSession session = request.getSession();
+                 session.setAttribute("user", account);
+                 session.setAttribute("cart", new Order());
+                 response.sendRedirect("Home");
+             } else if (UserRespository.checkStatus(userName)=='0') {
+                 request.setAttribute("error","1");
+                 request.getRequestDispatcher("login.jsp").forward(request,response);
+                // response.sendRedirect("login.jsp?error=1");
+             }
+
 
             }
 
