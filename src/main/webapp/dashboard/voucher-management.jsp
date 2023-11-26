@@ -41,10 +41,16 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    <form id="searchForm" onsubmit="submitSearch()" action="voucher-page" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                        aria-hidden="true"></i></span>
+                            <%--                        <input type="text" class="form-control" placeholder="Type here...">--%>
+                            <input id="search" maxlength="10" class="form-control" name="search"
+                                   placeholder="Nhập mã giảm giá"/>
+
+                        </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -162,7 +168,8 @@
                     <div class="card-header pb-0">
                         <h6 class="text-lg">Bảng vourcher (Trang ${page}/${maxPage})</h6>
                         <a href="voucher-create" class="fa-solid fa-circle-plus fa-xl d-flex flex-row-reverse"
-                           style="color: #d31798;"> <span style="font-family: Courier;font-size: 20px;">Mã giảm giá mới</span>
+                           style="color: #d31798;"> <span
+                                style="font-family: Courier;font-size: 20px;">Mã giảm giá mới</span>
                         </a>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -175,7 +182,10 @@
                                         Voucher
                                     </th>
                                     <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2">
-                                        Phần trăm 
+                                        Phần trăm
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-lg text-center font-weight-bolder opacity-7 ps-2">
+                                        Số lượng
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-lg font-weight-bolder opacity-7">
                                         Ngày tạo
@@ -210,16 +220,24 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-lg font-weight-bold mb-0 text-left">
-                                                    <fmt:formatNumber var="price" value=" ${v.voucherPercent*100}" maxFractionDigits="1"></fmt:formatNumber>
-                                                  ${price} %</p>
+                                            <p class="text-lg font-weight-bold mb-0 text-left ">
+                                                <fmt:formatNumber var="price" value=" ${v.voucherPercent*100}"
+                                                                  maxFractionDigits="1"></fmt:formatNumber>
+                                                    ${price} %</p>
 
                                         </td>
 
                                         <td class="align-middle text-center">
+                                            <span class="text-secondary text-lg font-weight-bold badge bg-warning">
+                                                <c:if test="${v.amount==0}">Không giới hạn</c:if>
+                                                <c:if test="${v.amount!=0}">${v.amount} mã</c:if>
+
+                                            </span>
+                                        </td>
+                                        <td class="align-middle text-center">
                                             <span class="text-secondary text-lg font-weight-bold">
-                                                ${v.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
-                                             </span>
+                                                    ${v.createDate.format(DateTimeFormatter.ofPattern("HH:mm:ss yyyy-MM-dd"))}
+                                            </span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-lg font-weight-bold">
@@ -232,56 +250,71 @@
                                             </span>
                                         </td>
                                         <td class="align-middle text-center text-lg">
-<%--                                                ${v.status}${(v.status+'') eq ('1').charAt(0)}--%>
-                                                    <c:if test="${(v.status+'') eq ('1').charAt(0)}">
-                                                        <span class="badge badge-sm bg-gradient-success ">Có thể áp dụng</span>
-                                                    </c:if>
-                                                    <c:if test="${(v.status+'') eq ('0').charAt(0)}">
-                                                        <span class="badge badge-sm bg-gradient-danger ">Dừng áp dụng</span>
-                                                    </c:if>
+                                                <%--                                                ${v.status}${(v.status+'') eq ('1').charAt(0)}--%>
+                                            <c:if test="${(v.status+'') eq ('1').charAt(0)}">
+                                                <span class="badge badge-sm bg-gradient-success ">Có thể áp dụng</span>
+                                            </c:if>
+                                            <c:if test="${(v.status+'') eq ('0').charAt(0)}">
+                                                <span class="badge badge-sm bg-gradient-danger ">Dừng áp dụng</span>
+                                            </c:if>
 
 
                                         </td>
                                         <td class="align-middle">
                                             <!-- Button trigger modal -->
-                                            <button type="button"   class="text-secondary font-weight-bold text-xs btn btn-warning" data-bs-toggle="modal" data-bs-target="#${v.id}">
-                                               Chỉnh sửa
+                                            <button type="button"
+                                                    class="text-secondary font-weight-bold text-xs btn btn-warning"
+                                                    data-bs-toggle="modal" data-bs-target="#${v.id}">
+                                                Chỉnh sửa
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal modal-lg fade" id="${v.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal modal-lg fade" id="${v.id}" tabindex="-1"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <div>
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa voucher ${v.voucherName}: Mã(${v.id})</h1>
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    Chỉnh sửa voucher ${v.voucherName}: Mã(${v.id})</h1>
                                                             </div>
 
-                                                            <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <button type="button" class="btn-close text-danger"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <c:if test="${(v.status+'') eq ('1').charAt(0)}">
-                                                                <h4 class="text-danger">Voucher này đang hoạt động bạn có muốn hoãn???</h4>
+                                                                <h4 class="text-danger">Voucher này đang hoạt động bạn
+                                                                    có muốn hoãn???</h4>
                                                                 <form action="voucher-change-status" method="post">
                                                                     <input type="hidden" value="${page}" name="page">
-                                                                    <input type="hidden" value="${v.id}" name="voucherId">
+                                                                    <input type="hidden" value="${v.id}"
+                                                                           name="voucherId">
                                                                     <input type="hidden" value="close" name="action">
-                                                                    <button type="submit" class="btn btn-danger" >Hoãn ngay</button>
+                                                                    <button type="submit" class="btn btn-danger">Hoãn
+                                                                        ngay
+                                                                    </button>
                                                                 </form>
                                                             </c:if>
                                                             <c:if test="${(v.status+'') eq ('0').charAt(0)}">
-                                                                <h4 style="width: 100%" class="text-danger">Voucher này đang hoãn bạn có muốn kích hoạt???</h4>
+                                                                <h4 style="width: 100%" class="text-danger">Voucher này
+                                                                    đang hoãn bạn có muốn kích hoạt???</h4>
                                                                 <form action="voucher-change-status" method="post">
                                                                     <input type="hidden" value="${page}" name="page">
-                                                                    <input type="hidden" value="${v.id}" name="voucherId">
+                                                                    <input type="hidden" value="${v.id}"
+                                                                           name="voucherId">
                                                                     <input type="hidden" value="open" name="action">
-                                                                    <button type="submit" class="btn btn-success" >Kích hoạt</button>
+                                                                    <button type="submit" class="btn btn-success">Kích
+                                                                        hoạt
+                                                                    </button>
                                                                 </form>
 
                                                             </c:if>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Đóng
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -300,10 +333,15 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="voucher-page?page=${page-1}"
-                                               aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
+                                            <c:if test="${empty search}">
+                                                <a class="page-link" href="voucher-page?page=${page-1}"
+                                            </c:if>
+                                            <c:if test="${not empty search}">
+                                                <a class="page-link" href="voucher-page?page=${page-1}&search=${search}"
+                                            </c:if>
+
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
                                             </a>
                                         </li>
 
@@ -311,8 +349,19 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                                     href="voucher-page?page=${i}">${i}</a></li>
+                                            <c:if test="${empty search}">
+                                                <li class="page-item"><a
+                                                        class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                        href="voucher-page?page=${i}">${i}</a></li>
+                                            </c:if>
+
+                                            <c:if test="${not empty search}">
+                                                <li class="page-item"><a
+                                                        class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                        href="voucher-page?page=${i}&search=${search}">${i}</a></li>
+                                            </c:if>
+
+
                                         </c:if>
 
                                     </c:forEach>
@@ -320,9 +369,15 @@
 
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
-
-                                            <a class="page-link" href="voucher-page?page=${page+1}"
+                                            <c:if test="${empty search}">
+                                                <a class="page-link" href="voucher-page?page=${page+1}"
+                                            </c:if>
+                                            <c:if test="${not empty search}">
+                                            <a class="page-link"
+                                               href="voucher-page?page=${page+1}&search=${search}"
                                                aria-label="Next">
+                                                </c:if>
+
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </a>
@@ -336,5 +391,15 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            function submitSearch() {
+                document.getElementById("search").addEventListener("keyup", function (event) {
+                    if (event.keyCode === 13) {
+                        var x = document.getElementById("searchForm");
+                        x.submit();
+                        return false;
+                    }
+                });
+            }
+        </script>
         <%@ include file="include/footer-dashboard.jsp" %>

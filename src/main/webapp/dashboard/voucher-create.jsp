@@ -26,6 +26,19 @@
 
 
 <%@include file="include/header-product-management-dashboard.jsp" %>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -41,14 +54,11 @@
 
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm mã giảm giá</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Quản lí sản phẩm</h6>
+                <h6 class="font-weight-bolder mb-0">Thêm mã giảm giá mới</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -178,14 +188,14 @@
 
                             <%--                        Tên mã mới--%>
                             <div class="col-12">
-                                <label for="voucherName" class="form-label">Tên mã giảm giá <span
+                                <label for="voucherName" class="form-label text-lg">Tên mã giảm giá <span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" placeholder="Nhập tên mã giảm giá"
-                                           id="voucherName" name="voucherName"
+                                    <input type="text" class="form-control  text-lg" placeholder="Nhập tên mã giảm giá"
+                                           id="voucherName" name="voucherName" maxlength="100"
                                            required>
-                                    <div class="invalid-feedback">
-                                        Tên không được bỏ trống
+                                    <div class="invalid-feedback  text-lg">
+                                        Tên không được bỏ trống và tối đa 100 kí tự
                                     </div>
                                 </div>
                             </div>
@@ -193,46 +203,65 @@
 
                             <%--                        %  giảm--%>
                             <div class="col-12">
-                                <label for="voucherPercent" class="form-label">Tỷ lệ giảm(%) <span class="text-danger"> *</span></label>
+                                <label for="voucherPercent" class="form-label  text-lg">Tỷ lệ giảm(%) <span
+                                        class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="number" class="form-control" min="1" max="70" id="voucherPercent"
+                                    <input type="number" class="form-control  text-lg" min="1" max="70"
+                                           id="voucherPercent"
                                            name="voucherPercent" placeholder="Nhập tỉ lệ % giảm(1-70)" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback  text-lg">
                                         Vui lòng điền số hợp lệ từ 1 đến 70
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="openDate" class="form-label">Ngày bắt đầu <span
+                                <label for="voucherAmount" class="form-label  text-lg">Số lượng mã (Không giới hạn nếu
+                                    không nhập)</label>
+                                <div class="input-group has-validation">
+                                    <input type="number" class="form-control  text-lg" min="1" max="1000"
+                                           id="voucherAmount"
+                                           name="voucherAmount" placeholder="Nhập số lượng mã từ 1 đến 1000 mã">
+                                    <div class="invalid-feedback  text-lg">
+                                        Vui lòng điền số hợp lệ từ 1 đến 1000
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="openDate" class="form-label  text-lg">Ngày bắt đầu <span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="datetime-local" format="DD-MM-YYYY hh:mm" class="form-control"
+                                    <input type="datetime-local" format="DD-MM-YYYY hh:mm" class="form-control  text-lg"
                                            id="openDate" name="openDate" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback  text-lg">
                                         Vui lòng chọn ngày bắt đầu
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="closeDate" class="form-label">Ngày kết thúc <span
+                                <label for="closeDate" class="form-label text-lg">Ngày kết thúc <span
                                         class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="datetime-local" format="DD-MM-YYYY hh:mm" class="form-control"
+                                    <input type="datetime-local" format="DD-MM-YYYY hh:mm" class="form-control  text-lg"
                                            id="closeDate" name="closeDate" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback text-lg">
                                         Vui lòng chọn ngày kết thúc
                                     </div>
                                 </div>
                             </div>
-                                <c:if test="${error eq 1}">
-                                    <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center" style="height: 50px;border-radius: 10px" ><b>Ngày bắt đầu phải lớn hơn ngày kết thúc</b></div>
-                                </c:if>
+                            <c:if test="${error eq 1}">
+                                <div class="bg-danger text-warning text-center d-flex justify-content-center align-items-center"
+                                     style="height: 50px;border-radius: 10px"><b>Ngày bắt đầu phải lớn hơn ngày kết
+                                    thúc</b></div>
+                            </c:if>
+                            <c:if test="${success eq 1}">
+                                <div class="bg-success text-white text-center d-flex justify-content-center align-items-center"
+                                     style="height: 50px;border-radius: 10px"><b>Thêm mã thành công</b></div>
+                            </c:if>
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Lưu <i
                                         class="fa-solid fa-rocket fa-bounce fa-lg" style="color: #f2df07;"></i></button>
                             </div>
                         </form>
-
 
 
                         <div class="mx-5 mb-2">
@@ -245,19 +274,21 @@
             </div>
         </div>
     </div>
+
     <script>
         // Get the datetime-local input field
         var closeDate = document.getElementById("closeDate");
         var openDate = document.getElementById("openDate");
         // Get the current date
         var today = new Date();
-
+        openDate.min = today.toISOString().substring(0, 10) + "T00:00:00";
+        console.log(today);
         // Increment the day by 1 to get tomorrow's date
         var tomorrow = new Date(today.setDate(today.getDate() + 1));
 
         // Set the minimum time to tomorrow's date at 00:00:00
         closeDate.min = tomorrow.toISOString().substring(0, 10) + "T00:00:00";
-        openDate.min = tomorrow.toISOString().substring(0, 10) + "T00:00:00";
+
 
     </script>
     <%@include file="include/footer-dashboard.jsp" %>

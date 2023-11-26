@@ -10,6 +10,8 @@ public class Voucher {
     private LocalDateTime createDate;
     private LocalDateTime closeDate;
     private char status;
+
+    private int amount;
 private LocalDateTime openDate;
     public Voucher() {
     }
@@ -78,6 +80,14 @@ private LocalDateTime openDate;
 
     public void setStatus(char status) {
         this.status = status;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override

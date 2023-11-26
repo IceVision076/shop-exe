@@ -15,8 +15,10 @@ public class VoucherCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String error = request.getParameter("error");
-        System.out.println(error);
+        String success=request.getParameter("success");
+       // System.out.println(error);
         if (error == null) {
+            request.setAttribute("success",success);
             request.getRequestDispatcher("dashboard/voucher-create.jsp").forward(request, response);
         } else {
             request.setAttribute("error", error);
@@ -35,19 +37,24 @@ public class VoucherCreateServlet extends HttpServlet {
             id += characters.charAt(random.nextInt(characters.length()));
         }
 
+
+
         String voucherName = request.getParameter("voucherName");
         double voucherPercent = Double.parseDouble(request.getParameter("voucherPercent")) / 100;
         LocalDateTime createDate = LocalDateTime.now();
         LocalDateTime closeDate = LocalDateTime.parse(request.getParameter("closeDate"));
         LocalDateTime openDate = LocalDateTime.parse(request.getParameter("openDate"));
-
+        int amount=0;
         char status = '1';
         if (closeDate.isBefore(openDate)) {
             response.sendRedirect("voucher-create?error=1");
         } else {
+
+          if (!request.getParameter("voucherAmount").isEmpty()) amount= Integer.parseInt(request.getParameter("voucherAmount"));
             Voucher voucher = new Voucher(id, voucherName, voucherPercent, createDate, closeDate, status, openDate);
+            voucher.setAmount(amount);
             VoucherRespository.addVoucher(voucher);
-            response.sendRedirect("voucher-create");
+            response.sendRedirect("voucher-create?success=1");
         }
 
     }
