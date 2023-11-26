@@ -244,9 +244,36 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <label for="address" class="form-label">Address</label>
+                                                                <label for="phone" class="form-label fw-bolder">Tỉnh/Thành: </label>
+                                                                <select class="form-control" id="city" required>
+                                                                    <option value="" selected></option>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    <span>Vui Lòng Chọn Tỉnh Thành Phố</span> <br>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="phone" class="form-label fw-bolder">Quận/Huyện: </label>
+                                                                <select class="form-control" id="district" required>
+                                                                    <option value="" selected></option>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    <span>Vui Lòng Chọn quận huyện</span> <br>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="phone" class="form-label fw-bolder">Phường/Xã: </label>
+                                                                <select class="form-control" id="ward" required>
+                                                                    <option value="" selected></option>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    <span>Vui Lòng Chọn phường xã</span> <br>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="addressInput" class="form-label">Address</label>
                                                                 <div class="input-group has-validation">
-                                                                    <input maxlength="50" type="text" class="form-control" id="address" name="address"
+                                                                    <input maxlength="100" type="text" class="form-control" id="addressInput" name="address"
                                                                            aria-describedby="inputGroupPrepend" value="${sessionScope.user.address}" required>
                                                                     <div class="invalid-feedback">
                                                                         Hãy chọn một địa chỉ.
@@ -277,6 +304,81 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        const host = "https://provinces.open-api.vn/api/";
+
+        const callAPI = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data, "city");
+                });
+        }
+
+        callAPI('https://provinces.open-api.vn/api/?depth=1');
+
+        const callApiDistrict = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data.districts, "district");
+                });
+        }
+
+        const callApiWard = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data.wards, "ward");
+                });
+        }
+
+        const renderData = (array, select) => {
+            let row = ' <option disable value="">Lựa Chọn</option>';
+            array.forEach(element => {
+                let addressCode = JSON.stringify(element.code);
+                let addressName = JSON.stringify(element.name).slice(1,-1);
+                console.log(addressCode+addressName)
+                row += `<option data-id="`+addressCode+`" value="`+addressName+`">`+addressName+`</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row
+        }
+
+        $("#city").change(() => {
+            callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+            printResult();
+        });
+
+        $("#district").change(() => {
+            callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+            printResult();
+        });
+
+        $("#ward").change(() => {
+            printResult();
+        })
+
+        const printResult = () => {
+            if ($("#district").find(':selected').data('id') != "" && $("#city").find(':selected').data('id') != "" &&
+                $("#ward").find(':selected').data('id') != "") {
+                let result = $("#city option:selected").text() +
+                    " , " + $("#district option:selected").text() + " , " +
+                    $("#ward option:selected").text();
+                $("#result").text(result);
+
+                // Set the value of the input field with the selected address
+                $("#addressInput").val(result);
+                console.log(result)
+            }
+        }
+        //
+        // const getResult = () =>{
+        //     if ($("#city").val() && $("#district").val() && $("#ward").val()) {
+        //         alert("Form đã được submit! Địa chỉ đã chọn: " + $("#result").text());
+        //     } else {
+        //         alert("Vui lòng chọn đầy đủ thông tin địa chỉ trước khi submit!");
+        //     }
+        // }
+    </script>
 
     <%@include file="include/footer-dashboard.jsp" %>
 
