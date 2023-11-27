@@ -656,7 +656,7 @@ public class ServiceResposiory {
         return list;
     }
 
-    public static ArrayList<ServiceTracking> serviceCanceledPage(String serviceIdSearch, int page) {
+    public static ArrayList<ServiceTracking> serviceCanceledSearch(String serviceIdSearch, int page) {
         ArrayList<ServiceTracking> list = null;
         try {
             String query = "select id,user_id, user_description,create_date,status,title,employee_description,delivery_date\n" +
@@ -693,7 +693,7 @@ public class ServiceResposiory {
         return list;
     }
 
- 
+
     public static void main(String[] args) {
 
 

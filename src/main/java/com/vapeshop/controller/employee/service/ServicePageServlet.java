@@ -14,8 +14,15 @@ import java.util.ArrayList;
 public class ServicePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String search = request.getParameter("search");
         int pageNumber = -1;
-        int amountServiceAccept = ServiceResposiory.serviceAcceptAmount();
+        int amountServiceAccept = 0;
+        if(search==null){
+            amountServiceAccept= ServiceResposiory.serviceAcceptAmount();
+        }
+        else
+            amountServiceAccept=ServiceResposiory.getAmountWaitingSearch(search);
+//        ServiceResposiory.serviceAcceptAmount();
         int maxPageAmount = (amountServiceAccept % 10 == 0) ? amountServiceAccept / 10 : amountServiceAccept / 10 + 1;
         if (request.getParameter("page") == null) {
             pageNumber = 1;
@@ -25,7 +32,14 @@ public class ServicePageServlet extends HttpServlet {
         if (pageNumber > maxPageAmount || pageNumber <= 0) pageNumber = 1;
 
 
-        ArrayList<ServiceTracking> serviceAcceptList = ServiceResposiory.serviceTrackingPage(pageNumber);
+        ArrayList<ServiceTracking> serviceAcceptList;
+        if (search == null) {
+            serviceAcceptList = ServiceResposiory.serviceTrackingPage(pageNumber);
+        } else {
+            serviceAcceptList = ServiceResposiory.serviceTrackingSearch(search, pageNumber);
+        }
+//        = ServiceResposiory.serviceTrackingPage(pageNumber);
+
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);
         request.setAttribute("serviceAcceptList",serviceAcceptList);
