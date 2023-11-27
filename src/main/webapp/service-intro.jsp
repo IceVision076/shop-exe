@@ -514,27 +514,28 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="title" class="form-label fw-bolder">Tiêu đề <span class="text-danger"> *</span></label>
+                                    <label for="title" class="form-label fw-bolder text-lg">Tiêu đề <span class="text-danger"> *</span></label>
                                     <div class="input-group has-validation mt-1">
-                                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"
+                                        <input type="text" class="form-control text-lg" placeholder="Nhập tiêu đề"
+                                               maxlength="50"
                                                id="title" name="title"
                                                required>
                                         <div class="invalid-feedback">
-                                            Không được bỏ trống tiêu đề
+                                            Không được bỏ trống tiêu đề và độ dài tối đa là 50 kí tự
                                         </div>
                                     </div>
                                 </div>
 
 
                                 <div class="col-12 mt-4">
-                                    <label for="userDescription" class="form-label fw-bolder">Mô tả <span
+                                    <label for="userDescription" class="form-label fw-bolder text-lg">Mô tả <span
                                             class="text-danger"> *</span></label>
                                     <div class="input-group has-validation">
-                                        <textarea cols="30" rows="10" class="form-control" id="userDescription"
-                                                  name="userDescription"
+                                        <textarea cols="30" rows="10" class="form-control text-lg" id="userDescription"
+                                                  name="userDescription" maxlength="250"
                                                   placeholder="Nhập mô tả" required></textarea>
                                         <div class="invalid-feedback">
-                                            Vui lòng điền mô tả
+                                            Vui lòng điền mô tả và độ dài tối đa 250 ki tự
                                         </div>
                                     </div>
                                 </div>
@@ -565,6 +566,27 @@
 
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+    <script>
+        (function () {
+            'use strict'
+
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')
 

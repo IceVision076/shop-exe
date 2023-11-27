@@ -37,6 +37,8 @@ public class ServicePageServlet extends HttpServlet {
             serviceAcceptList = ServiceResposiory.serviceTrackingPage(pageNumber);
         } else {
             serviceAcceptList = ServiceResposiory.serviceTrackingSearch(search, pageNumber);
+            request.setAttribute("search",search);
+
         }
 //        = ServiceResposiory.serviceTrackingPage(pageNumber);
 

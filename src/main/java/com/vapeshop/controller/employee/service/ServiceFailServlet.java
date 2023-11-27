@@ -36,6 +36,8 @@ public class ServiceFailServlet extends HttpServlet {
             serviceFailList = ServiceResposiory.serviceFailPage(pageNumber);
         } else {
             serviceFailList = ServiceResposiory.serviceFailSearch(search, pageNumber);
+            request.setAttribute("search",search);
+
         }
 
         request.setAttribute("maxPage", maxPageAmount);

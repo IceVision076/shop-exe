@@ -24,10 +24,16 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    <form id="searchForm" onsubmit="submitSearch()" action="service-canceled" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                        aria-hidden="true"></i></span>
+                            <%--                        <input type="text" class="form-control" placeholder="Type here...">--%>
+                            <input id="search" maxlength="10" class="form-control" name="search"
+                                   placeholder="Nhập mã đơn dịch vụ"/>
+
+                        </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -143,7 +149,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6 class="text-lg">Bảng dịch vụ bị hủy  (Trang ${page}/${maxPage})</h6>
+                        <h6 class="text-lg">Bảng dịch vụ bị hủy (Trang ${page}/${maxPage})</h6>
 
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -272,10 +278,16 @@
                                     <c:if test="${page>1}">
 
                                         <li class="page-item">
-                                            <a class="page-link" href="service-canceled?page=${page-1}"
-                                               aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
+                                            <c:if test="${empty search}">
+                                                <a class="page-link" href="service-canceled?page=${page-1}"
+                                            </c:if>
+                                            <c:if test="${not empty search}">
+                                                <a class="page-link"
+                                                   href="service-canceled?page=${page-1}&search=${search}"
+                                            </c:if>
+
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
                                             </a>
                                         </li>
 
@@ -283,8 +295,20 @@
 
                                     <c:forEach var="i" begin="${page-1}" end="${page+1}">
                                         <c:if test="${i>=1&&i<=maxPage}">
-                                            <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                                                     href="service-canceled?page=${i}">${i}</a></li>
+
+                                            <c:if test="${empty search}">
+                                                <li class="page-item"><a
+                                                        class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                        href="service-canceled?page=${i}">${i}</a></li>
+                                            </c:if>
+
+                                            <c:if test="${not empty search}">
+                                                <li class="page-item"><a
+                                                        class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                                        href="service-canceled?page=${i}&search=${search}">${i}</a></li>
+                                            </c:if>
+
+
                                         </c:if>
 
                                     </c:forEach>
@@ -292,9 +316,14 @@
 
                                     <c:if test="${page<maxPage}">
                                         <li class="page-item">
-
-                                            <a class="page-link" href="service-canceled?page=${page+1}"
+                                            <c:if test="${empty search}">
+                                                <a class="page-link" href="service-canceled?page=${page+1}"
+                                            </c:if>
+                                            <c:if test="${not empty search}">
+                                            <a class="page-link"
+                                               href="service-canceled?page=${page+1}&search=${search}"
                                                aria-label="Next">
+                                                </c:if>
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </a>
@@ -308,5 +337,15 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            function submitSearch() {
+                document.getElementById("search").addEventListener("keyup", function (event) {
+                    if (event.keyCode === 13) {
+                        var x = document.getElementById("searchForm");
+                        x.submit();
+                        return false;
+                    }
+                });
+            }
+        </script>
         <%@ include file="include/footer-dashboard.jsp" %>

@@ -38,6 +38,7 @@ public class ServiceAcceptedServlet extends HttpServlet {
         }
         else{
             serviceAcceptedList=ServiceResposiory.serviceAccepetedSearch(search,pageNumber);
+            request.setAttribute("search",search);
         }
         request.setAttribute("maxPage",maxPageAmount);
         request.setAttribute("page",pageNumber);

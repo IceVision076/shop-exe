@@ -27,10 +27,16 @@
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group">
-            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-            <input type="text" class="form-control" placeholder="Type here...">
-          </div>
+          <form id="searchForm" onsubmit="submitSearch()" action="service-success" method="get">
+            <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                        aria-hidden="true"></i></span>
+              <%--                        <input type="text" class="form-control" placeholder="Type here...">--%>
+              <input id="search" maxlength="10" class="form-control" name="search"
+                     placeholder="Nhập mã đơn dịch vụ"/>
+
+            </div>
+          </form>
         </div>
         <ul class="navbar-nav  justify-content-end">
 
@@ -161,7 +167,7 @@
                   <th class="text-uppercase text-secondary text-lg font-weight-bolder opacity-7 ps-2 text-start">
                     User Id
                   </th>
-                  <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start">
+                  <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-center">
                     Tiêu đề
                   </th>
                     <th class=" text-uppercase text-secondary text-lg font-weight-bolder opacity-7 text-start">
@@ -207,7 +213,7 @@
 
                     </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">
+                      <p class="text-lg font-weight-bold mb-0">
                           ${s.deliveryDate.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"))}</p>
 
                     </td>
@@ -277,8 +283,13 @@
                   <c:if test="${page>1}">
 
                     <li class="page-item">
-                      <a class="page-link" href="service-success?page=${page-1}"
-                         aria-label="Previous">
+                      <c:if test="${empty search}">
+                        <a class="page-link" href="service-success?page=${page-1}"
+                      </c:if>
+                      <c:if test="${not empty search}">
+                        <a class="page-link" href="service-success?page=${page-1}&search=${search}"
+                      </c:if>
+
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
@@ -288,8 +299,19 @@
 
                   <c:forEach var="i" begin="${page-1}" end="${page+1}">
                     <c:if test="${i>=1&&i<=maxPage}">
-                      <li class="page-item"><a class="page-link <c:if test="${i eq page}">active text-white</c:if>"
-                                               href="service-success?page=${i}">${i}</a></li>
+
+                      <c:if test="${empty search}">
+                        <li class="page-item"><a
+                                class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                href="service-success?page=${i}">${i}</a></li>
+                      </c:if>
+
+                      <c:if test="${not empty search}">
+                        <li class="page-item"><a
+                                class="page-link <c:if test="${i eq page}">active text-white</c:if>"
+                                href="service-success?page=${i}&search=${search}">${i}</a></li>
+                      </c:if>
+
                     </c:if>
 
                   </c:forEach>
@@ -298,8 +320,16 @@
                   <c:if test="${page<maxPage}">
                     <li class="page-item">
 
-                      <a class="page-link" href="service-success?page=${page+1}"
+                      <c:if test="${empty search}">
+                        <a class="page-link" href="service-success?page=${page+1}"
+                      </c:if>
+                      <c:if test="${not empty search}">
+                      <a class="page-link"
+                         href="service-success?page=${page+1}&search=${search}"
                          aria-label="Next">
+                        </c:if>
+
+
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                       </a>
@@ -313,5 +343,15 @@
         </div>
       </div>
     </div>
-
+    <script>
+      function submitSearch() {
+        document.getElementById("search").addEventListener("keyup", function (event) {
+          if (event.keyCode === 13) {
+            var x = document.getElementById("searchForm");
+            x.submit();
+            return false;
+          }
+        });
+      }
+    </script>
     <%@ include file="include/footer-dashboard.jsp" %>

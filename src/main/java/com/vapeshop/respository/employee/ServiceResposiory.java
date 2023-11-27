@@ -633,7 +633,7 @@ public class ServiceResposiory {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, serviceIdSearch);
+            preparedStatement.setString(1, "%"+serviceIdSearch+"%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
@@ -668,7 +668,7 @@ public class ServiceResposiory {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, serviceIdSearch);
+            preparedStatement.setString(1, "%"+serviceIdSearch+"%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();

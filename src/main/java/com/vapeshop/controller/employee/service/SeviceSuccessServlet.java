@@ -37,6 +37,8 @@ public class SeviceSuccessServlet extends HttpServlet {
         }
         else{
             serviceSuccessList=ServiceResposiory.serviceSuccessSearch(search,pageNumber);
+            request.setAttribute("search",search);
+
         }
 //        = ServiceResposiory.serviceSuccessPage(pageNumber);
         request.setAttribute("maxPage",maxPageAmount);

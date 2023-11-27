@@ -38,6 +38,8 @@ public class ServiceCanceledServlet extends HttpServlet {
             serviceCanceledList = ServiceResposiory.serviceCanceledPage(pageNumber);
         } else {
             serviceCanceledList = ServiceResposiory.serviceCanceledSearch(search, pageNumber);
+            request.setAttribute("search",search);
+
         }
 //                 ServiceResposiory.serviceCanceledPage(pageNumber);
         request.setAttribute("maxPage",maxPageAmount);
