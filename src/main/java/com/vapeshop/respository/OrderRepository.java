@@ -109,7 +109,7 @@ public class OrderRepository {
                 stmt.setString(1, orderId); //id cua cai bill
                 stmt.setString(2, i.getProductType().getProductTypeId()); //id cua san pham
                 stmt.setInt(3, i.getAmmout()); //so luong
-                stmt.setDouble(4, i.getPrice()); //gia luc mua
+                stmt.setDouble(4, i.getPrice()/i.getAmmout()); //gia luc mua
                 stmt.executeUpdate();
                 con.close();
             } catch (Exception e) {

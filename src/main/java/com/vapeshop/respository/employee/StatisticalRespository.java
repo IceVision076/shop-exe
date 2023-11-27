@@ -104,11 +104,20 @@ public class StatisticalRespository {
     public static double totalMoneyToday() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
-                    "  and CONVERT(date, o.create_date) = CONVERT(date, GETDATE())\n";
+                    "  and CONVERT(date, o.delivery_date) = CONVERT(date, GETDATE())";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -124,12 +133,22 @@ public class StatisticalRespository {
     public static double totalMoneyOnMonth() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "\n" +
+                    "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
-                    "  and MONTH(o.create_date) = MONTH(GETDATE())\n" +
-                    "  and YEAR(o.create_date) = YEAR(GETDATE());";
+                    "  and MONTH(o.delivery_date) = MONTH(GETDATE())\n" +
+                    "  and YEAR(o.delivery_date) = YEAR(GETDATE());";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -145,11 +164,20 @@ public class StatisticalRespository {
     public static double totalMoneyInYear() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
-                    "  and YEAR(o.create_date) = YEAR(GETDATE());";
+                    "  and YEAR(o.delivery_date) = YEAR(GETDATE());";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -166,11 +194,21 @@ public class StatisticalRespository {
     public static double totalMoneyBeforeYear() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
+                    "\n" +
                     "where o.status = '4'\n" +
-                    "  and YEAR(o.create_date) = YEAR(DATEADD(YEAR, -1, GETDATE()));";
+                    "  and YEAR(o.delivery_date) = YEAR(DATEADD(YEAR, -1, GETDATE()));";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -186,12 +224,21 @@ public class StatisticalRespository {
     public static double totalMoneyBeforeMonth() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
-                    "  and MONTH(o.create_date) = MONTH(DATEADD(MONTH, -1, GETDATE()))\n" +
-                    "  and YEAR(o.create_date) = YEAR(DATEADD(MONTH, -1, GETDATE()));";
+                    "  and MONTH(o.delivery_date) = MONTH(DATEADD(MONTH, -1, GETDATE()))\n" +
+                    "  and YEAR(o.delivery_date) = YEAR(DATEADD(MONTH, -1, GETDATE()));";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -208,12 +255,21 @@ public class StatisticalRespository {
     public static double totalMoneyAccessoryInYear() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
                     "  and od.product_type_id like 'A%'\n" +
-                    "  and YEAR(o.create_date) = YEAR(getdate())";
+                    "  and YEAR(o.delivery_date) = YEAR(getdate())";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -230,12 +286,21 @@ public class StatisticalRespository {
     public static double totalMoneyJuiceInYear() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
                     "  and od.product_type_id like 'J%'\n" +
-                    "  and YEAR(o.create_date) = YEAR(getdate())";
+                    "  and YEAR(o.delivery_date) = YEAR(getdate())";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -251,12 +316,21 @@ public class StatisticalRespository {
     public static double totalMoneyVapeInYear() {
         double totalMoney = 0;
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
                     "  and od.product_type_id like 'V%'\n" +
-                    "  and YEAR(o.create_date) = YEAR(getdate())";
+                    "  and YEAR(o.delivery_date) = YEAR(getdate())";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -278,12 +352,13 @@ public class StatisticalRespository {
                     "               from OrderDetail od\n" +
                     "                        join [Order] o on o.order_id = od.order_id\n" +
                     "               where o.status = '4'\n" +
+                    "                 and MONTH(o.delivery_date) = MONTH(GETDATE())\n" +
+                    "                 and YEAR(o.delivery_date) = YEAR(GETDATE())\n" +
                     "               group by product_type_id\n" +
                     "               order by amount desc) top5\n" +
                     "              on ProductType.Id = top5.product_type_id\n" +
-                    "\n" +
                     "         join Product on ProductType.product_id = Product.Id\n" +
-                    "order by amount desc\n";
+                    "order by amount desc";
             Connection con = DBConnect.getConnection();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -320,12 +395,21 @@ public class StatisticalRespository {
     public static MoneyWithMonth totalMoneyOnEachMonth() {
         MoneyWithMonth moneyWithMonth = new MoneyWithMonth();
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
-                    "  and MONTH(o.create_date) = ?\n" +
-                    "  and YEAR(o.create_date) = YEAR( GETDATE());";
+                    "  and MONTH(o.delivery_date) = ?\n" +
+                    "  and YEAR(o.delivery_date) = YEAR(GETDATE());";
             Connection con = DBConnect.getConnection();
             PreparedStatement statement = con.prepareStatement(query);
 
@@ -343,12 +427,21 @@ public class StatisticalRespository {
     public static MoneyWithMonth totalMoneyOnEachMonthLastYear() {
         MoneyWithMonth moneyWithMonth = new MoneyWithMonth();
         try {
-            String query = "select sum(amount * price_at_purchase)\n" +
+            String query = "select sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "               )\n" +
+                    "           )\n" +
                     "from OrderDetail od\n" +
                     "         join [Order] o on od.order_id = o.order_id\n" +
+                    "         left join Voucher V on V.id = o.voucher_id\n" +
                     "where o.status = '4'\n" +
-                    "  and MONTH(o.create_date) = ?\n" +
-                    "  and YEAR(o.create_date) = YEAR(DATEADD(YEAR, -1, GETDATE()));";
+                    "  and MONTH(o.delivery_date) = ?\n" +
+                    "  and YEAR(o.delivery_date) = YEAR(DATEADD(YEAR, -1, GETDATE()));";
             Connection con = DBConnect.getConnection();
             PreparedStatement statement = con.prepareStatement(query);
 
@@ -366,23 +459,34 @@ public class StatisticalRespository {
     public static MoneyWithWeek totalMoneyOnEachWeek() {
         MoneyWithWeek moneyWithWeek = new MoneyWithWeek();
         try {
-            String query = "SET DATEFIRST 4 /* or use any other weird value to test it */\n" +
-                    "DECLARE @d         DATETIME\n" +
-                    "DECLARE @startdate DATE\n" +
-                    "DECLARE @enddate   DATE\n" +
-                    "SET @d = GETDATE()\n" +
-                    "SET @startdate = CONVERT(date, DATEADD(dd, 0 - (@@DATEFIRST + 5 + DATEPART(dw, @d)) % 7, @d))\n" +
-                    "SET @enddate = CONVERT(date, DATEADD(dd, 6 - (@@DATEFIRST + 5 + DATEPART(dw, @d)) % 7, @d))\n" +
-                    "select OD.order_id,create_date,sum(OD.amount*OD.price_at_purchase) as total\n" +
+            String query = "SET DATEFIRST 4;\n" +
+                    "DECLARE @d DATETIME;\n" +
+                    "DECLARE @startdate DATE;\n" +
+                    "DECLARE @enddate DATE;\n" +
+                    "SET @d = GETDATE();\n" +
+                    "SET @startdate = CONVERT(date, DATEADD(dd, 0 - (@@DATEFIRST + 5 + DATEPART(dw, @d)) % 7, @d));\n" +
+                    "SET @enddate = CONVERT(date, DATEADD(dd, 6 - (@@DATEFIRST + 5 + DATEPART(dw, @d)) % 7, @d));\n" +
+                    "select OD.order_id, delivery_date, sum((od.amount * od.price_at_purchase)\n" +
+                    "    * (1 -\n" +
+                    "       (case\n" +
+                    "            when V.vourcher_percent is NULL then 0\n" +
+                    "            else V.vourcher_percent\n" +
+                    "           end\n" +
+                    "           )\n" +
+                    "                                           )\n" +
+                    "    ) as total\n" +
                     "from [Order]\n" +
-                    "join OrderDetail OD on [Order].order_id = OD.order_id\n" +
-                    "where CONVERT(date,create_date) between @startdate and @enddate and status='4'\n" +
-                    "group by OD.order_id,create_date";
+                    "         join OrderDetail OD on [Order].order_id = OD.order_id\n" +
+                    "         left join Voucher V on V.id = [Order].voucher_id\n" +
+                    "\n" +
+                    "where CONVERT(date, delivery_date) between @startdate and @enddate\n" +
+                    "  and [Order].status = '4'\n" +
+                    "group by OD.order_id, delivery_date";
             Connection con = DBConnect.getConnection();
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                LocalDateTime createDay = resultSet.getObject("create_date", LocalDateTime.class);
+                LocalDateTime createDay = resultSet.getObject("delivery_date", LocalDateTime.class);
                 String dayOfWeek = createDay.getDayOfWeek().toString();
                 switch (dayOfWeek) {
                     case "MONDAY":
@@ -427,15 +531,27 @@ public class StatisticalRespository {
     public static Top10MostPurchased top10MostPurchased() {
         Top10MostPurchased top10MostPurchased = new Top10MostPurchased();
         try {
-            String query = "select top 10 UserInfo.id, full_name, SUM(OD.price_at_purchase * OD.amount) AS 'total'\n" +
+            String query = "select top 10 UserInfo.id,\n" +
+                    "              full_name,\n" +
+                    "              sum((od.amount * od.price_at_purchase)\n" +
+                    "                  * (1 -\n" +
+                    "                     (case\n" +
+                    "                          when V.vourcher_percent is NULL then 0\n" +
+                    "                          else V.vourcher_percent\n" +
+                    "                         end\n" +
+                    "                         )\n" +
+                    "                      )\n" +
+                    "                  ) AS 'total'\n" +
                     "from UserInfo\n" +
                     "         join [Order] on UserInfo.id = [Order].user_id\n" +
                     "         join OrderDetail OD on [Order].order_id = OD.order_id\n" +
+                    "         left join Voucher V on V.id = [Order].voucher_id\n" +
+                    "\n" +
                     "where [Order].status = '4'\n" +
-                    "  and DATEPART(MONTH, create_date) = datepart(MONTH, GETDATE())\n" +
-                    "  and DATEPART(YEAR , create_date) = datepart(YEAR, GETDATE())\n" +
+                    "  and DATEPART(MONTH, [Order].delivery_date) = datepart(MONTH, GETDATE())\n" +
+                    "  and DATEPART(YEAR, [Order].delivery_date) = datepart(YEAR, GETDATE())\n" +
                     "group by UserInfo.id, full_name\n" +
-                    "order by total desc ;";
+                    "order by total desc";
             Connection connection = DBConnect.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

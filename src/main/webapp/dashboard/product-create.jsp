@@ -23,9 +23,20 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%@include file="include/header-product-management-dashboard.jsp"%>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -173,9 +184,9 @@
                         <form class="row g-3 needs-validation p-4" novalidate action="#"
                               method="post"   enctype="multipart/form-data">
                             <div class="col-12">
-                                <label for="typechoice" class="form-label">Nhãn hàng <span class="text-danger"> *</span></label>
+                                <label for="typechoice" class="form-label text-lg">Nhãn hàng <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <select class="form-select" name="typechoice" id="typechoice">
+                                    <select class="form-select text-lg" name="typechoice" id="typechoice">
                                         <option value="1">Vape</option>
                                         <option value="2">Dầu</option>
                                         <option value="3">Phụ kiện</option>
@@ -184,36 +195,38 @@
                             </div>
                             <%--                        Tên sản phẩm mới--%>
                             <div class="col-12">
-                                <label for="productName" class="form-label">Tên sản phẩm <span class="text-danger"> *</span></label>
+                                <label for="productName" class="form-label text-lg">Tên sản phẩm <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"
-                                           id="productName" name="productName"
+                                    <input type="text" class="form-control text-lg" placeholder="Nhập tên sản phẩm"
+                                           id="productName" name="productName" maxlength="100"
                                            required>
-                                    <div class="invalid-feedback">
-                                        Tên không được bỏ trống
+                                    <div class="invalid-feedback text-lg">
+                                        Tên không được bỏ trống và có độ dài tối đa là 100 kí tự
                                     </div>
                                 </div>
                             </div>
                             <%--                        Nhãn hàng--%>
                             <div class="col-12">
-                                <label for="brand" class="form-label">Nhãn hàng <span class="text-danger"> *</span></label>
+                                <label for="brand" class="form-label text-lg">Nhãn hàng <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="brand" name="brand"
+                                    <input type="text" class="form-control text-lg" id="brand" name="brand"
+                                           maxlength="50"
                                            placeholder="Nhập nhãn hàng" required>
-                                    <div class="invalid-feedback">
-                                        Vui lòng nhập nhãn hàng
+                                    <div class="invalid-feedback text-lg">
+                                        Vui lòng nhập nhãn hàng và có độ dài tối đa là 50 kí tự
                                     </div>
                                 </div>
                             </div>
 
                             <%-- Mô tả sản phẩm--%>
                             <div class="col-12">
-                                <label for="detail" class="form-label">Mô tả sản phẩm <span class="text-danger"> *</span></label>
+                                <label for="detail" class="form-label text-lg">Mô tả sản phẩm <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <textarea cols="30" rows="10" class="form-control" id="detail" name="detail"
+                                    <textarea cols="30" rows="10" class="form-control text-lg" id="detail" name="detail"
+                                              maxlength="1000"
                                               placeholder="Nhập mô tả sản phẩm" required></textarea>
-                                    <div class="invalid-feedback">
-                                        Vui lòng điền mô tả sản phẩm
+                                    <div class="invalid-feedback text-lg">
+                                        Vui lòng điền mô tả sản phẩm và tối đa 1000 kí tự
                                     </div>
                                 </div>
                             </div>
@@ -222,42 +235,45 @@
                             <%--                        Xuất xứ sản phẩm--%>
 
                             <div class="col-12">
-                                <label for="origin" class="form-label">Xuất xứ sản phẩm <span class="text-danger">*</span></label>
+                                <label for="origin" class="form-label text-lg">Xuất xứ sản phẩm <span class="text-danger">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="origin" name="origin" placeholder="Nhập xuất xứ sản phẩm" required>
-                                    <div class="invalid-feedback">
-                                        Vui lòng điền xuất xứ sản phẩm
+                                    <input type="text" maxlength="50" class="form-control text-lg" id="origin" name="origin" placeholder="Nhập xuất xứ sản phẩm" required>
+                                    <div class="invalid-feedback text-lg">
+                                        Vui lòng điền xuất xứ sản phẩm và có độ dài tối đa là 50 kí tự
                                     </div>
                                 </div>
                             </div>
 
                             <%--                        Tên loại sản phẩm--%>
                             <div class="col-12">
-                                <label for="productTypeName" class="form-label">Tên loại sản phẩm <span class="text-danger"> *</span></label>
+                                <label for="productTypeName" class="form-label text-lg">Tên loại sản phẩm <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="productTypeName" name="productTypeName" placeholder="Nhập tên loại sản phẩm"
+                                    <input type="text" class="form-control text-lg"  id="productTypeName" name="productTypeName" placeholder="Nhập tên loại sản phẩm"
+                                           maxlength="50"
                                            required>
-                                    <div class="invalid-feedback">
-                                        Vui lòng điền tên loại sản phẩm
+                                    <div class="invalid-feedback text-lg">
+                                        Vui lòng điền tên loại sản phẩm và có độ dài tối đa là 50 kí tự
                                     </div>
                                 </div>
 
                             </div>
                             <%--                        Giá loại sản phẩm--%>
                             <div class="col-12">
-                                <label for="price" class="form-label">Giá loại sản phẩm <span class="text-danger"> *</span></label>
+                                <label for="price" class="form-label text-lg">Giá loại sản phẩm <span class="text-danger"> *</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="price" name="price" placeholder="Nhập giá loại sản phẩm" required>
-                                    <div class="invalid-feedback">
-                                        Vui lòng điền giá hợp lệ
+                                    <input type="number"
+                                           min="1000" max="999999999"
+                                           class="form-control text-lg" id="price" name="price" placeholder="Nhập giá loại sản phẩm" required>
+                                    <div class="invalid-feedback text-lg">
+                                        Vui lòng điền giá hợp lệ, tối thiểu 1000 và tối đa là 999999999
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="image_url" class="form-label">Ảnh loại sản phẩm <span class="text-danger"> *</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="file" class="form-control" id="image_url" name="image_url" placeholder="Chọn ảnh từ máy tính" required>
-                                    <div class="invalid-feedback">
+                                <label for="image_url" class="form-label text-lg">Ảnh loại sản phẩm <span class="text-danger"> *</span></label>
+                                <div class="input-group has-validation text-lg">
+                                    <input type="file" class="form-control text-lg" id="image_url" name="image_url" placeholder="Chọn ảnh từ máy tính" required>
+                                    <div class="invalid-feedback text-lg">
                                         Vui lòng tải ảnh
                                     </div>
                                 </div>

@@ -344,11 +344,12 @@ public class OrderRespository {
     public static void updateAcceptedSuccess(String orderId) {
 
         try {
-            String query = "update [Order] set status = '4' where order_id = ?";
+            String query = "update [Order] set status = '4' , delivery_date=? where order_id = ?";
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, orderId);
+            preparedStatement.setString(2, orderId);
+            preparedStatement.setObject(1,LocalDateTime.now());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
