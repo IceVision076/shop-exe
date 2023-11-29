@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -54,8 +55,8 @@
                     <tbody>
                     <c:forEach items="${listOrdered}" var="i">
                         <tr>
-                            <td><a href="getordereddetail?orderId=${i.orderId}">${i.orderId}</a></td>
-                            <td>${i.createDate}</td>
+                            <td><a href="getordereddetail?orderId=${i.orderId}" style="text-decoration: none">${i.orderId}</a></td>
+                            <td>${i.createDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm:ss "))}</td>
 
                             <td>
                                 <c:forEach items="${i.cart}" var="item">
@@ -104,7 +105,6 @@
             </div>
 
         </div>
-
     </div>
 </div>
 <div id="pagination" class="text-center mb-5"></div>

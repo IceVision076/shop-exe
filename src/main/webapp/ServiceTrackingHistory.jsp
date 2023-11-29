@@ -1,4 +1,6 @@
 <%@include file="include/header-footer/header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <style>
@@ -42,8 +44,8 @@
                     <tbody>
                     <c:forEach items="${serviceTrackingArrayList}" var="sta">
                         <tr>
-                            <td width="15%"><a href="GetServiceTrackingDetail?serviceTrackingId=${sta.id}" style="text-decoration: none">${sta.id}</a></td>
-                            <td width="20%">${sta.createDate}</td>
+                            <td width="15%"><a href="GetServiceTrackingDetail?serviceTrackingId=${sta.id}" style="text-decoration: none;color: black">${sta.id}</a></td>
+                            <td width="20%">${sta.createDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm:ss "))}</td>
 
                             <td width="20%">
                                 <p>${sta.title}</p>

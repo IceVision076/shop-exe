@@ -126,7 +126,7 @@
                                                      object-fit: cover;">
                         </a>
                         <div class="dropdown-menu m-0 dropdown-menu-end px-2">
-                            <a class="nav-link position-relative py-0 text-decoration-none d-flex justify-content-start align-items-start border-bottom" href="update-profile">
+                            <a class="nav-link position-relative py-0 text-decoration-none d-flex justify-content-start align-items-start border-bottom mt-2" href="update-profile">
                                 <img src="${sessionScope.user.avatarImg}" alt=""
                                      style="width: 30px;height: 30px;border-radius: 50%;object-fit: cover;margin-right: 10px">                            <p class="fw-bolder">${sessionScope.user.userName}</p>
 
@@ -140,7 +140,7 @@
                             <a href="getorderhistory" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/1A1A1A/paid--v1.png" alt="paid--v1"/> Lịch sử đặt hàng</a>
                             <a href="ServiceTrackingHistory" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/1A1A1A/paid--v1.png" alt="paid--v1"/> ServiceTrackingHistory</a>
                             <a href="testconnect.jsp" class="dropdown-item"><img width="20" height="20" src="https://img.icons8.com/ios-filled/50/1A1A1A/chat.png" alt="chat"/> Tư vấn</a>
-                            <a href="logout" class="mt-3 dropdown-item text-white bg-danger text-center">Đăng Xuất</a>
+                            <a href="logout" class="my-2 dropdown-item text-white bg-danger text-center">Đăng Xuất</a>
                         </div>
                     </div>
                 </c:if>

@@ -1,4 +1,5 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <fmt:setLocale value = "en_US"/>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -50,8 +51,9 @@
                             <h3>Thông tin dịch vụ</h3>
                             <div class="my-3">
                                 <h5>Tiêu đề: <h6>${serviceTrackingDetail.title}</h6></h5>
-                                <h5>Ngày đặt dịch vụ: <h6>${serviceTrackingDetail.createDate}</h6></h5>
-                                <h5>Chi tiết dịch vụ: </h5><textarea cols="50" rows="5">${serviceTrackingDetail.userDescription}</textarea>
+                                <h5>Ngày đặt dịch vụ: <h6>${serviceTrackingDetail.createDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm:ss "))}</h6></h5>
+                                <h5>Chi tiết dịch vụ: </h5><textarea cols="50" rows="5" style="border-radius: 5px" readonly>${serviceTrackingDetail.userDescription}</textarea>
+                                <h5>Phản hồi của nhân viên: </h5><textarea cols="50" rows="5" style="border-radius: 5px" readonly>${serviceTrackingDetail.employeeDescription}</textarea>
                             </div>
                         </div>
                     </div>

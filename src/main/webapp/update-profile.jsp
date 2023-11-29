@@ -5,69 +5,95 @@
 <div class="container mb-4 mt-3">
     <div class="row">
 
+        <div class="col-12">
+            <div class="modal fade" id="add-poster" data-bs-backdrop="static"
+                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Thay ảnh đại diện</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+
+
+                                <form class="row g-3 needs-validation p-4" novalidate
+                                      enctype="multipart/form-data" action="change-avatar" method="post">
+                                    <div class="col-12">
+                                        <label for="image_url" class="form-label">Avatar<span
+                                                class="text-danger"> *</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="file" class="form-control" id="image_url"
+                                                   name="image_url" placeholder="Chọn ảnh từ máy tính"
+                                                   required>
+                                            <div class="invalid-feedback">
+                                                Vui lòng tải ảnh
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <input type="submit" class="btn btn-primary" value="Thêm mới">
+                                </form>
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Đóng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade me-10" id="view-avt" data-bs-backdrop="static"
+                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="max-height: 700px">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Ảnh của bạn</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body" style="overflow-y: hidden">
+                            <div class="container">
+                                    <img src="${sessionScope.user.avatarImg}" alt="Your Avatar" class="rounded-circle p-1" width="400" height="400" style="object-fit: cover">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Đóng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-4 mb-5">
             <div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="${sessionScope.user.avatarImg}"
-                             alt="Admin" class="rounded-circle p-1 bg-primary" width="110" height="110" style="object-fit: cover">
+                        <div type="button"  data-bs-toggle="modal"
+                             data-bs-target="#view-avt">
+                            <img src="${sessionScope.user.avatarImg}"
+                                 alt="Your Avatar" class="rounded-circle" width="150" height="150" style="object-fit: cover;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                        </div>
                         <div class="mt-3">
                             <h4>${sessionScope.user.fullName}</h4>
                         </div>
-                        <div type="button" style="color: #d31798;"
+                        <div type="button" style="color: #d31798;margin-top: 20px"
                              class="btn btn-primary " data-bs-toggle="modal"
                              data-bs-target="#add-poster">
                             <span class="text-white">Đổi ảnh đại diện</span>
-                        </div>
-
-                        <div class="modal modal-lg fade" id="add-poster" data-bs-backdrop="static"
-                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Thay ảnh đại diện</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">x
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container">
-
-
-                                            <form class="row g-3 needs-validation p-4" novalidate
-                                                  enctype="multipart/form-data" action="change-avatar" method="post">
-                                                <div class="col-12">
-                                                    <label for="image_url" class="form-label">Avatar<span
-                                                            class="text-danger"> *</span></label>
-                                                    <div class="input-group has-validation">
-                                                        <input type="file" class="form-control" id="image_url"
-                                                               name="image_url" placeholder="Chọn ảnh từ máy tính"
-                                                               required>
-                                                        <div class="invalid-feedback">
-                                                            Vui lòng tải ảnh
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <input type="submit" class="btn btn-primary" value="Thêm mới">
-                                            </form>
-
-
-
-
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                            Đóng
-                                        </button>
-
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <hr class="my-4">

@@ -161,6 +161,28 @@
                     <div class="card-header pb-0">
                         <h4 class="text-center">Thông tin cá nhân</h4>
                     </div>
+                    <div class="modal fade me-10" id="view-avt" data-bs-backdrop="static"
+                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="max-height: 700px">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Ảnh của bạn</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="overflow-y: hidden;display: flex;align-items: center;justify-content: center">
+                                        <img src="${sessionScope.user.avatarImg}" alt="Your Avatar" class="rounded-circle" width="400" height="400" style="object-fit: cover;">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Đóng
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="profile-form">
                             <section>
@@ -169,9 +191,11 @@
                                         <div class="col-lg-4">
                                             <div class="card shadow-lg mb-4">
                                                 <div class="card-body text-center">
-                                                    <img src="${sessionScope.user.avatarImg}"
-                                                         alt="avatar"
-                                                         class="rounded-circle img-fluid" style="width: 150px;">
+                                                    <div type="button"  data-bs-toggle="modal"
+                                                         data-bs-target="#view-avt">
+                                                        <img src="${sessionScope.user.avatarImg}"
+                                                             alt="Your Avatar" class="rounded-circle" width="150" height="150" style="object-fit: cover;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                                                    </div>
                                                     <h5 class="my-3">${sessionScope.user.fullName}</h5>
                                                     <p class="text-muted mb-1">Chức vụ nhân viên</p>
 
@@ -238,14 +262,16 @@
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                             <h6 class="mb-0">
-                                                                <i class="fa-regular fa-envelope fa-lg" style="color: #1f71ff;"></i>
+                                                                <i class="fa-regular fa-envelope fa-lg"
+                                                                   style="color: #1f71ff;"></i>
                                                                 Email
                                                             </h6>
                                                             <span class="text-secondary">${sessionScope.user.email}</span>
                                                         </li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                             <h6 class="mb-0">
-                                                                <i class="fa-solid fa-phone fa-lg" style="color: #24f56d;"></i>
+                                                                <i class="fa-solid fa-phone fa-lg"
+                                                                   style="color: #24f56d;"></i>
                                                                 Số điện thoại
                                                             </h6>
                                                             <span class="text-secondary">${sessionScope.user.phone}</span>
@@ -253,14 +279,16 @@
 
                                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                             <h6 class="mb-0">
-                                                                <i class="fa-regular fa-user fa-lg" style="color: #ff1414;"></i>
+                                                                <i class="fa-regular fa-user fa-lg"
+                                                                   style="color: #ff1414;"></i>
                                                                 Username
                                                             </h6>
                                                             <span class="text-secondary">${sessionScope.user.userName}</span>
                                                         </li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                             <h6 class="mb-0">
-                                                                <i class="fa-solid fa-location-dot fa-lg" style="color: #0ac6f5;"></i>
+                                                                <i class="fa-solid fa-location-dot fa-lg"
+                                                                   style="color: #0ac6f5;"></i>
                                                                 Địa chỉ
                                                             </h6>
                                                             <span class="text-secondary">${sessionScope.user.address}</span>
@@ -273,25 +301,35 @@
                                         <div class="col-lg-8 ">
                                             <div class="card mb-4 shadow-lg">
                                                 <div class="card-body">
-                                                    <form action="profile-ad" method="post" class="card-body  g-3 needs-validation " novalidate>
+                                                    <form action="profile-ad" method="post"
+                                                          class="card-body  g-3 needs-validation " novalidate>
 
 
                                                         <div class="row g-3 ">
                                                             <div class="col-md-12 ">
                                                                 <label for="fullname" class="form-label">Tên</label>
                                                                 <div class="input-group has-validation">
-                                                                    <input maxlength="50" type="text" class="form-control" id="fullname" name="fullname"
-                                                                           aria-describedby="inputGroupPrepend" value="${sessionScope.user.fullName}" required>
+                                                                    <input maxlength="50" type="text"
+                                                                           class="form-control" id="fullname"
+                                                                           name="fullname"
+                                                                           aria-describedby="inputGroupPrepend"
+                                                                           value="${sessionScope.user.fullName}"
+                                                                           required>
                                                                     <div class="invalid-feedback">
                                                                         Tối đa là 50 ký tự và không được để trống
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <label for="phone" class="form-label">Số điện thoại </label>
+                                                                <label for="phone" class="form-label">Số điện
+                                                                    thoại </label>
                                                                 <div class="input-group has-validation">
-                                                                    <input maxlength="11" minlength="10" pattern="^\d{10,11}$" type="text" class="form-control"
-                                                                           id="phone" name="phone" aria-describedby="inputGroupPrepend" value="${sessionScope.user.phone}" required>
+                                                                    <input maxlength="11" minlength="10"
+                                                                           pattern="^\d{10,11}$" type="text"
+                                                                           class="form-control"
+                                                                           id="phone" name="phone"
+                                                                           aria-describedby="inputGroupPrepend"
+                                                                           value="${sessionScope.user.phone}" required>
                                                                     <div class="invalid-feedback">
                                                                         Tối đa 11 số và tối thiểu 10 số
                                                                     </div>
@@ -325,17 +363,24 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <label for="addressInput" class="form-label">Address</label>
+                                                                <label for="addressInput"
+                                                                       class="form-label">Address</label>
                                                                 <div class="input-group has-validation">
-                                                                    <input maxlength="100" type="text" class="form-control" id="addressInput" name="address"
-                                                                           aria-describedby="inputGroupPrepend" value="${sessionScope.user.address}" required>
+                                                                    <input maxlength="100" type="text"
+                                                                           class="form-control" id="addressInput"
+                                                                           name="address"
+                                                                           aria-describedby="inputGroupPrepend"
+                                                                           value="${sessionScope.user.address}"
+                                                                           required>
                                                                     <div class="invalid-feedback">
                                                                         Hãy chọn một địa chỉ.
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 d-flex justify-content-center mt-4">
-                                                                <button class="btn btn-primary" type="submit">Cập nhật thông tin</button>
+                                                                <button class="btn btn-primary" type="submit">Cập nhật
+                                                                    thông tin
+                                                                </button>
                                                             </div>
                                                         </div>
 
@@ -360,7 +405,8 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
         const host = "https://provinces.open-api.vn/api/";
@@ -392,9 +438,9 @@
             let row = ' <option disable value="">Lựa Chọn</option>';
             array.forEach(element => {
                 let addressCode = JSON.stringify(element.code);
-                let addressName = JSON.stringify(element.name).slice(1,-1);
-                console.log(addressCode+addressName)
-                row += `<option data-id="`+addressCode+`" value="`+addressName+`">`+addressName+`</option>`
+                let addressName = JSON.stringify(element.name).slice(1, -1);
+                console.log(addressCode + addressName)
+                row += `<option data-id="` + addressCode + `" value="` + addressName + `">` + addressName + `</option>`
             });
             document.querySelector("#" + select).innerHTML = row
         }
