@@ -14,6 +14,61 @@
                         <div class="mt-3">
                             <h4>${sessionScope.user.fullName}</h4>
                         </div>
+                        <div type="button" style="color: #d31798;"
+                             class="btn btn-primary " data-bs-toggle="modal"
+                             data-bs-target="#add-poster">
+                            <span class="text-white">Đổi ảnh đại diện</span>
+                        </div>
+
+                        <div class="modal modal-lg fade" id="add-poster" data-bs-backdrop="static"
+                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5">Thay ảnh đại diện</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">x
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+
+
+                                            <form class="row g-3 needs-validation p-4" novalidate
+                                                  enctype="multipart/form-data" action="change-avatar" method="post">
+                                                <div class="col-12">
+                                                    <label for="image_url" class="form-label">Avatar<span
+                                                            class="text-danger"> *</span></label>
+                                                    <div class="input-group has-validation">
+                                                        <input type="file" class="form-control" id="image_url"
+                                                               name="image_url" placeholder="Chọn ảnh từ máy tính"
+                                                               required>
+                                                        <div class="invalid-feedback">
+                                                            Vui lòng tải ảnh
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <input type="submit" class="btn btn-primary" value="Thêm mới">
+                                            </form>
+
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Đóng
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr class="my-4">
                     <ul class="list-group list-group-flush">

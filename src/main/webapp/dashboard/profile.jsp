@@ -43,10 +43,7 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
-                    </div>
+                    
                 </div>
                 <ul class="navbar-nav  justify-content-end">
 
@@ -172,12 +169,69 @@
                                         <div class="col-lg-4">
                                             <div class="card shadow-lg mb-4">
                                                 <div class="card-body text-center">
-                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV8hRhgljohEKvg8qyijaxkLK440M86ZLyhw&usqp=CAU"
+                                                    <img src="${sessionScope.user.avatarImg}"
                                                          alt="avatar"
                                                          class="rounded-circle img-fluid" style="width: 150px;">
                                                     <h5 class="my-3">${sessionScope.user.fullName}</h5>
                                                     <p class="text-muted mb-1">Chức vụ nhân viên</p>
+
+                                                    <div type="button" style="color: #d31798;"
+                                                         class="btn btn-primary " data-bs-toggle="modal"
+                                                         data-bs-target="#add-poster">
+                                                           <span class="text-white">Đổi ảnh đại diện</span>
+                                                    </div>
+
+                                                    <div class="modal modal-lg fade" id="add-poster" data-bs-backdrop="static"
+                                                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                         aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5">Thay ảnh đại diện</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                        aria-label="Close">x
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="container">
+
+
+                                                                        <form class="row g-3 needs-validation p-4" novalidate
+                                                                              enctype="multipart/form-data" action="change-avatar" method="post">
+                                                                            <div class="col-12">
+                                                                                <label for="image_url" class="form-label">Avatar<span
+                                                                                        class="text-danger"> *</span></label>
+                                                                                <div class="input-group has-validation">
+                                                                                    <input type="file" class="form-control" id="image_url"
+                                                                                           name="image_url" placeholder="Chọn ảnh từ máy tính"
+                                                                                           required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Vui lòng tải ảnh
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                            <input type="submit" class="btn btn-primary" value="Thêm mới">
+                                                                        </form>
+
+
+
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                                    Đóng
+                                                                </button>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        </div>
                                                 </div>
+
                                             </div>
                                             <div class="card shadow-lg mb-4 mb-lg-0">
                                                 <div class="card-body p-0">
@@ -293,6 +347,8 @@
                                     </div>
                                 </div>
                             </section>
+
+
                         </div>
                         <div class="mx-5 mb-2">
                             <a href="product-management"><i class="fa-solid fa-arrow-left-long fa-2xl"

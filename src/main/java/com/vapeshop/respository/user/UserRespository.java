@@ -338,6 +338,22 @@ public class UserRespository {
 
             return check;
     }
+
+    public static void updateAvatar(String userId,String imgUrl){
+        try {
+            String query="update UserInfo set avata_img=? where id=?";
+            Connection con=DBConnect.getConnection();
+            PreparedStatement preparedStatement= con.prepareStatement(query);
+            preparedStatement.setString(1,imgUrl);
+            preparedStatement.setString(2,userId);
+            preparedStatement.executeUpdate();
+
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         // Gọi phương thức setIDDatabase và cung cấp chuỗi đầu vào "AC00000999"
 //        String inputString = "AC00000010";
