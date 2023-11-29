@@ -11,6 +11,7 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.time.temporal.ChronoUnit" %>
 
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -220,10 +221,12 @@
                                             <br>
                                             <div class="text-danger">
                                                 <c:if test="${s.estimatedDeliveryDate.isBefore(LocalDateTime.now())}">
-                                                    Đang trễ tiến độ (${-s.estimatedDeliveryDate.compareTo(LocalDateTime.now())}) ngày
+
+
+                                                    Đang trễ tiến độ (${-ChronoUnit.DAYS.between(LocalDateTime.now(), s.estimatedDeliveryDate)}) ngày
                                                 </c:if>
                                                 <c:if test="${!s.estimatedDeliveryDate.isBefore(LocalDateTime.now())}">
-                                                    Thời gian giao còn (${s.estimatedDeliveryDate.compareTo(LocalDateTime.now())}) ngày
+                                                    Thời gian giao còn (${ChronoUnit.DAYS.between(LocalDateTime.now(), s.estimatedDeliveryDate)}) ngày
                                                 </c:if>
                                             </div>
                                         </td>

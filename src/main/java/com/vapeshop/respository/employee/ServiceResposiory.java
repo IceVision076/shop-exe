@@ -119,7 +119,7 @@ public class ServiceResposiory {
     public static ArrayList<ServiceTracking> serviceSuccessPage(int page) {
         ArrayList<ServiceTracking> list = null;
         try {
-            String query = "select id,user_id, user_description,create_date,status,title,delivery_date\n" +
+            String query = "select id,user_id, user_description,create_date,status,title,delivery_date,price,employee_description\n" +
                     "from ServiceTracking\n" +
                     "where status = '4'\n" +
                     "order by create_date asc\n" +
@@ -138,8 +138,12 @@ public class ServiceResposiory {
                 char status = resultSet.getString(5).charAt(0);
                 String title = resultSet.getString(6);
                 LocalDateTime deliveryDate = resultSet.getObject("delivery_date", LocalDateTime.class);
+                double price = resultSet.getDouble("price");
+                String employeeDescription = resultSet.getString("employee_description");
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
                 serviceTracking.setDeliveryDate(deliveryDate);
+                serviceTracking.setPrice(price);
+                serviceTracking.setEmployeeDescription(employeeDescription);
                 list.add(serviceTracking);
             }
             connection.close();
@@ -589,7 +593,7 @@ public class ServiceResposiory {
     public static ArrayList<ServiceTracking> serviceSuccessSearch(String serviceIdSearch, int page) {
         ArrayList<ServiceTracking> list = null;
         try {
-            String query = "select id,user_id, user_description,create_date,status,title,delivery_date\n" +
+            String query = "select id,user_id, user_description,create_date,status,title,delivery_date,price\n" +
                     "from ServiceTracking\n" +
                     "where status = '4'\n" +
                     "                    and id like ?\n" +
@@ -610,8 +614,10 @@ public class ServiceResposiory {
                 char status = resultSet.getString(5).charAt(0);
                 String title = resultSet.getString(6);
                 LocalDateTime deliveryDate = resultSet.getObject("delivery_date", LocalDateTime.class);
+                double price = resultSet.getDouble("price");
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
                 serviceTracking.setDeliveryDate(deliveryDate);
+                serviceTracking.setPrice(price);
                 list.add(serviceTracking);
             }
             connection.close();
@@ -624,7 +630,7 @@ public class ServiceResposiory {
     public static ArrayList<ServiceTracking> serviceFailSearch(String serviceIdSearch, int page) {
         ArrayList<ServiceTracking> list = null;
         try {
-            String query = "select id,user_id, user_description,create_date,status,title,delivery_date\n" +
+            String query = "select id,user_id, user_description,create_date,status,title,delivery_date,employee_description\n" +
                     "from ServiceTracking\n" +
                     "where status = '3'\n" +
                     "                    and id like ?\n" +
@@ -644,9 +650,11 @@ public class ServiceResposiory {
                 LocalDateTime createDate = resultSet.getObject(4, LocalDateTime.class);
                 char status = resultSet.getString(5).charAt(0);
                 String title = resultSet.getString(6);
+                String employeeDescription = resultSet.getString("employee_description");
                 ServiceTracking serviceTracking = new ServiceTracking(id, userId, userDescription, createDate, status, title);
                 LocalDateTime deliveryDate = resultSet.getObject("delivery_date", LocalDateTime.class);
                 serviceTracking.setDeliveryDate(deliveryDate);
+                serviceTracking.setEmployeeDescription(employeeDescription);
                 list.add(serviceTracking);
             }
             connection.close();
