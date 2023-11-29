@@ -349,7 +349,7 @@ public class OrderRespository {
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(2, orderId);
-            preparedStatement.setObject(1,LocalDateTime.now());
+            preparedStatement.setObject(1, LocalDateTime.now());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -395,7 +395,7 @@ public class OrderRespository {
                 char status = resultSet.getString("status").charAt(0);
                 String voucherId = resultSet.getString("voucher_id");
                 double vourcherPercent = resultSet.getDouble("vourcher_percent"); //phan tram giam gia
-                String phone=resultSet.getString("phone");
+                String phone = resultSet.getString("phone");
                 String fullNameUser = resultSet.getString("full_name");
 
                 //user
@@ -449,7 +449,7 @@ public class OrderRespository {
                 int amount = resultSet.getInt("amount");
                 double priceAtPurchase = resultSet.getDouble("price_at_purchase");
 
-                ProductType productType=ProductRespository.getProductTypeById(productTypeId);
+                ProductType productType = ProductRespository.getProductTypeById(productTypeId);
 
                 orderDetail.setProductType(productType);
                 orderDetail.setOrderId(orderId);
@@ -466,22 +466,22 @@ public class OrderRespository {
     }
 
 
-    public static String downloadInvoce(String orderId){
-        String urlDownload="D:/Project_final_intership/Invoice/history/"+orderId+".pdf";
-        String path="D:/Project_final_intership/Invoice/history/";
-        File file=new File(urlDownload);
-        System.out.println("in"+urlDownload);
-        if(!file.exists()){
+    public static String downloadInvoce(String orderId) {
+        String urlDownload = "D:/Project_final_intership/Invoice/history/" + orderId + ".pdf";
+        String path = "D:/Project_final_intership/Invoice/history/";
+        File file = new File(urlDownload);
+        System.out.println("in" + urlDownload);
+        if (!file.exists()) {
             String pdfFilename = orderId + ".pdf";
             PrintInvoce generateInvoice = new PrintInvoce();
-            Order order=getOrderById(orderId);
-            generateInvoice.createPDF(pdfFilename,path,order);
+            Order order = getOrderById(orderId);
+            generateInvoice.createPDF(pdfFilename, path, order);
         }
 
         return urlDownload;
     }
 
-    public static ArrayList<Order> searchWaitingOrder(String orderIdSearch,int page){
+    public static ArrayList<Order> searchWaitingOrder(String orderIdSearch, int page) {
         ArrayList<Order> list = null;
         try {
             String query = "select *\n" +
@@ -493,7 +493,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setString(1, "%" + orderIdSearch + "%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
@@ -519,8 +519,9 @@ public class OrderRespository {
         }
         return list;
     }
-    public static int  searchWaitingOrderAmount(String orderId){
-        int amount=0;
+
+    public static int searchWaitingOrderAmount(String orderId) {
+        int amount = 0;
         try {
             String query = "select count(1)\n" +
                     "from [Order]\n" +
@@ -530,10 +531,10 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderId+"%");
+            preparedStatement.setString(1, "%" + orderId + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-               amount=resultSet.getInt(1);
+                amount = resultSet.getInt(1);
             }
             connection.close();
         } catch (Exception e) {
@@ -543,7 +544,7 @@ public class OrderRespository {
     }
 
 
-    public static ArrayList<Order> searchCanceledOrder(String orderIdSearch,int page){
+    public static ArrayList<Order> searchCanceledOrder(String orderIdSearch, int page) {
         ArrayList<Order> list = null;
         try {
             String query = "select *\n" +
@@ -554,7 +555,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setString(1, "%" + orderIdSearch + "%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
@@ -582,9 +583,8 @@ public class OrderRespository {
     }
 
 
-
-    public static int  searchCanceledOrderAmount(String orderId){
-        int amount=0;
+    public static int searchCanceledOrderAmount(String orderId) {
+        int amount = 0;
         try {
             String query = "select count(1)\n" +
                     "from [Order]\n" +
@@ -593,10 +593,10 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderId+"%");
+            preparedStatement.setString(1, "%" + orderId + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                amount=resultSet.getInt(1);
+                amount = resultSet.getInt(1);
             }
             connection.close();
         } catch (Exception e) {
@@ -604,7 +604,8 @@ public class OrderRespository {
         }
         return amount;
     }
-    public static ArrayList<Order> searchSuccessOrder(String orderIdSearch,int page){
+
+    public static ArrayList<Order> searchSuccessOrder(String orderIdSearch, int page) {
         ArrayList<Order> list = null;
         try {
             String query = "select *\n" +
@@ -615,7 +616,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setString(1, "%" + orderIdSearch + "%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
@@ -642,8 +643,8 @@ public class OrderRespository {
         return list;
     }
 
-    public static int  searchSuccessOrderAmount(String orderId){
-        int amount=0;
+    public static int searchSuccessOrderAmount(String orderId) {
+        int amount = 0;
         try {
             String query = "select count(1)\n" +
                     "from [Order]\n" +
@@ -652,10 +653,10 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderId+"%");
+            preparedStatement.setString(1, "%" + orderId + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                amount=resultSet.getInt(1);
+                amount = resultSet.getInt(1);
             }
             connection.close();
         } catch (Exception e) {
@@ -664,7 +665,7 @@ public class OrderRespository {
         return amount;
     }
 
-    public static ArrayList<Order> searchFailOrder(String orderIdSearch,int page){
+    public static ArrayList<Order> searchFailOrder(String orderIdSearch, int page) {
         ArrayList<Order> list = null;
         try {
             String query = "select *\n" +
@@ -675,7 +676,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setString(1, "%" + orderIdSearch + "%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
@@ -701,8 +702,9 @@ public class OrderRespository {
         }
         return list;
     }
-    public static int  searchFailOrderAmount(String orderId){
-        int amount=0;
+
+    public static int searchFailOrderAmount(String orderId) {
+        int amount = 0;
         try {
             String query = "select count(1)\n" +
                     "from [Order]\n" +
@@ -711,10 +713,10 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderId+"%");
+            preparedStatement.setString(1, "%" + orderId + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                amount=resultSet.getInt(1);
+                amount = resultSet.getInt(1);
             }
             connection.close();
         } catch (Exception e) {
@@ -724,7 +726,7 @@ public class OrderRespository {
     }
 
 
-    public static ArrayList<Order> searchAcceptedOrder(String orderIdSearch,int page){
+    public static ArrayList<Order> searchAcceptedOrder(String orderIdSearch, int page) {
         ArrayList<Order> list = null;
         try {
             String query = "select *\n" +
@@ -735,7 +737,7 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderIdSearch+"%");
+            preparedStatement.setString(1, "%" + orderIdSearch + "%");
             preparedStatement.setInt(2, page);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
@@ -761,8 +763,9 @@ public class OrderRespository {
         }
         return list;
     }
-    public static int  searchAcceptedOrderAmount(String orderId){
-        int amount=0;
+
+    public static int searchAcceptedOrderAmount(String orderId) {
+        int amount = 0;
         try {
             String query = "select count(1)\n" +
                     "from [Order]\n" +
@@ -771,10 +774,10 @@ public class OrderRespository {
 
             Connection connection = DBConnect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"%"+orderId+"%");
+            preparedStatement.setString(1, "%" + orderId + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                amount=resultSet.getInt(1);
+                amount = resultSet.getInt(1);
             }
             connection.close();
         } catch (Exception e) {
@@ -783,12 +786,42 @@ public class OrderRespository {
         return amount;
     }
 
+
+    public static String checkAvailableOrder(String orderId) {
+        String productTypeId = "";
+        try {
+            String query = "select OrderDetail.order_id, product_type_id, amount, dbo.remainingAmount(product_type_id) as remaining_amount\n" +
+                    "from [OrderDetail]\n" +
+                    "join [Order] O on O.order_id = OrderDetail.order_id\n" +
+                    "where OrderDetail.order_id = ?\n" +
+                    "  and (status = '1' or status='0')";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, orderId);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String ptid=resultSet.getString("product_type_id");
+                int amount =resultSet.getInt("amount");
+                int remainingAmount=resultSet.getInt("remaining_amount");
+
+                if(amount>remainingAmount) {
+                    productTypeId=ptid;
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return productTypeId;
+    }
+
     public static void main(String[] args) {
 //        Order order = OrderRespository.getOrderById("0lbSoK6BNR");
 //        System.out.println(order.getOrderId());
-       // System.out.println(downloadInvoce("0lbSoK6BNR"));
+        // System.out.println(downloadInvoce("0lbSoK6BNR"));
 
-        System.out.println(searchCanceledOrder("Gmt81L",1).size());
+        System.out.println(searchCanceledOrder("Gmt81L", 1).size());
 
     }
 }

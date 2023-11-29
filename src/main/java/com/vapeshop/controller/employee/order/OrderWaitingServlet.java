@@ -17,19 +17,18 @@ public class OrderWaitingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String search=request.getParameter("search");
+        String search = request.getParameter("search");
         int pageNumber = -1;
         int orderWaitingAmount = 0;
-        if(search==null){
-            orderWaitingAmount=   OrderRespository.orderWaitingAmount();
-        }
-        else{
-            orderWaitingAmount=OrderRespository.searchWaitingOrderAmount(search);
+        if (search == null) {
+            orderWaitingAmount = OrderRespository.orderWaitingAmount();
+        } else {
+            orderWaitingAmount = OrderRespository.searchWaitingOrderAmount(search);
         }
 
         int maxPageAmount = (orderWaitingAmount % 10 == 0) ? orderWaitingAmount / 10 : orderWaitingAmount / 10 + 1;
         String error = request.getParameter("error");
-
+        String productTypeId = request.getParameter("productTypeId");
         if (request.getParameter("page") == null) {
             pageNumber = 1;
         } else
@@ -39,19 +38,18 @@ public class OrderWaitingServlet extends HttpServlet {
 
 
         ArrayList<Order> orderWaiting;
-        if(search==null){
+        if (search == null) {
             orderWaiting = OrderRespository.orderWaitingPage(pageNumber);
-        }
-        else{
-            orderWaiting = OrderRespository.searchWaitingOrder(search,pageNumber);
-            request.setAttribute("search",search);
+        } else {
+            orderWaiting = OrderRespository.searchWaitingOrder(search, pageNumber);
+            request.setAttribute("search", search);
 
         }
 
 
         if (error != null) request.setAttribute("error", error);
-
-        request.setAttribute("maxPage", maxPageAmount);
+        if (productTypeId != null) request.setAttribute("productIdError",productTypeId);
+            request.setAttribute("maxPage", maxPageAmount);
         request.setAttribute("page", pageNumber);
         request.setAttribute("orderWaiting", orderWaiting);
         request.getRequestDispatcher("dashboard/order-waiting.jsp").forward(request, response);
@@ -65,11 +63,18 @@ public class OrderWaitingServlet extends HttpServlet {
         int page = Integer.parseInt(request.getParameter("page"));
 
         if (currentStatus == '1' || currentStatus == '0') {
-            if (choice.equals("accept")) OrderRespository.updateWaitingAccepted(orderId);
-            else if (choice.equals("cancel")) {
+            String productTypeId = OrderRespository.checkAvailableOrder(orderId);
+            if (choice.equals("accept")) {
+                if (productTypeId.equals("")) {
+                    OrderRespository.updateWaitingAccepted(orderId);
+                    response.sendRedirect("order-waiting?page=" + page);
+                } else
+                    response.sendRedirect("order-waiting?productTypeId=" + productTypeId + "&error=2&page=" + page);
+            } else if (choice.equals("cancel")) {
                 OrderRespository.updateWaitingCanceled(orderId);
+                response.sendRedirect("order-waiting?page=" + page);
             }
-            response.sendRedirect("order-waiting?page=" + page);
+
         } else {
             response.sendRedirect("order-waiting?error=1&page=" + page);
             //Lỗi status khác trạng thái chờ duyệt

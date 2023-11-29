@@ -271,6 +271,9 @@
                             <c:if test="${error eq '1'}">
                                 Trạng thái đơn hàng gặp sự cố vui lòng kiểm tra lại
                             </c:if>
+                            <c:if test="${error eq '2'}">
+                                Đơn hàng này chứa sản phẩm ${productIdError} đã quá số lượng còn lại trong kho
+                            </c:if>
                         </p>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
