@@ -95,7 +95,7 @@
     <div class="row">
 
         <div id="chatContainer" class="col-10 offset-1">
-            <div id="chatLog"></div>
+            <div id="chatLog" style="overflow-wrap: break-word;"></div>
         </div>
     </div>
     <div class="row mt-5">
@@ -135,7 +135,7 @@
 
 <script>
     var chatLog = document.querySelector("#chatLog");
-    var server = new WebSocket('ws://' + window.location.host + '/VapeShop_war_exploded/chatAll/0');
+    var server = new WebSocket('ws://' + window.location.host + '/VapeShope_war_exploded/chatAll/0');
     var username = '${sessionScope.user.userName}';
     var otherJoined = false;
 

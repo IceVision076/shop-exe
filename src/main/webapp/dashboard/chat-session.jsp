@@ -295,7 +295,7 @@
   </div>
   <script>
     var chatLog = document.querySelector("#chatLog");
-    var server = new WebSocket('ws://'+window.location.host+'/VapeShop_war_exploded/chatAll/${sessionId}');
+    var server = new WebSocket('ws://'+window.location.host+'/VapeShope_war_exploded/chatAll/${sessionId}');
     var username = '${sessionScope.user.userName}';
     var otherJoined = false;
 
@@ -339,6 +339,7 @@
       }
 
     }
+
 
     var objectMessage = function (message) {
 

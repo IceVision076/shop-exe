@@ -86,15 +86,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="service-intro.jsp">Dịch Vụ</a>
                     </li>
-                    <li>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="testmonial.jsp" class="dropdown-item">Chứng Thực</a>
-                                <a href="blog.jsp" class="dropdown-item">Bài Viết</a>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">

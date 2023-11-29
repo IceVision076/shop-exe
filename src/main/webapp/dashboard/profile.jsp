@@ -173,7 +173,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body" style="overflow-y: hidden;display: flex;align-items: center;justify-content: center">
-                                        <img src="${sessionScope.user.avatarImg}" alt="Your Avatar" class="rounded-circle" width="400" height="400" style="object-fit: cover;">
+                                        <img src="${sessionScope.user.avatarImg}" alt="Your Avatar"     width="400" height="400" style="object-fit: cover; border-radius: 5px">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -197,7 +197,6 @@
                                                              alt="Your Avatar" class="rounded-circle" width="150" height="150" style="object-fit: cover;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
                                                     </div>
                                                     <h5 class="my-3">${sessionScope.user.fullName}</h5>
-                                                    <p class="text-muted mb-1">Chức vụ nhân viên</p>
 
                                                     <div type="button" style="color: #d31798;"
                                                          class="btn btn-primary " data-bs-toggle="modal"

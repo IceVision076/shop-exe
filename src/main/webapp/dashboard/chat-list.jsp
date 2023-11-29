@@ -221,14 +221,14 @@
                     <div class="card-header pb-0">
                         <h4 class="text-center">Danh sách khách hàng cần hỗ trợ</h4>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body px-0 pt-0 pb-2 ">
                         <div class="container mt-2 mb-2">
-                            <div class="row">
+                            <div class="row my-5 d-flex justify-content-around">
                                 <c:set var="checkChatList" value="0" ></c:set>
                                 <c:forEach items="${chatList}" var="chat">
                                     <%--                                    <a href="#">${chat.sessionId} ${chat.customerUsername}</a>--%>
                                     <c:set var="checkChatList" value="1" ></c:set>
-                                    <div class="col-4 mt-2 mb-2">
+                                    <div class="col-4 d-flex justify-content-around">
                                         <div class="card-chat">
                                             <div class="card-chat-border-top">
                                             </div>
@@ -244,46 +244,43 @@
                                         </div>
                                     </div>
                                 </c:forEach>
+                                    <c:if test="${checkChatList==0}">
 
-                                <c:if test="${checkChatList==0}">
-
-                                    <div class="col-4 mt-2 mb-2">
-                                        <div class="card-chat">
-                                            <div class="card-chat-border-top">
+                                        <div class="col-4 d-flex justify-content-center">
+                                            <div class="card-chat">
+                                                <div class="card-chat-border-top">
+                                                </div>
+                                                <div class="img">
+                                                </div>
+                                                <span> Đang chờ</span>
+                                                <button> Click
+                                                </button>
                                             </div>
-                                            <div class="img">
-                                            </div>
-                                            <span> Đang chờ</span>
-                                            <button> Click
-                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="col-4 mt-2 mb-2">
-                                        <div class="card-chat">
-                                            <div class="card-chat-border-top">
-                                            </div>
-                                            <div class="img">
+                                        <div class="col-4 d-flex justify-content-center">
+                                            <div class="card-chat">
+                                                <div class="card-chat-border-top">
+                                                </div>
+                                                <div class="img">
 
+                                                </div>
+                                                <span> Đang chờ</span>
+                                                <button> Click
+                                                </button>
                                             </div>
-                                            <span> Đang chờ</span>
-                                            <button> Click
-                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="col-4 mt-2 mb-2">
-                                        <div class="card-chat">
-                                            <div class="card-chat-border-top">
+                                        <div class="col-4 d-flex justify-content-center">
+                                            <div class="card-chat">
+                                                <div class="card-chat-border-top">
+                                                </div>
+                                                <div class="img">
+                                                </div>
+                                                <span>Đang chờ</span>
+                                                <button> Click
+                                                </button>
                                             </div>
-                                            <div class="img">
-                                            </div>
-                                            <span>Đang chờ</span>
-                                            <button> Click
-                                            </button>
                                         </div>
-                                    </div>
-                                </c:if>
-
-
+                                    </c:if>
                             </div>
                         </div>
 

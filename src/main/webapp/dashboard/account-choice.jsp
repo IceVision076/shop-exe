@@ -59,12 +59,7 @@
     }
 
     .cards-service .card-service:hover {
-        transform: scale(1.2, 1.2);
-    }
-
-    .cards-service:hover > .card-service:not(:hover) {
-        filter: blur(10px);
-        transform: scale(0.9, 0.9);
+        transform: scale(1.05, 1.05);
     }
 </style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

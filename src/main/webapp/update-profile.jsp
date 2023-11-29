@@ -64,10 +64,8 @@
                                     aria-label="Close">
                             </button>
                         </div>
-                        <div class="modal-body" style="overflow-y: hidden">
-                            <div class="container">
-                                    <img src="${sessionScope.user.avatarImg}" alt="Your Avatar" class="rounded-circle p-1" width="400" height="400" style="object-fit: cover">
-                            </div>
+                        <div class="modal-body" style="overflow-y: hidden;display: flex;justify-content: center">
+                                    <img src="${sessionScope.user.avatarImg}" alt="Your Avatar"  width="400" height="400" style="object-fit: cover;border-radius: 5px">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

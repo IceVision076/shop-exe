@@ -59,12 +59,7 @@
   }
 
   .cards-service .card-service:hover {
-    transform: scale(1.2, 1.2);
-  }
-
-  .cards-service:hover > .card-service:not(:hover) {
-    filter: blur(10px);
-    transform: scale(0.9, 0.9);
+    transform: scale(1.05, 1.05);
   }
 </style>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -206,9 +201,9 @@
             <h4 style="font-family: Calibri;" class="text-center"> <i class="fa-solid fa-calendar-days fa-flip fa-xl" style="color: #2008d9;"></i> Quản lí dịch vụ <i class="fa-solid fa-calendar-days fa-flip fa-xl" style="color: #2008d9;"></i></h4>
 
           </div>
-          <div class="card-body px-0 pt-0 pb-2 ">
+          <div class="card-body px-0 pt-0 pb-2 mt-3">
             <div class="container">
-              <div class="cards-service row mb-5 ">
+              <div class="cards-service row mb-5 d-flex justify-content-around ">
                 <a href="service-management" class="card-service red bg-secondary col-md-4 position-relative">
                   <p class="tip" >Dịch vụ đang chờ
                   </p>
