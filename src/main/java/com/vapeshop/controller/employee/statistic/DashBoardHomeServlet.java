@@ -36,8 +36,20 @@ public class DashBoardHomeServlet extends HttpServlet {
         double totalMoneyVapeInYear = StatisticalRespository.totalMoneyVapeInYear();
         int totalCustomerIsLocked = StatisticalRespository.totalCustomerIsLocked();
         MoneyWithWeek moneyWithWeek = StatisticalRespository.totalMoneyOnEachWeek();
-        Top10MostPurchased top10MostPurchased=StatisticalRespository.top10MostPurchased();
+        Top10MostPurchased top10MostPurchased = StatisticalRespository.top10MostPurchased();
 
+        double moneyServiceOnMonth = StatisticalRespository.moneyServiceOnMonth();
+
+        double moneyServiceInYear = StatisticalRespository.moneyServiceInYear();
+
+        double moneyServiceToday= StatisticalRespository.moneyServiceOnDay();
+
+
+        request.setAttribute("moneyServiceOnMonth", moneyServiceOnMonth);
+
+        request.setAttribute("moneyServiceInYear", moneyServiceInYear);
+
+        request.setAttribute("moneyServiceToday", moneyServiceToday);
 
         request.setAttribute("top10MostPurchased", top10MostPurchased);
         //

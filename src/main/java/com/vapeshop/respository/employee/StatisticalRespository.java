@@ -572,6 +572,59 @@ public class StatisticalRespository {
     }
 
 
+    public static double moneyServiceOnMonth(){
+        double moneyService = 0;
+        try {
+            String query = "select SUM(price) as 'total'\n" +
+                    "from ServiceTracking\n" +
+                    "where status = '4'\n" +
+                    "  AND DATEPART(MONTH, ServiceTracking.delivery_date) = DATEPART(Month, getdate())\n" +
+                    "  and DATEPART(YEAR, ServiceTracking.delivery_date) = DATEPART(YEAR, getdate());";
+            Connection connection = DBConnect.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) moneyService = resultSet.getDouble(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return moneyService;
+    }
+    public static double moneyServiceInYear(){
+        double moneyService = 0;
+        try {
+            String query = "select SUM(price) as 'total'\n" +
+                    "from ServiceTracking\n" +
+                    "where status = '4'\n" +
+                    "and DATEPART(YEAR, ServiceTracking.delivery_date) = DATEPART(YEAR, getdate());";
+            Connection connection = DBConnect.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) moneyService = resultSet.getDouble(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return moneyService;
+    }
+    public static double moneyServiceOnDay(){
+        double moneyService = 0;
+        try {
+            String query = "select SUM(price) as 'total'\n" +
+                    "from ServiceTracking\n" +
+                    "where status = '4'\n" +
+                    "  AND DATEPART(DAY,ServiceTracking.delivery_date) = DATEPART(DAY, getdate())\n" +
+                    "  AND DATEPART(MONTH, ServiceTracking.delivery_date) = DATEPART(Month, getdate())\n" +
+                    "  and DATEPART(YEAR, ServiceTracking.delivery_date) = DATEPART(YEAR, getdate());";
+            Connection connection = DBConnect.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) moneyService = resultSet.getDouble(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return moneyService;
+    }
+
+
     public static void main(String[] args) {
         top10MostPurchased().getUserPurchaseds().stream().forEach(System.out::println);
     }

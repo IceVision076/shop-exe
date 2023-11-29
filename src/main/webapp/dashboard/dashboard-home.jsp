@@ -300,10 +300,11 @@
                 </div>
             </div>
 
-            <div class="col-12 mb-xl-0 mb-4 mt-2">\
+            <div class="col-12 mb-xl-0 mb-4 mt-2">
 
                 <h3 class="text-center"> Phần thống kê thu nhập cho từng loại sản phẩm</h3>
             </div>
+
             <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 mt-2">
                 <div class="card">
                     <div class="card-body p-3">
@@ -366,6 +367,85 @@
                                         <fmt:formatNumber type="number" maxFractionDigits="3"
                                                           value=" ${totalMoneyVapeInYear}"/> <span
                                             class="text-success">VNĐ</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-xl-0 mb-4 mt-2">
+
+                <h3 class="text-center"> Phần thống kê thu nhập cho dịch vụ</h3>
+            </div>
+
+            <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 mt-2">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập dịch vụ trong ngày
+                                       </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        <fmt:formatNumber type="number" maxFractionDigits="3"
+                                                          value=" ${moneyServiceToday}"/> <span
+                                            class="text-success">VNĐ</span>
+
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 mt-2">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập dịch vụ trong tháng
+                                        </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        <fmt:formatNumber type="number" maxFractionDigits="3"
+                                                          value=" ${moneyServiceOnMonth}"/> <span
+                                            class="text-success">VNĐ</span>
+
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 mt-2">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập dịch vụ trong năm</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        <fmt:formatNumber type="number" maxFractionDigits="3"
+                                                          value=" ${moneyServiceInYear}"/> <span
+                                            class="text-success">VNĐ</span>
+
                                     </h5>
                                 </div>
                             </div>
@@ -525,7 +605,7 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6 col-7">
-                                <h6 class="text-lg">Top 5 sản phẩm bán chạy</h6>
+                                <h6 class="text-lg">Top 5 sản phẩm bán chạy trong tháng</h6>
 
                             </div>
 

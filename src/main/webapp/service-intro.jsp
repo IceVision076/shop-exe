@@ -556,7 +556,7 @@
         function run() {
             alert(
             <c:if test="${not empty sessionScope.user}">
-                ${"CẢM ƠN BẠN ĐÃ PHẢN HỒI (^.^)"}
+                "CẢM ƠN BẠN ĐÃ PHẢN HỒI (^.^)"
                 </c:if>
             <c:if test="${empty sessionScope.user}">
             "Vui lòng đăng nhập để sử dụng tính năng"
