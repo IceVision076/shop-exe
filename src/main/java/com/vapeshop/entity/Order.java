@@ -195,16 +195,16 @@ public class Order { //gio hang = cart
     public double getThanhTienAfterPurchase(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
-            tong += item.getPriceAfterPurchase(orderId);
+            tong += (item.getPriceAfterPurchase(orderId) * item.getAmmout());
         }
         return tong + phatsinh;
     }
     public double getThanhTienAfterPurchaseDiscount(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
-            tong += item.getPriceAfterPurchase(orderId);
+            tong += item.getPriceAfterPurchase(orderId) * item.getAmmout();
         }
-        return (tong + phatsinh) - (tong*discountPercent);
+        return (tong +phatsinh) - (tong*discountPercent);
     }
     public String getThanhTienString(double phatsinh) {
         if (cart.isEmpty()) {

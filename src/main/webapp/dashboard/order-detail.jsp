@@ -419,7 +419,9 @@
                                                                                    scope="page">
                                                                             </c:set>
                                                                         </c:forEach>
-                                                                        ${sum}
+                                                                   
+                                                                        <fmt:formatNumber type="number"
+                                                                                          maxFractionDigits="3" value=" ${sum}"/>
                                                                     </c:if><c:if test="${not empty order.voucher.id}">
                                                                     <c:forEach items="${order.orderDetails}"
                                                                                var="od">
@@ -428,7 +430,9 @@
                                                                                scope="page">
                                                                         </c:set>
                                                                     </c:forEach>
-                                                                    ${sum*order.voucher.voucherPercent}
+                                                                    <fmt:formatNumber type="number"
+                                                                                      maxFractionDigits="3" value="${sum*order.voucher.voucherPercent}"/>
+
                                                                 </c:if>
 
                                                                 </span>

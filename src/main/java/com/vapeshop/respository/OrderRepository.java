@@ -232,7 +232,7 @@ public class OrderRepository {
         String discountCode = null;
         try {
             Connection con = DBConnect.getConnection();
-            String query = "select voucher_id from Order where order_id =?";
+            String query = "select voucher_id from [Order] where order_id =?";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, orderid);
             ResultSet results = stmt.executeQuery();
