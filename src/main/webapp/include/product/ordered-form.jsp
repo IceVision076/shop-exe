@@ -82,6 +82,7 @@
                             </div>
                             <div class="mb-sm-5 border-top pt-2 mt-3 d-flex justify-content-between" style="width: 90%">
                                 <h5>Tổng cộng:</h5>
+                                <h1>${orderedCart.discountCode}"</h1>
                                 <c:if test="${orderedCart.discountCode == null}">
                                     <strong style="font-size:18px;font-weight:500">${orderedCart.getThanhTienStringAfterPurchase(30000)}<i class="text-success">VND</i></strong>
                                 </c:if>

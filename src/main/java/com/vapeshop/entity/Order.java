@@ -11,7 +11,6 @@ import java.util.List;
 public class Order { //gio hang = cart
     private String orderId; // id cua order
     private String userId;
-    private User user;
     private LocalDateTime createDate;
     private char status;
     private String voucherId;
@@ -20,20 +19,6 @@ public class Order { //gio hang = cart
     private int paymentType = 0; //0 la COD , 1 la CK
     private double discountPercent =0f; //phan tram giam gia
     private String discountCode; //ma giam gia
-
-    private String orderAddress;
-    private Voucher voucher;
-
-    private ArrayList<OrderDetail> orderDetails=new ArrayList<>();
-
-    public ArrayList<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(ArrayList<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
-
     public Order() {
         cart = new ArrayList<>();
     }
@@ -135,30 +120,6 @@ public class Order { //gio hang = cart
         this.discountCode = discountCode;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getOrderAddress() {
-        return orderAddress;
-    }
-
-    public void setOrderAddress(String orderAddress) {
-        this.orderAddress = orderAddress;
-    }
-
-    public Voucher getVoucher() {
-        return voucher;
-    }
-
-    public void setVoucher(Voucher voucher) {
-        this.voucher = voucher;
-    }
-
     /*====================================END GET/SET() METHOD============================================================*/
 
 
@@ -195,16 +156,16 @@ public class Order { //gio hang = cart
     public double getThanhTienAfterPurchase(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
-            tong += (item.getPriceAfterPurchase(orderId) * item.getAmmout());
+            tong += item.getPriceAfterPurchase(orderId);
         }
         return tong + phatsinh;
     }
     public double getThanhTienAfterPurchaseDiscount(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
-            tong += item.getPriceAfterPurchase(orderId) * item.getAmmout();
+            tong += item.getPriceAfterPurchase(orderId);
         }
-        return (tong +phatsinh) - (tong*discountPercent);
+        return (tong + phatsinh) - (tong*discountPercent);
     }
     public String getThanhTienString(double phatsinh) {
         if (cart.isEmpty()) {
@@ -220,8 +181,7 @@ public class Order { //gio hang = cart
         return formatter.format(getThanhTienDiscount(phatsinh));
 
     }
-    public double
-    getThanhTienDiscount(double phatsinh) {
+    public double getThanhTienDiscount(double phatsinh) {
         double tong = 0;
         for (Items item : cart) {
             tong += item.getPrice();
