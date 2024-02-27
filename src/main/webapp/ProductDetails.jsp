@@ -6,11 +6,12 @@
   Time: 10:43 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@include file="include/product/product-Header.jsp" %>
+<%@include file="include/header-footer/header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <title>Vape Shop - Product Details</title>
+<property name="net.sf.jasperreports.export.character.encoding" value="UTF-8"/>
 
 <!-- Open Content -->
 <section class="bg-light">
@@ -124,7 +125,8 @@
                         </p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <h6>Hãng:</h6>
+                                <h6>Phân loại</h6>
+<%--                                đây từng là hãng--%>
                             </li>
                             <li class="list-inline-item">
                                 <p style="color: #505052"><strong>${product.brand}</strong></p>
@@ -134,7 +136,7 @@
                             </li>
                             <li class="list-inline-item">
                                 <p style="color: #505052" id="remaining-quantity">
-                                    <strong> ${product.productTypes.get(0).realAmount} Cái</strong></p>
+                                    <strong> ${product.productTypes.get(0).realAmount}</strong></p>
                             </li>
                         </ul>
 
@@ -215,69 +217,69 @@
 <!-- Close Content -->
 
 <!-- Start Article -->
-<section class="py-5">
-    <div class="container">
-        <div class="row text-left p-2 pb-3">
-            <h4>Related Products</h4>
-        </div>
+<%--<section class="py-5">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row text-left p-2 pb-3">--%>
+<%--            <h4>Related Products</h4>--%>
+<%--        </div>--%>
 
-        <!--Start Carousel Wrapper-->
-        <div id="carousel-related-product">
-            <c:forEach items="${productTypeArrayList}" var="pta">
-                <div class="p-2 pb-3 ">
-                    <div class="product-wap card rounded-0 d-lg-flex-flex align-items-lg-centercenter justify-content-lg-center">
-                        <div class="card rounded-0">
-                            <img class="card-img rounded-0 img-fluid" src="${pta.imageProducts.get(0).imageUrl}">
-                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                <ul class="list-unstyled">
-                                    <li><a class="btn btn-success text-white" href="shop-single.html"><i
-                                            class="far fa-heart"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2"
-                                           href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}"><i
-                                            class="far fa-eye"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i
-                                            class="fas fa-cart-plus"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div style="white-space: nowrap;width: 100%;overflow: hidden;text-overflow: clip;">
-                                <a href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}"
-                                   class="h3 text-decoration-none">${pta.product.productName}</a>
-                            </div>
-                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-3">
-                                <li>${pta.typeName}</li>
-                                <li class="pt-2">
-                                    <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="text-center mb-0"><fmt:formatNumber type="number" maxFractionDigits="3"
-                                                                          value="${pta.typePrice}"/><i
-                                    class="text-success">VND</i></p>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-</section>
+<%--        <!--Start Carousel Wrapper-->--%>
+<%--        <div id="carousel-related-product">--%>
+<%--            <c:forEach items="${productTypeArrayList}" var="pta">--%>
+<%--                <div class="p-2 pb-3 ">--%>
+<%--                    <div class="product-wap card rounded-0 d-lg-flex-flex align-items-lg-centercenter justify-content-lg-center">--%>
+<%--                        <div class="card rounded-0">--%>
+<%--                            <img class="card-img rounded-0 img-fluid" src="${pta.imageProducts.get(0).imageUrl}">--%>
+<%--                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">--%>
+<%--                                <ul class="list-unstyled">--%>
+<%--                                    <li><a class="btn btn-success text-white" href="shop-single.html"><i--%>
+<%--                                            class="far fa-heart"></i></a></li>--%>
+<%--                                    <li><a class="btn btn-success text-white mt-2"--%>
+<%--                                           href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}"><i--%>
+<%--                                            class="far fa-eye"></i></a></li>--%>
+<%--                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i--%>
+<%--                                            class="fas fa-cart-plus"></i></a></li>--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-body">--%>
+<%--                            <div style="white-space: nowrap;width: 100%;overflow: hidden;text-overflow: clip;">--%>
+<%--                                <a href="ShowProductDetails?idProduct=${pta.product.idProduct}&brand=${pta.product.brand}"--%>
+<%--                                   class="h3 text-decoration-none">${pta.product.productName}</a>--%>
+<%--                            </div>--%>
+<%--                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-3">--%>
+<%--                                <li>${pta.typeName}</li>--%>
+<%--                                <li class="pt-2">--%>
+<%--                                    <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>--%>
+<%--                                    <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>--%>
+<%--                                    <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>--%>
+<%--                                    <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>--%>
+<%--                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                            <ul class="list-unstyled d-flex justify-content-center mb-1">--%>
+<%--                                <li>--%>
+<%--                                    <i class="text-warning fa fa-star"></i>--%>
+<%--                                    <i class="text-warning fa fa-star"></i>--%>
+<%--                                    <i class="text-warning fa fa-star"></i>--%>
+<%--                                    <i class="text-warning fa fa-star"></i>--%>
+<%--                                    <i class="text-muted fa fa-star"></i>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                            <p class="text-center mb-0"><fmt:formatNumber type="number" maxFractionDigits="3"--%>
+<%--                                                                          value="${pta.typePrice}"/><i--%>
+<%--                                    class="text-success">VND</i></p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </c:forEach>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</section>--%>
 <!-- End Article -->
 
 
-<%@include file="include/product/Product-Footer.jsp" %>
+<%@include file="include/header-footer/footer.jsp" %>
 
 <!-- Start Slider Script -->
 <script src="assets/js/slick.min.js"></script>

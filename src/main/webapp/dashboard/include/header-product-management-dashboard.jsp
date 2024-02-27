@@ -40,8 +40,8 @@
            aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="dashboard-home"
         >
-            <img src="dashboard/assets/img/vape-icon.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">VapeShop Dashboard</span>
+            <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/408401133_3503012760028740_2340052329278457272_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEZpsFWgJ3ROwCsLm3UGFfiPM5N2i9QNWw8zk3aL1A1bM8xvFXHAgIHe4_pT5Qx-QkwRyiEPIN_76pKgFvl9VZ9&_nc_ohc=CK7Y7jj4qmoAX8sPtor&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDfH3tbXvMKVOcBrHHxkuFKv75XCeKH7ejbHvpTQpb1rg&oe=65E24691" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">SOU-COFFE Dashboard</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">

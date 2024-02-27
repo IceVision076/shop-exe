@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="include/product/product-Header.jsp" %>
+<%@include file="include/header-footer/header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value = "en_US"/>
@@ -89,7 +89,7 @@
                                        class="h3 text-decoration-none">${pl.product.productName}</a>
                                 </div>
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-3">
-                                    <li>${pl.typeName}</li>
+<%--                                    <li>${pl.typeName}</li>--%>
                                     <li class="pt-2">
                                         <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
                                         <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
@@ -255,7 +255,7 @@
 <%--  </div>--%>
 <%--</section>--%>
 <%--<!--End Brands-->--%>
-<%@include file="include/product/Product-Footer.jsp" %>
+<%@include file="include/header-footer/footer.jsp" %>
 <script>
     function sendRequest() {
 // Get the value of the option.

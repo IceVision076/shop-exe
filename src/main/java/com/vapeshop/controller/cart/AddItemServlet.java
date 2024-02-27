@@ -13,12 +13,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 @WebServlet(name = "AddItemServlet", value = "/additem")
 public class AddItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //        response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("text/html;charset=UTF-8");
         String message = "";
         HttpSession session = request.getSession();
         if(session.getAttribute("user")==null) {
@@ -29,6 +31,7 @@ public class AddItemServlet extends HttpServlet {
         else if (request.getParameter("typeidcart").equals("") ||request.getParameter("typeidcart").isEmpty() ) {
 
             String brand = request.getParameter("brand");
+            brand = URLEncoder.encode(brand, "UTF-8");
             String idProduct = request.getParameter("idProduct");
             message = "1";
 //            request.removeAttribute("quantity");
@@ -70,7 +73,7 @@ public class AddItemServlet extends HttpServlet {
                     request.setAttribute("product", p);
 
                     message = "2";
-
+                    brand = URLEncoder.encode(brand, "UTF-8");
                     request.setAttribute("message",message);
                     request.setAttribute("brand",brand);
                     request.setAttribute("idProduct",idProduct);

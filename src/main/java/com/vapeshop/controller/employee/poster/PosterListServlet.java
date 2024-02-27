@@ -25,6 +25,7 @@ public class PosterListServlet extends HttpServlet {
         req.setAttribute("posterList",posterList);
         req.setAttribute("posterListTop",posterListTop);
         req.setAttribute("ProductTopList",ProductTopList);
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+//        req.getRequestDispatcher("index.jsp").forward(req,resp);
+        req.getRequestDispatcher("introduce.jsp").forward(req,resp);
     }
 }

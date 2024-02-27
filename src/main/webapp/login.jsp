@@ -33,11 +33,11 @@
 
         <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #464953;">
             <div class="featured-image mb-3">
-                <img src="assets/img/vapeShop.jpg" class="img-fluid rounded-circle" style="width: 250px;">
+                <img src="assets/img/soulogo.png" class="img-fluid rounded-circle" style="width: 250px;">
             </div>
 
-            <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">VAPE-Login</p>
-            <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Vaping is a smart choice for lifestyle change without compromising health.</small>
+            <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">SOU-Login</p>
+            <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">You can't buy happiness, but you can buy coffee, and that's pretty close</small>
         </div>
 
         <!-------------------- ------ Right Box ---------------------------->

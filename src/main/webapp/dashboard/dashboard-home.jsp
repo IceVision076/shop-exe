@@ -311,7 +311,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập bán tinh dầu
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập bán Thiệp
                                         trong năm</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         <fmt:formatNumber type="number" maxFractionDigits="3"
@@ -336,7 +336,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập bán phụ kiện
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập bán nước uống
                                         trong năm</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         <fmt:formatNumber type="number" maxFractionDigits="3"
@@ -361,7 +361,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập bán vape
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng thu nhập bán gói quà
                                         trong năm</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         <fmt:formatNumber type="number" maxFractionDigits="3"
@@ -544,7 +544,7 @@
                                     <h5 class="font-weight-bolder">Chào bạn hôm nay bạn thế nào <i
                                             class="fa-solid fa-seedling fa-flip-horizontal fa-sm"
                                             style="color: #09c84c;"></i></h5>
-                                    <p class="mb-5">Đội ngũ vapeshop chúc bạn một ngày mới vui vẻ <i
+                                    <p class="mb-5">Đội ngũ SOU-Coffe chúc bạn một ngày mới vui vẻ <i
                                             class="fa-solid fa-heart-pulse fa-fade fa-xl" style="color: #d8220e;"></i>
                                     </p>
 
@@ -751,20 +751,20 @@
 
                 <div class="card-footer text-bold text-lg text-center">
 
-                        <span style="color: rgb(255, 99, 132)">Phụ kiện:
+                        <span style="color: rgb(255, 99, 132)">Thức uống:
                             <fmt:formatNumber
                                     value="  ${productAmountChart[0]/(productAmountChart[0]+productAmountChart[1]+productAmountChart[2])*100}"
                                     maxFractionDigits="2"
                             ></fmt:formatNumber>%
                           </span>
                     <span> - </span>
-                    <span style="color: rgb(54, 162, 235)">Dầu:
+                    <span style="color: rgb(54, 162, 235)">Thiệp:
                             <fmt:formatNumber
                                     value="  ${productAmountChart[1]/(productAmountChart[0]+productAmountChart[1]+productAmountChart[2])*100}"
                                     maxFractionDigits="2"
                             ></fmt:formatNumber>%</span>
                     <span> - </span>
-                    <span style="color: rgb(117,255,86)">Vape:
+                    <span style="color: rgb(117,255,86)">Gói quà:
                             <fmt:formatNumber
                                     value="  ${productAmountChart[2]/(productAmountChart[0]+productAmountChart[1]+productAmountChart[2])*100}"
                                     maxFractionDigits="2"
@@ -920,9 +920,9 @@
             type: 'doughnut',
             data: {
                 labels: [
-                    'Phụ kiện',
-                    'Dầu',
-                    'Vape'
+                    'Nước uống',
+                    'Thiệp',
+                    'Gói quà'
                 ],
                 datasets: [{
                     label: 'Số lượng',
