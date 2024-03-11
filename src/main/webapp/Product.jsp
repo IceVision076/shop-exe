@@ -70,7 +70,12 @@
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="${pl.imageProducts.get(0).imageUrl}">
+<%--                                <img class="card-img rounded-0 img-fluid" src="${pl.imageProducts.get(0).imageUrl}">--%>
+                                    <div style="display: flex; flex-wrap: wrap; justify-content: space-around; max-width: 800px;  margin: 0 auto;">
+                                        <div style="width: 200px; height: 200px; margin: 10px; overflow: hidden; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);" class="card">
+                                            <img style="width: 100%; height: 100%; object-fit: cover;" src="${pl.imageProducts.get(0).imageUrl}" />
+                                        </div>
+                                    </div>
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
 <%--                                        <li><a class="btn btn-success text-white" href="shop-single.html"><i--%>

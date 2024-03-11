@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.vapeshop</groupId>
-    <artifactId>VapeShope</artifactId>
+    <artifactId>SOUCOFFEE</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>VapeShope</name>
     <packaging>war</packaging>
